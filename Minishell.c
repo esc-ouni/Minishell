@@ -19,6 +19,7 @@ int main()
         char s[100];
         printf("\x1B[34m");
         printf("Your_prompt >> ");
+        // readline("Your_prompt >> ");
         printf("\x1B[0m");
         scanf("%s", s);
     }
