@@ -12,9 +12,17 @@
 
 #include "Minishell.h"
 
-int main()
+
+
+int main() 
 {
-    printf("Your_prompt : ");
-    while (1)
-        continue ;
+    printf("\n\t\t\tBIG_SHELL\n\n\n");
+    while (1) {
+        char s[100];
+        printf("\x1B[34m");
+        printf("Your_prompt >> ");
+        printf("\x1B[0m");
+        scanf("%s", s);
+    }
+    return 0;
 }
