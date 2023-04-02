@@ -13,6 +13,14 @@
 #include "Minishell.h"
 
 
+// printf("###########");
+// printf("#         #");
+// printf("#         #");
+// printf("#  #####  #");
+// printf("#  #####  #");
+// printf("#         #");
+// printf("#         #");
+// printf("###########");
 int main() 
 {
     printf("\n\t\t\tBIG_SHELL\n\n\n");
