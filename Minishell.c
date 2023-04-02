@@ -11,3 +11,10 @@
 /* ************************************************************************** */
 
 #include "Minishell.h"
+
+int main()
+{
+    printf("Your_prompt : ");
+    while (1)
+        continue ;
+}
