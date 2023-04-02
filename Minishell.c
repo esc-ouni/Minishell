@@ -13,7 +13,6 @@
 #include "Minishell.h"
 
 
-
 int main() 
 {
     printf("\n\t\t\tBIG_SHELL\n\n\n");
