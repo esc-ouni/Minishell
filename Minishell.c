@@ -25,8 +25,8 @@ int main()
 
         printf("%s\n", s);
         printf("\x1B[0m");
-        break ;
+        free(s);
+        s = malloc(100);
     }
-    free(s);
     return 0;
 }
