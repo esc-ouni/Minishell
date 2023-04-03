@@ -25,15 +25,16 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-t_list	*ft_lstnew(t_data data, int content)
+t_list	*ft_lstnew(char *s)
 {
 	t_list	*new_node;
 
 	new_node = NULL;
-	new_node = (t_list *)h_malloc(data, sizeof(t_list), new_node);
+	new_node = (t_list *)malloc(sizeof(t_list));
+	// new_node = (t_list *)h_malloc(data, sizeof(t_list), new_node);
 	if (new_node)
 	{
-		new_node->content = content;
+        ft_memcpy(new_node->cmd, s, ft_strlen(s));
 		new_node->next = NULL;
 	}
 	return (new_node);
@@ -60,16 +61,6 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 		return ;
 	new->next = *lst;
 	*lst = new;
-}
-
-int	ft_strlen(char	*str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
 }
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
@@ -106,40 +97,13 @@ void	ft_lstclear(t_list **lst)
 	*lst = NULL;
 }
 
-t_list	*ft_lstmap(t_data data, t_list *lst)
-{
-	t_list	*n_head;
-	t_list	*n_next;
-	t_list	*tracker;
 
-	if (lst == NULL)
-		return (NULL);
-	n_head = ft_lstnew(data, lst->content);
-	if (n_head == NULL)
-		ft_exit_with_error(data);
-	tracker = n_head;
-	lst = lst->next;
-	while (lst)
-	{
-		n_next = ft_lstnew(data, lst->content);
-		if (n_next == NULL)
-		{
-			ft_lstclear(&n_head);
-			ft_exit_with_error(data);
-		}
-		tracker->next = n_next;
-		tracker = n_next;
-		lst = lst->next;
-	}
-	return (n_head);
-}
-
-void	*h_malloc(t_data data, size_t s, void *p)
-{
-	p = malloc(s);
-	if (!p)
-	{
-		ft_exit_with_error(data);
-	}
-	return (p);
-}
+// void	*h_malloc(t_data data, size_t s, void *p)
+// {
+// 	p = malloc(s);
+// 	if (!p)
+// 	{
+// 		ft_exit_with_error(data);
+// 	}
+// 	return (p);
+// }
