@@ -14,7 +14,9 @@
 # define MINISHELL_H
 
 # include <unistd.h>
+# include <fcntl.h>
 # include "Libft/libft.h"
+# include "G_N_L/get_next_line.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
@@ -34,9 +36,10 @@ typedef struct s_list
 }   t_list;
 
 void    prompt(void);
+void    start(void);
 t_list	*ft_lstnew(char *s);
 t_list	*ft_lstlast(t_list *lst);
-int	ft_lstsize(t_list *lst);
+int	    ft_lstsize(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst);

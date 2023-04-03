@@ -104,6 +104,16 @@ void    prompt()
     printf("\x1B[0m");
 }
 
+void    start()
+{
+    char    *s;
+    int     fd;
+
+    fd = open("header.h", O_RDONLY);
+    while ((s = get_next_line(fd)))
+        printf("%s\n", s);
+}
+
 // void	*h_malloc(t_data data, size_t s, void *p)
 // {
 // 	p = malloc(s);

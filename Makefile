@@ -22,7 +22,9 @@ HR     = Minishell.h
 
 MND    = Minishell.c
 
-TLS    = tools.c
+TLS    = tools.c \
+		G_N_L/get_next_line.c \
+		G_N_L/get_next_line_utils.c \
 
 OBJ_M  = $(MND:%.c=%.o)
 
