@@ -19,7 +19,7 @@ int main()
     {
         prompt();
         readline("");
-        after_parse();
+        // after_parse();
     }
     return 0;
 }
