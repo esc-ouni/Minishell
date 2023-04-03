@@ -27,7 +27,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-
 typedef struct s_list
 {
     char            *cmd;
