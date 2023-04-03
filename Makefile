@@ -22,7 +22,7 @@ HR     = Minishell.h
 
 MND    = Minishell.c
 
-# TLS    = 
+TLS    = tools.c
 
 OBJ_M  = $(MND:%.c=%.o)
 

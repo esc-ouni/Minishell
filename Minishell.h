@@ -28,6 +28,7 @@
 typedef struct s_list
 {
     char            *cmd;
+    char            *target;
     struct s_list   *next;
 }   t_list;
 
