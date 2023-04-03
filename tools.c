@@ -97,6 +97,12 @@ void	ft_lstclear(t_list **lst)
 	*lst = NULL;
 }
 
+void    prompt()
+{
+    printf("\x1B[34m");
+    printf("Your_prompt >> ");
+    printf("\x1B[0m");
+}
 
 // void	*h_malloc(t_data data, size_t s, void *p)
 // {

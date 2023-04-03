@@ -14,26 +14,20 @@
 
 int main() 
 {
-    char    *s;
-    char    **stash;
-    t_list  **head;
-
-    head = NULL;
-    s = malloc(100);
+    // s = malloc(100);
     printf("\n\t\t\tBIG_SHELL\n\n\n");
     while (1)
     {
-        write(1, "\x1B[34m", 6);
-        s = readline("Your_prompt >> ");
-        write(1, "\x1B[0m", 5   );
+        prompt();
+        readline("");
 
-        stash = ft_split(s, ' ');
-        while (*stash)
-        {
-            printf("%s\n", *stash);
-            free(*stash);
-            stash++;
-        }
+        // stash = ft_split(s, ' ');
+        // while (*stash)
+        // {
+        //     printf("%s\n", *stash);
+        //     free(*stash);
+        //     stash++;
+        // }
         // s = malloc(100);
     }
     return 0;

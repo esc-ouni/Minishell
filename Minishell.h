@@ -33,6 +33,7 @@ typedef struct s_list
     struct s_list   *next;
 }   t_list;
 
+void    prompt(void);
 t_list	*ft_lstnew(char *s);
 t_list	*ft_lstlast(t_list *lst);
 int	ft_lstsize(t_list *lst);
