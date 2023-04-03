@@ -16,7 +16,7 @@ CC     = cc
 
 RM     = rm -rf
 
-FLAGS  =  -Wall -Wextra -Werror 
+FLAGS  =  -w#Wall -Wextra -Werror 
 
 HR     = Minishell.h
 

@@ -31,7 +31,7 @@
 typedef struct s_list
 {
     char            *cmd;
-    char            *target;
+    int             nb;
     struct s_list   *next;
 }   t_list;
 

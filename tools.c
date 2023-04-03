@@ -30,11 +30,11 @@ t_list	*ft_lstnew(char *s)
 	t_list	*new_node;
 
 	new_node = NULL;
-	new_node = (t_list *)malloc(sizeof(t_list));
+	new_node = (t_list *)malloc(sizeof(t_list) + 1);
 	// new_node = (t_list *)h_malloc(data, sizeof(t_list), new_node);
 	if (new_node)
 	{
-        ft_memcpy(new_node->cmd, s, ft_strlen(s));
+        // ft_memcpy(new_node->cmd, s, ft_strlen(s));
 		new_node->next = NULL;
 	}
 	return (new_node);
@@ -67,8 +67,11 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*o_last;
 
-	// if (lst == NULL || new == NULL)
+	// if (lst == NULL)
+	// {
+	// 	*lst = new;
 	// 	return ;
+	// }
 	if (*lst == NULL)
 	{
 		*lst = new;
@@ -121,14 +124,15 @@ void    start()
 void    after_parse(t_list  **head)
 {
     t_list  *node;
-    int i = 0;
+    int i = 1;
 
     node = *head;
+    printf("\n");
     while(node)
     {
         printf("node %d\n", i);
-        printf("command   : %s", node->cmd);
-        printf("tar. file : %s", node->target);
+        printf("command   : %d", node->nb);
+        // printf("command   : %s", node->cmd);
         printf("\n\n");
         i++;
         node = node->next;
@@ -140,20 +144,19 @@ t_list  **read_line()
 	int		i = 0;
     char    *s;
     char    **str;
-	t_list	**head;
+	t_list	*head;
 
 	head = NULL;
     s = readline("");
 	str = ft_split(s, ' ');
 	while (str[i])
 	{
-		printf("%s\n", str[i]);
-		// ft_lstadd_back(head, ft_lstnew(str[i]));
+		ft_lstadd_back(&head, ft_lstnew(str[i]));
 		free(str[i]);
 		i++;
 	}
 	free(s);
-	return (head);
+	return (&head);
 }
 
 // void	*h_malloc(t_data data, size_t s, void *p)
