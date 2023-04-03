@@ -127,8 +127,8 @@ void    after_parse(t_list  **head)
     printf("\n");
     while(node)
     {
-        printf("node %d\n", i);
-        printf("command   : %s", node->cmd);
+        printf("=> node %d;\n", i);
+        printf("   command : %s", node->cmd);
         printf("\n\n");
         i++;
         node = node->next;
