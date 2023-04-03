@@ -14,12 +14,19 @@
 
 int main() 
 {
+    char    *s;
+
+    s = malloc(100);
     printf("\n\t\t\tBIG_SHELL\n\n\n");
     while (1)
     {
         printf("\x1B[34m");
-        readline("Your_prompt >> ");
+        s = readline("Your_prompt >> ");
+
+        printf("%s\n", s);
         printf("\x1B[0m");
+        break ;
     }
+    free(s);
     return 0;
 }

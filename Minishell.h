@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <unistd.h>
+# include "Libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
