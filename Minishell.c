@@ -23,20 +23,3 @@ int main()
     }
     return 0;
 }
-
-void    after_parse(t_list  **head)
-{
-    t_list  *node;
-    int i = 0;
-
-    node = *head;
-    while(node)
-    {
-        printf("node %d\n", i);
-        printf("command   : %s", node->cmd);
-        printf("tar. file : %s", node->target);
-        printf("\n\n");
-        i++;
-        node = node->next;
-    }
-}

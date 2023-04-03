@@ -118,6 +118,23 @@ void    start()
     close(fd);
 }
 
+void    after_parse(t_list  **head)
+{
+    t_list  *node;
+    int i = 0;
+
+    node = *head;
+    while(node)
+    {
+        printf("node %d\n", i);
+        printf("command   : %s", node->cmd);
+        printf("tar. file : %s", node->target);
+        printf("\n\n");
+        i++;
+        node = node->next;
+    }
+}
+
 // void	*h_malloc(t_data data, size_t s, void *p)
 // {
 // 	p = malloc(s);
