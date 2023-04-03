@@ -23,16 +23,15 @@ int main()
     printf("\n\t\t\tBIG_SHELL\n\n\n");
     while (1)
     {
-        printf("\x1B[34m");
+        write(1, "\x1B[34m", 6);
         s = readline("Your_prompt >> ");
+        write(1, "\x1B[0m", 5   );
 
-        // printf("%s\n", s);
-        printf("\x1B[0m");
-        // free(s);
         stash = ft_split(s, ' ');
         while (*stash)
         {
             printf("%s\n", *stash);
+            free(*stash);
             stash++;
         }
         // s = malloc(100);
