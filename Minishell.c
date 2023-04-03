@@ -14,21 +14,11 @@
 
 int main() 
 {
-    // s = malloc(100);
     printf("\n\t\t\tBIG_SHELL\n\n\n");
     while (1)
     {
         prompt();
         readline("");
-
-        // stash = ft_split(s, ' ');
-        // while (*stash)
-        // {
-        //     printf("%s\n", *stash);
-        //     free(*stash);
-        //     stash++;
-        // }
-        // s = malloc(100);
     }
     return 0;
 }
