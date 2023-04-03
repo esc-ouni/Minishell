@@ -18,8 +18,7 @@ int main()
     while (1)
     {
         prompt();
-        system(readline(""));
-        // after_parse();
+        after_parse(read_line());
     }
     return 0;
 }

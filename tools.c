@@ -67,8 +67,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*o_last;
 
-	if (lst == NULL || new == NULL)
-		return ;
+	// if (lst == NULL || new == NULL)
+	// 	return ;
 	if (*lst == NULL)
 	{
 		*lst = new;
@@ -133,6 +133,27 @@ void    after_parse(t_list  **head)
         i++;
         node = node->next;
     }
+}
+
+t_list  **read_line()
+{
+	int		i = 0;
+    char    *s;
+    char    **str;
+	t_list	**head;
+
+	head = NULL;
+    s = readline("");
+	str = ft_split(s, ' ');
+	while (str[i])
+	{
+		printf("%s\n", str[i]);
+		// ft_lstadd_back(head, ft_lstnew(str[i]));
+		free(str[i]);
+		i++;
+	}
+	free(s);
+	return (head);
 }
 
 // void	*h_malloc(t_data data, size_t s, void *p)
