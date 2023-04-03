@@ -15,13 +15,11 @@
 int main() 
 {
     printf("\n\t\t\tBIG_SHELL\n\n\n");
-    while (1) {
-        char s[100];
+    while (1)
+    {
         printf("\x1B[34m");
-        printf("Your_prompt >> ");
-        // readline("Your_prompt >> ");
+        readline("Your_prompt >> ");
         printf("\x1B[0m");
-        scanf("%s", s);
     }
     return 0;
 }
