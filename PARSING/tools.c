@@ -135,7 +135,6 @@ void    after_parse(t_list  **head)
         printf("\n\n");
         i++;
         node = node->next;
-		free(node);
     }
 }
 
