@@ -28,13 +28,15 @@ int	ft_lstsize(t_list *lst)
 t_list	*ft_lstnew(char *s)
 {
 	t_list	*new_node;
+	int		d;
 
+	d = ft_strlen(s);
 	new_node = NULL;
 	new_node = (t_list *)malloc(sizeof(t_list) + 1);
-	// new_node = (t_list *)h_malloc(data, sizeof(t_list), new_node);
+	new_node->cmd = malloc(d + 1);
 	if (new_node)
 	{
-        // ft_memcpy(new_node->cmd, s, ft_strlen(s));
+		ft_memcpy(new_node->cmd, s, d + 1);
 		new_node->next = NULL;
 	}
 	return (new_node);
@@ -67,11 +69,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*o_last;
 
-	// if (lst == NULL)
-	// {
-	// 	*lst = new;
-	// 	return ;
-	// }
 	if (*lst == NULL)
 	{
 		*lst = new;
@@ -131,8 +128,7 @@ void    after_parse(t_list  **head)
     while(node)
     {
         printf("node %d\n", i);
-        printf("command   : %d", node->nb);
-        // printf("command   : %s", node->cmd);
+        printf("command   : %s", node->cmd);
         printf("\n\n");
         i++;
         node = node->next;
@@ -155,6 +151,8 @@ t_list  **read_line()
 		free(str[i]);
 		i++;
 	}
+	free(str[i]);
+	free(str);
 	free(s);
 	return (&head);
 }
