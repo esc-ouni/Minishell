@@ -112,7 +112,10 @@ void    start()
     fd = open("header.h", O_RDONLY);
     printf("\x1B[32m");
     while ((s = get_next_line(fd)))
+	{
         printf("%s", s);
+		free(s);
+	}
     printf("\x1B[0m");
     printf("\n\n");
     close(fd);
