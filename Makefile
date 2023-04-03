@@ -30,30 +30,30 @@ OBJ_M  = $(MND:%.c=%.o)
 
 OBJ_T  = $(TLS:%.c=%.o)
 
-all: libft $(NAME)
+all: LIBFT $(NAME)
 
-libft:
-	make -C Libft
+LIBFT:
+	make -C LIBF
 
 $(NAME): $(OBJ_M) $(OBJ_T) $(HR)
-	@$(CC) $(FLAGS) Libft/libft.a -lreadline -L /Users/idouni/.brew/opt/readline/lib $(OBJ_T) $(OBJ_M) -o $(NAME)
+	@$(CC) $(FLAGS) LIBF/libft.a -lreadline -L /Users/idouni/.brew/opt/readline/lib $(OBJ_T) $(OBJ_M) -o $(NAME)
 	@clear && echo "==$(NAME)_compiled=============="
 
 %.o: %.c $(HR)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	make clean -C Libft
+	make clean -C LIBF
 	$(RM) $(OBJ_M)
 	$(RM) $(OBJ_T)
 	@clear && echo "==Object_files_deleted=========="
 
 fclean: clean
-	make fclean -C Libft
+	make fclean -C LIBF
 	$(RM) $(NAME)
 	@clear && echo "==All_created_files_deleted====="
 
 re: fclean all
 	@clear && echo "==Compilation_reseted==========="
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re LIBFT
