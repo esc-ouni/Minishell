@@ -13,6 +13,10 @@
 # ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define PIPE 11
+# define REDR 12
+# define SMCL 13
+
 # include <unistd.h>
 # include <fcntl.h>
 # include "LIBF/libft.h"
