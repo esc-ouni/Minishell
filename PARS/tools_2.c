@@ -51,5 +51,5 @@ void    after_parse(t_list  *head)
         i++;
         node = node->next;
     }
-	ft_lstclear(&head);
+	// ft_lstclear(&head);
 }
