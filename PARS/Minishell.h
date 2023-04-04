@@ -38,10 +38,18 @@ typedef struct s_list
     struct s_list   *next;
 }   t_list;
 
+typedef struct ss_list
+{
+    char            *cmd;
+    int             type;
+    struct ss_list   *next;
+}   tt_list;
+
 void    prompt(void);
 void    start(void);
 t_list  *read_line(void);
 void    after_parse(t_list  *head);
+void	check_type(t_list	*node);
 t_list	*ft_lstnew(char *s);
 t_list	*ft_lstlast(t_list *lst);
 int	    ft_lstsize(t_list *lst);

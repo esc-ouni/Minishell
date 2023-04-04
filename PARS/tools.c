@@ -25,6 +25,16 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
+void	check_type(t_list	*node)
+{
+	if (!ft_strncmp(node->cmd, "|", 1))
+		node->type = PIPE;
+	else if (!ft_strncmp(node->cmd, ";", 1))
+		node->type = SMCL;
+	else if (!ft_strncmp(node->cmd, ">", 1))
+		node->type = REDR;
+}
+
 t_list	*ft_lstnew(char *s)
 {
 	t_list	*new_node;
@@ -37,6 +47,7 @@ t_list	*ft_lstnew(char *s)
 	if (new_node)
 	{
 		ft_memcpy(new_node->cmd, s, d + 1);
+		check_type(new_node);
 		new_node->next = NULL;
 	}
 	return (new_node);
@@ -132,6 +143,7 @@ void    after_parse(t_list  *head)
     {
         printf("=> node %d;\n", i);
         printf("   command : %s", node->cmd);
+        printf("   type    : %d", node->type);
         printf("\n\n");
         i++;
         node = node->next;
