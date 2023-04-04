@@ -43,19 +43,28 @@ void    after_parse(t_list  *head)
     int i2 = 0;
 
     node = head;
+    node = head;
     str = malloc(sizeof(char *) + 10);
     printf("\n");
     while(node)
     {
-        strcpy(str[i2], node->cmd);
         printf("=> node %d;\n", i);
         printf("   command : %s\n", node->cmd);
         printf("   type    : %d", node->type);
+        str[i2] = node->cmd;
         printf("\n\n");
         i++;
         i2++;
         node = node->next;
     }
     str[i2] = NULL;
+    node = head;
+    node->full_cmd = str;
+    i2 = 0;
+    while (str[i2])
+    {
+        printf("%s\n", str[i2]);
+        i2++;
+    }
 	// ft_lstclear(&head);
 }

@@ -34,17 +34,11 @@
 
 typedef struct s_list
 {
+    char            **full_cmd;
     char            *cmd;
     int             type;
     struct s_list   *next;
 }   t_list;
-
-typedef struct ss_list
-{
-    char            *cmd;
-    int             type;
-    struct ss_list   *next;
-}   tt_list;
 
 void    prompt(void);
 void    start(void);
