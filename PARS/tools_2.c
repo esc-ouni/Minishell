@@ -38,18 +38,24 @@ t_list  *read_line()
 void    after_parse(t_list  *head)
 {
     t_list  *node;
+    char    **str;
     int i = 1;
+    int i2 = 0;
 
     node = head;
+    str = malloc(sizeof(char *) + 10);
     printf("\n");
     while(node)
     {
+        strcpy(str[i2], node->cmd);
         printf("=> node %d;\n", i);
         printf("   command : %s\n", node->cmd);
         printf("   type    : %d", node->type);
         printf("\n\n");
         i++;
+        i2++;
         node = node->next;
     }
+    str[i2] = NULL;
 	// ft_lstclear(&head);
 }

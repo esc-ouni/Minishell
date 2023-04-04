@@ -22,6 +22,7 @@
 # include "LIBF/libft.h"
 # include "G_N_L/get_next_line.h"
 # include <stdio.h>
+# include <string.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <signal.h>
