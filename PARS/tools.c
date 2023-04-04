@@ -100,7 +100,7 @@ void	ft_lstclear(t_list **lst)
 void    prompt()
 {
     printf("\x1B[34m");
-    printf("Your_prompt >> ");
+    printf("\nBig_shell >> ");
     printf("\x1B[0m");
 }
 
