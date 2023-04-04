@@ -35,7 +35,7 @@ t_list  *read_line()
 	return (head);
 }
 
-void    after_parse(t_list  *head)
+t_list  *after_parse(t_list  *head)
 {
     t_list  *node;
     char    **str;
@@ -45,14 +45,14 @@ void    after_parse(t_list  *head)
     node = head;
     node = head;
     str = malloc(sizeof(char *) + 10);
-    printf("\n");
+    // printf("\n");
     while(node)
     {
-        printf("=> node %d;\n", i);
-        printf("   command : %s\n", node->cmd);
-        printf("   type    : %d", node->type);
+        // printf("=> node %d;\n", i);
+        // printf("   command : %s\n", node->cmd);
+        // printf("   type    : %d", node->type);
         str[i2] = node->cmd;
-        printf("\n\n");
+        // printf("\n\n");
         i++;
         i2++;
         node = node->next;
@@ -60,11 +60,15 @@ void    after_parse(t_list  *head)
     str[i2] = NULL;
     node = head;
     node->full_cmd = str;
-    i2 = 0;
-    while (str[i2])
-    {
-        printf("%s\n", str[i2]);
-        i2++;
-    }
+        // printf("=> node %d;\n", i);
+        // printf("   command : %s\n", node->cmd);
+        // printf("   type    : %d", node->type);
+    // i2 = 0;
+    // while (str[i2])
+    // {
+    //     printf("%s\n", str[i2]);
+    //     i2++;
+    // }
 	// ft_lstclear(&head);
+    return (head);
 }

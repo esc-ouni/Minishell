@@ -43,7 +43,7 @@ typedef struct s_list
 void    prompt(void);
 void    start(void);
 t_list  *read_line(void);
-void    after_parse(t_list  *head);
+t_list  *after_parse(t_list  *head);
 void	check_type(t_list	*node);
 t_list	*ft_lstnew(char *s);
 t_list	*ft_lstlast(t_list *lst);
