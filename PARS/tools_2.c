@@ -12,24 +12,6 @@
 
 #include "Minishell.h"
 
-void    after_parse(t_list  *head)
-{
-    t_list  *node;
-    int i = 1;
-
-    node = head;
-    printf("\n");
-    while(node)
-    {
-        printf("=> node %d;\n", i);
-        printf("   command : %s\n", node->cmd);
-        printf("   type    : %d", node->type);
-        printf("\n\n");
-        i++;
-        node = node->next;
-    }
-	ft_lstclear(&head);
-}
 
 t_list  *read_line()
 {
@@ -51,4 +33,23 @@ t_list  *read_line()
 	free(str);
 	free(s);
 	return (head);
+}
+
+void    after_parse(t_list  *head)
+{
+    t_list  *node;
+    int i = 1;
+
+    node = head;
+    printf("\n");
+    while(node)
+    {
+        printf("=> node %d;\n", i);
+        printf("   command : %s\n", node->cmd);
+        printf("   type    : %d", node->type);
+        printf("\n\n");
+        i++;
+        node = node->next;
+    }
+	ft_lstclear(&head);
 }
