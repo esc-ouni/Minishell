@@ -136,6 +136,13 @@ void    after_parse(t_list  *head)
         i++;
         node = node->next;
     }
+    node = head;
+    while(node)
+	{
+		free(node);
+		node = node->next;
+	}
+	free(node);
 }
 
 t_list  *read_line()
