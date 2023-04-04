@@ -159,7 +159,7 @@ t_list  *read_line()
 	t_list	*head;
 
 	head = NULL;
-    s = readline("");
+    s = readline(" ");
 	str = ft_split(s, ' ');
 	while (str[i])
 	{
