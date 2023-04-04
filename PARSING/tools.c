@@ -121,12 +121,12 @@ void    start()
     close(fd);
 }
 
-void    after_parse(t_list  **head)
+void    after_parse(t_list  *head)
 {
     t_list  *node;
     int i = 1;
 
-    node = *head;
+    node = head;
     printf("\n");
     while(node)
     {
@@ -138,7 +138,7 @@ void    after_parse(t_list  **head)
     }
 }
 
-t_list  **read_line()
+t_list  *read_line()
 {
 	int		i = 0;
     char    *s;
@@ -157,7 +157,7 @@ t_list  **read_line()
 	free(str[i]);
 	free(str);
 	free(s);
-	return (&head);
+	return (head);
 }
 
 // void	*h_malloc(t_data data, size_t s, void *p)

@@ -35,8 +35,8 @@ typedef struct s_list
 
 void    prompt(void);
 void    start(void);
-void    after_parse(t_list  **head);
-t_list  **read_line(void);
+void    after_parse(t_list  *head);
+t_list  *read_line(void);
 t_list	*ft_lstnew(char *s);
 t_list	*ft_lstlast(t_list *lst);
 int	    ft_lstsize(t_list *lst);
