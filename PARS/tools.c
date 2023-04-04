@@ -142,7 +142,7 @@ void    after_parse(t_list  *head)
     while(node)
     {
         printf("=> node %d;\n", i);
-        printf("   command : %s", node->cmd);
+        printf("   command : %s\n", node->cmd);
         printf("   type    : %d", node->type);
         printf("\n\n");
         i++;
