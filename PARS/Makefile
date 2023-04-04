@@ -23,6 +23,8 @@ HR     = Minishell.h
 MND    = Minishell.c
 
 TLS    = tools.c \
+		tools_1.c \
+		tools_2.c \
 		G_N_L/get_next_line.c \
 		G_N_L/get_next_line_utils.c \
 
