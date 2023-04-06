@@ -20,8 +20,23 @@ int main()
     {
         prompt();
         after_parse(parser());
-        // execve("/bin/ls",n->full_cmd, NULL);
+        // execve("/bin/ls",&n->cmd, NULL);
         // system(n->cmd);
     }
     return 0;
+}
+
+
+void    full(t_list **fuck)
+{
+
+}
+
+
+int main(void)
+{
+    t_f_list *p;
+
+    p = NULL;
+    full(&p);
 }
