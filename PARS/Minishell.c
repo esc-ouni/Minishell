@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:08 by idouni            #+#    #+#             */
-/*   Updated: 2023/04/02 20:55:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/04/04 18:45:33 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int main() 
 {
+    t_list  *n;
     start();
     while (1)
     {
         prompt();
-        after_parse(read_line());
+        n = after_parse(read_line());
+        execve("/bin/ls",n->full_cmd, NULL);
         // system(readline(""));
     }
     return 0;
