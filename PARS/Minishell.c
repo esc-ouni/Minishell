@@ -19,9 +19,9 @@ int main()
     while (1)
     {
         prompt();
-        n = after_parse(read_line());
+        n = after_parse(parser());
         // execve("/bin/ls",n->full_cmd, NULL);
-        system(*n->full_cmd);
+        // system(n->cmd);
     }
     return 0;
 }

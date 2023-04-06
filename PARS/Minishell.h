@@ -54,7 +54,7 @@ typedef struct s_f_list
 
 void    prompt(void);
 void    start(void);
-t_list  *read_line(void);
+t_list  *parser(void);
 void    check_syntax(t_list *head);
 t_list  *after_parse(t_list  *head);
 void	check_type(t_list	*node);

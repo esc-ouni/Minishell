@@ -13,7 +13,7 @@
 #include "Minishell.h"
 
 
-t_list  *read_line()
+t_list  *parser()
 {
 	int		i = 0;
     char    *s;
