@@ -37,38 +37,19 @@ t_list  *parser()
 
 t_list  *after_parse(t_list  *head)
 {
+    int i = 0;
     t_list  *node;
-    char    **str;
-    int i = 1;
-    int i2 = 0;
 
     node = head;
-    node = head;
-    str = malloc(sizeof(char *) + ft_lstsize(head) + 1);
     while(node)
     {
         printf("=> node %d;\n", i);
         printf("   command : %s\n", node->cmd);
         printf("   type    : %d", node->type);
-        str[i2] = node->cmd;
         printf("\n\n");
         i++;
-        i2++;
         node = node->next;
     }
-    str[i2] = NULL;
-    node = head;
-    node->full_cmd = str;
-        // printf("=> node %d;\n", i);
-        // printf("   command : %s\n", node->cmd);
-        // printf("   type    : %d", node->type);
-    i2 = 0;
-    while (str[i2])
-    {
-        printf("%s ", str[i2]);
-        i2++;
-    }
-    printf("\n");
 	ft_lstclear(&head);
     return (head);
 }
