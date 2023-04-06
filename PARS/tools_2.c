@@ -35,7 +35,7 @@ t_list  *parser()
 	return (head);
 }
 
-t_list  *after_parse(t_list  *head)
+void    after_parse(t_list  *head)
 {
     int i = 0;
     t_list  *node;
@@ -51,7 +51,6 @@ t_list  *after_parse(t_list  *head)
         node = node->next;
     }
 	ft_lstclear(&head);
-    return (head);
 }
 
 void    check_syntax(t_list *head)
