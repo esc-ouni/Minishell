@@ -16,11 +16,23 @@
 void	check_type(t_list	*node)
 {
 	if (!ft_strncmp(node->cmd, "|", 1))
-		node->type = PIPE;
+		node->type = PIP;
 	else if (!ft_strncmp(node->cmd, ";", 1))
-		node->type = SMCL;
+		node->type = ERO;
 	else if (!ft_strncmp(node->cmd, ">", 1))
-		node->type = REDR;
+		node->type = RED;
+    else if (!ft_strncmp(node->cmd, ">>", 2))
+		node->type = RED;
+    else if (!ft_strncmp(node->cmd, "<", 1))
+		node->type = RED;
+    else if (!ft_strncmp(node->cmd, "<<", 2))
+		node->type = RED;
+	else if (!ft_strncmp(node->cmd, "\'", 1))
+		node->type = SQU;
+	else if (!ft_strncmp(node->cmd, "\"", 1))
+		node->type = DQU;
+	else
+		node->type = STD;
 }
 
 void    prompt()
@@ -52,7 +64,7 @@ void    start()
 // 	p = malloc(s);
 // 	if (!p)
 // 	{
-// 		ft_exit_with_error(data);
+// 		ft_exit_with_EROor(data);
 // 	}
 // 	return (p);
 // }

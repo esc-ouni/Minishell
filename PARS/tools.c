@@ -33,7 +33,7 @@ t_list	*ft_lstnew(char *s)
 
 	d = ft_strlen(s);
 	new_node = NULL;
-	new_node = (t_list *)malloc(sizeof(t_list) + 1);
+	new_node = (t_list *)malloc(sizeof(t_list));
 	new_node->cmd = malloc(d + 1);
 	if (new_node)
 	{
@@ -93,6 +93,7 @@ void	ft_lstclear(t_list **lst)
 	while (node)
 	{
 		n_node = node->next;
+		free(node->cmd);
 		free(node);
 		node = n_node;
 	}

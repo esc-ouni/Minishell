@@ -14,14 +14,14 @@
 
 int main() 
 {
-    t_list  *n;
+    // t_list  *n;
     start();
     while (1)
     {
         prompt();
-        n = after_parse(read_line());
-        execve("/bin/ls",n->full_cmd, NULL);
-        // system(readline(""));
+        after_parse(parser());
+        // execve("/bin/ls",n->full_cmd, NULL);
+        // system(n->cmd);
     }
     return 0;
 }
