@@ -16,7 +16,7 @@
 # define STD 10
 # define PIP 11
 # define RED 12
-# define ERR 13
+# define ERO 13
 # define SQU 14
 # define DQU 15
 

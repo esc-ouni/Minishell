@@ -18,7 +18,7 @@ void	check_type(t_list	*node)
 	if (!ft_strncmp(node->cmd, "|", 1))
 		node->type = PIP;
 	else if (!ft_strncmp(node->cmd, ";", 1))
-		node->type = ERR;
+		node->type = ERO;
 	else if (!ft_strncmp(node->cmd, ">", 1))
 		node->type = RED;
     else if (!ft_strncmp(node->cmd, ">>", 2))
@@ -64,7 +64,7 @@ void    start()
 // 	p = malloc(s);
 // 	if (!p)
 // 	{
-// 		ft_exit_with_error(data);
+// 		ft_exit_with_EROor(data);
 // 	}
 // 	return (p);
 // }
