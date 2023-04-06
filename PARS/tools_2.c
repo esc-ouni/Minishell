@@ -72,3 +72,6 @@ t_list  *after_parse(t_list  *head)
 	// ft_lstclear(&head);
     return (head);
 }
+
+void    check_syntax(t_list *head)
+{}

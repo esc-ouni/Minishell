@@ -34,15 +34,25 @@
 
 typedef struct s_list
 {
-    char            **full_cmd;
     char            *cmd;
     int             type;
     struct s_list   *next;
 }   t_list;
 
+typedef struct s_f_list
+{
+    char            **full_cmd;
+    char            *cmd;
+    int             type;
+    int             input;
+    int             output;
+    struct s_f_list   *next;
+}   t_list;
+
 void    prompt(void);
 void    start(void);
 t_list  *read_line(void);
+void    check_syntax(t_list *head);
 t_list  *after_parse(t_list  *head);
 void	check_type(t_list	*node);
 t_list	*ft_lstnew(char *s);
