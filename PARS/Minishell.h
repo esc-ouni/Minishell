@@ -13,6 +13,7 @@
 # ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define STD 10
 # define PIP 11
 # define RED 12
 # define ERR 13

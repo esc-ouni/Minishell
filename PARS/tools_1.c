@@ -21,16 +21,18 @@ void	check_type(t_list	*node)
 		node->type = ERR;
 	else if (!ft_strncmp(node->cmd, ">", 1))
 		node->type = RED;
-    else if (!ft_strncmp(node->cmd, ">>", 1))
+    else if (!ft_strncmp(node->cmd, ">>", 2))
 		node->type = RED;
     else if (!ft_strncmp(node->cmd, "<", 1))
 		node->type = RED;
-    else if (!ft_strncmp(node->cmd, "<<", 1))
+    else if (!ft_strncmp(node->cmd, "<<", 2))
 		node->type = RED;
 	else if (!ft_strncmp(node->cmd, "\'", 1))
 		node->type = SQU;
 	else if (!ft_strncmp(node->cmd, "\"", 1))
 		node->type = DQU;
+	else
+		node->type = STD;
 }
 
 void    prompt()
