@@ -69,3 +69,14 @@ static char	*ft_get_path(char *arg, char **env)
 	}
 	return (NULL);
 }
+
+int	ft_execute(char *arg, char **env)
+{
+	char *path;
+	char **cmd;
+
+	cmd = ft_split(arg, ' ');
+	path = ft_get_path(cmd[0], env);
+	execve(path, cmd, env);
+	return (0);
+}
