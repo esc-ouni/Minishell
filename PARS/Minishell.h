@@ -13,9 +13,11 @@
 # ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PIPE 11
-# define REDR 12
-# define SMCL 13
+# define PIP 11
+# define RED 12
+# define ERR 13
+# define SQU 14
+# define DQU 15
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -34,6 +36,7 @@
 
 typedef struct s_list
 {
+    char            **full_cmd;
     char            *cmd;
     int             type;
     struct s_list   *next;
@@ -47,7 +50,7 @@ typedef struct s_f_list
     int             input;
     int             output;
     struct s_f_list   *next;
-}   t_list;
+}   t_f_list;
 
 void    prompt(void);
 void    start(void);

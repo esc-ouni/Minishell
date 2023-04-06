@@ -74,4 +74,6 @@ t_list  *after_parse(t_list  *head)
 }
 
 void    check_syntax(t_list *head)
-{}
+{
+    (void)head;
+}

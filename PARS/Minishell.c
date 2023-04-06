@@ -20,8 +20,8 @@ int main()
     {
         prompt();
         n = after_parse(read_line());
-        execve("/bin/ls",n->full_cmd, NULL);
-        // system(readline(""));
+        // execve("/bin/ls",n->full_cmd, NULL);
+        system(*n->full_cmd);
     }
     return 0;
 }

@@ -16,11 +16,21 @@
 void	check_type(t_list	*node)
 {
 	if (!ft_strncmp(node->cmd, "|", 1))
-		node->type = PIPE;
+		node->type = PIP;
 	else if (!ft_strncmp(node->cmd, ";", 1))
-		node->type = SMCL;
+		node->type = ERR;
 	else if (!ft_strncmp(node->cmd, ">", 1))
-		node->type = REDR;
+		node->type = RED;
+    else if (!ft_strncmp(node->cmd, ">>", 1))
+		node->type = RED;
+    else if (!ft_strncmp(node->cmd, "<", 1))
+		node->type = RED;
+    else if (!ft_strncmp(node->cmd, "<<", 1))
+		node->type = RED;
+	else if (!ft_strncmp(node->cmd, "\'", 1))
+		node->type = SQU;
+	else if (!ft_strncmp(node->cmd, "\"", 1))
+		node->type = DQU;
 }
 
 void    prompt()
