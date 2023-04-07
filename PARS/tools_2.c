@@ -22,7 +22,7 @@ t_list  *parser()
 
 	head = NULL;
     s = readline(" ");
-	str = ft_split(s, ' ');
+	str = ft_split(s, '\"');
 	while (str[i])
 	{
 		ft_lstadd_back(&head, ft_lstnew(str[i]));
