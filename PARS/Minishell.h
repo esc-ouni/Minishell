@@ -40,18 +40,10 @@ typedef struct s_list
     char            **full_cmd;
     char            *cmd;
     int             type;
-    struct s_list   *next;
-}   t_list;
-
-typedef struct s_f_list
-{
-    char            **full_cmd;
-    char            *cmd;
-    int             type;
     int             input;
     int             output;
-    struct s_f_list   *next;
-}   t_f_list;
+    struct s_list   *next;
+}   t_list;
 
 void    prompt(void);
 void    start(void);

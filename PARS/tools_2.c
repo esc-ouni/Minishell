@@ -44,10 +44,10 @@ void    after_parse(t_list  *head)
     while(node)
     {
 
-        // printf("=> node %d;\n", i);
-        // printf("   command : %s\n", node->cmd);
-        // printf("   type    : %d", node->type);
-        // printf("\n\n");
+        printf("=> node %d;\n", i);
+        printf("   command : %s\n", node->cmd);
+        printf("   type    : %d", node->type);
+        printf("\n\n");
         i++;
         node = node->next;
     }

@@ -25,7 +25,6 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-
 t_list	*ft_lstnew(char *s)
 {
 	t_list	*new_node;
@@ -38,6 +37,7 @@ t_list	*ft_lstnew(char *s)
 	if (new_node)
 	{
 		ft_memcpy(new_node->cmd, s, d + 1);
+		new_node->cmd[d] = '\0';
 		check_type(new_node);
 		new_node->next = NULL;
 	}
