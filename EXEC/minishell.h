@@ -12,11 +12,13 @@ typedef struct s_cmd
 {
     char    **cmd;
     char    *input_file;
+    char    *output_file;
     int cmd_pos;
     int first_cmd;
     int last_cmd;
     int cmd_fdin;
     int inputed;
+    int outputed;
     int cmd_fdout;
     int *fd;
     struct s_cmd *next;

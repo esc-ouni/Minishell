@@ -58,7 +58,7 @@ t_cmd	**init()
 	//cmd 111
 	lol[1]->cmd = ft_split("wc -l", ' ');
 	lol[1]->first_cmd = 0;
-	lol[1]->inputed = 0;
+	lol[1]->outputed = 0;
 	lol[1]->last_cmd = 1;
 	lol[1]->next = NULL;
 	return lol;
@@ -80,10 +80,26 @@ int	ft_redirect(t_cmd **lol)
 	int i = 0;
 	while (lol[i])
 	{
-		if(lol[i]->first_cmd && lol[i]->inputed)
-			lol[i]->cmd_fdin = open(lol[i]->input_file, O_RDONLY);
-		if(!lol[i]->first_cmd && !lol[i]->inputed)
-			lol[i]->cmd_fdin = 0;
+		if (lol[i]->first_cmd)
+		{
+			if (lol[i]->inputed)
+				lol[i]->cmd_fdin = open(lol[i]->input_file, O_RDONLY);
+			else
+				lol[i]->cmd_fdin = 0;
+			lol[i]->cmd_fdout = lol[i]->next->fd[1];
+		}
+		else if(lol[i]->last_cmd)
+		{
+			if(lol[i]->outputed)
+				lol[i]->cmd_fdout = open(lol[i]->output_file, O_WRONLY);
+			else
+				lol[i]->cmd_fdout = 1;
+		}
+		else
+		{
+			lol[i]->cmd_fdin = fd[1];
+			
+		}
 		dup2(lol[i]->cmd_fdin, STDIN_FILENO);
 	}
 }
