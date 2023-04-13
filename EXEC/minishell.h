@@ -8,6 +8,20 @@
 # include <readline/history.h>
 # include "libft/libft.h"
 
+typedef struct s_cmd
+{
+    char    **cmd;
+    char    *input_file;
+    int cmd_pos;
+    int first_cmd;
+    int last_cmd;
+    int cmd_fdin;
+    int inputed;
+    int cmd_fdout;
+    int *fd;
+    struct s_cmd *next;
+}   t_cmd;
+
 int	ft_execute(char *arg, char **env);
 
 #endif

@@ -12,38 +12,99 @@
 
 #include "minishell.h"
 
-int	ft_process(char *line, char **env)
-{
-	int	pid;
-	int	fd[2];
-	int	readead_bytes;
-	char buff[5];
+// int	ft_process(char *line, char **env)
+// {
+// 	int	pid;
+// 	int	readead_bytes;
+// 	char buff[5];
 
-	pipe(fd);
-	pid = fork();
-	if (pid == 0)
+// 	ft_pipe_open();
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		close(fd[0]);
+// 		dup2(fd[1], STDOUT_FILENO);
+// 		ft_execute(line, env);
+// 	}
+// 	else
+// 	{
+// 		close (fd[1]);
+// 		if (!last)
+// 			dup2(fd[0], STDIN_FILENO);
+// 		else
+// 			while ((readead_bytes = read(fd[0], buff, 5)) > 0)
+// 				write(STDOUT_FILENO, buff, 5);
+// 		waitpid(pid, NULL, 0);
+// 	}
+// }
+
+t_cmd	**init()
+{
+	t_cmd **lol;
+
+	lol = (t_cmd **)malloc(sizeof(t_cmd *) * 3);
+	int i = 0;
+	while (i < 2)
+		lol[i++] = (t_cmd *)malloc(sizeof(t_cmd));
+	lol[i] = NULL;
+	//cmd 000
+	lol[0]->cmd = ft_split("ls -la", ' ');
+	lol[0]->cmd_fdin = 0;
+	lol[0]->inputed = 0;
+	lol[0]->first_cmd = 1;
+	lol[0]->last_cmd = 0;
+	lol[0]->next = lol[1];
+
+	//cmd 111
+	lol[1]->cmd = ft_split("wc -l", ' ');
+	lol[1]->first_cmd = 0;
+	lol[1]->inputed = 0;
+	lol[1]->last_cmd = 1;
+	lol[1]->next = NULL;
+	return lol;
+}
+
+int ft_pipe_open(t_cmd **lol)
+{
+	int i = 0;
+	while (lol[i])
 	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		ft_execute(line, env);
+		lol[i]->fd = (int *)malloc(sizeof(int) * 2);
+		pipe(lol[i++]->fd);
 	}
-	else
+	return 0;
+}
+
+int	ft_redirect(t_cmd **lol)
+{
+	int i = 0;
+	while (lol[i])
 	{
-		close (fd[1]);
-		waitpid(pid, NULL, 0);
-		while ((readead_bytes = read(fd[0], buff, 5)) > 0)
-			write(STDOUT_FILENO, buff, 5);
+		if(lol[i]->first_cmd && lol[i]->inputed)
+			lol[i]->cmd_fdin = open(lol[i]->input_file, O_RDONLY);
+		if(!lol[i]->first_cmd && !lol[i]->inputed)
+			lol[i]->cmd_fdin = 0;
+		dup2(lol[i]->cmd_fdin, STDIN_FILENO);
 	}
 }
 
 int main(int ac, char **av, char **env)
 {
 	char *r;
-	while (1)
+	t_cmd	**lol;
+
+	lol = init();
+	ft_pipe_open(lol);
+	ft_redirect(lol);
+	for (int i = 0 ;lol[i]; i++)
 	{
-		printf(">>");
-		r = readline("");
-		ft_process(r, env);
-		// ft_execute(r, env);
+		printf("%d %d \n", lol[i]->fd[0], lol[i]->fd[1]);
 	}
+	// while (1)
+	// {
+	// 	printf(">>");
+	// 	r = readline("");
+	// 	ft_process(r, env);
+	// 	// ft_execute(r, env);
+	// }
 }
