@@ -8,12 +8,22 @@
 # include <readline/history.h>
 # include "libft/libft.h"
 
+typedef struct s_file
+{
+    char *filename;
+    int infile;
+    int outfile;
+
+}   t_file;
+
 typedef struct s_cmd
 {
     char    **cmd;
     char    *input_file;
     char    *output_file;
+    char    *cmd_path;
     int cmd_pos;
+    int init_stdin;
     int first_cmd;
     int last_cmd;
     int cmd_fdin;

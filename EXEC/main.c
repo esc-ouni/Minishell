@@ -41,86 +41,108 @@
 t_cmd	**init()
 {
 	t_cmd **lol;
+	int	stdinit;
+
+	stdinit = dup(0);
 
 	lol = (t_cmd **)malloc(sizeof(t_cmd *) * 3);
 	int i = 0;
-	while (i < 2)
+	while (i < 3)
 		lol[i++] = (t_cmd *)malloc(sizeof(t_cmd));
 	lol[i] = NULL;
 	//cmd 000
-	lol[0]->cmd = ft_split("ls -la", ' ');
+	lol[0]->cmd = ft_split("cat", ' ');
+	lol[0]->cmd_path = "/bin/cat";
+	lol[0]->input_file = "nnn.c";
 	lol[0]->cmd_fdin = 0;
 	lol[0]->inputed = 0;
 	lol[0]->first_cmd = 1;
 	lol[0]->last_cmd = 0;
-	lol[0]->next = lol[1];
+	lol[0]->init_stdin = stdinit;
 
 	//cmd 111
-	lol[1]->cmd = ft_split("wc -l", ' ');
+	lol[1]->cmd = ft_split("grep int", ' ');
+	lol[1]->cmd_path = "/usr/bin/grep";
+	lol[1]->input_file = NULL;
 	lol[1]->first_cmd = 0;
 	lol[1]->outputed = 0;
-	lol[1]->last_cmd = 1;
+	lol[1]->last_cmd = 0;
+	lol[1]->init_stdin = stdinit;
 	lol[1]->next = NULL;
+
+	//cmd 222
+	lol[2]->cmd = ft_split("wc -l", ' ');
+	lol[2]->cmd_path = "/bin/wc";
+	lol[2]->input_file = NULL;
+	lol[2]->first_cmd = 0;
+	lol[2]->outputed = 0;
+	lol[2]->last_cmd = 1;
+	lol[2]->init_stdin = stdinit;
+	lol[2]->next = NULL;
 	return lol;
 }
 
-int ft_pipe_open(t_cmd **lol)
-{
-	int i = 0;
-	while (lol[i])
-	{
-		lol[i]->fd = (int *)malloc(sizeof(int) * 2);
-		pipe(lol[i++]->fd);
-	}
-	return 0;
-}
 
-int	ft_redirect(t_cmd **lol)
+int	ft_fork(t_cmd **lol, char **env)
 {
-	int i = 0;
-	while (lol[i])
+	int	fd[2];
+	int	pid;
+	int	i = 0;
+	pipe(fd);
+
+	while (i < 3)
 	{
-		if (lol[i]->first_cmd)
+		//dup2(lol[i]->init_stdin, STDIN_FILENO);
+		if (lol[i]->input_file)
 		{
-			if (lol[i]->inputed)
-				lol[i]->cmd_fdin = open(lol[i]->input_file, O_RDONLY);
-			else
-				lol[i]->cmd_fdin = 0;
-			lol[i]->cmd_fdout = lol[i]->next->fd[1];
+			lol[i]->cmd_fdin = open(lol[i]->input_file, O_RDONLY);
+			if (lol[i]->cmd_fdin < 0)
+				exit(1);
+			dup2(lol[i]->cmd_fdin, STDIN_FILENO);
+			// close(lol[i]->cmd_fdin);
 		}
-		else if(lol[i]->last_cmd)
+		else if(!lol[i]->input_file)
+			dup2(fd[0], STDIN_FILENO);
+		pid = fork();
+		if (pid == 0)
 		{
-			if(lol[i]->outputed)
-				lol[i]->cmd_fdout = open(lol[i]->output_file, O_WRONLY);
-			else
-				lol[i]->cmd_fdout = 1;
+			close(fd[0]);
+			dup2(fd[1], STDOUT_FILENO);
+			execve(lol[i]->cmd_path, lol[i]->cmd, env);
 		}
 		else
 		{
-			lol[i]->cmd_fdin = fd[1];
-			
+			close(fd[1]);
+			//sleep(10);
+			waitpid(pid, NULL, 0);
+			if (lol[i]->cmd_fdin)
+				close(lol[i]->cmd_fdin);
 		}
-		dup2(lol[i]->cmd_fdin, STDIN_FILENO);
+		i++;
 	}
+	if (fd[0])
+		close(fd[0]);
+	if (fd[1])
+		close(fd[1]);
 }
-
 int main(int ac, char **av, char **env)
 {
 	char *r;
+	int	tmp_fd_in;
+	int	tmp_fd_out;
 	t_cmd	**lol;
 
+	tmp_fd_in = dup(STDIN_FILENO);
+	tmp_fd_out = dup (STDOUT_FILENO);
+
 	lol = init();
-	ft_pipe_open(lol);
-	ft_redirect(lol);
-	for (int i = 0 ;lol[i]; i++)
+	while (1)
 	{
-		printf("%d %d \n", lol[i]->fd[0], lol[i]->fd[1]);
+		dup2(tmp_fd_in, 0);
+		dup2(tmp_fd_out, 1);
+		printf(">>");
+		r = readline("");
+		ft_fork(lol, env);
+		// ft_execute(r, env);
 	}
-	// while (1)
-	// {
-	// 	printf(">>");
-	// 	r = readline("");
-	// 	ft_process(r, env);
-	// 	// ft_execute(r, env);
-	// }
 }
