@@ -47,7 +47,7 @@ t_cmd	**init()
 
 	lol = (t_cmd **)malloc(sizeof(t_cmd *) * 3);
 	int i = 0;
-	while (i < 3)
+	while (i < 1)
 		lol[i++] = (t_cmd *)malloc(sizeof(t_cmd));
 	lol[i] = NULL;
 	//cmd 000
@@ -57,28 +57,29 @@ t_cmd	**init()
 	lol[0]->cmd_fdin = 0;
 	lol[0]->inputed = 0;
 	lol[0]->first_cmd = 1;
-	lol[0]->last_cmd = 0;
+	lol[0]->last_cmd = 1;
 	lol[0]->init_stdin = stdinit;
 
 	//cmd 111
-	lol[1]->cmd = ft_split("grep int", ' ');
-	lol[1]->cmd_path = "/usr/bin/grep";
-	lol[1]->input_file = NULL;
-	lol[1]->first_cmd = 0;
-	lol[1]->outputed = 0;
-	lol[1]->last_cmd = 0;
-	lol[1]->init_stdin = stdinit;
-	lol[1]->next = NULL;
+	// lol[1]->cmd = ft_split("grep int", ' ');
+	// lol[1]->cmd_path = "/usr/bin/grep";
+	// lol[1]->input_file = NULL;
+	// lol[1]->output_file = "out.txt";
+	// lol[1]->first_cmd = 0;
+	// lol[1]->outputed = 0;
+	// lol[1]->last_cmd = 0;
+	// lol[1]->init_stdin = stdinit;
+	// lol[1]->next = NULL;
 
-	//cmd 222
-	lol[2]->cmd = ft_split("wc -l", ' ');
-	lol[2]->cmd_path = "/usr/bin/wc";
-	lol[2]->input_file = NULL;
-	lol[2]->first_cmd = 0;
-	lol[2]->outputed = 0;
-	lol[2]->last_cmd = 1;
-	lol[2]->init_stdin = stdinit;
-	lol[2]->next = NULL;
+	// //cmd 222
+	// lol[2]->cmd = ft_split("wc -l", ' ');
+	// lol[2]->cmd_path = "/usr/bin/wc";
+	// lol[2]->input_file = NULL;
+	// lol[2]->first_cmd = 0;
+	// lol[2]->outputed = 0;
+	// lol[2]->last_cmd = 1;
+	// lol[2]->init_stdin = stdinit;
+	// lol[2]->next = NULL;
 	return lol;
 }
 
@@ -94,14 +95,19 @@ int	ft_fork(t_cmd *lol, char **env)
 		if (lol->cmd_fdin < 0)
 			exit(1);
 		dup2(lol->cmd_fdin, STDIN_FILENO);
-		// close(lol[i]->cmd_fdin);
 	}
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
 	{
 		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
+		if (lol->output_file)
+		{
+			lol->cmd_fdout = open(lol->output_file, O_CREAT | O_WRONLY, 0664);
+			dup2(lol->cmd_fdout, STDOUT_FILENO);
+		}
+		else
+			dup2(fd[1], STDOUT_FILENO);
 		if (execve(lol->cmd_path, lol->cmd, env) < 0)
 			exit(1);
 	}
@@ -120,11 +126,6 @@ int	ft_fork(t_cmd *lol, char **env)
 		}
 		close (fd[0]);
 	}
-	//i++;
-	// if (fd[0])
-	// 	close(fd[0]);
-	// if (fd[1])
-	// 	close(fd[1]);
 }
 int main(int ac, char **av, char **env)
 {
@@ -145,7 +146,7 @@ int main(int ac, char **av, char **env)
 		dup2(tmp_fd_out, 1);
 		printf(">>");
 		r = readline("");
-		while (i < 3)
+		while (i < 1)
 			ft_fork(lol[i++], env);
 		// ft_execute(r, env);
 	}

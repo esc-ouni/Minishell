@@ -1,0 +1,14 @@
+void execute_command(char **args, int num_args, int input_fd, int output_fd) {
+void execute_pipeline(char **args, int num_args) {
+    int num_pipes = 0;
+    for (int i = 0; i < num_args; i++) {
+    int input_fd = STDIN_FILENO;
+    for (int i = 0; i <= num_pipes; i++) {
+        int pipe_fd[2];
+int main() {
+        printf("MyShell> ");
+        int num_args = 0;
+        // Parse input into arguments
+                printf("Usage: cd <directory>\n");
+            int output_fd = mkstemp(tmp_filename);
+            printf("%s\n", buffer);
