@@ -52,7 +52,7 @@ t_cmd	**init()
 	lol[i] = NULL;
 	//cmd 000
 	lol[0]->cmd = ft_split("cat", ' ');
-	lol[0]->cmd_path = "/bin/cat";
+	lol[0]->cmd_path = "/usr/bin/cat";
 	lol[0]->input_file = "nnn.c";
 	lol[0]->cmd_fdin = 0;
 	lol[0]->inputed = 0;
@@ -72,7 +72,7 @@ t_cmd	**init()
 
 	//cmd 222
 	lol[2]->cmd = ft_split("wc -l", ' ');
-	lol[2]->cmd_path = "/bin/wc";
+	lol[2]->cmd_path = "/usr/bin/wc";
 	lol[2]->input_file = NULL;
 	lol[2]->first_cmd = 0;
 	lol[2]->outputed = 0;
@@ -83,47 +83,48 @@ t_cmd	**init()
 }
 
 
-int	ft_fork(t_cmd **lol, char **env)
+int	ft_fork(t_cmd *lol, char **env)
 {
-	int	fd[2];
 	int	pid;
-	int	i = 0;
-	pipe(fd);
+	int fd[2];
 
-	while (i < 3)
+	if (lol->input_file)
 	{
-		//dup2(lol[i]->init_stdin, STDIN_FILENO);
-		if (lol[i]->input_file)
-		{
-			lol[i]->cmd_fdin = open(lol[i]->input_file, O_RDONLY);
-			if (lol[i]->cmd_fdin < 0)
-				exit(1);
-			dup2(lol[i]->cmd_fdin, STDIN_FILENO);
-			// close(lol[i]->cmd_fdin);
-		}
-		else if(!lol[i]->input_file)
-			dup2(fd[0], STDIN_FILENO);
-		pid = fork();
-		if (pid == 0)
-		{
-			close(fd[0]);
-			dup2(fd[1], STDOUT_FILENO);
-			execve(lol[i]->cmd_path, lol[i]->cmd, env);
-		}
-		else
-		{
-			close(fd[1]);
-			//sleep(10);
-			waitpid(pid, NULL, 0);
-			if (lol[i]->cmd_fdin)
-				close(lol[i]->cmd_fdin);
-		}
-		i++;
+		lol->cmd_fdin = open(lol->input_file, O_RDONLY);
+		if (lol->cmd_fdin < 0)
+			exit(1);
+		dup2(lol->cmd_fdin, STDIN_FILENO);
+		// close(lol[i]->cmd_fdin);
 	}
-	if (fd[0])
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
+	{
 		close(fd[0]);
-	if (fd[1])
+		dup2(fd[1], STDOUT_FILENO);
+		if (execve(lol->cmd_path, lol->cmd, env) < 0)
+			exit(1);
+	}
+	else
+	{
 		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		waitpid(pid, NULL, 0);
+		if (lol->cmd_fdin)
+			close(lol->cmd_fdin);
+		if (lol->last_cmd)
+		{
+			char buff[5];
+			while (read(fd[0], buff, 5) > 0)
+				write(1, buff, 5);
+		}
+		close (fd[0]);
+	}
+	//i++;
+	// if (fd[0])
+	// 	close(fd[0]);
+	// if (fd[1])
+	// 	close(fd[1]);
 }
 int main(int ac, char **av, char **env)
 {
@@ -131,6 +132,7 @@ int main(int ac, char **av, char **env)
 	int	tmp_fd_in;
 	int	tmp_fd_out;
 	t_cmd	**lol;
+	int i = 0;
 
 	tmp_fd_in = dup(STDIN_FILENO);
 	tmp_fd_out = dup (STDOUT_FILENO);
@@ -138,11 +140,13 @@ int main(int ac, char **av, char **env)
 	lol = init();
 	while (1)
 	{
+		i = 0;
 		dup2(tmp_fd_in, 0);
 		dup2(tmp_fd_out, 1);
 		printf(">>");
 		r = readline("");
-		ft_fork(lol, env);
+		while (i < 3)
+			ft_fork(lol[i++], env);
 		// ft_execute(r, env);
 	}
 }
