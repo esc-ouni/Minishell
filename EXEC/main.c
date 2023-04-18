@@ -12,64 +12,41 @@
 
 #include "minishell.h"
 
-// int	ft_process(char *line, char **env)
-// {
-// 	int	pid;
-// 	int	readead_bytes;
-// 	char buff[5];
-
-// 	ft_pipe_open();
-// 	pid = fork();
-// 	if (pid == 0)
-// 	{
-// 		close(fd[0]);
-// 		dup2(fd[1], STDOUT_FILENO);
-// 		ft_execute(line, env);
-// 	}
-// 	else
-// 	{
-// 		close (fd[1]);
-// 		if (!last)
-// 			dup2(fd[0], STDIN_FILENO);
-// 		else
-// 			while ((readead_bytes = read(fd[0], buff, 5)) > 0)
-// 				write(STDOUT_FILENO, buff, 5);
-// 		waitpid(pid, NULL, 0);
-// 	}
-// }
-
 t_cmd	**init()
 {
 	t_cmd **lol;
 	int	stdinit;
+	enum	flags;
 
 	stdinit = dup(0);
 
 	lol = (t_cmd **)malloc(sizeof(t_cmd *) * 3);
 	int i = 0;
-	while (i < 1)
+	while (i < 2)
 		lol[i++] = (t_cmd *)malloc(sizeof(t_cmd));
 	lol[i] = NULL;
 	//cmd 000
 	lol[0]->cmd = ft_split("cat", ' ');
 	lol[0]->cmd_path = "/usr/bin/cat";
+	lol[0]->cmd_flag = 1;
 	lol[0]->input_file = "nnn.c";
 	lol[0]->cmd_fdin = 0;
 	lol[0]->inputed = 0;
 	lol[0]->first_cmd = 1;
-	lol[0]->last_cmd = 1;
+	lol[0]->last_cmd = 0;
 	lol[0]->init_stdin = stdinit;
 
 	//cmd 111
-	// lol[1]->cmd = ft_split("grep int", ' ');
-	// lol[1]->cmd_path = "/usr/bin/grep";
-	// lol[1]->input_file = NULL;
-	// lol[1]->output_file = "out.txt";
-	// lol[1]->first_cmd = 0;
-	// lol[1]->outputed = 0;
-	// lol[1]->last_cmd = 0;
-	// lol[1]->init_stdin = stdinit;
-	// lol[1]->next = NULL;
+	lol[1]->cmd = ft_split("wc -l", ' ');
+	lol[1]->cmd_path = "/usr/bin/wc";
+	lol[1]->cmd_flag = 0;
+	lol[1]->input_file = NULL;
+	lol[1]->output_file = NULL;
+	lol[1]->first_cmd = 0;
+	lol[1]->outputed = 0;
+	lol[1]->last_cmd = 1;
+	lol[1]->init_stdin = stdinit;
+	lol[1]->next = NULL;
 
 	// //cmd 222
 	// lol[2]->cmd = ft_split("wc -l", ' ');
@@ -108,8 +85,15 @@ int	ft_fork(t_cmd *lol, char **env)
 		}
 		else
 			dup2(fd[1], STDOUT_FILENO);
-		if (execve(lol->cmd_path, lol->cmd, env) < 0)
-			exit(1);
+
+		if (lol->cmd_flag == 1)
+			{
+				ft_putendl_fd("hello", STDOUT_FILENO);
+				exit (0);
+			}
+		else if (lol->cmd_flag == 0)
+			{if (execve(lol->cmd_path, lol->cmd, env) < 0)
+				exit(1);}
 	}
 	else
 	{
@@ -126,6 +110,11 @@ int	ft_fork(t_cmd *lol, char **env)
 		}
 		close (fd[0]);
 	}
+}
+
+int	builting_cmd(t_cmd *lol, char **env)
+{
+	return(0);
 }
 int main(int ac, char **av, char **env)
 {
@@ -146,8 +135,9 @@ int main(int ac, char **av, char **env)
 		dup2(tmp_fd_out, 1);
 		printf(">>");
 		r = readline("");
-		while (i < 1)
-			ft_fork(lol[i++], env);
-		// ft_execute(r, env);
+		while (i < 2)
+		{
+				ft_fork(lol[i++], env);
+		}
 	}
 }

@@ -8,6 +8,11 @@
 # include <readline/history.h>
 # include "libft/libft.h"
 
+enum    flags{
+    SYS,
+    BUILT
+};
+
 typedef struct s_file
 {
     char *filename;
@@ -19,18 +24,19 @@ typedef struct s_file
 typedef struct s_cmd
 {
     char    **cmd;
+    int     cmd_flag;
     char    *input_file;
     char    *output_file;
     char    *cmd_path;
-    int cmd_pos;
-    int init_stdin;
-    int first_cmd;
-    int last_cmd;
-    int cmd_fdin;
-    int inputed;
-    int outputed;
-    int cmd_fdout;
-    int *fd;
+    int     cmd_pos;
+    int     init_stdin;
+    int     first_cmd;
+    int     last_cmd;
+    int     cmd_fdin;
+    int     inputed;
+    int     outputed;
+    int     cmd_fdout;
+    int     *fd;
     struct s_cmd *next;
 }   t_cmd;
 
