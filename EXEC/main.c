@@ -28,7 +28,7 @@ t_cmd	**init()
 	//cmd 000
 	lol[0]->cmd = ft_split("cat", ' ');
 	lol[0]->cmd_path = "/usr/bin/cat";
-	lol[0]->cmd_flag = 1;
+	lol[0]->cmd_flag = BUILT;
 	lol[0]->input_file = "nnn.c";
 	lol[0]->cmd_fdin = 0;
 	lol[0]->inputed = 0;
@@ -39,7 +39,7 @@ t_cmd	**init()
 	//cmd 111
 	lol[1]->cmd = ft_split("wc -l", ' ');
 	lol[1]->cmd_path = "/usr/bin/wc";
-	lol[1]->cmd_flag = 0;
+	lol[1]->cmd_flag = SYS;
 	lol[1]->input_file = NULL;
 	lol[1]->output_file = NULL;
 	lol[1]->first_cmd = 0;
@@ -86,12 +86,12 @@ int	ft_fork(t_cmd *lol, char **env)
 		else
 			dup2(fd[1], STDOUT_FILENO);
 
-		if (lol->cmd_flag == 1)
+		if (lol->cmd_flag == BUILT)
 			{
 				ft_putendl_fd("hello", STDOUT_FILENO);
 				exit (0);
 			}
-		else if (lol->cmd_flag == 0)
+		else if (lol->cmd_flag == SYS)
 			{if (execve(lol->cmd_path, lol->cmd, env) < 0)
 				exit(1);}
 	}
