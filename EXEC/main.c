@@ -22,31 +22,31 @@ t_cmd	**init()
 
 	lol = (t_cmd **)malloc(sizeof(t_cmd *) * 3);
 	int i = 0;
-	while (i < 2)
+	while (i < 1)
 		lol[i++] = (t_cmd *)malloc(sizeof(t_cmd));
 	lol[i] = NULL;
 	//cmd 000
-	lol[0]->cmd = ft_split("cat", ' ');
+	lol[0]->cmd = ft_split("echo $PATH", ' ');
 	lol[0]->cmd_path = "/usr/bin/cat";
 	lol[0]->cmd_flag = BUILT;
 	lol[0]->input_file = "nnn.c";
 	lol[0]->cmd_fdin = 0;
 	lol[0]->inputed = 0;
 	lol[0]->first_cmd = 1;
-	lol[0]->last_cmd = 0;
+	lol[0]->last_cmd = 1;
 	lol[0]->init_stdin = stdinit;
 
 	//cmd 111
-	lol[1]->cmd = ft_split("wc -l", ' ');
-	lol[1]->cmd_path = "/usr/bin/wc";
-	lol[1]->cmd_flag = SYS;
-	lol[1]->input_file = NULL;
-	lol[1]->output_file = NULL;
-	lol[1]->first_cmd = 0;
-	lol[1]->outputed = 0;
-	lol[1]->last_cmd = 1;
-	lol[1]->init_stdin = stdinit;
-	lol[1]->next = NULL;
+	// lol[1]->cmd = ft_split("wc -l", ' ');
+	// lol[1]->cmd_path = "/usr/bin/wc";
+	// lol[1]->cmd_flag = SYS;
+	// lol[1]->input_file = NULL;
+	// lol[1]->output_file = NULL;
+	// lol[1]->first_cmd = 0;
+	// lol[1]->outputed = 0;
+	// lol[1]->last_cmd = 1;
+	// lol[1]->init_stdin = stdinit;
+	// lol[1]->next = NULL;
 
 	// //cmd 222
 	// lol[2]->cmd = ft_split("wc -l", ' ');
@@ -60,6 +60,22 @@ t_cmd	**init()
 	return lol;
 }
 
+int	ft_echo(t_cmd *lol)
+{
+	char	*s;
+	if (lol->cmd[1] && lol->cmd[1][0] != '$')
+		printf("%s\n", lol->cmd[1]);
+	else if (lol->cmd[1][0] == '$')
+	{
+		s = ft_substr(lol->cmd[1], 1, ft_strlen(lol->cmd[1]));
+		if (getenv(s))
+			printf("%s\n", getenv(s));
+		else
+			printf("\n");
+	}
+	else
+		printf("\n");
+}
 
 int	ft_fork(t_cmd *lol, char **env)
 {
@@ -88,7 +104,7 @@ int	ft_fork(t_cmd *lol, char **env)
 
 		if (lol->cmd_flag == BUILT)
 			{
-				ft_putendl_fd("hello", STDOUT_FILENO);
+				ft_echo(lol);
 				exit (0);
 			}
 		else if (lol->cmd_flag == SYS)
@@ -135,7 +151,7 @@ int main(int ac, char **av, char **env)
 		dup2(tmp_fd_out, 1);
 		printf(">>");
 		r = readline("");
-		while (i < 2)
+		while (i < 1)
 		{
 				ft_fork(lol[i++], env);
 		}
