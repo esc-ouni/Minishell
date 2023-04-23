@@ -82,6 +82,7 @@ int	ft_cd(t_cmd *lol)
 {
 	if (chdir(lol->cmd[1]) < 0)
 		perror("");
+	return (0);
 }
 
 int	ft_fork(t_cmd *lol, char **env)
@@ -89,6 +90,8 @@ int	ft_fork(t_cmd *lol, char **env)
 	int	pid;
 	int fd[2];
 
+	if (lol->cmd_flag == BUILT && !ft_strncmp(lol->cmd[0], "cd", ft_strlen(lol->cmd[0])))
+		return (ft_cd(lol), 0);
 	if (lol->input_file)
 	{
 		lol->cmd_fdin = open(lol->input_file, O_RDONLY);
@@ -144,9 +147,11 @@ void	ft_prompt()
 {
 	char	*buff;
 	char	*user;
-	buff = getenv("PWD");
+	buff = malloc(sizeof(char) * 1024);
 	user = getenv("USER");
+	getcwd(buff, 1024);
 	printf("\e[1;35m%s:\e[0m\e[1;34m%s\e[0m$ ", user, buff);
+	free(buff);
 }
 
 int main(int ac, char **av, char **env)
@@ -172,5 +177,6 @@ int main(int ac, char **av, char **env)
 		{
 				ft_fork(lol[i++], env);
 		}
+		//return (printf("%s\n", getenv("PWD")), 0);
 	}
 }
