@@ -26,7 +26,7 @@ t_cmd	**init()
 		lol[i++] = (t_cmd *)malloc(sizeof(t_cmd));
 	lol[i] = NULL;
 	//cmd 000
-	lol[0]->cmd = ft_split("echo $PATH", ' ');
+	lol[0]->cmd = ft_split("cd ../PARS", ' ');
 	lol[0]->cmd_path = "/usr/bin/cat";
 	lol[0]->cmd_flag = BUILT;
 	lol[0]->input_file = "nnn.c";
@@ -75,6 +75,13 @@ int	ft_echo(t_cmd *lol)
 	}
 	else
 		printf("\n");
+	return (0);
+}
+
+int	ft_cd(t_cmd *lol)
+{
+	if (chdir(lol->cmd[1]) < 0)
+		perror("");
 }
 
 int	ft_fork(t_cmd *lol, char **env)
@@ -104,7 +111,7 @@ int	ft_fork(t_cmd *lol, char **env)
 
 		if (lol->cmd_flag == BUILT)
 			{
-				ft_echo(lol);
+				ft_cd(lol);
 				exit (0);
 			}
 		else if (lol->cmd_flag == SYS)
@@ -132,6 +139,16 @@ int	builting_cmd(t_cmd *lol, char **env)
 {
 	return(0);
 }
+
+void	ft_prompt()
+{
+	char	*buff;
+	char	*user;
+	buff = getenv("PWD");
+	user = getenv("USER");
+	printf("\e[1;35m%s:\e[0m\e[1;34m%s\e[0m$ ", user, buff);
+}
+
 int main(int ac, char **av, char **env)
 {
 	char *r;
@@ -149,7 +166,7 @@ int main(int ac, char **av, char **env)
 		i = 0;
 		dup2(tmp_fd_in, 0);
 		dup2(tmp_fd_out, 1);
-		printf(">>");
+		ft_prompt();
 		r = readline("");
 		while (i < 1)
 		{
