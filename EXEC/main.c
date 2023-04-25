@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/04/04 18:40:29 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/04/25 15:43:29 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,6 @@ t_cmd	**init()
 	return lol;
 }
 
-int	ft_echo(t_cmd *lol)
-{
-	char	*s;
-	if (lol->cmd[1] && lol->cmd[1][0] != '$')
-		printf("%s\n", lol->cmd[1]);
-	else if (lol->cmd[1][0] == '$')
-	{
-		s = ft_substr(lol->cmd[1], 1, ft_strlen(lol->cmd[1]));
-		if (getenv(s))
-			printf("%s\n", getenv(s));
-		else
-			printf("\n");
-	}
-	else
-		printf("\n");
-	return (0);
-}
-
-int	ft_cd(t_cmd *lol)
-{
-	if (chdir(lol->cmd[1]) < 0)
-		perror("");
-	return (0);
-}
-
 int	ft_fork(t_cmd *lol, char **env)
 {
 	int	pid;
@@ -136,6 +111,7 @@ int	ft_fork(t_cmd *lol, char **env)
 		}
 		close (fd[0]);
 	}
+	return 0;
 }
 
 int	builting_cmd(t_cmd *lol, char **env)
@@ -145,26 +121,55 @@ int	builting_cmd(t_cmd *lol, char **env)
 
 void	ft_prompt()
 {
-	char	*buff;
+	char	*pwd;
 	char	*user;
-	buff = malloc(sizeof(char) * 1024);
+
 	user = getenv("USER");
-	getcwd(buff, 1024);
-	printf("\e[1;35m%s:\e[0m\e[1;34m%s\e[0m$ ", user, buff);
-	free(buff);
+	pwd = ft_getcwd();
+	printf("\e[1;35m%s:\e[0m\e[1;34m%s\e[0m$ ", user, pwd);
+	free(pwd);
+}
+
+void	ft_free_pos(char **strp, int pos)
+{
+	while (pos--)
+		free(strp[pos]);
+	free(strp);
+}
+
+char	**ft_set_env(char **env)
+{
+	int		i;
+	char	**res;
+
+	i = 0;
+	while (env[i])
+		i++;
+	res = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!res)
+		return(perror(""), NULL);
+	i = 0;
+	while (env[i])
+	{
+		res[i] = ft_strdup(env[i]);
+		if (!res[i])
+			return (ft_free_pos(res, i), NULL);
+		i++;
+	}
+	return(res);
 }
 
 int main(int ac, char **av, char **env)
 {
-	char *r;
-	int	tmp_fd_in;
-	int	tmp_fd_out;
+	char 	*r;
+	int		tmp_fd_in;
+	int		tmp_fd_out;
 	t_cmd	**lol;
-	int i = 0;
-
+	int		i;
+	
+	i = 0;
 	tmp_fd_in = dup(STDIN_FILENO);
 	tmp_fd_out = dup (STDOUT_FILENO);
-
 	lol = init();
 	while (1)
 	{
@@ -174,9 +179,6 @@ int main(int ac, char **av, char **env)
 		ft_prompt();
 		r = readline("");
 		while (i < 1)
-		{
-				ft_fork(lol[i++], env);
-		}
-		//return (printf("%s\n", getenv("PWD")), 0);
+			ft_fork(lol[i++], env);
 	}
 }

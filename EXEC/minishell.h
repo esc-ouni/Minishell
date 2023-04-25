@@ -3,7 +3,6 @@
 # define MINISHELL_H
 # include <unistd.h>
 # include <stdlib.h>
-# include <wait.h>
 # include <sys/types.h>
 # include <dirent.h>
 # include <readline/readline.h>
@@ -43,5 +42,12 @@ typedef struct s_cmd
 }   t_cmd;
 
 int	ft_execute(char *arg, char **env);
+int     ft_cd(t_cmd *lol);
+char    *ft_getcwd();
+int     ft_pwd();
+int	ft_echo(t_cmd *lol);
+char	**ft_export(char **env, char *str);
+void	ft_free_old_env(char **env);
+void	ft_free_pos(char **strp, int pos);
 
 #endif
