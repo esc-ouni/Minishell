@@ -13,13 +13,6 @@
 # ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define STD 10
-# define PIP 11
-# define RED 12
-# define ERO 13
-# define SQU 14
-# define DQU 15
-
 # include <unistd.h>
 # include <fcntl.h>
 # include "LIBF/libft.h"
@@ -34,6 +27,16 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+typedef enum e_enum
+{
+	STD,
+    PIP,
+    RED,
+    ERO,
+    SQU,
+    DQU,
+}	t_enum;
 
 typedef struct s_list
 {
