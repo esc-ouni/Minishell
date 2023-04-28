@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/04/28 00:53:44 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/04/28 02:42:51 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ t_cmd	**init(char	**env)
 		lol[i++] = (t_cmd *)malloc(sizeof(t_cmd));
 	lol[i] = NULL;
 	//cmd 000
-	lol[0]->cmd = ft_split("pwd", ' ');
+	lol[0]->cmd = ft_split("ls", ' ');
 	lol[0]->env = myenv;
-	//lol[0]->cmd_path = "/usr/bin/cat";
-	lol[0]->cmd_flag = BUILT;
-	lol[0]->builtflag = PWD;
+	lol[0]->cmd_path = "/bin/ls";
+	lol[0]->cmd_flag = SYS;
+	//lol[0]->builtflag = NOT;
 	lol[0]->input_file = NULL;
 	lol[0]->output_file = NULL;
 	lol[0]->cmd_fdin = 0;
@@ -100,12 +100,14 @@ int	ft_open_files(t_cmd *lol)
 	t_file	*files;
 
 	files = lol->out_files;
-	while (files->next)
+	while (files)
 	{
-		open(files->filename, O_CREAT | O_WRONLY , 0664);
+		lol->cmd_fdout = open(files->filename, O_CREAT | O_TRUNC| O_WRONLY , 0664);
+		if (lol->cmd_fdout < 0)
+			return (perror(""), exit(1), 1);
 		files = files->next;
 	}
-	lol->cmd_fdout = open(files->filename, O_CREAT | O_WRONLY , 0664);
+	
 	return (0);
 }
 
