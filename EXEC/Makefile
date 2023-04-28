@@ -17,4 +17,12 @@ $(NAME) : $(OBJ)
 %.o:%.c minishell.h
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC)
 
-.PHONY: all clean
+clean :
+	rm -rf $(OBJ)
+
+fclean : clean
+	rm -rf $(NAME)
+
+re : fclean all
+
+.PHONY: all clean fclean re

@@ -61,21 +61,6 @@ static size_t	lenfinder(char const *s, char c, int start)
 	return (0);
 }
 
-static size_t	q_lenfinder(char const *s, char c, int start)
-{
-	size_t	i;
-
-	(void)c;
-	i = 0;
-	while (s[start + i] || s[start + i] == '\0')
-	{
-		if (s[start + i] == '"' || s[start + i] == '\0')
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
 static char	**ft_splitp2(char **p, char const *s, char const c)
 {
 	size_t		i;
@@ -88,15 +73,6 @@ static char	**ft_splitp2(char **p, char const *s, char const c)
 	l_s = ft_strlen(s);
 	while (i < l_s)
 	{
-		if (s[i] == '"')
-		{
-			l = q_lenfinder(s, c, i);
-			p[i2] = ft_substr(s, i, l);
-			if (p[i2] == NULL)
-				return (free_s (p, i2));
-			i2++;
-			i += l;
-		}
 		if (s[i] != c)
 		{
 			l = lenfinder(s, c, i);
