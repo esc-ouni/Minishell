@@ -51,7 +51,7 @@ typedef struct s_list
 void    prompt(void);
 void    start(void);
 t_list  *parser(void);
-void    check_syntax(t_list *head);
+int     check_syntax(char *s);
 void    after_parse(t_list  *head);
 void	check_type(t_list	*node);
 t_list	*ft_lstnew(char *s);

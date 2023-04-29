@@ -22,6 +22,8 @@ t_list  *parser()
 
 	head = NULL;
     s = readline(" ");
+    if (check_syntax(s))
+        return (NULL);
 	str = ft_split(s, ' ');
 	while (str[i])
 	{
@@ -53,7 +55,23 @@ void    after_parse(t_list  *head)
 	ft_lstclear(&head);
 }
 
-void    check_syntax(t_list *head)
+int    check_syntax(char *s)
 {
-    (void)head;
+    int i;
+    int dq;
+
+    i = 0;
+    dq = 0;
+    while (s[i])
+    {
+        if (s[i] == '"')
+            dq++;
+        i++;
+    }
+    if (dq % 2)
+    {
+        printf("Minishell: syntax error");
+        return (1);
+    }
+    return (0);
 }
