@@ -34,7 +34,7 @@ OBJ_T  = $(TLS:%.c=%.o)
 
 all:
 	gcc Minishell.c tools.c tools_1.c tools_2.c libft.a -lreadline -L /Users/idouni/.brew/opt/readline/lib -o $(NAME)
-	@clear && echo "==$(NAME)_compiled=============="
+	# @clear && echo "==$(NAME)_compiled=============="
 
 # all: LIBFT $(NAME)
 

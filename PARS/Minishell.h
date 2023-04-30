@@ -55,6 +55,7 @@ typedef struct s_cmd
 	int				*fd;
 	t_file			*in_files;
 	t_file			*out_files;
+	struct s_cmd	*next;
 }   t_cmd;
 
 typedef enum e_enum
