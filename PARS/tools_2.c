@@ -68,8 +68,8 @@ t_list  *parser()
 
 	head = NULL;
     s = readline(" ");
-    if (check_syntax(s))
-        return (NULL);
+    // if (check_syntax(s))
+    //     return (NULL);
 	str = ft_split(s, '|');
 	while (str[i])
 	{
@@ -101,7 +101,7 @@ void    after_parse(t_list  *head)
         i++;
         node = node->next;
     }
-    after_parse2(parser2(head));
+    after_parse2(parser2(node2));
 	// ft_lstclear(&head);
 }
 
