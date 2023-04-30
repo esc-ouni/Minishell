@@ -51,11 +51,15 @@ t_cmd  *parser2(t_list *head)
             out_files = NULL;
         }
         else
+        {
             s[i2] = ft_strdup(cmd->cmd[i]);
+            printf("%s ", s[i2]);
+        }
             // s[i2] = ft_strjoin(ft_strjoin(s, strdup(" ")), cmd->cmd[i]);
         i++;
         i2++;
     }
+    printf("\n\n");
     // printf("%s\n", s);
     cmd->cmd = s;
     cmd->out_files = ot_fil;
