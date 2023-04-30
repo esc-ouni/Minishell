@@ -28,6 +28,35 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+typedef struct s_file
+{
+	char            *filename;
+	int				o_flags; /*Append  O_TRUNC O_CREAT .... */
+	struct s_file   *next;
+}   t_file;
+
+typedef struct s_cmd
+{
+	char			**env;
+	char			**cmd;
+	int				cmd_flag;
+	char			*input_file;
+	char			*output_file;
+	// enum builtin	builtflag;
+	char			*cmd_path;
+	int				cmd_pos;
+	int				init_stdin;
+	int				first_cmd;
+	int				last_cmd;
+	int				cmd_fdin;
+	int				inputed;
+	int				outputed;
+	int				cmd_fdout;
+	int				*fd;
+	t_file			*in_files;
+	t_file			*out_files;
+}   t_cmd;
+
 typedef enum e_enum
 {
 	STD,
@@ -52,6 +81,8 @@ void    prompt(void);
 void    start(void);
 t_list  *parser(void);
 int     check_syntax(char *s);
+t_cmd  *parser2(t_list *head);
+void    after_parse2(t_cmd  *cmd);
 void    after_parse(t_list  *head);
 void	check_type(t_list	*node);
 t_list	*ft_lstnew(char *s);
