@@ -18,11 +18,14 @@ t_cmd  *parser2(t_list *head)
     int i2;
     t_list  *n;
     t_cmd   *cmd;
-    // t_file  *out_files;
+    t_file  *out_files;
+    t_file  *ot_fil;
 
     i = 0;
     i2 = 0;
     n = head;
+    out_files = malloc(sizeof(t_file));
+    ot_fil = out_files;
     cmd = malloc(sizeof(t_cmd));
     cmd->cmd = malloc(sizeof (char *) * 10);
     while (n)
@@ -39,8 +42,14 @@ t_cmd  *parser2(t_list *head)
     // char *s = calloc(10 , sizeof (char));
     while (cmd->cmd[i])
     {
-        if (!strcmp(cmd->cmd[i], ">") || !strcmp(cmd->cmd[i], "<"))
+        if (!strcmp(cmd->cmd[i], ">"))
+        {
             i++;
+            out_files->filename = ft_strdup(cmd->cmd[i]);
+            out_files = out_files->next;
+            out_files = malloc(sizeof(t_file));
+            out_files = NULL;
+        }
         else
             s[i2] = ft_strdup(cmd->cmd[i]);
             // s[i2] = ft_strjoin(ft_strjoin(s, strdup(" ")), cmd->cmd[i]);
@@ -49,6 +58,7 @@ t_cmd  *parser2(t_list *head)
     }
     // printf("%s\n", s);
     cmd->cmd = s;
+    cmd->out_files = ot_fil;
     cmd->next = NULL;
     return (cmd);
 }
@@ -109,7 +119,7 @@ void    after_parse2(t_cmd  *cmd)
     {
         printf("=> node %d;\n", i);
         printf("   command   : %s\n", node->cmd[0]);
-        // printf("   out_files : %s\n", node->out_files->filename);
+        printf("   out_files : %s\n", node->out_files->filename);
         printf("\n\n");
         i++;
         node = node->next;
