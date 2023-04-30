@@ -42,22 +42,22 @@ void    prompt()
     printf("\x1B[0m");
 }
 
-void    start()
-{
-    char    *s;
-    int     fd;
+// void    start()
+// {
+//     char    *s;
+//     int     fd;
 
-    fd = open("header.h", O_RDONLY);
-    printf("\x1B[32m");
-    while ((s = get_next_line(fd)))
-	{
-        printf("%s", s);
-		free(s);
-	}
-    printf("\x1B[0m");
-    printf("\n\n");
-    close(fd);
-}
+//     fd = open("header.h", O_RDONLY);
+//     printf("\x1B[32m");
+//     while ((s = get_next_line(fd)))
+// 	{
+//         printf("%s", s);
+// 		free(s);
+// 	}
+//     printf("\x1B[0m");
+//     printf("\n\n");
+//     close(fd);
+// }
 
 // void	*h_malloc(t_data data, size_t s, void *p)
 // {

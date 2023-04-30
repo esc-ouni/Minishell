@@ -78,7 +78,7 @@ typedef struct s_list
 }   t_list;
 
 void    prompt(void);
-void    start(void);
+// void    start(void);
 t_list  *parser(void);
 int     check_syntax(char *s);
 t_cmd  *parser2(t_list *head);
