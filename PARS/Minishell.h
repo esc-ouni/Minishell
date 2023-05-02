@@ -89,7 +89,9 @@ int	    ft_lstsize(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, t_list **head);
-void	add_file(t_file *st_file, char *s);
+void	add_file(t_file **st_file, char *s);
 void	ft_lstclear(t_list **lst);
+t_file	*ft_filenew(char *s);
+void	ft_fileadd_back(t_file **lst, t_file *new);
 
 # endif

@@ -40,27 +40,29 @@ t_cmd  *parser2(t_list *head)
         }
         // CHECK_FOR_OUT_FILES
         tmp_n = *tmp;
-        t_file  *out_files;
+        t_file  **out_files;
         out_files = NULL;
+        t_file  *tmp_out;
         while (tmp_n)
         {
             if (!strcmp(tmp_n->cmd, ">"))
             {
-                ft_lstdelone(tmp_n, tmp);
-                add_file(out_files, tmp_n->cmd);
-                ft_lstdelone(tmp_n, tmp);
-            }
-            if (tmp_n)
                 tmp_n = tmp_n->next;
-            else
-                break ;
+                if (!out_files)
+                {   
+                    *out_files = ft_filenew(tmp_n->cmd);                
+                }
+                else
+                    ft_fileadd_back(out_files, ft_filenew(tmp_n->cmd));
+            }
+            tmp_n = tmp_n->next;
         }
-        while (out_files)
+        debug();
+        while ((*out_files))
         {
-            printf("%s\n", out_files->filename);
-            out_files = out_files->next;
+            printf("%s\n", (*out_files)->filename);
+            (*out_files) = (*out_files)->next;
         }
-        // debug();
         // CHECK_FOR_IN_FILES
 
         // GET_FULL_CMD
