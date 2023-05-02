@@ -75,7 +75,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	l_f = ns_start(s1, set);
 	l_e = ns_end(s1, set);
-	if (l_f >= l_e)
+	if (l_f > l_e)
 		return (ft_strdup(""));
 	l = l_e - l_f + 1;
 	ns = (char *)malloc(sizeof (char) * (l + 1));

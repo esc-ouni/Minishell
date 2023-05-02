@@ -40,19 +40,23 @@ t_cmd  *parser2(t_list *head)
         }
         // CHECK_FOR_OUT_FILES
         tmp_n = *tmp;
+        t_file  *out_files;
         while (tmp_n)
         {
-            t_file  *out_files;
-            out_files = malloc(sizeof(t_file));
-            // out_files = NULL;
-            out_files->filename = NULL;
-            out_files->next = NULL;
-            // if (!ft_strcmp(tmp_n->cmd, ">"))
-            // {
-
-            // }
-            // printf("%s\n", out_files->filename);
-            tmp_n = tmp_n->next;
+            if (!strcmp(tmp_n->cmd, ">"))
+            {
+                ft_lstdelone(tmp_n, tmp);
+                out_files = malloc(sizeof(t_file));
+                out_files->filename = ft_strdup(tmp_n->cmd);
+                out_files->next = NULL;
+                ft_lstdelone(tmp_n, tmp);
+            }
+            if (out_files)
+                printf("%s\n", out_files->filename);
+            if (tmp_n)
+                tmp_n = tmp_n->next;
+            else
+                break ;
         }
         // CHECK_FOR_IN_FILES
 
