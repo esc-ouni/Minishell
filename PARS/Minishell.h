@@ -93,5 +93,7 @@ void	ft_lstclear(t_list **lst);
 t_file	*ft_filenew(char *s);
 void	ft_fileadd_back(t_file **lst, t_file *new);
 void 	add_file_node(t_file **head, char *filename, int flag);
+void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files);
+
 
 # endif

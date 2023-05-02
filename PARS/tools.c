@@ -180,3 +180,25 @@ void add_file_node(t_file **head, char *filename, int flag)
         new_node->next = NULL;
     }
 }
+void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
+{
+	t_cmd	*tmp;
+	t_cmd *new_cmd = malloc(sizeof(t_cmd));
+
+	printf("hello %d\n",sizeof(full_cmd));
+	if (!(*head))
+    {
+        *head = new_cmd;
+        new_cmd->next = NULL;
+    }
+    else
+    {
+        tmp = *head;
+        while (tmp->next)
+        {
+            tmp = tmp->next;
+        }
+        tmp->next = new_cmd;
+        new_cmd->next = NULL;
+    }
+}
