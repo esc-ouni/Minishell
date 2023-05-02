@@ -67,17 +67,21 @@ void    after_parse2(t_cmd  *cmd)
     int i = 0;
     int i2 = 0;
     t_cmd  *node;
+    t_file  *out_files;
+    t_file  *in_files;
     (void)cmd;
     char **s;
     s = ft_split(ft_strdup("ls -la -op"), ' ');
     node = malloc(sizeof(t_cmd));
     node->cmd = s;
-    node->out_files = malloc(sizeof(t_file));
-    node->in_files = malloc(sizeof(t_file));
-    node->out_files->filename = ft_strdup("hello");
-    node->out_files->next = NULL;
-    node->in_files->filename = ft_strdup("hello");
-    node->in_files->next = NULL;
+    out_files = malloc(sizeof(t_file));
+    in_files = malloc(sizeof(t_file));
+    out_files->filename = ft_strdup("hello");
+    out_files->next = NULL;
+    in_files->filename = ft_strdup("hello");
+    in_files->next = NULL;
+    node->out_files = out_files;
+    node->in_files = in_files;
     while(node)
     {
         printf("=> t_cmd %d;\n", i);
@@ -90,27 +94,20 @@ void    after_parse2(t_cmd  *cmd)
         i2 = 0;
         printf("\n");
         printf("   out_files   : ");
-        // debug();
-        if (node->out_files->filename)
+        while(node->out_files)
         {
-            while(node->out_files->filename)
-            {
-                printf("%s", node->out_files->filename);
-                node->out_files = node->out_files->next;
-            }
+            printf("%s", node->out_files->filename);
+            node->out_files = node->out_files->next;
         }
+        // debug();
         printf("\n");
         printf("   in_files    : ");
-        if(node->in_files->filename)
+        while(node->in_files)
         {
-            while(node->in_files->filename)
-            {
-                printf("%s", node->in_files->filename);
-                node->in_files = node->in_files->next;
-            }
+            printf("%s", node->in_files->filename);
+            node->in_files = node->in_files->next;
         }
-        printf("\n");
-        printf("\n");
+        printf("\n\n");
         i++;
         node = node->next;
     }
