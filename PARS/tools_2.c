@@ -67,7 +67,6 @@ t_cmd  *parser2(t_list *head)
             printf("  > %s\n", out_files->filename);
             out_files = out_files->next;
         }
-        printf("\n");
 
         // CHECK_FOR_IN_FILES
         n = *tmp;
@@ -113,6 +112,8 @@ t_cmd  *parser2(t_list *head)
             printf("  > %s\n", full_cmd[i]);
             i++;
         }
+        printf("\n");
+        printf("\n");
         out_files = NULL;
         in_files = NULL;
         node = node->next;
