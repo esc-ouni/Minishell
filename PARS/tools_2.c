@@ -42,27 +42,23 @@ t_cmd  *parser2(t_list *head)
         tmp_n = *tmp;
         t_file  **out_files;
         out_files = NULL;
-        t_file  *tmp_out;
+        // t_file  *tmp_out;
         while (tmp_n)
         {
             if (!strcmp(tmp_n->cmd, ">"))
             {
                 tmp_n = tmp_n->next;
-                if (!out_files)
-                {   
-                    *out_files = ft_filenew(tmp_n->cmd);                
-                }
-                else
-                    ft_fileadd_back(out_files, ft_filenew(tmp_n->cmd));
+                ft_fileadd_back(out_files, ft_filenew(tmp_n->cmd));
             }
             tmp_n = tmp_n->next;
         }
-        debug();
-        while ((*out_files))
-        {
-            printf("%s\n", (*out_files)->filename);
-            (*out_files) = (*out_files)->next;
-        }
+        // t_file *tmp_out = *out_files;
+        // debug();
+        // while (tmp_out)
+        // {
+        //     printf("%s\n", tmp_out->filename);
+        //     tmp_out = tmp_out->next;
+        // }
         // CHECK_FOR_IN_FILES
 
         // GET_FULL_CMD
