@@ -14,10 +14,16 @@
 
 t_cmd  *parser2(t_list *head)
 {
-    (void)head;
+    t_list  *node;
     t_cmd   *cmd;
-    cmd = calloc(sizeof(t_cmd), 1);
+
+    node = head;
+    cmd = malloc(sizeof(t_cmd));
     cmd = NULL;
+    // while (node)
+    // {
+        // node->
+    // }
     return (cmd);
 }
 

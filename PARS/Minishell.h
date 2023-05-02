@@ -71,9 +71,6 @@ typedef enum e_enum
 typedef struct s_list
 {
     char            *cmd;
-    int             type;
-    int             input;
-    int             output;
     struct s_list   *next;
 }   t_list;
 
@@ -85,7 +82,7 @@ void	debug(void);
 t_cmd  *parser2(t_list *head);
 void    after_parse2(t_cmd  *cmd);
 void    after_parse(t_list  *head);
-void	check_type(t_list	*node);
+// void	check_type(t_list	*node);
 t_list	*ft_lstnew(char *s);
 t_list	*ft_lstlast(t_list *lst);
 int	    ft_lstsize(t_list *lst);

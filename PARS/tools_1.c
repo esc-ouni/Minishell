@@ -13,27 +13,27 @@
 #include "Minishell.h"
 
 
-void	check_type(t_list	*node)
-{
-	if (!ft_strncmp(node->cmd, "|", 1))
-		node->type = PIP;
-	else if (!ft_strncmp(node->cmd, ";", 1))
-		node->type = ERO;
-	else if (!ft_strncmp(node->cmd, ">", 1))
-		node->type = RED;
-    else if (!ft_strncmp(node->cmd, ">>", 2))
-		node->type = RED;
-    else if (!ft_strncmp(node->cmd, "<", 1))
-		node->type = RED;
-    else if (!ft_strncmp(node->cmd, "<<", 2))
-		node->type = RED;
-	else if (!ft_strncmp(node->cmd, "\'", 1))
-		node->type = SQU;
-	else if (!ft_strncmp(node->cmd, "\"", 1))
-		node->type = DQU;
-	else
-		node->type = STD;
-}
+// void	check_type(t_list	*node)
+// {
+// 	if (!ft_strncmp(node->cmd, "|", 1))
+// 		node->type = PIP;
+// 	else if (!ft_strncmp(node->cmd, ";", 1))
+// 		node->type = ERO;
+// 	else if (!ft_strncmp(node->cmd, ">", 1))
+// 		node->type = RED;
+//     else if (!ft_strncmp(node->cmd, ">>", 2))
+// 		node->type = RED;
+//     else if (!ft_strncmp(node->cmd, "<", 1))
+// 		node->type = RED;
+//     else if (!ft_strncmp(node->cmd, "<<", 2))
+// 		node->type = RED;
+// 	else if (!ft_strncmp(node->cmd, "\'", 1))
+// 		node->type = SQU;
+// 	else if (!ft_strncmp(node->cmd, "\"", 1))
+// 		node->type = DQU;
+// 	else
+// 		node->type = STD;
+// }
 
 void    prompt()
 {
