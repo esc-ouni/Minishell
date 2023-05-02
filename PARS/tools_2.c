@@ -14,8 +14,8 @@
 
 t_cmd  *parser2(t_list *head)
 {
-    t_list  *out_files;
-    t_list  *_files;
+    t_file  *out_files;
+    t_file  *in_files;
     t_list  *node;
     t_list  **tmp;
     t_list  *tmp_n;
@@ -30,6 +30,8 @@ t_cmd  *parser2(t_list *head)
     node = head;
     cmd = malloc(sizeof(t_cmd));
     cmd = NULL;
+    out_files = NULL;
+    in_files = NULL;
     while (node)
     {
         s = ft_split(node->cmd, ' ');
@@ -45,16 +47,37 @@ t_cmd  *parser2(t_list *head)
         n = *tmp;
         while (n)
         {
-            printf("%s\n", n->cmd);
+            if (!strcmp(n->cmd, ">"))
+            {
+                n = n->next;
+                add_file_node(&out_files, n->cmd);
+            }
             n = n->next;
         }
+        printf("\nout_files :\n");
+        while (out_files)
+        {
+            printf("  > %s\n", out_files->filename);
+            out_files = out_files->next;
+        }
+        printf("\n");
+        // CHECK_FOR_IN_FILES
         n = *tmp;
         while (n)
         {
-            printf("%s\n", n->cmd);
+            if (!strcmp(n->cmd, "<"))
+            {
+                n = n->next;
+                add_file_node(&in_files, n->cmd);
+            }
             n = n->next;
         }
-        // CHECK_FOR_IN_FILES
+        printf("\nin_files :\n\n");
+        while (out_files)
+        {
+            printf("  > %s\n", in_files->filename);
+            in_files = in_files->next;
+        }
 
         // GET_FULL_CMD
 
