@@ -121,9 +121,9 @@ void    after_parse2(t_cmd  *cmd)
     node = cmd;
     while(node)
     {
-        printf("=> node %d;\n", i);
-        printf("   command   : %s\n", node->cmd[0]);
-        printf("   out_files : %s\n", node->out_files->filename);
+        // printf("=> node %d;\n", i);
+        // printf("   command   : %s\n", node->cmd[0]);
+        printf("   out_files : %s", node->out_files->filename);
         printf("\n\n");
         i++;
         node = node->next;

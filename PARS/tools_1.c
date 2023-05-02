@@ -38,7 +38,7 @@ void	check_type(t_list	*node)
 void    prompt()
 {
     printf("\x1B[34m");
-    printf("\nBig_shell >> ");
+    printf("\nWHAT_YOU_WANT_MASTER>> ");
     printf("\x1B[0m");
 }
 
