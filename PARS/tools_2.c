@@ -16,7 +16,8 @@ t_cmd  *parser2(t_list *head)
 {
     (void)head;
     t_cmd   *cmd;
-    cmd = malloc(sizeof(t_cmd));
+    cmd = calloc(sizeof(t_cmd), 1);
+    cmd = NULL;
     return (cmd);
 }
 
@@ -48,7 +49,9 @@ void    after_parse(t_list  *head)
     t_list  *node;
 
     node = head;
-    printf("PART--1\n");
+    printf("\x1B[32m");
+    printf("PART--1:\n");
+	printf("\x1B[0m");
     while(node)
     {
         printf("=> node %d;\n", i);
@@ -58,7 +61,9 @@ void    after_parse(t_list  *head)
         i++;
         node = node->next;
     }
-    printf("PART--2\n");
+    printf("\x1B[32m");
+    printf("PART--2:\n");
+	printf("\x1B[0m");
     after_parse2(parser2(head));
 }
 
@@ -67,21 +72,8 @@ void    after_parse2(t_cmd  *cmd)
     int i = 0;
     int i2 = 0;
     t_cmd  *node;
-    t_file  *out_files;
-    t_file  *in_files;
-    (void)cmd;
-    char **s;
-    s = ft_split(ft_strdup("ls -la -op"), ' ');
-    node = malloc(sizeof(t_cmd));
-    node->cmd = s;
-    out_files = malloc(sizeof(t_file));
-    in_files = malloc(sizeof(t_file));
-    out_files->filename = ft_strdup("hello");
-    out_files->next = NULL;
-    in_files->filename = ft_strdup("hello");
-    in_files->next = NULL;
-    node->out_files = out_files;
-    node->in_files = in_files;
+
+    node = cmd;
     while(node)
     {
         printf("=> t_cmd %d;\n", i);
@@ -96,15 +88,14 @@ void    after_parse2(t_cmd  *cmd)
         printf("   out_files   : ");
         while(node->out_files)
         {
-            printf("%s", node->out_files->filename);
+            printf("%s ", node->out_files->filename);
             node->out_files = node->out_files->next;
         }
-        // debug();
         printf("\n");
         printf("   in_files    : ");
         while(node->in_files)
         {
-            printf("%s", node->in_files->filename);
+            printf("%s ", node->in_files->filename);
             node->in_files = node->in_files->next;
         }
         printf("\n\n");
