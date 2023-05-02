@@ -156,12 +156,13 @@ void	debug(void)
 	printf("\x1B[0m");
 }        
 
-void add_file_node(t_file **head, char *filename)
+void add_file_node(t_file **head, char *filename, int flag)
 {
     t_file *tmp;
     t_file *new_node = malloc(sizeof(t_file));
     
     new_node->filename = ft_strdup(filename);
+    new_node->o_flags = flag;
     
     if (!(*head))
     {

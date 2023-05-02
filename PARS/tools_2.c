@@ -52,7 +52,12 @@ t_cmd  *parser2(t_list *head)
             if (!strcmp(n->cmd, ">"))
             {
                 n = n->next;
-                add_file_node(&out_files, n->cmd);
+                add_file_node(&out_files, n->cmd, O_TRUNC);
+            }
+            if (!strcmp(n->cmd, ">>"))
+            {
+                n = n->next;
+                add_file_node(&out_files, n->cmd, O_APPEND);
             }
             n = n->next;
         }
@@ -71,7 +76,12 @@ t_cmd  *parser2(t_list *head)
             if (!strcmp(n->cmd, "<"))
             {
                 n = n->next;
-                add_file_node(&in_files, n->cmd);
+                add_file_node(&in_files, n->cmd, O_TRUNC);
+            }
+            if (!strcmp(n->cmd, "<<"))
+            {
+                n = n->next;
+                add_file_node(&in_files, n->cmd, O_TRUNC);
             }
             n = n->next;
         }
@@ -87,10 +97,7 @@ t_cmd  *parser2(t_list *head)
         while (n)
         {
             if (!strcmp(n->cmd, "<") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, ">>"))
-            {
                 n = n->next;
-                // add_file_node(&in_files, n->cmd);
-            }
             else
             {
                 full_cmd[i] = ft_strdup(n->cmd);
