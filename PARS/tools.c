@@ -125,3 +125,24 @@ void	debug(void)
 	printf("\nDEBUG OK\n");
 	printf("\x1B[0m");
 }        
+
+void	add_file(t_file *st_file, char *s)
+{
+	t_file	*new_file;
+
+	new_file = malloc(sizeof(t_file));
+	if (new_file)
+	{
+		new_file->filename = ft_strdup(s);
+		new_file->next = NULL;
+	}
+	printf("%s\n", new_file->filename);
+	if (!st_file)
+		st_file = new_file;
+	else
+	{
+		while (st_file->next)
+			st_file = st_file->next;
+		st_file->next = new_file;
+	}
+}
