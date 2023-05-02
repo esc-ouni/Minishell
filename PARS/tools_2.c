@@ -15,15 +15,27 @@
 t_cmd  *parser2(t_list *head)
 {
     t_list  *node;
+    t_list  **tmp;
+    t_list  *tmp_n;
     t_cmd   *cmd;
+
+    char **s;
+    tmp = NULL;
 
     node = head;
     cmd = malloc(sizeof(t_cmd));
     cmd = NULL;
-    // while (node)
-    // {
-        // node->
-    // }
+    while (node)
+    {
+        s = ft_split(node->cmd, ' ');
+        tmp_n = ft_lstnew(*s);
+        tmp = &tmp_n;
+        while(*s)
+        {
+            ft_lstadd_back(tmp, ft_lstnew(*s));
+            s++;
+        }
+    }
     return (cmd);
 }
 
