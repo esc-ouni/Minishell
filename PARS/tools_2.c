@@ -17,7 +17,9 @@ t_cmd  *parser2(t_list *head)
     t_list  *node;
     t_list  **tmp;
     t_list  *tmp_n;
+    t_list  *n;
     t_cmd   *cmd;
+    int i = 0;
 
     char **s;
     tmp = NULL;
@@ -30,11 +32,33 @@ t_cmd  *parser2(t_list *head)
         s = ft_split(node->cmd, ' ');
         tmp_n = ft_lstnew(*s);
         tmp = &tmp_n;
+        s++;
         while(*s)
         {
             ft_lstadd_back(tmp, ft_lstnew(*s));
             s++;
         }
+        // CHECK_FOR_OUT_FILES
+        tmp_n = *tmp;
+        while (tmp_n)
+        {
+            t_file  *out_files;
+            out_files = malloc(sizeof(t_file));
+            // out_files = NULL;
+            out_files->filename = NULL;
+            out_files->next = NULL;
+            // if (!ft_strcmp(tmp_n->cmd, ">"))
+            // {
+
+            // }
+            // printf("%s\n", out_files->filename);
+            tmp_n = tmp_n->next;
+        }
+        // CHECK_FOR_IN_FILES
+
+        // GET_FULL_CMD
+
+        node = node->next;
     }
     return (cmd);
 }
@@ -82,7 +106,8 @@ void    after_parse(t_list  *head)
     printf("\x1B[32m");
     printf("PART--2:\n");
 	printf("\x1B[0m");
-    after_parse2(parser2(head));
+    // after_parse2(parser2(head));
+    parser2(head);
 }
 
 void    after_parse2(t_cmd  *cmd)
