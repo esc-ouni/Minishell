@@ -165,8 +165,8 @@ void    after_parse(t_list  *head)
     printf("\x1B[32m");
     printf("PART--2:\n");
 	printf("\x1B[0m");
-    // after_parse2(parser2(head));
-    parser2(head);
+    after_parse2(parser2(head));
+    // parser2(head);
 }
 
 void    after_parse2(t_cmd  *cmd)

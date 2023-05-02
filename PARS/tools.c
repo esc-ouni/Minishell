@@ -180,12 +180,49 @@ void add_file_node(t_file **head, char *filename, int flag)
         new_node->next = NULL;
     }
 }
+
+void add_file_file(t_file **head, t_file *file)
+{
+
+}
+
 void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
 {
+	t_file	*out_files2;
+	t_file	*in_files2;
+
 	t_cmd	*tmp;
 	t_cmd *new_cmd = malloc(sizeof(t_cmd));
 
-	printf("hello %d\n",sizeof(full_cmd));
+	out_files2 = NULL;
+	in_files2 = NULL;
+
+	char **s = malloc(sizeof(char *) * 10);
+	while (*full_cmd)
+	{
+		*s = ft_strdup(*full_cmd);
+		s++;
+		full_cmd++;
+	}
+	*s = NULL;
+
+	while (out_files)
+	{
+		add_file_file(&out_files2, out_files);
+		out_files = out_files->next;
+	}
+
+	while (in_files)
+	{
+		add_file_file(&in_files2, in_files);
+		in_files = in_files->next;
+	}
+
+	new_cmd->cmd = s;
+	new_cmd->out_files = out_files2;
+	new_cmd->in_files = in_files2;
+
+	// printf("hello %d\n",sizeof(full_cmd));
 	if (!(*head))
     {
         *head = new_cmd;
