@@ -217,13 +217,15 @@ void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fil
 	out_files2 = NULL;
 	in_files2 = NULL;
 
-	char **s = malloc(sizeof(char *) * 10);
+	char **str = malloc(sizeof(char *) * 15);
+	char **s = str;
+	// s = NULL;
 	while (*full_cmd)
 	{
 		*s = ft_strdup(*full_cmd);
 		// printf("%s ", *s);
-		s++;
 		full_cmd++;
+		s++;
 	}
 	*s = NULL;
 
@@ -239,7 +241,7 @@ void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fil
 		in_files = in_files->next;
 	}
 
-	new_cmd->cmd = s;
+	new_cmd->cmd = str;
 	new_cmd->out_files = out_files2;
 	new_cmd->in_files = in_files2;
 

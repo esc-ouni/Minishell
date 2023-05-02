@@ -29,7 +29,7 @@ t_cmd  *parser2(t_list *head)
     tmp = NULL;
 
     node = head;
-    full_cmd = malloc(sizeof(char *) * 10);
+    full_cmd = malloc(sizeof(char *) * 15);
     cmd = NULL;
     out_files = NULL;
     in_files = NULL;
@@ -115,6 +115,7 @@ t_cmd  *parser2(t_list *head)
         // printf("\n");
         i = 0;
         add_to_cmd(&cmd, full_cmd, out_files, in_files);
+        full_cmd[0] = NULL;
         out_files = NULL;
         in_files = NULL;
         node = node->next;
