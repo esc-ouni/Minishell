@@ -49,13 +49,13 @@ $(NAME): $(OBJ_M) $(OBJ_T) $(HR)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	# @make clean -C LIBF
+	@make clean -C LIBF
 	$(RM) $(OBJ_M)
 	$(RM) $(OBJ_T)
 	@clear && echo "==Object_files_deleted=========="
 
 fclean: clean
-	# @make fclean -C LIBF
+	@make fclean -C LIBF
 	$(RM) $(NAME)
 	@clear && echo "==All_created_files_deleted====="
 
