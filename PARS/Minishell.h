@@ -70,7 +70,6 @@ typedef enum e_enum
 
 typedef struct s_list
 {
-    char            **full_cmd;
     char            *cmd;
     int             type;
     int             input;
@@ -81,7 +80,7 @@ typedef struct s_list
 void    prompt(void);
 // void    start(void);
 t_list  *parser(void);
-int     check_syntax(char *s);
+// int     check_syntax(char *s);
 t_cmd  *parser2(t_list *head);
 void    after_parse2(t_cmd  *cmd);
 void    after_parse(t_list  *head);

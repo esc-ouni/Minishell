@@ -25,6 +25,7 @@ t_cmd  *parser2(t_list *head)
     i2 = 0;
     n = head;
     out_files = malloc(sizeof(t_file));
+    out_files = NULL;
     ot_fil = out_files;
     cmd = malloc(sizeof(t_cmd));
     cmd->cmd = malloc(sizeof (char *) * 10);
@@ -76,8 +77,6 @@ t_list  *parser()
 
 	head = NULL;
     s = readline(" ");
-    // if (check_syntax(s))
-    //     return (NULL);
 	str = ft_split(s, '|');
 	while (str[i])
 	{
@@ -88,7 +87,6 @@ t_list  *parser()
 	free(str[i]);
 	free(str);
 	free(s);
-    // parser2(head);
 	return (head);
 }
 
@@ -103,14 +101,13 @@ void    after_parse(t_list  *head)
     while(node)
     {
         printf("=> node %d;\n", i);
-        printf("   command : %s\n", node->cmd);
-        printf("   type    : %d", node->type);
+        if (node->cmd)
+            printf("   command : '%s'\n", node->cmd);
         printf("\n\n");
         i++;
         node = node->next;
     }
-    after_parse2(parser2(node2));
-	// ft_lstclear(&head);
+    // after_parse2(parser2(node2));
 }
 
 void    after_parse2(t_cmd  *cmd)
@@ -122,32 +119,13 @@ void    after_parse2(t_cmd  *cmd)
     while(node)
     {
         // printf("=> node %d;\n", i);
-        // printf("   command   : %s\n", node->cmd[0]);
-        printf("   out_files : %s", node->out_files->filename);
+        if (node->cmd[i])
+            printf("   command   : %s\n", node->cmd[i]);
+        if (node->out_files->filename)
+            printf("   out_files : %s", node->out_files->filename);
         printf("\n\n");
         i++;
         node = node->next;
     }
 	// ft_lstclear(&cmd);
-}
-
-int    check_syntax(char *s)
-{
-    int i;
-    int dq;
-
-    i = 0;
-    dq = 0;
-    while (s[i])
-    {
-        if (s[i] == '"')
-            dq++;
-        i++;
-    }
-    if (dq % 2)
-    {
-        printf("Minishell: syntax error");
-        return (1);
-    }
-    return (0);
 }
