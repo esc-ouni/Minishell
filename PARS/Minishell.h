@@ -81,6 +81,7 @@ void    prompt(void);
 // void    start(void);
 t_list  *parser(void);
 // int     check_syntax(char *s);
+void	debug(void);
 t_cmd  *parser2(t_list *head);
 void    after_parse2(t_cmd  *cmd);
 void    after_parse(t_list  *head);

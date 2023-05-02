@@ -44,6 +44,7 @@ LIBFT:
 $(NAME): $(OBJ_M) $(OBJ_T) $(HR)
 	@$(CC) $(FLAGS) LIBF/libft.a -lreadline -L /Users/idouni/.brew/opt/readline/lib $(OBJ_T) $(OBJ_M) -o $(NAME)
 	@clear && echo "==$(NAME)_compiled=============="
+	# ./Minishell
 
 %.o: %.c $(HR)
 	$(CC) $(FLAGS) -c $< -o $@

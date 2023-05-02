@@ -106,3 +106,10 @@ void	ft_lstclear(t_list **lst)
 	}
 	*lst = NULL;
 }
+
+void	debug(void)
+{
+	printf("\x1B[32m");
+	printf("\nDEBUG OK\n");
+	printf("\x1B[0m");
+}        
