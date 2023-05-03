@@ -183,6 +183,7 @@ void    after_parse2(t_cmd  *cmd)
     node = cmd;
     while(node)
     {
+        printf("\n");
         printf("=> t_cmd %d;\n", i);
         printf("   command     : ");
         while(node->cmd[i2])

@@ -20,8 +20,7 @@ int main()
     {
         prompt();
         cmd = after_parse(parser());
-        // after_parse2(cmd); 
+        after_parse2(cmd); // hide this
     }
-    // here is ur cmd : cmd
     return 0;
 }
