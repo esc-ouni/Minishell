@@ -181,7 +181,7 @@ void add_file_node(t_file **head, char *filename, int flag)
     }
 }
 
-void add_file_file(t_file **head, t_file *file)
+void	add_file_file(t_file **head, t_file *file)
 {
     t_file *tmp;
     t_file *new_node = malloc(sizeof(t_file));
@@ -261,4 +261,29 @@ void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fil
         tmp->next = new_cmd;
         new_cmd->next = NULL;
     }
+}
+
+void	add_lexer(t_lexer **head, char *content)
+{
+	t_lexer	*tmp;
+	t_lexer	*new_node;
+
+	new_node = malloc(sizeof(t_lexer));
+	new_node->cmd = ft_strdup(content);
+
+	if (!(*head))
+	{
+		*head = new_node;
+		new_node->next = NULL;
+	}
+	else
+	{
+		tmp = *head;
+		while (tmp->next)
+		{
+			tmp = tmp->next;
+		}
+		tmp->next = new_node;
+		new_node->next = NULL;
+	}
 }

@@ -74,9 +74,16 @@ typedef struct s_list
     struct s_list   *next;
 }   t_list;
 
+typedef struct s_lexer
+{
+    char            *cmd;
+    struct s_lexer	*next;
+}   t_lexer;
+
 void    prompt(void);
 // void    start(void);
 t_list  *parser(void);
+char 	*lexer(char *s);
 // int     check_syntax(char *s);
 void	debug(void);
 t_cmd  *parser2(t_list *head);
@@ -95,6 +102,7 @@ void	ft_fileadd_back(t_file **lst, t_file *new);
 void 	add_file_node(t_file **head, char *filename, int flag);
 void 	add_file_file(t_file **head, t_file *file);
 void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files);
+void	add_lexer(t_lexer **head, char *content);
 
 
 # endif

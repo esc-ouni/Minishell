@@ -132,7 +132,9 @@ t_list  *parser()
 
 	head = NULL;
     s = readline(" ");
+    s = lexer(s);
 	str = ft_split(s, '|');
+    // debug();
 	while (str[i])
 	{
 		ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
@@ -206,4 +208,80 @@ void    after_parse2(t_cmd  *cmd)
         node = node->next;
     }
 	// ft_lstclear(&cmd);
+}
+
+char *lexer(char *s)
+{
+    int     i;
+    int     l;
+    int     l2;
+    t_lexer *l_node;
+    char    *new_str;
+
+    i = 0;
+    l = 0;
+    l2 = 0;
+    l_node = NULL;
+    new_str = malloc(ft_strlen(s) + 1);
+    // new_str = NULL;
+    while (i < ft_strlen(s))
+    {
+        // if (s[i] == ' ')
+        //     i++;
+        // if (s[i] == '>' && s[i + 1] == '>')
+        // {
+        //     add_lexer(&l_node, ft_substr(s, i, 2));
+        //     i += 2;
+        // }
+        // else if (s[i] == '>' && s[i + 1] != '>')
+        // {
+        //     add_lexer(&l_node, ft_substr(s, i, 1));
+        //     i++;
+        // }
+        // else if (s[i] == '<' && s[i + 1] == '<')
+        // {
+        //     add_lexer(&l_node, ft_substr(s, i, 2));
+        //     i += 2;
+        // }
+        // else if (s[i] == '<' && s[i + 1] != '<')
+        // {
+        //     add_lexer(&l_node, ft_substr(s, i, 1));
+        //     i++;
+        // }
+        // else if (s[i] == '"')
+        // {
+        //     while (s[i] != '"' && s[i])
+        //     {
+        //         i++;
+        //         l++;
+        //     }
+        //     i += l;
+        //     l2 = i + l;
+        //     add_lexer(&l_node, ft_substr(s, i, l2));
+        //     l = 0;
+        //     l2 = 0;
+        // }
+        // else
+        // {
+        //     while (s[i])
+        //     {
+        //         i++;
+        //         l++;
+        //     }
+        //     l2 = i + l;
+        //     add_lexer(&l_node, ft_substr(s, i, l2));
+        //     i += l;
+        //     l2 = 0;
+        //     l = 0;   
+        // }
+        i++;
+    }
+    while (l_node)
+    {
+        // printf("\n:%s:\n", l_node->cmd);
+        new_str = ft_strjoin(ft_strjoin(new_str, " "), l_node->cmd);
+        l_node = l_node->next;       
+    }
+    printf("\n:%s:\n", new_str);
+    return (new_str);
 }
