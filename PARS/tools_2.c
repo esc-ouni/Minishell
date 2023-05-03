@@ -146,10 +146,11 @@ t_list  *parser()
 	return (head);
 }
 
-void    after_parse(t_list  *head)
+t_cmd    *after_parse(t_list  *head)
 {
     int i = 0;
     t_list  *node;
+    t_cmd   *nm;
 
     node = head;
     printf("\x1B[32m");
@@ -167,7 +168,8 @@ void    after_parse(t_list  *head)
     printf("\x1B[32m");
     printf("PART--2:\n");
 	printf("\x1B[0m");
-    after_parse2(parser2(head));
+    after_parse2((nm = parser2(head)));
+    return (nm);
     // parser2(head);
 }
 

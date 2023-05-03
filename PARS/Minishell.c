@@ -14,11 +14,13 @@
 
 int main() 
 {
+    t_cmd *cmd;
     // start();
     while (1)
     {
         prompt();
-        after_parse(parser());
+        cmd = after_parse(parser());
     }
+    // here is ur cmd : cmd
     return 0;
 }
