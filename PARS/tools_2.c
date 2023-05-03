@@ -283,6 +283,7 @@ char *lexer(char *s)
         new_str = ft_strjoin(ft_strjoin(ft_strdup(new_str), ft_strdup(" ")), ft_strdup(n->cmd));
         n = n->next;       
     }
+    new_str = ft_strtrim(new_str, " ");
     printf("\nbefore lexer : '%s'\n", s);
     printf("after  lexer : '%s'\n\n", new_str);
     return (new_str);
