@@ -229,6 +229,8 @@ char *lexer(char *s)
     new_str = calloc(sz + 1, 1);
     while (i < sz && s[i])
     {
+        if(s[i] == ' ')
+            i++;
         if (ft_isalnum(s[i]))
         {
             if (!start)
