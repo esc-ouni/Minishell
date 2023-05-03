@@ -133,16 +133,16 @@ t_list  *parser()
 	head = NULL;
     s = readline(" ");
     s = lexer(s);
-	// str = ft_split(s, '|');
-	// while (str[i])
-	// {
-	// 	ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
-	// 	free(str[i]);
-	// 	i++;
-	// }
-	// free(str[i]);
-	// free(str);
-	// free(s);
+	str = ft_split(s, '|');
+	while (str[i])
+	{
+		ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
+		free(str[i]);
+		i++;
+	}
+	free(str[i]);
+	free(str);
+	free(s);
 	return (head);
 }
 
@@ -167,7 +167,7 @@ void    after_parse(t_list  *head)
     printf("\x1B[32m");
     printf("PART--2:\n");
 	printf("\x1B[0m");
-    // after_parse2(parser2(head));
+    after_parse2(parser2(head));
     // parser2(head);
 }
 
@@ -243,7 +243,13 @@ char *lexer(char *s)
             add_lexer(&l_node, ft_substr(s, start, l2));
             start = 0;
             l2 = 0;
-            // i--;
+        }
+        else if (s[i] == '|')
+        {
+            add_lexer(&l_node, ft_substr(s, i, 1));
+            i += 1;
+            start = 0;
+            l2 = 0;
         }
         else if (s[i] == '>' && s[i + 1] != '>')
         {
