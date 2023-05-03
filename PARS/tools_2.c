@@ -153,22 +153,23 @@ t_cmd    *after_parse(t_list  *head)
     t_cmd   *nm;
 
     node = head;
-    printf("\x1B[32m");
-    printf("PART--1:\n");
-	printf("\x1B[0m");
-    while(node)
-    {
-        printf("=> node %d;\n", i);
-        if (node->cmd)
-            printf("   command : '%s'\n", node->cmd);
-        printf("\n\n");
-        i++;
-        node = node->next;
-    }
-    printf("\x1B[32m");
-    printf("PART--2:\n");
-	printf("\x1B[0m");
-    after_parse2((nm = parser2(head)));
+    // printf("\x1B[32m");
+    // printf("PART--1:\n");
+	// printf("\x1B[0m");
+    // while(node)
+    // {
+    //     printf("=> node %d;\n", i);
+    //     if (node->cmd)
+    //         printf("   command : '%s'\n", node->cmd);
+    //     printf("\n\n");
+    //     i++;
+    //     node = node->next;
+    // }
+    // printf("\x1B[32m");
+    // printf("PART--2:\n");
+	// printf("\x1B[0m");
+    // after_parse2((nm = parser2(head)));
+    nm = parser2(head);
     return (nm);
     // parser2(head);
 }
@@ -302,12 +303,12 @@ char *lexer(char *s)
     n = l_node;
     while (n)
     {
-        printf("\n:%s:\n", n->cmd);
+        // printf("\n:%s:\n", n->cmd);
         new_str = ft_strjoin(ft_strjoin(ft_strdup(new_str), ft_strdup(" ")), ft_strdup(n->cmd));
         n = n->next;       
     }
     new_str = ft_strtrim(new_str, " ");
-    printf("\nbefore lexer : '%s'\n", s);
-    printf("after  lexer : '%s'\n\n", new_str);
+    // printf("\nbefore lexer : '%s'\n", s);
+    // printf("after  lexer : '%s'\n\n", new_str);
     return (new_str);
 }
