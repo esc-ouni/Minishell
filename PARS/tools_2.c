@@ -133,17 +133,16 @@ t_list  *parser()
 	head = NULL;
     s = readline(" ");
     s = lexer(s);
-	str = ft_split(s, '|');
-    // debug();
-	while (str[i])
-	{
-		ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
-		free(str[i]);
-		i++;
-	}
-	free(str[i]);
-	free(str);
-	free(s);
+	// str = ft_split(s, '|');
+	// while (str[i])
+	// {
+	// 	ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
+	// 	free(str[i]);
+	// 	i++;
+	// }
+	// free(str[i]);
+	// free(str);
+	// free(s);
 	return (head);
 }
 
@@ -168,7 +167,7 @@ void    after_parse(t_list  *head)
     printf("\x1B[32m");
     printf("PART--2:\n");
 	printf("\x1B[0m");
-    after_parse2(parser2(head));
+    // after_parse2(parser2(head));
     // parser2(head);
 }
 
@@ -215,73 +214,74 @@ char *lexer(char *s)
     int     i;
     int     l;
     int     l2;
+    int     start;
+    int     sz;
     t_lexer *l_node;
+    t_lexer *n;
     char    *new_str;
 
     i = 0;
+    start = 0;
     l = 0;
     l2 = 0;
+    sz = ft_strlen(s);
     l_node = NULL;
-    new_str = malloc(ft_strlen(s) + 1);
-    // new_str = NULL;
-    while (i < ft_strlen(s))
+    new_str = calloc(sz + 1, 1);
+    while (i < sz && s[i])
     {
-        // if (s[i] == ' ')
-        //     i++;
-        // if (s[i] == '>' && s[i + 1] == '>')
-        // {
-        //     add_lexer(&l_node, ft_substr(s, i, 2));
-        //     i += 2;
-        // }
-        // else if (s[i] == '>' && s[i + 1] != '>')
-        // {
-        //     add_lexer(&l_node, ft_substr(s, i, 1));
-        //     i++;
-        // }
-        // else if (s[i] == '<' && s[i + 1] == '<')
-        // {
-        //     add_lexer(&l_node, ft_substr(s, i, 2));
-        //     i += 2;
-        // }
-        // else if (s[i] == '<' && s[i + 1] != '<')
-        // {
-        //     add_lexer(&l_node, ft_substr(s, i, 1));
-        //     i++;
-        // }
-        // else if (s[i] == '"')
-        // {
-        //     while (s[i] != '"' && s[i])
-        //     {
-        //         i++;
-        //         l++;
-        //     }
-        //     i += l;
-        //     l2 = i + l;
-        //     add_lexer(&l_node, ft_substr(s, i, l2));
-        //     l = 0;
-        //     l2 = 0;
-        // }
-        // else
-        // {
-        //     while (s[i])
-        //     {
-        //         i++;
-        //         l++;
-        //     }
-        //     l2 = i + l;
-        //     add_lexer(&l_node, ft_substr(s, i, l2));
-        //     i += l;
-        //     l2 = 0;
-        //     l = 0;   
-        // }
-        i++;
+        if (ft_isalnum(s[i]))
+        {
+            if (!start)
+                start = i;
+            while (ft_isalnum(s[i]) && s[i])
+            {
+                i++;
+                l2++;
+            }
+            add_lexer(&l_node, ft_substr(s, start, l2));
+            start = 0;
+            l2 = 0;
+            // i--;
+        }
+        else if (s[i] == '>' && s[i + 1] != '>')
+        {
+            add_lexer(&l_node, ft_substr(s, i, 1));
+            i += 1;
+            start = 0;
+            l2 = 0;
+        }
+        else if (s[i] == '<' && s[i + 1] != '<')
+        {
+            add_lexer(&l_node, ft_substr(s, i, 1));
+            i += 1;
+            start = 0;
+            l2 = 0;
+        }
+        else if (s[i] == '>' && s[i + 1] == '>')
+        {
+            add_lexer(&l_node, ft_substr(s, i, 2));
+            i += 2;
+            start = 0;
+            l2 = 0;
+        }
+        else if (s[i] == '<' && s[i + 1] == '<')
+        {
+            add_lexer(&l_node, ft_substr(s, i, 2));
+            i += 2;
+            start = 0;
+            l2 = 0;
+        }
+        else
+            i++;
     }
-    while (l_node)
+    n = l_node;
+    while (n)
     {
-        // printf("\n:%s:\n", l_node->cmd);
-        new_str = ft_strjoin(ft_strjoin(new_str, " "), l_node->cmd);
-        l_node = l_node->next;       
+        printf("\n:%s:\n", n->cmd);
+        new_str = ft_strjoin(ft_strjoin(ft_strdup(new_str), ft_strdup(" ")), ft_strdup(n->cmd));
+        n = n->next;       
     }
-    printf("\n:%s:\n", new_str);
+    printf("\nbefore lexer : '%s'\n", s);
+    printf("after  lexer : '%s'\n\n", new_str);
     return (new_str);
 }
