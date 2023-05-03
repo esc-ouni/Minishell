@@ -116,6 +116,7 @@ void	ft_fileadd_back(t_file **lst, t_file *new)
 	new->next = NULL;
 }
 
+
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*o_last;

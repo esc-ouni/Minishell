@@ -231,6 +231,21 @@ char *lexer(char *s)
     {
         if(s[i] == ' ')
             i++;
+        if (s[i] == '"')
+        {
+            if (!start)
+                start = i + 1;
+            i++;
+            while (s[i] != '"' && s[i])
+            {
+                i++;
+                l2++;
+            }
+            add_lexer(&l_node, ft_substr(s, start, l2));
+            start = 0;
+            l2 = 0;
+            i++;
+        }   
         if (ft_isalnum(s[i]))
         {
             if (!start)
