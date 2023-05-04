@@ -59,12 +59,6 @@ t_cmd  *parser2(t_list *head)
             }
             n = n->next;
         }
-        // printf("\nout_files :\n");
-        // while (out_files)
-        // {
-        //     printf("  > %s\n", out_files->filename);
-        //     out_files = out_files->next;
-        // }
 
         // CHECK_FOR_IN_FILES
         n = *tmp;
@@ -82,12 +76,6 @@ t_cmd  *parser2(t_list *head)
             }
             n = n->next;
         }
-        // printf("\nin_files :\n\n");
-        // while (in_files)
-        // {
-        //     printf("  > %s\n", in_files->filename);
-        //     in_files = in_files->next;
-        // }
 
         // GET_FULL_CMD
         n = *tmp;
@@ -103,15 +91,6 @@ t_cmd  *parser2(t_list *head)
             }
             n = n->next;
         }
-        i = 0;
-        // printf("\nfull_cmd :\n\n");
-        // while (full_cmd[i])
-        // {
-        //     printf("  > %s\n", full_cmd[i]);
-        //     i++;
-        // }
-        // printf("\n");
-        // printf("\n");
         i = 0;
         add_to_cmd(&cmd, full_cmd, out_files, in_files);
         full_cmd[0] = NULL;
