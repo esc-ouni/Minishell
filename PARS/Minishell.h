@@ -81,7 +81,7 @@ typedef struct s_lexer
 }   t_lexer;
 
 void    prompt(void);
-// void    start(void);
+void    start(void);
 t_list  *parser(void);
 char 	*lexer(char *s);
 // int     check_syntax(char *s);

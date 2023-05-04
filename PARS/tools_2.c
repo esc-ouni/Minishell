@@ -43,6 +43,7 @@ t_cmd  *parser2(t_list *head)
             ft_lstadd_back(tmp, ft_lstnew(*s));
             s++;
         }
+
         // CHECK_FOR_OUT_FILES
         n = *tmp;
         while (n)
@@ -130,25 +131,8 @@ t_cmd    *after_parse(t_list  *head)
     t_cmd   *nm;
 
     node = head;
-    // printf("\x1B[32m");
-    // printf("PART--1:\n");
-	// printf("\x1B[0m");
-    // while(node)
-    // {
-    //     printf("=> node %d;\n", i);
-    //     if (node->cmd)
-    //         printf("   command : '%s'\n", node->cmd);
-    //     printf("\n\n");
-    //     i++;
-    //     node = node->next;
-    // }
-    // printf("\x1B[32m");
-    // printf("PART--2:\n");
-	// printf("\x1B[0m");
-    // after_parse2((nm = parser2(head)));
     nm = parser2(head);
     return (nm);
-    // parser2(head);
 }
 
 void    after_parse2(t_cmd  *cmd)
@@ -187,7 +171,6 @@ void    after_parse2(t_cmd  *cmd)
         i++;
         node = node->next;
     }
-	// ft_lstclear(&cmd);
 }
 
 char *lexer(char *s)

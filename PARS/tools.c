@@ -25,43 +25,12 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-void	ft_lstdelone(t_list *lst, t_list **head)
-{
-	t_list	*node;
-
-	node = *head;
-	if (node == lst)
-	{
-		*head = lst->next;
-		free(lst);
-		return ;
-	}
-	while (node->next)
-	{
-		if (node->next == lst)
-		{
-			node->next = node->next->next;
-			free(lst);
-			return ;
-		}
-		node = node->next;
-	}
-	// if (node->next == lst)
-	// {
-	// 	node->next = NULL;
-	// 	free(lst);
-	// 	return ;
-	// }
-}
-
 t_list	*ft_lstnew(char *s)
 {
 	t_list	*new_node;
-	int		d;
 
-	d = ft_strlen(s);
 	new_node = NULL;
-	new_node = (t_list *)malloc(sizeof(t_list));
+	new_node = malloc(sizeof(t_list));
 	if (new_node)
 	{
 		new_node->cmd = ft_strdup(s);
@@ -125,7 +94,7 @@ void	debug(void)
 	printf("\x1B[0m");
 }        
 
-void add_file_node(t_file **head, char *filename, int flag)
+void	add_file_node(t_file **head, char *filename, int flag)
 {
     t_file *tmp;
     t_file *new_node = malloc(sizeof(t_file));
@@ -188,11 +157,9 @@ void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fil
 
 	char **str = malloc(sizeof(char *) * 15);
 	char **s = str;
-	// s = NULL;
 	while (*full_cmd)
 	{
 		*s = ft_strdup(*full_cmd);
-		// printf("%s ", *s);
 		full_cmd++;
 		s++;
 	}
@@ -214,7 +181,6 @@ void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fil
 	new_cmd->out_files = out_files2;
 	new_cmd->in_files = in_files2;
 
-	// printf("hello %d\n",sizeof(full_cmd));
 	if (!(*head))
     {
         *head = new_cmd;
