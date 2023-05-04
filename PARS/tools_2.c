@@ -23,7 +23,6 @@ t_cmd  *parser2(t_list *head)
     t_list  *n;
     t_cmd   *cmd;
     int i = 0;
-    int l;
 
     char **s;
     tmp = NULL;
@@ -148,7 +147,6 @@ t_list  *parser()
 
 t_cmd    *after_parse(t_list  *head)
 {
-    int i = 0;
     t_list  *node;
     t_cmd   *nm;
 

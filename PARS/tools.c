@@ -27,7 +27,6 @@ int	ft_lstsize(t_list *lst)
 
 void	ft_lstdelone(t_list *lst, t_list **head)
 {
-	int	i = 0;
 	t_list	*node;
 
 	node = *head;
@@ -85,37 +84,6 @@ t_list	*ft_lstlast(t_list *lst)
 	}
 	return (node);
 }
-
-t_file	*ft_filenew(char *s)
-{
-	t_file	*new_file;
-
-	new_file = NULL;
-	new_file = (t_file *)malloc(sizeof(t_file));
-	if (new_file)
-	{
-		new_file->filename = ft_strdup(s);
-		new_file->next = NULL;
-	}
-	return (new_file);
-}
-
-void	ft_fileadd_back(t_file **lst, t_file *new)
-{
-	t_file *n;
-
-	if (*lst == NULL)
-	{
-		*lst = new;
-		new->next = NULL;
-		return ;
-	}
-	while (n->next)
-		n = n->next;
-	n->next = new;
-	new->next = NULL;
-}
-
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
