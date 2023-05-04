@@ -12,6 +12,29 @@
 
 #include "Minishell.h"
 
+t_list  *parser()
+{
+	int		i = 0;
+    char    *s;
+    char    **str;
+	t_list	*head;
+
+	head = NULL;
+    s = readline(" ");
+    s = lexer(s);
+	str = ft_split(s, '|');
+	while (str[i])
+	{
+		ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
+		free(str[i]);
+		i++;
+	}
+	free(str[i]);
+	free(str);
+	free(s);
+	return (head);
+}
+
 t_cmd  *parser2(t_list *head)
 {
     char    **full_cmd;
@@ -100,39 +123,6 @@ t_cmd  *parser2(t_list *head)
         node = node->next;
     }
     return (cmd);
-}
-
-t_list  *parser()
-{
-	int		i = 0;
-    char    *s;
-    char    **str;
-	t_list	*head;
-
-	head = NULL;
-    s = readline(" ");
-    s = lexer(s);
-	str = ft_split(s, '|');
-	while (str[i])
-	{
-		ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
-		free(str[i]);
-		i++;
-	}
-	free(str[i]);
-	free(str);
-	free(s);
-	return (head);
-}
-
-t_cmd    *after_parse(t_list  *head)
-{
-    t_list  *node;
-    t_cmd   *nm;
-
-    node = head;
-    nm = parser2(head);
-    return (nm);
 }
 
 void    after_parse2(t_cmd  *cmd)

@@ -19,7 +19,7 @@ int main()
     while (1)
     {
         prompt();
-        cmd = after_parse(parser());
+        cmd = parser2(parser());
         after_parse2(cmd); // hide this
     }
     return 0;
