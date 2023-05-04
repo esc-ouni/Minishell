@@ -14,40 +14,61 @@
 
 t_list  *parser()
 {
-	int		i = 0;
+	// int		i = 0;
     char    *s;
-    char    **str;
+    // char    **str;
 	t_list	*head;
+	t_lexer	*h_lexer;
 
 	head = NULL;
     s = readline(" ");
-    s = lexer(s);
-	str = ft_split(s, '|');
-	while (str[i])
-	{
-		ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
-		free(str[i]);
-		i++;
-	}
-	free(str[i]);
-	free(str);
-	free(s);
+    h_lexer = lexer(s);
+	// str = ft_split(s, '|');
+	// while (str[i])
+	// {
+	// 	ft_lstadd_back(&head, ft_lstnew(ft_strtrim(str[i], " ")));
+	// 	// free(str[i]);
+	// 	i++;
+	// }
+	// // free(str[i]);
+	// // free(str);
+	// // free(s);
+    parser2(h_lexer);
+
+    // while (h_lexer)
+	// {
+    //     // if (!strncmp(h_lexer->cmd, "|", ft_strlen(h_lexer->cmd)));
+    //     // {
+    //     //     h_lexer = h_lexer->next;
+    //     //     while (strncmp(h_lexer->cmd, "|", ft_strlen(h_lexer->cmd)))
+    //     //     {
+    //     //         ft_strjoin()
+    //     //     }
+	// 	//     ft_lstadd_back(&head, ft_lstnew(h_lexer->cmd));
+
+    //     // }
+    //     printf("#%s#\n", h_lexer->cmd);
+	// 	// free(str[i]);
+	// 	// i++;
+    //     h_lexer = h_lexer->next;
+	// }
+    // exit (0);
 	return (head);
 }
 
-t_cmd  *parser2(t_list *head)
+t_cmd  *parser2(t_lexer *head)
 {
     char    **full_cmd;
     t_file  *out_files;
     t_file  *in_files;
-    t_list  *node;
-    t_list  **tmp;
-    t_list  *tmp_n;
-    t_list  *n;
+    t_lexer  *node;
+    t_lexer  **tmp;
+    // t_lexer  *tmp_n;
+    // t_lexer  *n;
     t_cmd   *cmd;
-    int i = 0;
+    // int i = 0;
 
-    char **s;
+    // char **s;
     tmp = NULL;
 
     node = head;
@@ -57,73 +78,164 @@ t_cmd  *parser2(t_list *head)
     in_files = NULL;
     while (node)
     {
-        s = ft_split(node->cmd, ' ');
-        tmp_n = ft_lstnew(*s);
-        tmp = &tmp_n;
-        s++;
-        while(*s)
-        {
-            ft_lstadd_back(tmp, ft_lstnew(*s));
-            s++;
-        }
+        // s = ft_split(node->cmd, ' ');
+        // tmp_n = ft_lstnew(*s);
+        // tmp = &tmp_n;
+        // s++;
+        // while(*s)
+        // {
+        //     ft_lstadd_back(tmp, ft_lstnew(*s));
+        //     s++;
+        // }
 
-        // CHECK_FOR_OUT_FILES
-        n = *tmp;
-        while (n)
-        {
-            if (!strcmp(n->cmd, ">"))
-            {
-                n = n->next;
-                add_file_node(&out_files, n->cmd, O_TRUNC);
-            }
-            if (!strcmp(n->cmd, ">>"))
-            {
-                n = n->next;
-                add_file_node(&out_files, n->cmd, O_APPEND);
-            }
-            n = n->next;
-        }
+        // // CHECK_FOR_OUT_FILES
+        // n = *tmp;
+        // while (n)
+        // {
+        //     if (!strcmp(n->cmd, ">"))
+        //     {
+        //         n = n->next;
+        //         add_file_node(&out_files, n->cmd, O_TRUNC);
+        //     }
+        //     if (!strcmp(n->cmd, ">>"))
+        //     {
+        //         n = n->next;
+        //         add_file_node(&out_files, n->cmd, O_APPEND);
+        //     }
+        //     n = n->next;
+        // }
 
-        // CHECK_FOR_IN_FILES
-        n = *tmp;
-        while (n)
-        {
-            if (!strcmp(n->cmd, "<"))
-            {
-                n = n->next;
-                add_file_node(&in_files, n->cmd, O_TRUNC);
-            }
-            if (!strcmp(n->cmd, "<<"))
-            {
-                n = n->next;
-                add_file_node(&in_files, n->cmd, O_TRUNC);
-            }
-            n = n->next;
-        }
+        // // CHECK_FOR_IN_FILES
+        // n = *tmp;
+        // while (n)
+        // {
+        //     if (!strcmp(n->cmd, "<"))
+        //     {
+        //         n = n->next;
+        //         add_file_node(&in_files, n->cmd, O_TRUNC);
+        //     }
+        //     if (!strcmp(n->cmd, "<<"))
+        //     {
+        //         n = n->next;
+        //         add_file_node(&in_files, n->cmd, O_TRUNC);
+        //     }
+        //     n = n->next;
+        // }
 
-        // GET_FULL_CMD
-        n = *tmp;
-        while (n)
-        {
-            if (!strcmp(n->cmd, "<") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, ">>"))
-                n = n->next;
-            else
-            {
-                full_cmd[i] = ft_strdup(n->cmd);
-                full_cmd[i + 1] = NULL;
-                i++;
-            }
-            n = n->next;
-        }
-        i = 0;
-        add_to_cmd(&cmd, full_cmd, out_files, in_files);
-        full_cmd[0] = NULL;
-        out_files = NULL;
-        in_files = NULL;
+        // // GET_FULL_CMD
+        // n = *tmp;
+        // while (n)
+        // {
+        //     if (!strcmp(n->cmd, "<") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, ">>"))
+        //         n = n->next;
+        //     else
+        //     {
+        //         full_cmd[i] = ft_strdup(n->cmd);
+        //         full_cmd[i + 1] = NULL;
+        //         i++;
+        //     }
+        //     n = n->next;
+        // }
+        // i = 0;
+        // add_to_cmd(&cmd, full_cmd, out_files, in_files);
+        // full_cmd[0] = NULL;
+        // out_files = NULL;
+        // in_files = NULL;
+        printf("*%s*\n", node->cmd);
         node = node->next;
     }
     return (cmd);
 }
+
+// t_cmd  *parser2(t_list *head)
+// {
+//     char    **full_cmd;
+//     t_file  *out_files;
+//     t_file  *in_files;
+//     t_list  *node;
+//     t_list  **tmp;
+//     t_list  *tmp_n;
+//     t_list  *n;
+//     t_cmd   *cmd;
+//     int i = 0;
+
+//     char **s;
+//     tmp = NULL;
+
+//     node = head;
+//     full_cmd = malloc(sizeof(char *) * 15);
+//     cmd = NULL;
+//     out_files = NULL;
+//     in_files = NULL;
+//     while (node)
+//     {
+//         s = ft_split(node->cmd, ' ');
+//         tmp_n = ft_lstnew(*s);
+//         tmp = &tmp_n;
+//         s++;
+//         while(*s)
+//         {
+//             ft_lstadd_back(tmp, ft_lstnew(*s));
+//             s++;
+//         }
+
+//         // CHECK_FOR_OUT_FILES
+//         n = *tmp;
+//         while (n)
+//         {
+//             if (!strcmp(n->cmd, ">"))
+//             {
+//                 n = n->next;
+//                 add_file_node(&out_files, n->cmd, O_TRUNC);
+//             }
+//             if (!strcmp(n->cmd, ">>"))
+//             {
+//                 n = n->next;
+//                 add_file_node(&out_files, n->cmd, O_APPEND);
+//             }
+//             n = n->next;
+//         }
+
+//         // CHECK_FOR_IN_FILES
+//         n = *tmp;
+//         while (n)
+//         {
+//             if (!strcmp(n->cmd, "<"))
+//             {
+//                 n = n->next;
+//                 add_file_node(&in_files, n->cmd, O_TRUNC);
+//             }
+//             if (!strcmp(n->cmd, "<<"))
+//             {
+//                 n = n->next;
+//                 add_file_node(&in_files, n->cmd, O_TRUNC);
+//             }
+//             n = n->next;
+//         }
+
+//         // GET_FULL_CMD
+//         n = *tmp;
+//         while (n)
+//         {
+//             if (!strcmp(n->cmd, "<") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, ">>"))
+//                 n = n->next;
+//             else
+//             {
+//                 full_cmd[i] = ft_strdup(n->cmd);
+//                 full_cmd[i + 1] = NULL;
+//                 i++;
+//             }
+//             n = n->next;
+//         }
+//         i = 0;
+//         add_to_cmd(&cmd, full_cmd, out_files, in_files);
+//         full_cmd[0] = NULL;
+//         out_files = NULL;
+//         in_files = NULL;
+//         node = node->next;
+//     }
+//     return (cmd);
+// }
 
 void    after_parse2(t_cmd  *cmd)
 {
@@ -163,7 +275,7 @@ void    after_parse2(t_cmd  *cmd)
     }
 }
 
-char *lexer(char *s)
+t_lexer *lexer(char *s)
 {
     int     i;
     int     l;
@@ -183,8 +295,6 @@ char *lexer(char *s)
     new_str = calloc(sz + 1, 1);
     while (i < sz && s[i])
     {
-        if(s[i] == ' ')
-            i++;
         if (s[i] == '"')
         {
             if (!start)
@@ -200,11 +310,11 @@ char *lexer(char *s)
             l2 = 0;
             i++;
         }   
-        if (ft_isalnum(s[i]))
+        if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|')
         {
             if (!start)
                 start = i;
-            while (ft_isalnum(s[i]) && s[i])
+            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"')
             {
                 i++;
                 l2++;
@@ -248,8 +358,6 @@ char *lexer(char *s)
             start = 0;
             l2 = 0;
         }
-        else
-            i++;
     }
     n = l_node;
     while (n)
@@ -258,8 +366,10 @@ char *lexer(char *s)
         new_str = ft_strjoin(ft_strjoin(ft_strdup(new_str), ft_strdup(" ")), ft_strdup(n->cmd));
         n = n->next;       
     }
-    new_str = ft_strtrim(new_str, " ");
+    // new_str = ft_strtrim(new_str, " ");
     // printf("\nbefore lexer : '%s'\n", s);
     // printf("after  lexer : '%s'\n\n", new_str);
-    return (new_str);
+    // // return (new_str);
+    // // exit (0);
+    return (l_node);
 }
