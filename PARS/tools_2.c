@@ -88,12 +88,12 @@ t_cmd  *parser2(t_lexer *head)
                     n = n->next;
                 else
                 {
-                    full_cmd[i] = ft_strdup(n->cmd);
-                    full_cmd[i + 1] = NULL;
-                    i++;
+                    full_cmd = ft_split(n->cmd, ' ');
                 }
-                n = n->next;
+                n = n->next;            
             }
+            // printf("%s\n", full_cmd[0]);
+            // printf("%s\n", full_cmd[1]);
             i = 0;
             add_to_cmd(&cmd, full_cmd, out_files, in_files);
             full_cmd[0] = NULL;
