@@ -116,10 +116,18 @@ t_cmd  *parser2(t_lexer *head)
         n_cmd = n_cmd->next;
     }
     n_cmd = cmd;
-    while (n_cmd->next)
-        n_cmd = n_cmd->next;
-    n_cmd->first_cmd = 0;
-    n_cmd->last_cmd = 1;
+    if (ft_cmdsize(n_cmd) == 1)
+    {
+        n_cmd->first_cmd = 1;
+        n_cmd->last_cmd = 1;
+    }
+    else
+    {
+        while (n_cmd->next)
+            n_cmd = n_cmd->next;
+        n_cmd->first_cmd = 0;
+        n_cmd->last_cmd = 1;
+    }
     return (cmd);
 }
 

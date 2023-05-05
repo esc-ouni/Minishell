@@ -25,6 +25,21 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
+int	ft_cmdsize(t_cmd *cmd)
+{
+	size_t	i;
+	t_cmd	*n_cmd;
+
+	i = 0;
+	n_cmd = cmd;
+	while (n_cmd)
+	{
+		n_cmd = n_cmd->next;
+		i++;
+	}
+	return (i);
+}
+
 t_list	*ft_lstnew(char *s)
 {
 	t_list	*new_node;
