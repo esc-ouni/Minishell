@@ -252,3 +252,23 @@ char	**mgetenv(char **env)
 	new_env[i] = NULL;
 	return (new_env);
 }
+
+t_built	cmd_type(char *cmd)
+{
+	if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+		return(ECH);
+	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+		return(CD);
+	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+		return(PWD);
+    else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+		return(EXPT);
+    else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
+		return(UNST);
+    else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+		return(ENV);
+	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+		return(EXT);
+	else
+		return(SYS);
+}
