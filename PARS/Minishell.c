@@ -12,16 +12,25 @@
 
 #include "Minishell.h"
 
-int main() 
+int main(int argc, char **argv, char **env) 
 {
     t_lexer  *h_lexer;
     t_cmd *cmd;
+    t_cmd *n_cmd;
+    char **menv;
+
+    menv = mgetenv(env);
     // start();
     while (1)
     {
         prompt();
         h_lexer = parser();
         cmd = parser2(h_lexer);
+        while (n_cmd)
+        {
+            n_cmd->env = menv;
+            n_cmd = n_cmd->next;
+        }
         after_parse2(cmd); // hide this
     }
     return 0;
