@@ -86,7 +86,7 @@ typedef struct s_lexer
 // t_cmd    *after_parse(t_list  *head);
 // void	check_type(t_list	*node);
 void    prompt(void);
-t_list  *parser(void);
+t_lexer	*parser(void);
 void	debug(void);
 // t_cmd  *parser2(t_list *head);
 t_cmd  *parser2(t_lexer *head);

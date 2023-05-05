@@ -14,13 +14,15 @@
 
 int main() 
 {
-    // t_cmd *cmd;
+    t_lexer  *h_lexer;
+    t_cmd *cmd;
     // start();
     while (1)
     {
         prompt();
-        parser();
-        // after_parse2(cmd); // hide this
+        h_lexer = parser();
+        cmd = parser2(h_lexer);
+        after_parse2(cmd); // hide this
     }
     return 0;
 }
