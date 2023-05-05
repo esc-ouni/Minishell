@@ -80,7 +80,6 @@ char	**mgetenv(char **env);
 void    prompt(void);
 t_lexer	*parser(void);
 void	debug(void);
-// t_cmd  *parser2(t_list *head);
 t_cmd  *parser2(t_lexer *head);
 void    after_parse2(t_cmd  *cmd);
 t_lexer *lexer(char *s);
