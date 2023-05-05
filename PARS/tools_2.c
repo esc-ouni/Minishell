@@ -137,24 +137,31 @@ void    after_parse2(t_cmd  *cmd)
         printf("   command     : ");
         while(node->cmd[i2])
         {
-            printf("%s ", node->cmd[i2]);
+            printf("'%s' ", node->cmd[i2]);
             i2++;
         }
         i2 = 0;
         printf("\n");
+        printf("   position    : ");
+        printf("f:%d ", node->first_cmd);
+        printf("l:%d ", node->last_cmd);
+        printf("\n");
         printf("   out_files   : ");
         while(node->out_files)
         {
-            printf("%s ", node->out_files->filename);
+            printf("'%s' ", node->out_files->filename);
             node->out_files = node->out_files->next;
         }
         printf("\n");
         printf("   in_files    : ");
         while(node->in_files)
         {
-            printf("%s ", node->in_files->filename);
+            printf("'%s' ", node->in_files->filename);
             node->in_files = node->in_files->next;
         }
+        printf("\n");
+        printf("   check_env   : ");
+        printf("%s ", node->env[0]); 
         printf("\n\n");
         i++;
         node = node->next;
