@@ -284,7 +284,6 @@ void	emplify(t_cmd *cmd, char **env)
 	while (n_cmd)
 	{
 		n_cmd->env = menv;
-		// printf("%s\n", n_cmd->cmd[1]);
 		n_cmd->builtflag = cmd_type(n_cmd->cmd[0]);
 		h_file = n_cmd->out_files;
 		if (h_file)
