@@ -16,6 +16,7 @@ int main(int argc, char **argv, char **env)
 {
     (void)argc;
     (void)argv;
+    (void)env;
     t_lexer  *h_lexer;
     t_cmd *cmd;
 
@@ -25,7 +26,7 @@ int main(int argc, char **argv, char **env)
         prompt();
         h_lexer = parser();
         cmd = parser2(h_lexer);
-        emplify(cmd, env);
+        // emplify(cmd, env);
         after_parse2(cmd); // hide this
     }
     return 0;

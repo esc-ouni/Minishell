@@ -34,6 +34,7 @@ t_cmd  *parser2(t_lexer *head)
     t_cmd   *cmd;
     t_cmd   *n_cmd;
     int i = 0;
+    int i2 = 0;
 
     node = head;
     full_cmd = malloc(sizeof(char *) * 15);
@@ -84,18 +85,16 @@ t_cmd  *parser2(t_lexer *head)
             n = node;
             while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
             {
-                if (!strcmp(n->cmd, "<") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, ">>") || !strcmp(n->cmd, "|"))
-                    n = n->next;
-                else
-                {
-                    full_cmd = ft_split(n->cmd, ' ');
-                }
+                printf("cmd n %d:\n", i2);
+                printf(":%s:\n\n", n->cmd);
+                full_cmd = ft_split(n->cmd, ' ');
                 n = n->next;            
             }
             // printf("%s\n", full_cmd[0]);
             // printf("%s\n", full_cmd[1]);
             i = 0;
             add_to_cmd(&cmd, full_cmd, out_files, in_files);
+            i2++;
             full_cmd[0] = NULL;
             out_files = NULL;
             in_files = NULL;
