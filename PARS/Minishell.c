@@ -18,7 +18,7 @@ int main(int argc, char **argv, char **env)
     (void)argv;
     (void)env;
     t_lexer  *h_lexer;
-    t_cmd *cmd;
+    t_cmd    *cmd;
 
     // start();
     while (1)

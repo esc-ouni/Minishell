@@ -1,0 +1,4 @@
+#Memory management;
+#Readbility(simplecode,get_cmd_enhanced,rename_files);
+#Handle s_q;
+#check syntax
