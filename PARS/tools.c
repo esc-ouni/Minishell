@@ -222,3 +222,18 @@ void	add_lexer(t_lexer **head, char *content)
 		new_node->next = NULL;
 	}
 }
+
+char	**mgetenv(char **env)
+{
+	int		i = 0;
+	char	**new_env;
+
+	while (env[i])
+        i++;
+	new_env = malloc(sizeof(char *) * (i + 1));
+    i = -1;
+	while(env[++i])
+		new_env[i] = strdup(env[i]);
+	new_env[i] = NULL;
+	return (new_env);
+}

@@ -32,6 +32,7 @@ typedef struct s_file
 {
 	char            *filename;
 	int				o_flags; /*Append  O_TRUNC O_CREAT .... */
+	int				islast; /*Append  O_TRUNC O_CREAT .... */
 	struct s_file   *next;
 }   t_file;
 
@@ -39,20 +40,10 @@ typedef struct s_cmd
 {
 	char			**env;
 	char			**cmd;
-	int				cmd_flag;
-	char			*input_file;
-	char			*output_file;
 	// enum builtin	builtflag;
 	char			*cmd_path;
-	int				cmd_pos;
-	int				init_stdin;
 	int				first_cmd;
 	int				last_cmd;
-	int				cmd_fdin;
-	int				inputed;
-	int				outputed;
-	int				cmd_fdout;
-	int				*fd;
 	t_file			*in_files;
 	t_file			*out_files;
 	struct s_cmd	*next;
@@ -85,6 +76,7 @@ typedef struct s_lexer
 // void    after_parse(t_list  *head);
 // t_cmd    *after_parse(t_list  *head);
 // void	check_type(t_list	*node);
+char	**mgetenv(char **env);
 void    prompt(void);
 t_lexer	*parser(void);
 void	debug(void);
