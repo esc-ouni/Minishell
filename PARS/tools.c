@@ -255,20 +255,56 @@ char	**mgetenv(char **env)
 
 t_built	cmd_type(char *cmd)
 {
-	if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+	if (!ft_strncmp(ft_strtrim(cmd, " "), "echo", ft_strlen(ft_strtrim(cmd, " "))))
 		return(ECH);
-	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+	else if (!ft_strncmp(ft_strtrim(cmd, " "), "cd", ft_strlen(ft_strtrim(cmd, " "))))
 		return(CD);
-	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+	else if (!ft_strncmp(ft_strtrim(cmd, " "), "pwd", ft_strlen(ft_strtrim(cmd, " "))))
 		return(PWD);
-    else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+    else if (!ft_strncmp(ft_strtrim(cmd, " "), "export", ft_strlen(ft_strtrim(cmd, " "))))
 		return(EXPT);
-    else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
+    else if (!ft_strncmp(ft_strtrim(cmd, " "), "unset", ft_strlen(ft_strtrim(cmd, " "))))
 		return(UNST);
-    else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+    else if (!ft_strncmp(ft_strtrim(cmd, " "), "env", ft_strlen(ft_strtrim(cmd, " "))))
 		return(ENV);
-	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+	else if (!ft_strncmp(ft_strtrim(cmd, " "), "exit", ft_strlen(ft_strtrim(cmd, " "))))
 		return(EXT);
 	else
 		return(SYS);
+}
+
+void	emplify(t_cmd *cmd, char **env)
+{
+    t_file   *h_file;
+    t_cmd *n_cmd;
+    char **menv;
+
+    menv = mgetenv(env);
+    n_cmd = cmd;
+	while (n_cmd)
+	{
+		n_cmd->env = menv;
+		n_cmd->builtflag = cmd_type(n_cmd->cmd[0]);
+		h_file = n_cmd->out_files;
+		if (h_file)
+		{
+			while (h_file->next)
+			{
+				h_file->islast = 0;
+				h_file = h_file->next;
+			}
+			h_file->islast = 1;
+		}
+		h_file = n_cmd->in_files;
+		if (h_file)
+		{
+			while (h_file->next)
+			{
+				h_file->islast = 0;
+				h_file = h_file->next;
+			}
+			h_file->islast = 1;
+		}
+		n_cmd = n_cmd->next;
+	}
 }

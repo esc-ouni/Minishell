@@ -103,6 +103,7 @@ t_cmd  *parser2(t_lexer *head)
         }
     }
     i = 0;
+
     //UPDATE_CMD
     n_cmd = cmd;
     while (n_cmd)
@@ -157,19 +158,21 @@ void    after_parse2(t_cmd  *cmd)
         printf("   out_files   : ");
         while(node->out_files)
         {
-            printf("'%s' ", node->out_files->filename);
+            printf("'%s'->", node->out_files->filename);
+            printf("%d ", node->out_files->islast);
             node->out_files = node->out_files->next;
         }
         printf("\n");
         printf("   in_files    : ");
         while(node->in_files)
         {
-            printf("'%s' ", node->in_files->filename);
+            printf("'%s'->", node->in_files->filename);
+            printf("%d ", node->in_files->islast);
             node->in_files = node->in_files->next;
         }
         printf("\n");
-        printf("   check_env   : ");
-        printf("%s ", node->env[0]); 
+        printf("   cmd_type    : ");
+        printf("%d ", node->builtflag); 
         printf("\n\n");
         i++;
         node = node->next;

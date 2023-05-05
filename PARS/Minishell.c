@@ -18,22 +18,14 @@ int main(int argc, char **argv, char **env)
     (void)argv;
     t_lexer  *h_lexer;
     t_cmd *cmd;
-    t_cmd *n_cmd;
-    char **menv;
 
-    menv = mgetenv(env);
     // start();
     while (1)
     {
         prompt();
         h_lexer = parser();
         cmd = parser2(h_lexer);
-        n_cmd = cmd;
-        while (n_cmd)
-        {
-            n_cmd->env = menv;
-            n_cmd = n_cmd->next;
-        }
+        emplify(cmd, env);
         after_parse2(cmd); // hide this
     }
     return 0;
