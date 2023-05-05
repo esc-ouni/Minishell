@@ -14,9 +14,7 @@
 
 t_lexer  *parser()
 {
-	// int		i = 0;
     char    *s;
-    // char    **str;
 	t_list	*head;
 	t_lexer	*h_lexer;
 
@@ -35,8 +33,6 @@ t_cmd  *parser2(t_lexer *head)
     t_lexer  *n;
     t_cmd   *cmd;
     int i = 0;
-
-    // char **s;
 
     node = head;
     full_cmd = malloc(sizeof(char *) * 15);
