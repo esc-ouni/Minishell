@@ -159,8 +159,34 @@ void	add_file_file(t_file **head, t_file *file)
     }
 }
 
+void	add_to_full_cmd(t_file **head, char *filename, int flag)
+{
+    t_file *tmp;
+    t_file *new_node = malloc(sizeof(t_file));
+    
+    new_node->filename = ft_strdup(filename);
+    new_node->o_flags = flag;
+    
+    if (!(*head))
+    {
+        *head = new_node;
+        new_node->next = NULL;
+    }
+    else
+    {
+        tmp = *head;
+        while (tmp->next)
+        {
+            tmp = tmp->next;
+        }
+        tmp->next = new_node;
+        new_node->next = NULL;
+    }
+}
+
 void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
 {
+	int		i = 0;
 	t_file	*out_files2;
 	t_file	*in_files2;
 
@@ -170,15 +196,14 @@ void add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fil
 	out_files2 = NULL;
 	in_files2 = NULL;
 
-	char **str = malloc(sizeof(char *) * 15);
-	char **s = str;
-	while (*full_cmd)
+	char **str = malloc(sizeof(full_cmd) + sizeof(char *));
+	// char **s = str;
+	while (full_cmd[i])
 	{
-		*s = ft_strdup(*full_cmd);
-		full_cmd++;
-		s++;
+		str[i] = ft_strdup(full_cmd[i]);
+		i++;
 	}
-	*s = NULL;
+	str[i] = NULL;
 
 	while (out_files)
 	{

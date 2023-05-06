@@ -73,11 +73,11 @@ typedef struct s_mlist
 typedef enum e_enum
 {
 	STD,
+	STS,
     PIP,
     RED,
-    ERO,
-    SQU,
-    DQU,
+    CMD,
+    SPC
 }	t_enum;
 
 typedef struct s_list
@@ -89,6 +89,7 @@ typedef struct s_list
 typedef struct s_lexer
 {
     char            *cmd;
+    t_enum			type;
     struct s_lexer	*next;
 }   t_lexer;
 

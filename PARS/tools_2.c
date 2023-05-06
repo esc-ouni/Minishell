@@ -21,6 +21,12 @@ t_lexer  *parser()
 	head = NULL;
     s = readline(" ");
     h_lexer = lexer(s);
+    while (h_lexer)
+    {
+        printf("'%s'\n", h_lexer->cmd);
+        h_lexer = h_lexer->next;
+    }
+    exit (0);
 	return (h_lexer);
 }
 
@@ -37,7 +43,7 @@ t_cmd  *parser2(t_lexer *head)
     int i2 = 0;
 
     node = head;
-    full_cmd = malloc(sizeof(char *) * 15);
+    full_cmd = NULL;
     cmd = NULL;
     out_files = NULL;
     in_files = NULL;
@@ -82,20 +88,25 @@ t_cmd  *parser2(t_lexer *head)
             }
 
             // GET_FULL_CMD
+            /* add_to_full_cmd*/
             n = node;
-            while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
-            {
-                printf("cmd n %d:\n", i2);
-                printf(":%s:\n\n", n->cmd);
-                full_cmd = ft_split(n->cmd, ' ');
-                n = n->next;            
-            }
-            // printf("%s\n", full_cmd[0]);
-            // printf("%s\n", full_cmd[1]);
             i = 0;
             add_to_cmd(&cmd, full_cmd, out_files, in_files);
             i2++;
-            full_cmd[0] = NULL;
+            while (full_cmd[i])
+            {
+                free(full_cmd[i]);
+                i++;
+            }
+            free(full_cmd[i]);
+            free(full_cmd);
+            i = 0;
+                        while (full_cmd[i])
+            {
+                free(full_cmd[i]);
+                i++;
+            }
+            full_cmd = NULL;
             out_files = NULL;
             in_files = NULL;
             node = n;
