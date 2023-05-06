@@ -38,8 +38,8 @@ typedef struct s_file
 
 typedef enum e_built
 {
-	SYS,
-    ECH,
+	NOT,
+	ECH,
     CD,
     PWD,
     EXPT,
@@ -50,16 +50,25 @@ typedef enum e_built
 
 typedef struct s_cmd
 {
+	char			**myenv;
 	char			**cmd;
-	char			**env;
-	t_built			builtflag;
-	char			*cmd_path;
-	int				first_cmd;
-	int				last_cmd;
 	t_file			*in_files;
 	t_file			*out_files;
-	struct s_cmd	*next;
-}   t_cmd;
+	int				first_cmd;
+	int				last_cmd;
+	t_built			builtflag;
+	int				init_stdin;
+	int				cmd_fdin;
+	char			*cmd_path;
+	int				cmd_fdout;
+	struct s_cmd   *next;
+}	t_cmd;
+
+typedef struct s_mlist
+{
+    char            *cmd;
+    struct s_mlist   *next;
+}   t_mlist;
 
 typedef enum e_enum
 {

@@ -270,7 +270,7 @@ t_built	cmd_type(char *cmd)
 	else if (!ft_strncmp(ft_strtrim(cmd, " "), "exit", ft_strlen(ft_strtrim(cmd, " "))))
 		return(EXT);
 	else
-		return(SYS);
+		return(NOT);
 }
 
 void	emplify(t_cmd *cmd, char **env)
@@ -283,7 +283,7 @@ void	emplify(t_cmd *cmd, char **env)
     n_cmd = cmd;
 	while (n_cmd)
 	{
-		n_cmd->env = menv;
+		n_cmd->myenv = menv;
 		n_cmd->builtflag = cmd_type(n_cmd->cmd[0]);
 		h_file = n_cmd->out_files;
 		if (h_file)
