@@ -166,7 +166,6 @@ void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
     char	**f_cmd;
 
 	l = 0;
-	// full_cmd = *full_cmd;
     if (!((*full_cmd)))
     {
 		tmp = n;
