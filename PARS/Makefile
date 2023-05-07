@@ -16,7 +16,7 @@ CC     = cc
 
 RM     = rm -rf
 
-FLAGS  =  -Wall -Wextra -Werror -g
+FLAGS  =  -Wall -Wextra -Werror -g #-fsanitize=thread -g
 
 HR     = Minishell.h
 

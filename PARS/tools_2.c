@@ -21,11 +21,6 @@ t_lexer  *parser()
 	head = NULL;
     s = readline(" ");
     h_lexer = lexer(s);
-    while (h_lexer)
-    {
-        printf("'%s'\n", h_lexer->cmd);
-        h_lexer = h_lexer->next;
-    }
 	return (h_lexer);
 }
 
@@ -34,8 +29,6 @@ t_cmd  *parser2(t_lexer *head)
     char    **full_cmd;
     t_file  *out_files;
     t_file  *in_files;
-    t_file  *file;
-    t_file  *file2;
     t_lexer  *node;
     t_lexer  *n;
     t_cmd   *cmd;
@@ -44,83 +37,61 @@ t_cmd  *parser2(t_lexer *head)
     int i2 = 0;
 
     node = head;
-    full_cmd = NULL;
+    full_cmd = malloc(sizeof(char *) * 15);
     cmd = NULL;
     out_files = NULL;
     in_files = NULL;
     while (node)
     {
-        if (!strncmp(node->cmd, "|", ft_strlen(node->cmd)))
-            node = node->next;
-        else
+        // CHECK_FOR_OUT_FILES
+        n = node;
+        while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
         {
-            // CHECK_FOR_OUT_FILES
-            n = node;
-            while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
+            if (!strcmp(n->cmd, ">"))
             {
-                if (!strcmp(n->cmd, ">"))
-                {
-                    n = n->next;
-                    add_file_node(&out_files, n->cmd, O_TRUNC);
-                }
-                if (!strcmp(n->cmd, ">>"))
-                {
-                    n = n->next;
-                    add_file_node(&out_files, n->cmd, O_APPEND);
-                }
                 n = n->next;
+                add_file_node(&out_files, n->cmd, O_TRUNC);
             }
-
-            // CHECK_FOR_IN_FILES
-            n = node;
-            while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
+            if (!strcmp(n->cmd, ">>"))
             {
-                if (!strcmp(n->cmd, "<"))
-                {
-                    n = n->next;
-                    add_file_node(&in_files, n->cmd, O_TRUNC);
-                }
-                if (!strcmp(n->cmd, "<<"))
-                {
-                    n = n->next;
-                    add_file_node(&in_files, n->cmd, O_TRUNC);
-                }
                 n = n->next;
+                add_file_node(&out_files, n->cmd, O_APPEND);
             }
-
-            // GET_FULL_CMD
-            /* add_to_full_cmd*/
-            n = node;
-            i = 0;
-            add_to_cmd(&cmd, full_cmd, out_files, in_files);
-            i2++;
-            while (full_cmd[i])
-            {
-                free(full_cmd[i]);
-                i++;
-            }
-            free(full_cmd[i]);
-            free(full_cmd);
-            i = 0;
-            file = out_files;
-            while (file)
-            {
-                file2 = file;
-                file = file->next;
-                free(file2);
-            }
-            file = in_files;
-            while (file)
-            {
-                file2 = file;
-                file = file->next;
-                free(file2);
-            }
-            full_cmd = NULL;
-            out_files = NULL;
-            in_files = NULL;
-            node = node->next;
+            n = n->next;
         }
+
+        // CHECK_FOR_IN_FILES
+        n = node;
+        while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
+        {
+            if (!strcmp(n->cmd, "<"))
+            {
+                n = n->next;
+                add_file_node(&in_files, n->cmd, O_TRUNC);
+            }
+            if (!strcmp(n->cmd, "<<"))
+            {
+                n = n->next;
+                add_file_node(&in_files, n->cmd, O_TRUNC);
+            }
+            n = n->next;
+        }
+
+        // GET_FULL_CMD
+        n = node;
+        while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
+        {
+            printf("cmd n %d:\n", i2);
+            printf(":%s:\n\n", n->cmd);
+            n = n->next;            
+        }
+        i = 0;
+        add_to_cmd(&cmd, full_cmd, out_files, in_files);
+        i2++;
+        full_cmd[0] = NULL;
+        out_files = NULL;
+        in_files = NULL;
+        node = node->next;
     }
     i = 0;
 
@@ -297,11 +268,11 @@ t_lexer *lexer(char *s)
         }
     }
     n = l_node;
-    while (n)
-    {
-        printf(":%s:\n", n->cmd);
-        n = n->next;       
-    }
-    exit(0);
+    // while (n)
+    // {
+    //     printf(":%s:\n", n->cmd);
+    //     n = n->next;       
+    // }
+    // exit(0);
     return (l_node);
 }

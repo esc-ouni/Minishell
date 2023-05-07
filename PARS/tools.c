@@ -309,7 +309,8 @@ void	emplify(t_cmd *cmd, char **env)
 	while (n_cmd)
 	{
 		n_cmd->myenv = menv;
-		n_cmd->builtflag = cmd_type(n_cmd->cmd[0]);
+		if (n_cmd->cmd[0])
+			n_cmd->builtflag = cmd_type(n_cmd->cmd[0]);
 		h_file = n_cmd->out_files;
 		if (h_file)
 		{
