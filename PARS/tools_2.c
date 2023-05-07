@@ -48,8 +48,8 @@ t_cmd  *parser2(t_lexer *head)
     t_lexer  *node;
     t_lexer  *n;
     t_cmd   *cmd;
-    t_cmd   *n_cmd;
-    int i = 0;
+    // t_cmd   *n_cmd;
+    // int i = 0;
     int i2 = 0;
 
     node = head;
@@ -61,7 +61,7 @@ t_cmd  *parser2(t_lexer *head)
     {
         // CHECK_FOR_OUT_FILES
         n = node;
-        while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
+        while (n && n->type != PIP)
         {
             if (!strcmp(n->cmd, ">"))
             {
@@ -78,7 +78,7 @@ t_cmd  *parser2(t_lexer *head)
 
         // CHECK_FOR_IN_FILES
         n = node;
-        while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
+        while (n && n->type != PIP)
         {
             if (!strcmp(n->cmd, "<"))
             {
@@ -94,48 +94,60 @@ t_cmd  *parser2(t_lexer *head)
         }
 
         // GET_FULL_CMD
-        n = node;
-        while (n && strncmp(n->cmd, "|", ft_strlen(n->cmd)))
+        // n = node;
+        // while (n && n->type != PIP)
+        // {
+        //     printf("cmd n %d:\n", i2);
+        //     printf(":%s:\n\n", n->cmd);
+        //     n = n->next;            
+        // }
+        // i = 0;
+        if (n)
         {
-            printf("cmd n %d:\n", i2);
-            printf(":%s:\n\n", n->cmd);
-            n = n->next;            
+            if (n->type == PIP)
+            {
+                add_to_cmd(&cmd, NULL, out_files, in_files);
+                full_cmd[0] = NULL;
+                out_files = NULL;
+                in_files = NULL;
+                i2++;
+                n = n->next;   
+            }
         }
-        i = 0;
-        add_to_cmd(&cmd, full_cmd, out_files, in_files);
-        i2++;
-        full_cmd[0] = NULL;
-        out_files = NULL;
-        in_files = NULL;
+        else
+        {
+            add_to_cmd(&cmd, NULL, out_files, in_files);
+            debug();
+        }
         node = n;
     }
-    i = 0;
+    // i = 0;
 
-    //UPDATE_CMD
-    n_cmd = cmd;
-    while (n_cmd)
-    {
-        if (i == 0)
-        {
-            n_cmd->first_cmd = 1;
-            n_cmd->last_cmd = 0;
-        }
-        i++;
-        n_cmd = n_cmd->next;
-    }
-    n_cmd = cmd;
-    if (ft_cmdsize(n_cmd) == 1)
-    {
-        n_cmd->first_cmd = 1;
-        n_cmd->last_cmd = 1;
-    }
-    else
-    {
-        while (n_cmd->next)
-            n_cmd = n_cmd->next;
-        n_cmd->first_cmd = 0;
-        n_cmd->last_cmd = 1;
-    }
+    // //UPDATE_CMD
+    // n_cmd = cmd;
+    // while (n_cmd)
+    // {
+    //     if (i == 0)
+    //     {
+    //         n_cmd->first_cmd = 1;
+    //         n_cmd->last_cmd = 0;
+    //     }
+    //     i++;
+    //     n_cmd = n_cmd->next;
+    // }
+    // n_cmd = cmd;
+    // if (ft_cmdsize(n_cmd) == 1)
+    // {
+    //     n_cmd->first_cmd = 1;
+    //     n_cmd->last_cmd = 1;
+    // }
+    // else
+    // {
+    //     while (n_cmd->next)
+    //         n_cmd = n_cmd->next;
+    //     n_cmd->first_cmd = 0;
+    //     n_cmd->last_cmd = 1;
+    // }
     return (cmd);
 }
 

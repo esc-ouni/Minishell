@@ -197,13 +197,19 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
 	in_files2 = NULL;
 
 	char **str = malloc(sizeof(full_cmd) + sizeof(char *));
-	// char **s = str;
-	while (full_cmd[i])
+	if (full_cmd)
 	{
-		str[i] = ft_strdup(full_cmd[i]);
-		i++;
+		while (full_cmd[i])
+		{
+			str[i] = ft_strdup(full_cmd[i]);
+			i++;
+		}
+		str[i] = NULL;
 	}
-	str[i] = NULL;
+	else
+	{
+		str[i] = NULL;
+	}
 
 	while (out_files)
 	{
