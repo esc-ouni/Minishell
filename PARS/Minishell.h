@@ -98,6 +98,7 @@ typedef struct s_lexer
 // void    after_parse(t_list  *head);
 // t_cmd    *after_parse(t_list  *head);
 // void	check_type(t_list	*node);
+void    get_type(t_lexer *head);
 void	emplify(t_cmd *cmd, char **env);
 char	**mgetenv(char **env);
 t_built	cmd_type(char *cmd);

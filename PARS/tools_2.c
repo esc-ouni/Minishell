@@ -21,7 +21,23 @@ t_lexer  *parser()
 	head = NULL;
     s = readline(" ");
     h_lexer = lexer(s);
+    get_type(h_lexer);
 	return (h_lexer);
+}
+
+void    get_type(t_lexer    *head)
+{
+    t_lexer *node;
+
+    node = head;
+    while (node)
+    {
+    	if (!ft_strncmp(node->cmd, "|", ft_strlen(node->cmd)))
+            node->type = PIP;
+        else
+            node->type = SPC;
+        node = node->next;
+    }
 }
 
 t_cmd  *parser2(t_lexer *head)
