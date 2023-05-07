@@ -64,12 +64,6 @@ typedef struct s_cmd
 	struct s_cmd   *next;
 }	t_cmd;
 
-typedef struct s_mlist
-{
-    char            *cmd;
-    struct s_mlist   *next;
-}   t_mlist;
-
 typedef enum e_enum
 {
 	STD,
@@ -80,11 +74,11 @@ typedef enum e_enum
     SPC
 }	t_enum;
 
-typedef struct s_list
+typedef struct s_mlist
 {
     char            *cmd;
-    struct s_list   *next;
-}   t_list;
+    struct s_mlist   *next;
+}   t_mlist;
 
 typedef struct s_lexer
 {
@@ -95,9 +89,9 @@ typedef struct s_lexer
 
 // void    start(void);
 // int     check_syntax(char *s);
-// void    after_parse(t_list  *head);
-// t_cmd    *after_parse(t_list  *head);
-// void	check_type(t_list	*node);
+// void    after_parse(t_mlist  *head);
+// t_cmd    *after_parse(t_mlist  *head);
+// void	check_type(t_mlist	*node);
 void    get_type(t_lexer *head);
 void	emplify(t_cmd *cmd, char **env);
 char	**mgetenv(char **env);
@@ -108,12 +102,12 @@ void	debug(void);
 t_cmd  *parser2(t_lexer *head);
 void    after_parse2(t_cmd  *cmd);
 t_lexer *lexer(char *s);
-t_list	*ft_lstnew(char *s);
-t_list	*ft_lstlast(t_list *lst);
-int	    ft_lstsize(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst);
+t_mlist	*ft_mlstnew(char *s);
+t_mlist	*ft_mlstlast(t_mlist *lst);
+int	    ft_mlstsize(t_mlist *lst);
+void	ft_mlstadd_back(t_mlist **lst, t_mlist *new);
+void	ft_mlstadd_front(t_mlist **lst, t_mlist *new);
+void	ft_mlstclear(t_mlist **lst);
 void 	add_file_node(t_file **head, char *filename, int flag);
 void 	add_file_file(t_file **head, t_file *file);
 void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files);

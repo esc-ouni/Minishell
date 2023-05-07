@@ -12,7 +12,7 @@
 
 #include "Minishell.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_mlstsize(t_mlist *lst)
 {
 	size_t	i;
 
@@ -40,12 +40,12 @@ int	ft_cmdsize(t_cmd *cmd)
 	return (i);
 }
 
-t_list	*ft_lstnew(char *s)
+t_mlist	*ft_mlstnew(char *s)
 {
-	t_list	*new_node;
+	t_mlist	*new_node;
 
 	new_node = NULL;
-	new_node = malloc(sizeof(t_list));
+	new_node = malloc(sizeof(t_mlist));
 	if (new_node)
 	{
 		new_node->cmd = ft_strdup(s);
@@ -54,7 +54,7 @@ t_list	*ft_lstnew(char *s)
 	return (new_node);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_mlist	*ft_mlstlast(t_mlist *lst)
 {
 	void	*node;
 
@@ -69,9 +69,9 @@ t_list	*ft_lstlast(t_list *lst)
 	return (node);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_mlstadd_back(t_mlist **lst, t_mlist *new)
 {
-	t_list	*o_last;
+	t_mlist	*o_last;
 
 	if (*lst == NULL)
 	{
@@ -79,15 +79,15 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		new->next = NULL;
 		return ;
 	}
-	o_last = ft_lstlast(*lst);
+	o_last = ft_mlstlast(*lst);
 	o_last->next = new;
 	new->next = NULL;
 }
 
-void	ft_lstclear(t_list **lst)
+void	ft_mlstclear(t_mlist **lst)
 {
-	t_list	*node;
-	t_list	*n_node;
+	t_mlist	*node;
+	t_mlist	*n_node;
 
 	if (!lst)
 		return ;

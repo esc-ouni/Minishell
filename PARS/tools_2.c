@@ -15,7 +15,7 @@
 t_lexer  *parser()
 {
     char    *s;
-	t_list	*head;
+	t_mlist	*head;
 	t_lexer	*h_lexer;
 
 	head = NULL;
