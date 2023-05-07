@@ -107,7 +107,7 @@ t_cmd  *parser2(t_lexer *head)
         full_cmd[0] = NULL;
         out_files = NULL;
         in_files = NULL;
-        node = node->next;
+        node = n;
     }
     i = 0;
 
