@@ -125,14 +125,14 @@ t_cmd  *parser2(t_lexer *head)
         }
         i = 0;
 		// debug();
-        if (full_cmd)
-        {
-            while (full_cmd[i])
-            {
-                printf("%s\n", full_cmd[i]);
-                i++;
-            }
-        }
+        // if (full_cmd)
+        // {
+        //     while (full_cmd[i])
+        //     {
+        //         printf("%s\n", full_cmd[i]);
+        //         i++;
+        //     }
+        // }
         if (n)
         {
             if (n->type == PIP)
