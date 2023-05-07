@@ -207,9 +207,7 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
 		str[i] = NULL;
 	}
 	else
-	{
 		str[i] = NULL;
-	}
 
 	while (out_files)
 	{

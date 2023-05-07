@@ -94,13 +94,13 @@ t_cmd  *parser2(t_lexer *head)
         }
 
         // GET_FULL_CMD
-        // n = node;
-        // while (n && n->type != PIP)
-        // {
-        //     printf("cmd n %d:\n", i2);
-        //     printf(":%s:\n\n", n->cmd);
-        //     n = n->next;            
-        // }
+        n = node;
+        while (n && n->type != PIP)
+        {
+            printf("cmd n %d:\n", i2);
+            printf(":%s:\n\n", n->cmd);
+            n = n->next;            
+        }
         // i = 0;
         if (n)
         {
@@ -117,7 +117,10 @@ t_cmd  *parser2(t_lexer *head)
         else
         {
             add_to_cmd(&cmd, NULL, out_files, in_files);
-            debug();
+            full_cmd[0] = NULL;
+            out_files = NULL;
+            in_files = NULL;
+            i2++;
         }
         node = n;
     }
