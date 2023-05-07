@@ -234,7 +234,20 @@ t_lexer *lexer(char *s)
             l2 = 0;
             i++;
         }   
-        if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ')
+        if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ' && s[i] != '-')
+        {
+            if (!start)
+                start = i;
+            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"' && s[i] != ' ' && s[i] != '-')
+            {
+                i++;
+                l2++;
+            }
+            add_lexer(&l_node, ft_substr(s, start, l2));
+            start = 0;
+            l2 = 0;
+        }
+        else if (s[i] == '-' && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ')
         {
             if (!start)
                 start = i;
@@ -248,7 +261,7 @@ t_lexer *lexer(char *s)
             l2 = 0;
         }
         else if (s[i] == ' ')
-            i ++;
+            i++;
         else if (s[i] == '|')
         {
             add_lexer(&l_node, ft_substr(s, i, 1));
