@@ -26,8 +26,6 @@ t_lexer  *parser()
         printf("'%s'\n", h_lexer->cmd);
         h_lexer = h_lexer->next;
     }
-    // exit (0);
-    main();
 	return (h_lexer);
 }
 
@@ -304,6 +302,6 @@ t_lexer *lexer(char *s)
         printf(":%s:\n", n->cmd);
         n = n->next;       
     }
-    main();
+    exit(0);
     return (l_node);
 }
