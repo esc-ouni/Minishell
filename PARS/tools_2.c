@@ -26,7 +26,8 @@ t_lexer  *parser()
         printf("'%s'\n", h_lexer->cmd);
         h_lexer = h_lexer->next;
     }
-    exit (0);
+    // exit (0);
+    main();
 	return (h_lexer);
 }
 
@@ -35,6 +36,8 @@ t_cmd  *parser2(t_lexer *head)
     char    **full_cmd;
     t_file  *out_files;
     t_file  *in_files;
+    t_file  *file;
+    t_file  *file2;
     t_lexer  *node;
     t_lexer  *n;
     t_cmd   *cmd;
@@ -101,15 +104,24 @@ t_cmd  *parser2(t_lexer *head)
             free(full_cmd[i]);
             free(full_cmd);
             i = 0;
-                        while (full_cmd[i])
+            file = out_files;
+            while (file)
             {
-                free(full_cmd[i]);
-                i++;
+                file2 = file;
+                file = file->next;
+                free(file2);
+            }
+            file = in_files;
+            while (file)
+            {
+                file2 = file;
+                file = file->next;
+                free(file2);
             }
             full_cmd = NULL;
             out_files = NULL;
             in_files = NULL;
-            node = n;
+            node = node->next;
         }
     }
     i = 0;
@@ -198,7 +210,6 @@ t_lexer *lexer(char *s)
     int     sz;
     t_lexer *l_node;
     t_lexer *n;
-    char    *new_str;
 
     i = 0;
     start = 0;
@@ -206,7 +217,6 @@ t_lexer *lexer(char *s)
     l2 = 0;
     sz = ft_strlen(s);
     l_node = NULL;
-    new_str = calloc(sz + 1, 1);
     while (i < sz && s[i])
     {
         if (s[i] == '"')
@@ -224,11 +234,11 @@ t_lexer *lexer(char *s)
             l2 = 0;
             i++;
         }   
-        if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|')
+        if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ')
         {
             if (!start)
                 start = i;
-            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"')
+            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"' && s[i] != ' ')
             {
                 i++;
                 l2++;
@@ -237,6 +247,8 @@ t_lexer *lexer(char *s)
             start = 0;
             l2 = 0;
         }
+        else if (s[i] == ' ')
+            i ++;
         else if (s[i] == '|')
         {
             add_lexer(&l_node, ft_substr(s, i, 1));
@@ -276,14 +288,9 @@ t_lexer *lexer(char *s)
     n = l_node;
     while (n)
     {
-        // printf("\n:%s:\n", n->cmd);
-        new_str = ft_strjoin(ft_strjoin(ft_strdup(new_str), ft_strdup(" ")), ft_strdup(n->cmd));
+        printf(":%s:\n", n->cmd);
         n = n->next;       
     }
-    // new_str = ft_strtrim(new_str, " ");
-    // printf("\nbefore lexer : '%s'\n", s);
-    // printf("after  lexer : '%s'\n\n", new_str);
-    // // return (new_str);
-    // // exit (0);
+    main();
     return (l_node);
 }
