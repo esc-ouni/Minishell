@@ -1,4 +1,4 @@
 #Handle s_q;
-#check syntax
+#check syntax errors
 #handle_leaks
-#
+#readability
