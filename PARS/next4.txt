@@ -1,4 +1,4 @@
-#Memory management; {#t_lexer type #full_cmd}
-#Readbility(simplecode,get_cmd_enhanced,rename_files);
 #Handle s_q;
 #check syntax
+#handle_leaks
+#

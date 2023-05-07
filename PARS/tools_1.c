@@ -37,10 +37,15 @@
 
 void    prompt()
 {
+    // rl_set_prompt("\x1B[34mWHAT_YOU_WANT_MASTER>> \x1B[0m");
+
     printf("\x1B[34m");
     printf("\nWHAT_YOU_WANT_MASTER>> ");
     printf("\x1B[0m");
+    // Disable color codes when reading input
+    rl_pre_input_hook = rl_reset_terminal;
 }
+
 
 // void    start()
 // {

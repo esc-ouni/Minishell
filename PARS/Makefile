@@ -10,6 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
+LINK = /Users/idouni/.brew/opt/readline/lib
+INCLUDES = includes/
+INC=/Users/idouni/.brew/opt/readline/include/readline
+
 NAME   = Minishell
 
 CC     = cc
@@ -42,12 +46,12 @@ LIBFT:
 	@make -C LIBF
 
 $(NAME): $(OBJ_M) $(OBJ_T) $(HR)
-	@$(CC) $(FLAGS) LIBF/libft.a -lreadline -L /Users/idouni/.brew/opt/readline/lib $(OBJ_T) $(OBJ_M) -o $(NAME)
+	@$(CC) $(FLAGS) LIBF/libft.a $(OBJ_T) $(OBJ_M) -o $(NAME) -L $(LINK) -lreadline
 	@clear && echo "==$(NAME)_compiled=============="
 	./Minishell
 
 %.o: %.c $(HR)
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@ -I$(INCLUDES) -I$(INC)
 
 clean:
 	@make clean -C LIBF
