@@ -159,30 +159,37 @@ void	add_file_file(t_file **head, t_file *file)
     }
 }
 
-void	add_to_full_cmd(t_file **head, char *filename, int flag)
+void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
 {
-    t_file *tmp;
-    t_file *new_node = malloc(sizeof(t_file));
-    
-    new_node->filename = ft_strdup(filename);
-    new_node->o_flags = flag;
-    
-    if (!(*head))
+	int	l;
+    t_lexer *tmp;
+    char	**f_cmd;
+
+	l = 0;
+	// full_cmd = *full_cmd;
+    if (!((*full_cmd)))
     {
-        *head = new_node;
-        new_node->next = NULL;
-    }
+		tmp = n;
+		while(tmp && tmp->type != PIP)
+		{
+			l++;
+			tmp = tmp->next;
+		}
+		(*full_cmd) = malloc(sizeof(char *) * (l + 1));
+		(*full_cmd)[0] = ft_strdup(n->cmd);
+		(*full_cmd)[1] = NULL;
+		return ;
+    }    
     else
     {
-        tmp = *head;
-        while (tmp->next)
-        {
-            tmp = tmp->next;
-        }
-        tmp->next = new_node;
-        new_node->next = NULL;
+        while ((*full_cmd)[l])
+            l++;
+		(*full_cmd)[l] = ft_strdup(n->cmd);
+		(*full_cmd)[l+1] = NULL;
+		return ;
     }
 }
+
 
 void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
 {
@@ -196,7 +203,10 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
 	out_files2 = NULL;
 	in_files2 = NULL;
 
-	char **str = malloc(sizeof(full_cmd) + sizeof(char *));
+	while (full_cmd[i])
+		i++;
+	char **str = malloc(sizeof(char *) * (i + 1));
+	i = 0;
 	if (full_cmd)
 	{
 		while (full_cmd[i])

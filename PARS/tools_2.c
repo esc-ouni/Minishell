@@ -49,11 +49,11 @@ t_cmd  *parser2(t_lexer *head)
     t_lexer  *n;
     t_cmd   *cmd;
     // t_cmd   *n_cmd;
-    // int i = 0;
+    int i = 0;
     int i2 = 0;
 
     node = head;
-    full_cmd = malloc(sizeof(char *) * 15);
+    full_cmd = NULL;
     cmd = NULL;
     out_files = NULL;
     in_files = NULL;
@@ -97,17 +97,27 @@ t_cmd  *parser2(t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
+            add_to_fullcmd(&full_cmd, n);
             printf("cmd n %d:\n", i2);
             printf(":%s:\n\n", n->cmd);
             n = n->next;            
         }
-        // i = 0;
+        i = 0;
+		// debug();
+        if (full_cmd)
+        {
+            while (full_cmd[i])
+            {
+                printf("%s\n", full_cmd[i]);
+                i++;
+            }
+        }
         if (n)
         {
             if (n->type == PIP)
             {
-                add_to_cmd(&cmd, NULL, out_files, in_files);
-                full_cmd[0] = NULL;
+                add_to_cmd(&cmd, full_cmd, out_files, in_files);
+                full_cmd = NULL;
                 out_files = NULL;
                 in_files = NULL;
                 i2++;
@@ -116,8 +126,8 @@ t_cmd  *parser2(t_lexer *head)
         }
         else
         {
-            add_to_cmd(&cmd, NULL, out_files, in_files);
-            full_cmd[0] = NULL;
+            add_to_cmd(&cmd, full_cmd, out_files, in_files);
+            full_cmd = NULL;
             out_files = NULL;
             in_files = NULL;
             i2++;
@@ -166,6 +176,7 @@ void    after_parse2(t_cmd  *cmd)
         printf("\n");
         printf("=> t_cmd %d;\n", i);
         printf("   command     : ");
+        i2 = 0;
         while(node->cmd[i2])
         {
             printf("'%s' ", node->cmd[i2]);
