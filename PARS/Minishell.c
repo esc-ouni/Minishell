@@ -23,7 +23,7 @@ int main(int argc, char **argv, char **env)
     // start();
     while (1)
     {
-        prompt();
+        // prompt();
         h_lexer = parser();
         cmd = parser2(h_lexer);
         emplify(cmd, env);

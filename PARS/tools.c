@@ -167,7 +167,6 @@ void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
     char	**f_cmd;
 
 	l = 0;
-	printf("%d\n", n->type);
     if (!((*full_cmd)))
     {
 		tmp = n;
@@ -205,12 +204,10 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
 	out_files2 = NULL;
 	in_files2 = NULL;
 
-	printf("%s\n", full_cmd);
 	if (full_cmd)
 	{
 		while (full_cmd[i])
 			i++;
-		printf("%d\n", i);
 		str = malloc(sizeof(char *) * (i + 1));
 	}
 	else

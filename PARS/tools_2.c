@@ -20,7 +20,7 @@ t_lexer  *parser()
 	t_lexer	*h_lexer;
 
 	head = NULL;
-    s = readline(" ");
+    s = readline("\x1B[34m" "WHAT_YOU_WANT_MASTER>> " "\x1B[0m");
     if (!s)
         return (NULL);
     h_lexer = lexer(s);
@@ -112,22 +112,42 @@ t_cmd  *parser2(t_lexer *head)
 
         // GET_FULL_CMD
         n = node;
-        while (n && n->type != PIP)
+        // while (n && n->type != PIP)
+        // {
+        //     if (node->type == FIL || node->type == R_HD || node->type == R_IN || node->type == R_OA || node->type == R_OT)
+        //     {
+        //         // n = n->next;
+        //         if (n->next)
+        //         {
+        //             if (n->next->next)
+        //                 n = n->next->next;
+        //             else
+        //             {
+        //                 n = NULL;
+        //                 break ;
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         add_to_fullcmd(&full_cmd, n);
+        //         n = n->next;
+        //     }
+        // }
+		while (n && n->type != PIP)
         {
-            if (node->type == FIL || node->type == R_HD || node->type == R_IN || node->type == R_OA || node->type == R_OT)
+            if (!strcmp(n->cmd, ">>") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, "<"))
             {
-                n = n->next;
-                // debug();
-                // if (n->next)
-                // {
-                //     if (n->next->next)
-                //         n = n->next->next;
-                //     else
-                //     {
-                //         n = NULL;
-                //         break ;
-                //     }
-                // }
+                if (n->next)
+                {
+                    if (n->next->next)
+                        n = n->next->next;
+                    else
+                    {
+                        n = NULL;
+                        break ;
+                    }
+                }
             }
             else
             {
