@@ -67,11 +67,12 @@ typedef struct s_cmd
 typedef enum e_enum
 {
 	STD,
-	STS,
     PIP,
-    RED,
-    CMD,
-    SPC
+    R_OA,
+    R_OT,
+    R_IN,
+    R_HD,
+	FIL
 }	t_enum;
 
 typedef struct s_mlist

@@ -20,6 +20,8 @@ t_lexer  *parser()
 
 	head = NULL;
     s = readline(" ");
+    if (!s)
+        return (NULL);
     h_lexer = lexer(s);
     get_type(h_lexer);
 	return (h_lexer);
@@ -34,8 +36,16 @@ void    get_type(t_lexer    *head)
     {
     	if (!ft_strncmp(node->cmd, "|", ft_strlen(node->cmd)))
             node->type = PIP;
+    	else if (!ft_strncmp(node->cmd, ">>", ft_strlen(node->cmd)))
+            node->type = R_OA;
+        else if (!ft_strncmp(node->cmd, ">", ft_strlen(node->cmd)))
+            node->type = R_OT;
+        else if (!ft_strncmp(node->cmd, "<<", ft_strlen(node->cmd)))
+            node->type = R_HD;
+        else if (!ft_strncmp(node->cmd, "<", ft_strlen(node->cmd)))
+            node->type = R_IN;
         else
-            node->type = SPC;
+            node->type = STD;
         node = node->next;
     }
 }
@@ -52,6 +62,8 @@ t_cmd  *parser2(t_lexer *head)
     int i = 0;
     int i2 = 0;
 
+    if (!head)
+        return (NULL);
     node = head;
     full_cmd = NULL;
     cmd = NULL;
@@ -63,14 +75,16 @@ t_cmd  *parser2(t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, ">"))
+            if (!strcmp(n->cmd, ">") && n->next)
             {
                 n = n->next;
+                n->type = FIL;
                 add_file_node(&out_files, n->cmd, O_TRUNC);
             }
-            if (!strcmp(n->cmd, ">>"))
+            if (!strcmp(n->cmd, ">>") && n->next)
             {
                 n = n->next;
+                n->type = FIL;
                 add_file_node(&out_files, n->cmd, O_APPEND);
             }
             n = n->next;
@@ -80,14 +94,16 @@ t_cmd  *parser2(t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, "<"))
+            if (!strcmp(n->cmd, "<") && n->next)
             {
                 n = n->next;
+                n->type = FIL;
                 add_file_node(&in_files, n->cmd, O_TRUNC);
             }
-            if (!strcmp(n->cmd, "<<"))
+            if (!strcmp(n->cmd, "<<") && n->next)
             {
                 n = n->next;
+                n->type = FIL;
                 add_file_node(&in_files, n->cmd, O_TRUNC);
             }
             n = n->next;
@@ -97,18 +113,20 @@ t_cmd  *parser2(t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, ">>") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, "<"))
+            if (node->type == FIL || node->type == R_HD || node->type == R_IN || node->type == R_OA || node->type == R_OT)
             {
-                if (n->next)
-                {
-                    if (n->next->next)
-                        n = n->next->next;
-                    else
-                    {
-                        n = NULL;
-                        break ;
-                    }
-                }
+                n = n->next;
+                // debug();
+                // if (n->next)
+                // {
+                //     if (n->next->next)
+                //         n = n->next->next;
+                //     else
+                //     {
+                //         n = NULL;
+                //         break ;
+                //     }
+                // }
             }
             else
             {
@@ -121,6 +139,7 @@ t_cmd  *parser2(t_lexer *head)
         // {
         //     while (full_cmd[i])
         //     {
+        //         printf("%s\n", full_cmd[i]);
         //         printf("%s\n", full_cmd[i]);
         //         i++;
         //     }
@@ -186,6 +205,8 @@ void    after_parse2(t_cmd  *cmd)
     t_cmd  *node;
 
     node = cmd;
+    if (!cmd)
+        return ;
     while(node)
     {
         printf("\n");
