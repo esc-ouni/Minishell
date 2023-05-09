@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **env)
     t_lexer  *h_lexer;
     t_cmd    *cmd;
 
-    // start();
+    start();
     while (1)
     {
         h_lexer = parser();
