@@ -22,7 +22,7 @@ t_lexer  *parser()
 	head = NULL;
     s = readline("\x1B[34m" "WHAT_YOU_WANT_MASTER>> " "\x1B[0m");
     if (!s)
-        return (NULL);
+		write(1, "exit\n", 5), exit(0);
 	add_history(s);
     h_lexer = lexer(s);
     get_type(h_lexer);
