@@ -16,7 +16,6 @@ int main(int argc, char **argv, char **env)
 {
     (void)argc;
     (void)argv;
-    (void)env;
     t_lexer  *h_lexer;
     t_cmd    *cmd;
 

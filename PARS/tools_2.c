@@ -47,7 +47,9 @@ void    get_type(t_lexer    *head)
         else if (!ft_strncmp(node->cmd, "<", ft_strlen(node->cmd)))
             node->type = R_IN;
         else
-            node->type = STD;
+			node->type = UDF;
+		// else if (node->type > FIL || node->type < PIP)
+        //     node->type = UDF;
         node = node->next;
     }
 }
@@ -161,7 +163,6 @@ t_cmd  *parser2(t_lexer *head)
         // {
         //     while (full_cmd[i])
         //     {
-        //         printf("%s\n", full_cmd[i]);
         //         printf("%s\n", full_cmd[i]);
         //         i++;
         //     }

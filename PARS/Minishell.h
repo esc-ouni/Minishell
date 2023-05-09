@@ -45,7 +45,8 @@ typedef enum e_enum
     R_OT,
     R_IN,
     R_HD,
-	FIL
+	FIL,
+	UDF
 }	t_enum;
 
 typedef enum e_built
