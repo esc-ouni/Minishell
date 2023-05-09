@@ -329,7 +329,7 @@ t_lexer *lexer(char *s)
             start = 0;
             l2 = 0;
         }
-        else if (s[i] == ' ')
+        else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
             i++;
         else if (s[i] == '|')
         {
