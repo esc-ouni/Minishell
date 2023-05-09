@@ -302,7 +302,22 @@ t_lexer *lexer(char *s)
             start = 0;
             l2 = 0;
             i++;
-        }   
+        }
+        if (s[i] == '\'')
+        {
+            if (!start)
+                start = i + 1;
+            i++;
+            while (s[i] != '\'' && s[i])
+            {
+                i++;
+                l2++;
+            }
+            add_lexer(&l_node, ft_substr(s, start, l2));
+            start = 0;
+            l2 = 0;
+            i++;
+        }
         if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ' && s[i] != '-')
         {
             if (!start)
