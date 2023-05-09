@@ -1,4 +1,4 @@
 #Handle s_q;
+#handle_leaks(garbage_collect, h_malloc)
 #check syntax errors
-#handle_leaks
 #readability
