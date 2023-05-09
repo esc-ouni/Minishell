@@ -67,6 +67,7 @@ typedef struct s_cmd
 	char			**cmd;
 	t_file			*in_files;
 	t_file			*out_files;
+	int				num_cmds;
 	int				first_cmd;
 	int				last_cmd;
 	t_built			builtflag;
