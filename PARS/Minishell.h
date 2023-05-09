@@ -36,6 +36,18 @@ typedef struct s_file
 	struct s_file   *next;
 }   t_file;
 
+typedef enum e_enum
+{
+    PIP,
+	ST_SQ,
+	ST_DQ,
+    R_OA,
+    R_OT,
+    R_IN,
+    R_HD,
+	FIL
+}	t_enum;
+
 typedef enum e_built
 {
 	NOT,
@@ -64,16 +76,6 @@ typedef struct s_cmd
 	struct s_cmd   *next;
 }	t_cmd;
 
-typedef enum e_enum
-{
-	STD,
-    PIP,
-    R_OA,
-    R_OT,
-    R_IN,
-    R_HD,
-	FIL
-}	t_enum;
 
 typedef struct s_mlist
 {
