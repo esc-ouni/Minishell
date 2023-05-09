@@ -23,11 +23,10 @@ int main(int argc, char **argv, char **env)
     // start();
     while (1)
     {
-        // prompt();
         h_lexer = parser();
         cmd = parser2(h_lexer);
         emplify(cmd, env);
-        after_parse2(cmd); // hide this
+        after_parse2(cmd);
     }
     return 0;
 }
