@@ -73,3 +73,8 @@ void    prompt()
 // 	}
 // 	return (p);
 // }
+
+int	check_syntax(char *s)
+{
+
+}

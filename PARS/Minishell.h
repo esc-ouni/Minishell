@@ -93,10 +93,10 @@ typedef struct s_lexer
 }   t_lexer;
 
 // void    start(void);
-// int     check_syntax(char *s);
 // void    after_parse(t_mlist  *head);
 // t_cmd    *after_parse(t_mlist  *head);
 // void	check_type(t_mlist	*node);
+int     check_syntax(char *s);
 void    get_type(t_lexer *head);
 void	emplify(t_cmd *cmd, char **env);
 char	**mgetenv(char **env);
