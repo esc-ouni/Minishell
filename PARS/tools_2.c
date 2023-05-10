@@ -20,7 +20,7 @@ t_lexer  *parser()
 	t_lexer	*h_lexer;
 
 	head = NULL;
-    s = readline("\x1B[34m" "WHAT_YOU_WANT_MASTER>> " "\x1B[0m");
+    s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
 	if (check_syntax(s))
 	{
 		printf ("\nERROR\n");
