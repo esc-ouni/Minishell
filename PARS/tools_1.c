@@ -74,7 +74,6 @@ void    prompt()
 // 	return (p);
 // }
 
-int	check_syntax(char *s)
-{
-
-}
+// int	check_syntax(char *s)
+// {
+// }

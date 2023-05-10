@@ -164,7 +164,6 @@ void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
 {
 	int	l;
     t_lexer *tmp;
-    char	**f_cmd;
 
 	l = 0;
     if (!((*full_cmd)))
@@ -333,7 +332,7 @@ void	emplify(t_cmd *cmd, char **env)
     n_cmd = cmd;
 	while (n_cmd)
 	{
-		n_cmd->num_cmds = ft_mlstsize(cmd);
+		// n_cmd->num_cmds = ft_mlstsize(cmd);
 		n_cmd->myenv = menv;
 		if (n_cmd->cmd[0])
 			n_cmd->builtflag = cmd_type(n_cmd->cmd[0]);

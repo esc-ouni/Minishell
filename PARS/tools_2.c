@@ -24,8 +24,8 @@ t_lexer  *parser()
     if (!s)
 		write(1, "exit\n", 5), exit(0);
 	add_history(s);
-	if (check_syntax(s))
-		return (NULL);
+	// if (check_syntax(s))
+	// 	return (NULL);
     h_lexer = lexer(s);
     get_type(h_lexer);
 	return (h_lexer);
@@ -267,9 +267,6 @@ void    after_parse2(t_cmd  *cmd)
         printf("\n");
         printf("   cmd_type    : ");
         printf("%d ", node->builtflag); 
-        printf("\n");
-        printf("   num_cmds    cle: ");
-        printf("%d ", node->num_cmds); 
         printf("\n\n");
         i++;
         node = node->next;
