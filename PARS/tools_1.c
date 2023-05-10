@@ -74,9 +74,50 @@ void    prompt()
 // 	return (p);
 // }
 
+int	check_dq(char *s)
+{
+	int i = 0;
+	int c = 0;
+	while (s[i])
+	{
+		if (s[i] == '"')
+			c++;
+		i++;
+	}
+	return ((i % 2));
+}
+
+int	check_sq(char *s)
+{
+	int i = 0;
+	int c = 0;
+	while (s[i])
+	{
+		if (s[i] == '\'')
+			c++;
+		i++;
+	}
+	return ((i % 2));
+}
+
+// int	check_oerr(char *s)
+// {
+// 	int i = 0;
+// 	return (0);
+// }
+
 int	check_syntax(char *s)
 {
-	if (s)
-		return (0);
+	if (!s)
+		write(1, "exit\n", 5), exit(0);
+	if (!ft_strlen(s))
+		return (1);
+	add_history(s);
+	if (check_dq(s))
+		return (1);
+	else if (check_sq(s))
+		return (1);	
+	// else if (check_oerr(s))
+	// 	return (1);
 	return (0);
 }

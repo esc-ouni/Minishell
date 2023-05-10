@@ -21,9 +21,6 @@ t_lexer  *parser()
 
 	head = NULL;
     s = readline("\x1B[34m" "WHAT_YOU_WANT_MASTER>> " "\x1B[0m");
-    if (!s)
-		write(1, "exit\n", 5), exit(0);
-	add_history(s);
 	if (check_syntax(s))
 		return (NULL);
     h_lexer = lexer(s);
