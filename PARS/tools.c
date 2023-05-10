@@ -260,13 +260,14 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
     }
 }
 
-void	add_lexer(t_lexer **head, char *content)
+void	add_lexer(t_lexer **head, char *content, t_enum	type)
 {
 	t_lexer	*tmp;
 	t_lexer	*new_node;
 
 	new_node = malloc(sizeof(t_lexer));
 	new_node->cmd = ft_strdup(content);
+	new_node->type = type;
 
 	if (!(*head))
 	{

@@ -301,7 +301,7 @@ t_lexer *lexer(char *s)
                 i++;
                 l2++;
             }
-            add_lexer(&l_node, ft_substr(s, start, l2));
+            add_lexer(&l_node, ft_substr(s, start, l2), ST_DQ);
             start = 0;
             l2 = 0;
             i++;
@@ -316,7 +316,7 @@ t_lexer *lexer(char *s)
                 i++;
                 l2++;
             }
-            add_lexer(&l_node, ft_substr(s, start, l2));
+            add_lexer(&l_node, ft_substr(s, start, l2), ST_SQ);
             start = 0;
             l2 = 0;
             i++;
@@ -330,7 +330,7 @@ t_lexer *lexer(char *s)
                 i++;
                 l2++;
             }
-            add_lexer(&l_node, ft_substr(s, start, l2));
+            add_lexer(&l_node, ft_substr(s, start, l2), ST_LT);
             start = 0;
             l2 = 0;
         }
@@ -343,7 +343,7 @@ t_lexer *lexer(char *s)
                 i++;
                 l2++;
             }
-            add_lexer(&l_node, ft_substr(s, start, l2));
+            add_lexer(&l_node, ft_substr(s, start, l2), ST_LT);
             start = 0;
             l2 = 0;
         }
@@ -351,35 +351,35 @@ t_lexer *lexer(char *s)
             i++;
         else if (s[i] == '|')
         {
-            add_lexer(&l_node, ft_substr(s, i, 1));
+            add_lexer(&l_node, ft_substr(s, i, 1), PIP);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '>' && s[i + 1] != '>')
         {
-            add_lexer(&l_node, ft_substr(s, i, 1));
+            add_lexer(&l_node, ft_substr(s, i, 1), R_OT);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '<' && s[i + 1] != '<')
         {
-            add_lexer(&l_node, ft_substr(s, i, 1));
+            add_lexer(&l_node, ft_substr(s, i, 1), R_IN);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '>' && s[i + 1] == '>')
         {
-            add_lexer(&l_node, ft_substr(s, i, 2));
+            add_lexer(&l_node, ft_substr(s, i, 2), R_OA);
             i += 2;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '<' && s[i + 1] == '<')
         {
-            add_lexer(&l_node, ft_substr(s, i, 2));
+            add_lexer(&l_node, ft_substr(s, i, 2), R_HD);
             i += 2;
             start = 0;
             l2 = 0;

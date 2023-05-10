@@ -39,6 +39,7 @@ typedef struct s_file
 typedef enum e_enum
 {
     PIP,
+	ST_LT,
 	ST_SQ,
 	ST_DQ,
     R_OA,
@@ -117,7 +118,7 @@ void 	add_file_node(t_file **head, char *filename, int flag);
 void 	add_file_file(t_file **head, t_file *file);
 void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files);
 void	add_to_fullcmd(char ***full_cmd, t_lexer *n);
-void	add_lexer(t_lexer **head, char *content);
+void	add_lexer(t_lexer **head, char *content, t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
 
 
