@@ -84,7 +84,7 @@ int	check_dq(char *s)
 			c++;
 		i++;
 	}
-	return ((i % 2));
+	return ((c % 2));
 }
 
 int	check_sq(char *s)
@@ -97,7 +97,7 @@ int	check_sq(char *s)
 			c++;
 		i++;
 	}
-	return ((i % 2));
+	return ((c % 2));
 }
 
 // int	check_oerr(char *s)

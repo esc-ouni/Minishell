@@ -22,7 +22,10 @@ t_lexer  *parser()
 	head = NULL;
     s = readline("\x1B[34m" "WHAT_YOU_WANT_MASTER>> " "\x1B[0m");
 	if (check_syntax(s))
+	{
+		printf ("\nERROR\n");
 		return (NULL);
+	}
     h_lexer = lexer(s);
     get_type(h_lexer);
 	return (h_lexer);
