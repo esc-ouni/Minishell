@@ -100,11 +100,45 @@ int	check_sq(char *s)
 	return ((c % 2));
 }
 
-// int	check_oerr(char *s)
-// {
-// 	int i = 0;
-// 	return (0);
-// }
+int	check_oerr(char *s)
+{
+	int i = 0;
+	int sq = 0;
+	int dq = 0;
+
+	while (s[i])
+	{
+		if (s[i] == '\'')
+		{
+			sq++;
+			i++;
+			while (s[i] != '\'' && s[i])
+				i++;
+			if (s[i] == '\'')
+			{
+				sq++;
+				i++;
+			}
+		}
+		else if (s[i] == '"')
+		{
+			dq++;
+			i++;
+			while (s[i] != '"' && s[i])
+				i++;
+			if (s[i] == '"')
+			{
+				dq++;
+				i++;
+			}
+		}
+		else
+			i++;
+	}
+	if ((sq % 2) || (dq % 2))
+		return (1);
+	return (0);
+}
 
 int	check_syntax(char *s)
 {
@@ -113,11 +147,7 @@ int	check_syntax(char *s)
 	if (!ft_strlen(s))
 		return (1);
 	add_history(s);
-	if (check_dq(s))
+	if (check_oerr(s))
 		return (1);
-	else if (check_sq(s))
-		return (1);	
-	// else if (check_oerr(s))
-	// 	return (1);
 	return (0);
 }
