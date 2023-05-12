@@ -108,11 +108,11 @@ void	emplify(t_cmd *cmd, char **env);
 char	**mgetenv(char **env);
 t_built	cmd_type(char *cmd);
 void    prompt(void);
-t_lexer	*parser(void);
+t_lexer	*parser(t_collector	**collector);
 void	debug(void);
 t_cmd  *parser2(t_lexer *head);
 void    after_parse2(t_cmd  *cmd);
-t_lexer *lexer(char *s);
+t_lexer *lexer(t_collector **collector, char *s);
 t_mlist	*ft_mlstnew(char *s);
 t_mlist	*ft_mlstlast(t_mlist *lst);
 int	    ft_mlstsize(t_mlist *lst);
@@ -123,8 +123,9 @@ void 	add_file_node(t_file **head, char *filename, int flag);
 void 	add_file_file(t_file **head, t_file *file);
 void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files);
 void	add_to_fullcmd(char ***full_cmd, t_lexer *n);
-void	add_lexer(t_lexer **head, char *content, t_enum	type);
+void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
+void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 
 
 # endif
