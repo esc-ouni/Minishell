@@ -64,15 +64,14 @@ void    prompt()
 //     close(fd);
 // }
 
-// void	*h_malloc(t_data data, size_t s, void *p)
-// {
-// 	p = malloc(s);
-// 	if (!p)
-// 	{
-// 		ft_exit_with_EROor(data);
-// 	}
-// 	return (p);
-// }
+void	*h_malloc(t_data data, size_t s, void *p)
+{
+	p = malloc(s);
+	if (!p)
+	{
+	}
+	return (p);
+}
 
 int	check_dq(char *s)
 {

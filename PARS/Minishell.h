@@ -79,6 +79,11 @@ typedef struct s_cmd
 	struct s_cmd   *next;
 }	t_cmd;
 
+typedef struct s_collector
+{
+    void            *addr;
+    struct s_collector   *next;
+}   t_collector;
 
 typedef struct s_mlist
 {
