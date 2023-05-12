@@ -11,13 +11,15 @@
 /* ************************************************************************** */
 
 #include "Minishell.h"
+t_collector **collect_head = NULL;
 
 int main(int argc, char **argv, char **env) 
 {
     (void)argc;
     (void)argv;
-    t_lexer  *h_lexer;
-    t_cmd    *cmd;
+    t_lexer		*h_lexer;
+    // t_collector	**collector;
+    t_cmd		*cmd;
 
     // start();
     while (1)

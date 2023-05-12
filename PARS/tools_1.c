@@ -64,12 +64,48 @@ void    prompt()
 //     close(fd);
 // }
 
-void	*h_malloc(t_data data, size_t s, void *p)
+void	free_collect(t_collector **collect_head)
 {
-	p = malloc(s);
-	if (!p)
+	t_collector *tmp;
+	t_collector *tmp2;
+	tmp = *collect_head;
+
+	while (tmp)
 	{
+		tmp2 = tmp->next;
+		free(tmp);
+		tmp = NULL;
+		tmp = tmp2;
 	}
+}
+
+void	*h_malloc(t_collector **collect_head, size_t s, void *p)
+{
+	t_collector *tmp;
+    t_collector *new_node;
+	new_node = malloc(sizeof(t_collector));
+	p = malloc(s);
+	if (!new_node || !p)
+	{
+		free_collect(collect_head);
+		exit (1);
+	}
+	new_node->addr = p;
+    if (!(*collect_head))
+    {
+        *collect_head = new_node;
+        new_node->next = NULL;
+    }
+    else
+    {
+        tmp = *collect_head;
+        while (tmp->next)
+        {
+            tmp = tmp->next;
+        }
+        tmp->next = new_node;
+        new_node->next = NULL;
+    }
 	return (p);
 }
 
