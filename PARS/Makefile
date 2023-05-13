@@ -20,7 +20,7 @@ CC     = cc
 
 RM     = rm -rf
 
-FLAGS  =  -Wall -Wextra -Werror -g #-fsanitize=address -g
+FLAGS  =  -Wall -Wextra -Werror #-fsanitize=address -g
 
 HR     = Minishell.h
 

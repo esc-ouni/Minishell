@@ -110,7 +110,6 @@ void	debug(void);
 t_cmd  *parser2(t_collector	**collector, t_lexer *head);
 void    after_parse2(t_cmd  *cmd);
 t_lexer *lexer(t_collector **collector, char *s);
-// t_mlist	*ft_mlstnew(char *s);
 t_mlist	*ft_mlstlast(t_mlist *lst);
 int	    ft_mlstsize(t_mlist *lst);
 void	ft_mlstadd_back(t_mlist **lst, t_mlist *new);
