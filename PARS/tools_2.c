@@ -84,7 +84,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(collector, &in_files, n->cmd, O_TRUNC);
+                add_file_node(collector, &in_files, n->cmd, O_APPEND);
             }
             n = n->next;
         }
