@@ -113,12 +113,11 @@ void	ft_collectorclear(t_collector **collector)
 	node = *collector;
 	while (node)
 	{
-		printf("%p\n", node->addr);
+		// printf("%p\n", node->addr);
 		n_node = node->next;
 		free(node->addr);
 		free(node);
 		node = n_node;
-		// printf("DONE\n");
 	}
 	*collector = NULL;
 }
