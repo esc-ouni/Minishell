@@ -79,7 +79,7 @@ void	free_collect(t_collector **collect_head)
 	}
 }
 
-void	*h_malloc(t_collector **collect_head, size_t s, void *p)
+void	*h_malloc(t_collector **collector_head, size_t s, void *p)
 {
 	t_collector *tmp;
     t_collector *new_node;
@@ -87,17 +87,18 @@ void	*h_malloc(t_collector **collect_head, size_t s, void *p)
 	p = malloc(s);
 	if (!new_node || !p)
 	{
+		ft_collectorclear(collector_head);
 		exit (1);
 	}
 	new_node->addr = p;
-    if (!(*collect_head))
+    if (!(*collector_head))
     {
-        *collect_head = new_node;
+        *collector_head = new_node;
         new_node->next = NULL;
     }
     else
     {
-        tmp = *collect_head;
+        tmp = *collector_head;
         while (tmp->next)
         {
             tmp = tmp->next;
