@@ -360,6 +360,7 @@ t_lexer *lexer(t_collector **collector, char *s)
         }
     }
     n = l_node;
+	free(s);
     return (l_node);
 }
 
