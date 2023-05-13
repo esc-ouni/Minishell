@@ -30,7 +30,7 @@ t_lexer  *parser(t_collector	**collector)
 	return (h_lexer);
 }
 
-t_cmd  *parser2(t_lexer *head)
+t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 {
     char    **full_cmd;
     t_file  *out_files;
@@ -59,13 +59,13 @@ t_cmd  *parser2(t_lexer *head)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(&out_files, n->cmd, O_TRUNC);
+                add_file_node(collector, &out_files, n->cmd, O_TRUNC);
             }
             if (!strcmp(n->cmd, ">>") && n->next)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(&out_files, n->cmd, O_APPEND);
+                add_file_node(collector, &out_files, n->cmd, O_APPEND);
             }
             n = n->next;
         }
@@ -78,13 +78,13 @@ t_cmd  *parser2(t_lexer *head)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(&in_files, n->cmd, O_TRUNC);
+                add_file_node(collector, &in_files, n->cmd, O_TRUNC);
             }
             if (!strcmp(n->cmd, "<<") && n->next)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(&in_files, n->cmd, O_TRUNC);
+                add_file_node(collector, &in_files, n->cmd, O_TRUNC);
             }
             n = n->next;
         }
@@ -130,7 +130,7 @@ t_cmd  *parser2(t_lexer *head)
             }
             else
             {
-                add_to_fullcmd(&full_cmd, n);
+                add_to_fullcmd(collector, &full_cmd, n);
                 n = n->next;
             }
         }

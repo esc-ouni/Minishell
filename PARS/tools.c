@@ -110,10 +110,11 @@ void	debug(void)
 	printf("\x1B[0m");
 }        
 
-void	add_file_node(t_file **head, char *filename, int flag)
+void	add_file_node(t_collector	**collector, t_file **head, char *filename, int flag)
 {
     t_file *tmp;
-    t_file *new_node = malloc(sizeof(t_file));
+    t_file *new_node = NULL;
+    new_node = h_malloc(collector, sizeof(t_file), new_node);
     
     new_node->filename = ft_strdup(filename);
     new_node->o_flags = flag;
@@ -160,7 +161,7 @@ void	add_file_file(t_file **head, t_file *file)
     }
 }
 
-void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
+void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n)
 {
 	int	l;
     t_lexer *tmp;
@@ -174,7 +175,7 @@ void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
 			l++;
 			tmp = tmp->next;
 		}
-		(*full_cmd) = malloc(sizeof(char *) * (l + 1));
+		(*full_cmd) = h_malloc(collector, sizeof(char *) * (l + 1), *full_cmd);
 		(*full_cmd)[0] = ft_strdup(n->cmd);
 		(*full_cmd)[1] = NULL;
 		return ;

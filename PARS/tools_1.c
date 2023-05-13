@@ -87,7 +87,6 @@ void	*h_malloc(t_collector **collect_head, size_t s, void *p)
 	p = malloc(s);
 	if (!new_node || !p)
 	{
-		free_collect(collect_head);
 		exit (1);
 	}
 	new_node->addr = p;
