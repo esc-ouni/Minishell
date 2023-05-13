@@ -85,6 +85,7 @@ void	*h_malloc(t_collector **collector_head, size_t s, void *p)
     t_collector *new_node;
 	new_node = malloc(sizeof(t_collector));
 	p = malloc(s);
+	printf("%p\n", p);
 	if (!new_node || !p)
 	{
 		ft_collectorclear(collector_head);

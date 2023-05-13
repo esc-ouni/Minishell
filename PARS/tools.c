@@ -113,11 +113,12 @@ void	ft_collectorclear(t_collector **collector)
 	node = *collector;
 	while (node)
 	{
+		printf("%p\n", node->addr);
 		n_node = node->next;
 		free(node->addr);
 		free(node);
 		node = n_node;
-		printf("DONE\n");
+		// printf("DONE\n");
 	}
 	*collector = NULL;
 }
@@ -326,21 +327,21 @@ char	**mgetenv(t_collector **collector, char **env)
 	return (new_env);
 }
 
-t_built	cmd_type(char *cmd)
+t_built	cmd_type(t_collector **collector, char *cmd)
 {
-	if (!ft_strncmp(ft_strtrim(cmd, " "), "echo", ft_strlen(ft_strtrim(cmd, " "))))
+	if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "echo", ft_strlen(ft_strtrim(collector, cmd, " "))))
 		return(ECH);
-	else if (!ft_strncmp(ft_strtrim(cmd, " "), "cd", ft_strlen(ft_strtrim(cmd, " "))))
+	else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "cd", ft_strlen(ft_strtrim(collector, cmd, " "))))
 		return(CD);
-	else if (!ft_strncmp(ft_strtrim(cmd, " "), "pwd", ft_strlen(ft_strtrim(cmd, " "))))
+	else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "pwd", ft_strlen(ft_strtrim(collector, cmd, " "))))
 		return(PWD);
-    else if (!ft_strncmp(ft_strtrim(cmd, " "), "export", ft_strlen(ft_strtrim(cmd, " "))))
+    else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "export", ft_strlen(ft_strtrim(collector, cmd, " "))))
 		return(EXPT);
-    else if (!ft_strncmp(ft_strtrim(cmd, " "), "unset", ft_strlen(ft_strtrim(cmd, " "))))
+    else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "unset", ft_strlen(ft_strtrim(collector, cmd, " "))))
 		return(UNST);
-    else if (!ft_strncmp(ft_strtrim(cmd, " "), "env", ft_strlen(ft_strtrim(cmd, " "))))
+    else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "env", ft_strlen(ft_strtrim(collector, cmd, " "))))
 		return(ENV);
-	else if (!ft_strncmp(ft_strtrim(cmd, " "), "exit", ft_strlen(ft_strtrim(cmd, " "))))
+	else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "exit", ft_strlen(ft_strtrim(collector, cmd, " "))))
 		return(EXT);
 	else
 		return(NOT);
@@ -361,7 +362,7 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 		// n_cmd->num_cmds = ft_mlstsize(cmd);
 		n_cmd->myenv = menv;
 		if (n_cmd->cmd[0])
-			n_cmd->builtflag = cmd_type(n_cmd->cmd[0]);
+			n_cmd->builtflag = cmd_type(collector, n_cmd->cmd[0]);
 		h_file = n_cmd->out_files;
 		if (h_file)
 		{

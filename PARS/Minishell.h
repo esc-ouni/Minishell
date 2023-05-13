@@ -79,12 +79,6 @@ typedef struct s_cmd
 	struct s_cmd   *next;
 }	t_cmd;
 
-typedef struct s_collector
-{
-    void            *addr;
-    struct s_collector   *next;
-}   t_collector;
-
 typedef struct s_mlist
 {
     char            *cmd;
@@ -105,11 +99,11 @@ typedef struct s_lexer
 // void    get_type(t_lexer *head);
 int     check_syntax(char *s);
 void	emplify(t_collector **collector, t_cmd *cmd, char **env);
-void	*h_malloc(t_collector **collect_head, size_t s, void *p);
+// void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_s2strdup(t_collector **collector, const char *s1);
 char	**mgetenv(t_collector **collector, char **env);
-t_built	cmd_type(char *cmd);
+t_built	cmd_type(t_collector **collector, char *cmd);
 void    prompt(void);
 t_lexer	*parser(t_collector	**collector);
 void	debug(void);

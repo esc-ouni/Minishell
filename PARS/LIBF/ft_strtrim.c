@@ -62,7 +62,7 @@ static int	ns_end(char const *s1, char const *set)
 	return (l_e);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(t_collector **collector, char const *s1, char const *set)
 {
 	char		*ns;
 	size_t		l;
@@ -70,15 +70,16 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t		l_f;
 	size_t		i;
 
+	ns = NULL;
 	i = 0;
 	if (!s1 || !set)
 		return (NULL);
 	l_f = ns_start(s1, set);
 	l_e = ns_end(s1, set);
 	if (l_f > l_e)
-		return (ft_strdup(""));
+		return (ft_strdup(collector, ""));
 	l = l_e - l_f + 1;
-	ns = (char *)malloc(sizeof (char) * (l + 1));
+	ns = (char *)h_malloc(collector, sizeof (char) * (l + 1), ns);
 	if (!ns)
 		return (0);
 	while (l--)
