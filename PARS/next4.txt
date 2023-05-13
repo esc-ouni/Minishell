@@ -1,3 +1,2 @@
 #check syntax errors
-#handle_leaks(garbage_collect(define macros and use each of thems to specify wich linked list type to be freed), h_malloc)
 #readability
