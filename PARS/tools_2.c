@@ -91,28 +91,6 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 
         // GET_FULL_CMD
         n = node;
-        // while (n && n->type != PIP)
-        // {
-        //     if (node->type == FIL || node->type == R_HD || node->type == R_IN || node->type == R_OA || node->type == R_OT)
-        //     {
-        //         // n = n->next;
-        //         if (n->next)
-        //         {
-        //             if (n->next->next)
-        //                 n = n->next->next;
-        //             else
-        //             {
-        //                 n = NULL;
-        //                 break ;
-        //             }
-        //         }
-        //     }
-        //     else
-        //     {
-        //         add_to_fullcmd(&full_cmd, n);
-        //         n = n->next;
-        //     }
-        // }
 		while (n && n->type != PIP)
         {
             if (!strcmp(n->cmd, ">>") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, "<"))
@@ -134,15 +112,6 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
                 n = n->next;
             }
         }
-        i = 0;
-        // if (full_cmd)
-        // {
-        //     while (full_cmd[i])
-        //     {
-        //         printf("%s\n", full_cmd[i]);
-        //         i++;
-        //     }
-        // }
         if (n)
         {
             if (n->type == PIP)
@@ -162,12 +131,10 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             out_files = NULL;
             in_files = NULL;
             i2++;
-            // n = n->next;   
             node = n;
         }
         node = n;
     }
-    // i = 0;
 
     //UPDATE_CMD
     n_cmd = cmd;
@@ -255,7 +222,6 @@ t_lexer *lexer(t_collector **collector, char *s)
     int     start;
     int     sz;
     t_lexer *l_node;
-    t_lexer *n;
 
     i = 0;
     start = 0;
@@ -359,30 +325,6 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
         }
     }
-    n = l_node;
 	free(s);
     return (l_node);
-}
-
-
-char	*ft_s2strdup(t_collector **collector, const char *s1)
-{
-	size_t	i;
-	char	*s;
-
-	i = 0;
-	s = NULL;
-	s = h_malloc(collector, sizeof(char) * (ft_strlen(s1) + 1), s);
-	if (s == NULL)
-		return (NULL);
-	else
-	{
-		while (s1[i] != '\0')
-		{
-			s[i] = s1[i];
-			i++;
-		}
-		s[i] = '\0';
-	}
-	return (s);
 }

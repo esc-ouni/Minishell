@@ -49,7 +49,7 @@ t_mlist	*ft_mlstnew(t_collector **collector, char *s)
 	new_node = h_malloc(collector, sizeof(t_mlist), new_node);
 	if (new_node)
 	{
-		new_node->cmd = ft_s2strdup(collector, s);
+		new_node->cmd = ft_strdup(collector, s);
 		new_node->next = NULL;
 	}
 	return (new_node);
@@ -136,7 +136,7 @@ void	add_file_node(t_collector	**collector, t_file **head, char *filename, int f
     t_file *new_node = NULL;
     new_node = h_malloc(collector, sizeof(t_file), new_node);
     
-    new_node->filename = ft_s2strdup(collector, filename);
+    new_node->filename = ft_strdup(collector, filename);
     new_node->o_flags = flag;
     
     if (!(*head))
@@ -162,7 +162,7 @@ void	add_file_file(t_collector **collector, t_file **head, t_file *file)
     t_file *new_node = NULL;
     new_node = h_malloc(collector, sizeof(t_file), new_node);
     
-    new_node->filename = ft_s2strdup(collector, file->filename);
+    new_node->filename = ft_strdup(collector, file->filename);
     new_node->o_flags = file->o_flags;
     
     if (!(*head))
@@ -197,7 +197,7 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n)
 			tmp = tmp->next;
 		}
 		(*full_cmd) = h_malloc(collector, sizeof(char *) * (l + 1), *full_cmd);
-		(*full_cmd)[0] = ft_s2strdup(collector, n->cmd);
+		(*full_cmd)[0] = ft_strdup(collector, n->cmd);
 		(*full_cmd)[1] = NULL;
 		return ;
     }    
@@ -205,7 +205,7 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n)
     {
         while ((*full_cmd)[l])
             l++;
-		(*full_cmd)[l] = ft_s2strdup(collector, n->cmd);
+		(*full_cmd)[l] = ft_strdup(collector, n->cmd);
 		(*full_cmd)[l+1] = NULL;
 		return ;
     }
@@ -243,7 +243,7 @@ void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file 
 	{
 		while (full_cmd[i])
 		{
-			str[i] = ft_s2strdup(collector, full_cmd[i]);
+			str[i] = ft_strdup(collector, full_cmd[i]);
 			i++;
 		}
 		str[i] = NULL;
@@ -291,7 +291,7 @@ void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	ty
 
 	new_node = NULL;
 	new_node = h_malloc(collector, sizeof(t_lexer), new_node);
-	new_node->cmd = ft_s2strdup(collector, content);
+	new_node->cmd = ft_strdup(collector, content);
 	new_node->type = type;
 
 	if (!(*head))
@@ -322,7 +322,7 @@ char	**mgetenv(t_collector **collector, char **env)
 	new_env = h_malloc(collector, sizeof(char *) * (i + 1), new_env );
     i = -1;
 	while(env[++i])
-		new_env[i] = ft_s2strdup(collector, env[i]);
+		new_env[i] = ft_strdup(collector, env[i]);
 	new_env[i] = NULL;
 	return (new_env);
 }

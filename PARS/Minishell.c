@@ -21,7 +21,6 @@ int main(int argc, char **argv, char **env)
     t_cmd		*cmd;
 
 	collector = NULL;
-    // start();
     while (1)
     {
         h_lexer = parser(&collector);

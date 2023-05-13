@@ -92,16 +92,11 @@ typedef struct s_lexer
     struct s_lexer	*next;
 }   t_lexer;
 
-// void    start(void);
-// void    after_parse(t_mlist  *head);
-// t_cmd    *after_parse(t_mlist  *head);
-// void	check_type(t_mlist	*node);
-// void    get_type(t_lexer *head);
 int     check_syntax(char *s);
 void	emplify(t_collector **collector, t_cmd *cmd, char **env);
 // void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
-char	*ft_s2strdup(t_collector **collector, const char *s1);
+char	*ft_strdup(t_collector **collector, const char *s1);
 char	**mgetenv(t_collector **collector, char **env);
 t_built	cmd_type(t_collector **collector, char *cmd);
 void    prompt(void);
@@ -123,6 +118,5 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n);
 void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
 void	*h_malloc(t_collector **collect_head, size_t s, void *p);
-
 
 # endif
