@@ -40,6 +40,7 @@ PR     = ft_atoi.c \
 	 ft_putendl_fd.c \
 	 ft_putnbr_fd.c \
 	 ft_putstr_fd.c \
+	 ft_split.c \
 	 ft_strchr.c \
 	 ft_strdup.c \
 	 ft_striteri.c \

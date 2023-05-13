@@ -386,3 +386,34 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 		n_cmd = n_cmd->next;
 	}
 }
+
+
+void	expander(t_collector **collector, t_lexer **head)
+{
+	t_lexer	*node;
+	int		i;
+
+	i = 0;
+	char **s;
+	char *str;
+	s = NULL;
+	str = NULL;
+	node = *head;
+	while (node)
+	{
+		if ((node->type == ST_DQ) && (ft_strchr(node->cmd, '$')))
+		{
+			s = ft_split(collector, node->cmd, '$');
+			str = s[i];
+			i++;
+			while (s[i])
+			{
+				str = ft_strjoin(str, getenv(s[i]));
+				i++;
+			}
+			// node->cmd = getenv();
+			node->cmd = str;
+		}
+		node = node->next;
+	}
+}

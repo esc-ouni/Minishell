@@ -102,6 +102,7 @@ t_built	cmd_type(t_collector **collector, char *cmd);
 void    prompt(void);
 t_lexer	*parser(t_collector	**collector);
 void	debug(void);
+void	expander(t_collector **collector, t_lexer **head);
 t_cmd  *parser2(t_collector	**collector, t_lexer *head);
 void    after_parse2(t_cmd  *cmd);
 t_lexer *lexer(t_collector **collector, char *s);
