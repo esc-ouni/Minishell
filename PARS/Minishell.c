@@ -28,7 +28,6 @@ int main(int argc, char **argv, char **env)
         cmd = parser2(&collector, h_lexer);
         emplify(&collector, cmd, env);
         after_parse2(cmd);
-		// h_free_all(&collector);
 		ft_collectorclear(&collector);
     }
     return 0;
