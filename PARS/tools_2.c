@@ -147,7 +147,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         {
             if (n->type == PIP)
             {
-                add_to_cmd(&cmd, full_cmd, out_files, in_files);
+                add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
                 full_cmd = NULL;
                 out_files = NULL;
                 in_files = NULL;
@@ -157,7 +157,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         }
         else
         {
-            add_to_cmd(&cmd, full_cmd, out_files, in_files);
+            add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
             full_cmd = NULL;
             out_files = NULL;
             in_files = NULL;
@@ -361,4 +361,27 @@ t_lexer *lexer(t_collector **collector, char *s)
     }
     n = l_node;
     return (l_node);
+}
+
+
+char	*ft_s2strdup(t_collector **collector, const char *s1)
+{
+	size_t	i;
+	char	*s;
+
+	i = 0;
+	s = NULL;
+	s = h_malloc(collector, sizeof(char) * (ft_strlen(s1) + 1), s);
+	if (s == NULL)
+		return (NULL);
+	else
+	{
+		while (s1[i] != '\0')
+		{
+			s[i] = s1[i];
+			i++;
+		}
+		s[i] = '\0';
+	}
+	return (s);
 }
