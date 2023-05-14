@@ -41,15 +41,15 @@ int	ft_cmdsize(t_cmd *cmd)
 	return (i);
 }
 
-t_mlist	*ft_mlstnew(char *s)
+t_mlist	*ft_mlstnew(t_collector **collector, char *s)
 {
 	t_mlist	*new_node;
 
 	new_node = NULL;
-	new_node = malloc(sizeof(t_mlist));
+	new_node = h_malloc(collector, sizeof(t_mlist), new_node);
 	if (new_node)
 	{
-		new_node->cmd = ft_strdup(s);
+		new_node->cmd = ft_mstrdup(collector, s);
 		new_node->next = NULL;
 	}
 	return (new_node);
@@ -103,6 +103,25 @@ void	ft_mlstclear(t_mlist **lst)
 	*lst = NULL;
 }
 
+void	ft_collectorclear(t_collector **collector)
+{
+	t_collector	*node;
+	t_collector	*n_node;
+
+	if (!collector)
+		return ;
+	node = *collector;
+	while (node)
+	{
+		// printf("%p\n", node->addr);
+		n_node = node->next;
+		free(node->addr);
+		free(node);
+		node = n_node;
+	}
+	*collector = NULL;
+}
+
 void	debug(void)
 {
 	printf("\x1B[32m");
@@ -110,12 +129,13 @@ void	debug(void)
 	printf("\x1B[0m");
 }        
 
-void	add_file_node(t_file **head, char *filename, int flag)
+void	add_file_node(t_collector	**collector, t_file **head, char *filename, int flag)
 {
     t_file *tmp;
-    t_file *new_node = malloc(sizeof(t_file));
+    t_file *new_node = NULL;
+    new_node = h_malloc(collector, sizeof(t_file), new_node);
     
-    new_node->filename = ft_strdup(filename);
+    new_node->filename = ft_mstrdup(collector, filename);
     new_node->o_flags = flag;
     
     if (!(*head))
@@ -135,12 +155,13 @@ void	add_file_node(t_file **head, char *filename, int flag)
     }
 }
 
-void	add_file_file(t_file **head, t_file *file)
+void	add_file_file(t_collector **collector, t_file **head, t_file *file)
 {
     t_file *tmp;
-    t_file *new_node = malloc(sizeof(t_file));
+    t_file *new_node = NULL;
+    new_node = h_malloc(collector, sizeof(t_file), new_node);
     
-    new_node->filename = ft_strdup(file->filename);
+    new_node->filename = ft_mstrdup(collector, file->filename);
     new_node->o_flags = file->o_flags;
     
     if (!(*head))
@@ -160,7 +181,7 @@ void	add_file_file(t_file **head, t_file *file)
     }
 }
 
-void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
+void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n)
 {
 	int	l;
     t_lexer *tmp;
@@ -174,8 +195,8 @@ void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
 			l++;
 			tmp = tmp->next;
 		}
-		(*full_cmd) = malloc(sizeof(char *) * (l + 1));
-		(*full_cmd)[0] = ft_strdup(n->cmd);
+		(*full_cmd) = h_malloc(collector, sizeof(char *) * (l + 1), *full_cmd);
+		(*full_cmd)[0] = ft_mstrdup(collector, n->cmd);
 		(*full_cmd)[1] = NULL;
 		return ;
     }    
@@ -183,22 +204,24 @@ void	add_to_fullcmd(char ***full_cmd, t_lexer *n)
     {
         while ((*full_cmd)[l])
             l++;
-		(*full_cmd)[l] = ft_strdup(n->cmd);
+		(*full_cmd)[l] = ft_mstrdup(collector, n->cmd);
 		(*full_cmd)[l+1] = NULL;
 		return ;
     }
 }
 
 
-void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
+void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
 {
 	int		i = 0;
 	t_file	*out_files2;
 	t_file	*in_files2;
 	char **str;
-
+	str = NULL;
 	t_cmd	*tmp;
-	t_cmd *new_cmd = malloc(sizeof(t_cmd));
+
+	t_cmd *new_cmd = NULL;
+	new_cmd = h_malloc(collector, sizeof(t_cmd), new_cmd);
 
 	out_files2 = NULL;
 	in_files2 = NULL;
@@ -207,11 +230,11 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
 	{
 		while (full_cmd[i])
 			i++;
-		str = malloc(sizeof(char *) * (i + 1));
+		str = h_malloc(collector, sizeof(char *) * (i + 1), str);
 	}
 	else
 	{
-		str = malloc(sizeof(char *));
+		str = h_malloc(collector, sizeof(char *), str);
 		str[0] = NULL;
 	}
 	i = 0;
@@ -219,7 +242,7 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
 	{
 		while (full_cmd[i])
 		{
-			str[i] = ft_strdup(full_cmd[i]);
+			str[i] = ft_mstrdup(collector, full_cmd[i]);
 			i++;
 		}
 		str[i] = NULL;
@@ -229,13 +252,13 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
 
 	while (out_files)
 	{
-		add_file_file(&out_files2, out_files);
+		add_file_file(collector, &out_files2, out_files);
 		out_files = out_files->next;
 	}
 
 	while (in_files)
 	{
-		add_file_file(&in_files2, in_files);
+		add_file_file(collector, &in_files2, in_files);
 		in_files = in_files->next;
 	}
 
@@ -260,13 +283,14 @@ void 	add_to_cmd(t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_fi
     }
 }
 
-void	add_lexer(t_lexer **head, char *content, t_enum	type)
+void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	type)
 {
 	t_lexer	*tmp;
 	t_lexer	*new_node;
 
-	new_node = malloc(sizeof(t_lexer));
-	new_node->cmd = ft_strdup(content);
+	new_node = NULL;
+	new_node = h_malloc(collector, sizeof(t_lexer), new_node);
+	new_node->cmd = ft_mstrdup(collector, content);
 	new_node->type = type;
 
 	if (!(*head))
@@ -286,42 +310,43 @@ void	add_lexer(t_lexer **head, char *content, t_enum	type)
 	}
 }
 
-char	**mgetenv(char **env)
+char	**mgetenv(t_collector **collector, char **env)
 {
 	int		i = 0;
 	char	**new_env;
 
+	new_env = NULL;
 	while (env[i])
         i++;
-	new_env = malloc(sizeof(char *) * (i + 1));
+	new_env = h_malloc(collector, sizeof(char *) * (i + 1), new_env );
     i = -1;
 	while(env[++i])
-		new_env[i] = strdup(env[i]);
+		new_env[i] = ft_mstrdup(collector, env[i]);
 	new_env[i] = NULL;
 	return (new_env);
 }
 
-t_built	cmd_type(char *cmd)
+t_built	cmd_type(t_collector **collector, char *cmd)
 {
-	if (!ft_strncmp(ft_strtrim(cmd, " "), "echo", ft_strlen(ft_strtrim(cmd, " "))))
+	if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "echo", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(ECH);
-	else if (!ft_strncmp(ft_strtrim(cmd, " "), "cd", ft_strlen(ft_strtrim(cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "cd", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(CD);
-	else if (!ft_strncmp(ft_strtrim(cmd, " "), "pwd", ft_strlen(ft_strtrim(cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "pwd", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(PWD);
-    else if (!ft_strncmp(ft_strtrim(cmd, " "), "export", ft_strlen(ft_strtrim(cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "export", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(EXPT);
-    else if (!ft_strncmp(ft_strtrim(cmd, " "), "unset", ft_strlen(ft_strtrim(cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "unset", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(UNST);
-    else if (!ft_strncmp(ft_strtrim(cmd, " "), "env", ft_strlen(ft_strtrim(cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "env", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(ENV);
-	else if (!ft_strncmp(ft_strtrim(cmd, " "), "exit", ft_strlen(ft_strtrim(cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "exit", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(EXT);
 	else
 		return(NOT);
 }
 
-void	emplify(t_cmd *cmd, char **env)
+void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 {
     t_file   *h_file;
     t_cmd *n_cmd;
@@ -329,14 +354,14 @@ void	emplify(t_cmd *cmd, char **env)
 
 	if (!cmd)
 		return ;
-    menv = mgetenv(env);
+    menv = mgetenv(collector, env);
     n_cmd = cmd;
 	while (n_cmd)
 	{
 		// n_cmd->num_cmds = ft_mlstsize(cmd);
 		n_cmd->myenv = menv;
 		if (n_cmd->cmd[0])
-			n_cmd->builtflag = cmd_type(n_cmd->cmd[0]);
+			n_cmd->builtflag = cmd_type(collector, n_cmd->cmd[0]);
 		h_file = n_cmd->out_files;
 		if (h_file)
 		{
@@ -358,5 +383,56 @@ void	emplify(t_cmd *cmd, char **env)
 			h_file->islast = 1;
 		}
 		n_cmd = n_cmd->next;
+	}
+}
+
+
+void	expander(t_collector **collector, t_lexer **head)
+{
+	t_lexer	*node;
+	int		i;
+
+	i = 0;
+	char **s;
+	char *str;
+	s = NULL;
+	str = NULL;
+	node = *head;
+	while (node)
+	{
+		if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')))
+		{
+			if (node->cmd[0] == '$')
+			{
+				s = ft_msplit(collector, node->cmd, '$');
+				// str = ft_mstrdup(collector, getenv(s[i]));
+				str = getenv(s[i]);
+				i++;
+				while (s[i])
+				{
+					// str = ft_mstrjoin(collector, str, ft_mstrdup(collector, getenv(s[i])));
+					str = ft_mstrjoin(collector, str, getenv(s[i]));
+					i++;
+				}
+			}
+			else
+			{
+				s = ft_msplit(collector, node->cmd, '$');
+				str = ft_mstrdup(collector, s[i]);
+				i++;
+				while (s[i])
+				{
+					// str = ft_mstrjoin(collector, str, ft_mstrdup(collector, getenv(s[i])));
+					str = ft_mstrjoin(collector, str, getenv(s[i]));
+					i++;
+				}
+			}
+			node->cmd = ft_mstrdup(collector, str);
+			// node->cmd = str;
+			// free(str);
+		}
+		str = NULL;
+		s = NULL;
+		node = node->next;
 	}
 }

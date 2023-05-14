@@ -124,8 +124,10 @@ int main(int ac, char **av, char **env)
 	char	**myenv;
 	t_env	*myenv_list;
 	t_cmd	*cmd;
+	t_collector *collector;
 	int		i;
 	
+	collector = NULL;
 	i = 0;
 	tmp_fd_in = dup(STDIN_FILENO);
 	tmp_fd_out = dup (STDOUT_FILENO);
@@ -139,8 +141,8 @@ int main(int ac, char **av, char **env)
 		dup2(tmp_fd_out, 1);
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
-		cmd = parser2(parser());
-		emplify(cmd, env);
+		cmd = parser2(&collector, parser(&collector));
+		emplify(&collector, cmd, env);
 		if (!cmd->cmd[0])
 			continue ;
 		ft_execution(cmd, &myenv_list, &myenv);
