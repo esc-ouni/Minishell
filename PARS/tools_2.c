@@ -38,6 +38,69 @@ int	check_syntax2(t_lexer	**h_lexer)
 	return (0);
 }
 
+void printTYPE(t_enum num) 
+{
+    switch (num) 
+	{
+        case PIP:
+		{
+            printf("Pipe\n");
+            break;
+		}
+        case CMD:
+		{
+            printf("CMD\n");
+            break;
+		}
+        case OPTN:
+		{
+            printf("OPTN\n");
+            break;
+		}
+        case ARGS:
+		{
+            printf("ARGS\n");
+            break;
+		}
+        case ST_SQ:
+		{
+            printf("ST_SQ\n");
+            break;
+		}
+        case ST_DQ:
+		{
+            printf("ST_DQ\n");
+            break;
+		}
+        case R_OA:
+		{
+            printf("R_OA\n");
+            break;
+		}
+        case R_OT:
+		{
+            printf("R_OT\n");
+            break;
+		}
+        case R_IN:
+		{
+            printf("R_IN\n");
+            break;
+		}
+        case R_HD:
+		{
+            printf("R_HD\n");
+            break;
+		}
+        case FIL_NM:
+		{
+            printf("FIL_NM\n");
+            break;
+		}
+        default:
+            printf("Unknown Type\n");
+    }
+}
 t_lexer  *parser(t_collector	**collector)
 {
     char    *s;
@@ -46,12 +109,20 @@ t_lexer  *parser(t_collector	**collector)
 
 	head = NULL;
     s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
-	if (check_syntax(s))
-		return (NULL);
+	// if (check_syntax(s))
+	// 	return (NULL);
     h_lexer = lexer(collector, s);
+	while (h_lexer)
+	{
+		printf("\n'%s' type ", h_lexer->cmd);
+		printTYPE(h_lexer->type);
+		h_lexer = h_lexer->next;
+	}
+	printf("\n");
+	return (NULL);
 	expander(collector, &h_lexer);
-	if (check_syntax2(&h_lexer))
-		return (NULL);
+	// if (check_syntax2(&h_lexer))
+	// 	return (NULL);
 	return (h_lexer);
 }
 
