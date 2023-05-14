@@ -18,14 +18,19 @@ int	check_syntax2(t_lexer	**h_lexer)
 	t_lexer *node;
 
 	node = *h_lexer;
-	while (node->next)
+	while (node)
 	{
 		if ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD))
 		{
-			if ((node->next->type == R_OA) || (node->next->type == R_OT) || (node->next->type == R_IN) || (node->next->type == R_HD))
+			if ((node->next) && ((node->next->type == R_OA) || (node->next->type == R_OT) || (node->next->type == R_IN) || (node->next->type == R_HD)))
 			{
-				printf("syntax error near unexpected token '%s'\n", node->next->cmd);
+				printf("syntax error near unexpected token\n");
 				return (1);	
+			}
+			else if (!node->next)
+			{
+				printf("syntax error near unexpected token\n");
+				return (1);		
 			}
 		}
 		node = node->next;
