@@ -28,12 +28,6 @@ t_lexer  *parser(t_collector	**collector)
 	}
     h_lexer = lexer(collector, s);
 	expander(collector, &h_lexer);
-	// while (h_lexer)
-	// {
-	// 	printf("%s\n", h_lexer->cmd);
-	// 	h_lexer = h_lexer->next;
-	// }
-	// return (NULL);
 	return (h_lexer);
 }
 
