@@ -427,11 +427,12 @@ void	expander(t_collector **collector, t_lexer **head)
 					i++;
 				}
 			}
-			// node->cmd = ft_strdup(collector, str);
-			node->cmd = str;
+			node->cmd = ft_strdup(collector, str);
+			// node->cmd = str;
+			// free(str);
 		}
-		s = NULL;
 		str = NULL;
+		s = NULL;
 		node = node->next;
 	}
 }

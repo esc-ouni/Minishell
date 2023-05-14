@@ -93,10 +93,11 @@ char	**ft_split(t_collector **collector, char const *s, char const c)
 	size_t		n;
 	char		**p;
 
+	p = NULL;
 	if (!s)
 		return (NULL);
 	n = count_str(s, c);
-	p = (char **)malloc(sizeof (char *) * (n + 1));
+	p = (char **)h_malloc(collector, sizeof (char *) * (n + 1), p);
 	if (p)
 	{
 		p = ft_splitp2(collector, p, s, c);
