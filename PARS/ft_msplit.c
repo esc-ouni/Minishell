@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_msplit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "Minishell.h"
 
 static char	**free_s(char **p, int l)
 {
@@ -61,7 +61,7 @@ static size_t	lenfinder(char const *s, char c, int start)
 	return (0);
 }
 
-static char	**ft_splitp2(t_collector **collector,char **p, char const *s, char const c)
+static char	**ft_msplitp2(t_collector **collector,char **p, char const *s, char const c)
 {
 	size_t		i;
 	size_t		l;
@@ -76,7 +76,7 @@ static char	**ft_splitp2(t_collector **collector,char **p, char const *s, char c
 		if (s[i] != c)
 		{
 			l = lenfinder(s, c, i);
-			p[i2] = ft_substr(collector, s, i, l);
+			p[i2] = ft_msubstr(collector, s, i, l);
 			if (p[i2] == NULL)
 				return (free_s (p, i2));
 			i2++;
@@ -88,7 +88,7 @@ static char	**ft_splitp2(t_collector **collector,char **p, char const *s, char c
 	return (p);
 }
 
-char	**ft_split(t_collector **collector, char const *s, char const c)
+char	**ft_msplit(t_collector **collector, char const *s, char const c)
 {
 	size_t		n;
 	char		**p;
@@ -100,7 +100,7 @@ char	**ft_split(t_collector **collector, char const *s, char const c)
 	p = (char **)h_malloc(collector, sizeof (char *) * (n + 1), p);
 	if (p)
 	{
-		p = ft_splitp2(collector, p, s, c);
+		p = ft_msplitp2(collector, p, s, c);
 		return (p);
 	}
 	return (NULL);

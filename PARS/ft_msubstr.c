@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_msubstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "Minishell.h"
 
-char	*ft_substr(t_collector **collector, char const *s, unsigned int start, size_t len)
+char	*ft_msubstr(t_collector **collector, char const *s, unsigned int start, size_t len)
 {
 	char	*ns;
 	size_t	l;
@@ -21,7 +21,7 @@ char	*ft_substr(t_collector **collector, char const *s, unsigned int start, size
 	if (s == NULL)
 		return (NULL);
 	if (start > (unsigned int)ft_strlen(s))
-		return (ft_strdup(collector, ""));
+		return (ft_mstrdup(collector, ""));
 	l = (unsigned int)ft_strlen(s + start);
 	if (l < len)
 		len = l;

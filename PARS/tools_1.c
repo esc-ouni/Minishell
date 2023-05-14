@@ -13,57 +13,6 @@
 // # include "minishell_pars.h"
 #include "Minishell.h"
 
-
-// void	check_type(t_list	*node)
-// {
-// 	if (!ft_strncmp(node->cmd, "|", 1))
-// 		node->type = PIP;
-// 	else if (!ft_strncmp(node->cmd, ";", 1))
-// 		node->type = ERO;
-// 	else if (!ft_strncmp(node->cmd, ">", 1))
-// 		node->type = RED;
-//     else if (!ft_strncmp(node->cmd, ">>", 2))
-// 		node->type = RED;
-//     else if (!ft_strncmp(node->cmd, "<", 1))
-// 		node->type = RED;
-//     else if (!ft_strncmp(node->cmd, "<<", 2))
-// 		node->type = RED;
-// 	else if (!ft_strncmp(node->cmd, "\'", 1))
-// 		node->type = SQU;
-// 	else if (!ft_strncmp(node->cmd, "\"", 1))
-// 		node->type = DQU;
-// 	else
-// 		node->type = STD;
-// }
-
-void    prompt()
-{
-    // rl_redisplay();
-    printf("\x1B[34m");
-    printf("\nWHAT_YOU_WANT_MASTER>> ");
-    printf("\x1B[0m");
-    rl_on_new_line();
-    // rl_redisplay();
-}
-
-
-// void    start()
-// {
-//     char    *s;
-//     int     fd;
-
-//     fd = open("header.h", O_RDONLY);
-//     printf("\x1B[32m");
-//     while ((s = get_next_line(fd)))
-// 	{
-//         printf("%s", s);
-// 		free(s);
-// 	}
-//     printf("\x1B[0m");
-//     printf("\n\n");
-//     close(fd);
-// }
-
 void	free_collect(t_collector **collect_head)
 {
 	t_collector *tmp;
@@ -187,3 +136,5 @@ int	check_syntax(char *s)
 		return (1);
 	return (0);
 }
+
+

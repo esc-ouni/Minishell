@@ -49,7 +49,7 @@ t_mlist	*ft_mlstnew(t_collector **collector, char *s)
 	new_node = h_malloc(collector, sizeof(t_mlist), new_node);
 	if (new_node)
 	{
-		new_node->cmd = ft_strdup(collector, s);
+		new_node->cmd = ft_mstrdup(collector, s);
 		new_node->next = NULL;
 	}
 	return (new_node);
@@ -135,7 +135,7 @@ void	add_file_node(t_collector	**collector, t_file **head, char *filename, int f
     t_file *new_node = NULL;
     new_node = h_malloc(collector, sizeof(t_file), new_node);
     
-    new_node->filename = ft_strdup(collector, filename);
+    new_node->filename = ft_mstrdup(collector, filename);
     new_node->o_flags = flag;
     
     if (!(*head))
@@ -161,7 +161,7 @@ void	add_file_file(t_collector **collector, t_file **head, t_file *file)
     t_file *new_node = NULL;
     new_node = h_malloc(collector, sizeof(t_file), new_node);
     
-    new_node->filename = ft_strdup(collector, file->filename);
+    new_node->filename = ft_mstrdup(collector, file->filename);
     new_node->o_flags = file->o_flags;
     
     if (!(*head))
@@ -196,7 +196,7 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n)
 			tmp = tmp->next;
 		}
 		(*full_cmd) = h_malloc(collector, sizeof(char *) * (l + 1), *full_cmd);
-		(*full_cmd)[0] = ft_strdup(collector, n->cmd);
+		(*full_cmd)[0] = ft_mstrdup(collector, n->cmd);
 		(*full_cmd)[1] = NULL;
 		return ;
     }    
@@ -204,7 +204,7 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n)
     {
         while ((*full_cmd)[l])
             l++;
-		(*full_cmd)[l] = ft_strdup(collector, n->cmd);
+		(*full_cmd)[l] = ft_mstrdup(collector, n->cmd);
 		(*full_cmd)[l+1] = NULL;
 		return ;
     }
@@ -242,7 +242,7 @@ void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file 
 	{
 		while (full_cmd[i])
 		{
-			str[i] = ft_strdup(collector, full_cmd[i]);
+			str[i] = ft_mstrdup(collector, full_cmd[i]);
 			i++;
 		}
 		str[i] = NULL;
@@ -290,7 +290,7 @@ void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	ty
 
 	new_node = NULL;
 	new_node = h_malloc(collector, sizeof(t_lexer), new_node);
-	new_node->cmd = ft_strdup(collector, content);
+	new_node->cmd = ft_mstrdup(collector, content);
 	new_node->type = type;
 
 	if (!(*head))
@@ -321,26 +321,26 @@ char	**mgetenv(t_collector **collector, char **env)
 	new_env = h_malloc(collector, sizeof(char *) * (i + 1), new_env );
     i = -1;
 	while(env[++i])
-		new_env[i] = ft_strdup(collector, env[i]);
+		new_env[i] = ft_mstrdup(collector, env[i]);
 	new_env[i] = NULL;
 	return (new_env);
 }
 
 t_built	cmd_type(t_collector **collector, char *cmd)
 {
-	if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "echo", ft_strlen(ft_strtrim(collector, cmd, " "))))
+	if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "echo", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(ECH);
-	else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "cd", ft_strlen(ft_strtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "cd", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(CD);
-	else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "pwd", ft_strlen(ft_strtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "pwd", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(PWD);
-    else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "export", ft_strlen(ft_strtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "export", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(EXPT);
-    else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "unset", ft_strlen(ft_strtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "unset", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(UNST);
-    else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "env", ft_strlen(ft_strtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "env", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(ENV);
-	else if (!ft_strncmp(ft_strtrim(collector, cmd, " "), "exit", ft_strlen(ft_strtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "exit", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
 		return(EXT);
 	else
 		return(NOT);
@@ -404,30 +404,30 @@ void	expander(t_collector **collector, t_lexer **head)
 		{
 			if (node->cmd[0] == '$')
 			{
-				s = ft_split(collector, node->cmd, '$');
-				// str = ft_strdup(collector, getenv(s[i]));
+				s = ft_msplit(collector, node->cmd, '$');
+				// str = ft_mstrdup(collector, getenv(s[i]));
 				str = getenv(s[i]);
 				i++;
 				while (s[i])
 				{
-					// str = ft_strjoin(collector, str, ft_strdup(collector, getenv(s[i])));
-					str = ft_strjoin(collector, str, getenv(s[i]));
+					// str = ft_mstrjoin(collector, str, ft_mstrdup(collector, getenv(s[i])));
+					str = ft_mstrjoin(collector, str, getenv(s[i]));
 					i++;
 				}
 			}
 			else
 			{
-				s = ft_split(collector, node->cmd, '$');
-				str = ft_strdup(collector, s[i]);
+				s = ft_msplit(collector, node->cmd, '$');
+				str = ft_mstrdup(collector, s[i]);
 				i++;
 				while (s[i])
 				{
-					// str = ft_strjoin(collector, str, ft_strdup(collector, getenv(s[i])));
-					str = ft_strjoin(collector, str, getenv(s[i]));
+					// str = ft_mstrjoin(collector, str, ft_mstrdup(collector, getenv(s[i])));
+					str = ft_mstrjoin(collector, str, getenv(s[i]));
 					i++;
 				}
 			}
-			node->cmd = ft_strdup(collector, str);
+			node->cmd = ft_mstrdup(collector, str);
 			// node->cmd = str;
 			// free(str);
 		}

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_mstrtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "Minishell.h"
 
 static int	check(char c, char const *set)
 {
@@ -62,7 +62,7 @@ static int	ns_end(char const *s1, char const *set)
 	return (l_e);
 }
 
-char	*ft_strtrim(t_collector **collector, char const *s1, char const *set)
+char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set)
 {
 	char		*ns;
 	size_t		l;
@@ -77,7 +77,7 @@ char	*ft_strtrim(t_collector **collector, char const *s1, char const *set)
 	l_f = ns_start(s1, set);
 	l_e = ns_end(s1, set);
 	if (l_f > l_e)
-		return (ft_strdup(collector, ""));
+		return (ft_mstrdup(collector, ""));
 	l = l_e - l_f + 1;
 	ns = (char *)h_malloc(collector, sizeof (char) * (l + 1), ns);
 	if (!ns)

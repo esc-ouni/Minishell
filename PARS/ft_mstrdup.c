@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_mstrdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 14:28:42 by idouni            #+#    #+#             */
-/*   Updated: 2022/11/12 14:28:44 by idouni           ###   ########.fr       */
+/*   Created: 2022/11/12 14:28:13 by idouni            #+#    #+#             */
+/*   Updated: 2022/11/12 14:28:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "Minishell.h"
 
-char	*ft_strjoin(t_collector **collector, char const *s1, char const *s2)
+char	*ft_mstrdup(t_collector **collector, const char *s1)
 {
-	size_t		l1;
-	size_t		l2;
-	char		*ns;
+	size_t	i;
+	char	*s;
 
-	ns = NULL;
-	if (!s1 || !s2)
+	i = 0;
+	s = NULL;
+	s = (char *)h_malloc(collector, sizeof(char) * (ft_strlen(s1) + 1), s);
+	if (s == NULL)
 		return (NULL);
-	l1 = ft_strlen(s1);
-	l2 = ft_strlen(s2);
-	ns = (char *)h_malloc(collector, sizeof(char) * (l1 + l2 + 1), ns);
-	if (ns)
+	else
 	{
-		ft_memmove(ns, s1, l1);
-		ft_memmove(ns + l1, s2, l2);
-		ns[l2 + l1] = '\0';
-		return (ns);
+		while (s1[i] != '\0')
+		{
+			s[i] = s1[i];
+			i++;
+		}
+		s[i] = '\0';
 	}
-	return (ns);
+	return (s);
 }

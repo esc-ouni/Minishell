@@ -31,6 +31,11 @@ TLS    = tools.c \
 		tools_2.c \
 		G_N_L/get_next_line.c \
 		G_N_L/get_next_line_utils.c \
+		ft_msplit.c \
+		ft_mstrdup.c \
+		ft_mstrjoin.c \
+		ft_mstrtrim.c \
+		ft_msubstr.c
 
 OBJ_M  = $(MND:%.c=%.o)
 

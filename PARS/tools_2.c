@@ -242,7 +242,7 @@ t_lexer *lexer(t_collector **collector, char *s)
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_substr(collector, s, start, l2), ST_DQ);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_DQ);
             start = 0;
             l2 = 0;
             i++;
@@ -257,7 +257,7 @@ t_lexer *lexer(t_collector **collector, char *s)
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_substr(collector, s, start, l2), ST_SQ);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_SQ);
             start = 0;
             l2 = 0;
             i++;
@@ -271,7 +271,7 @@ t_lexer *lexer(t_collector **collector, char *s)
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_substr(collector, s, start, l2), ST_LT);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_LT);
             start = 0;
             l2 = 0;
         }
@@ -284,7 +284,7 @@ t_lexer *lexer(t_collector **collector, char *s)
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_substr(collector, s, start, l2), ST_LT);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_LT);
             start = 0;
             l2 = 0;
         }
@@ -292,35 +292,35 @@ t_lexer *lexer(t_collector **collector, char *s)
             i++;
         else if (s[i] == '|')
         {
-            add_lexer(collector, &l_node, ft_substr(collector, s, i, 1), PIP);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), PIP);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '>' && s[i + 1] != '>')
         {
-            add_lexer(collector, &l_node, ft_substr(collector, s, i, 1), R_OT);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), R_OT);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '<' && s[i + 1] != '<')
         {
-            add_lexer(collector, &l_node, ft_substr(collector, s, i, 1), R_IN);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), R_IN);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '>' && s[i + 1] == '>')
         {
-            add_lexer(collector, &l_node, ft_substr(collector, s, i, 2), R_OA);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 2), R_OA);
             i += 2;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '<' && s[i + 1] == '<')
         {
-            add_lexer(collector, &l_node, ft_substr(collector, s, i, 2), R_HD);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 2), R_HD);
             i += 2;
             start = 0;
             l2 = 0;
