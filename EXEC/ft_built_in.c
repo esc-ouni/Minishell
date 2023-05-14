@@ -42,16 +42,8 @@ int	ft_echo(t_cmd *lol)
 {
 	char	*s;
 
-	if (lol->cmd[1] && lol->cmd[1][0] != '$')
+	if (lol->cmd[1])
 		printf("%s\n", lol->cmd[1]);
-	else if (lol->cmd[1][0] == '$')
-	{
-		s = ft_substr(lol->cmd[1], 1, ft_strlen(lol->cmd[1]));
-		if (getenv(s))
-			printf("%s\n", getenv(s));
-		else
-			printf("\n");
-	}
 	else
 		printf("\n");
 	return (0);
