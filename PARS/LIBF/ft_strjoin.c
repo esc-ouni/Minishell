@@ -12,17 +12,18 @@
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(t_collector **collector, char const *s1, char const *s2)
 {
 	size_t		l1;
 	size_t		l2;
 	char		*ns;
 
+	ns = NULL;
 	if (!s1 || !s2)
 		return (NULL);
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);
-	ns = (char *)malloc(sizeof(char) * (l1 + l2 + 1));
+	ns = (char *)h_malloc(collector, sizeof(char) * (l1 + l2 + 1), ns);
 	if (ns)
 	{
 		ft_memmove(ns, s1, l1);

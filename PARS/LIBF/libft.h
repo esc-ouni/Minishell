@@ -40,7 +40,7 @@ void	*ft_memset(void *b, int c, size_t len);
 char    **ft_split(t_collector **collector, char const *s, char const c);
 char	*ft_strdup(t_collector **collector,const char *s1);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-char	*ft_strjoin(char const *s1, char const *s2);
+char    *ft_strjoin(t_collector **collector, char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

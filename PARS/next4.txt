@@ -1,3 +1,4 @@
 #BUILD expander
 #check syntax errors(add type to tokkenz >> ">>")
 #readability(make code more readable )
+#features to add (d"erwer" shoould be joined)

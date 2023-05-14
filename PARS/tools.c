@@ -405,11 +405,13 @@ void	expander(t_collector **collector, t_lexer **head)
 			if (node->cmd[0] == '$')
 			{
 				s = ft_split(collector, node->cmd, '$');
-				str = ft_strdup(collector, getenv(s[i]));
+				// str = ft_strdup(collector, getenv(s[i]));
+				str = getenv(s[i]);
 				i++;
 				while (s[i])
 				{
-					str = ft_strjoin(str, ft_strdup(collector, getenv(s[i])));
+					// str = ft_strjoin(collector, str, ft_strdup(collector, getenv(s[i])));
+					str = ft_strjoin(collector, str, getenv(s[i]));
 					i++;
 				}
 			}
@@ -420,11 +422,13 @@ void	expander(t_collector **collector, t_lexer **head)
 				i++;
 				while (s[i])
 				{
-					str = ft_strjoin(str, ft_strdup(collector, getenv(s[i])));
+					// str = ft_strjoin(collector, str, ft_strdup(collector, getenv(s[i])));
+					str = ft_strjoin(collector, str, getenv(s[i]));
 					i++;
 				}
 			}
-			node->cmd = ft_strdup(collector, str);
+			// node->cmd = ft_strdup(collector, str);
+			node->cmd = str;
 		}
 		s = NULL;
 		str = NULL;
