@@ -59,32 +59,6 @@ void	*h_malloc(t_collector **collector_head, size_t s, void *p)
 	return (p);
 }
 
-int	check_dq(char *s)
-{
-	int i = 0;
-	int c = 0;
-	while (s[i])
-	{
-		if (s[i] == '"')
-			c++;
-		i++;
-	}
-	return ((c % 2));
-}
-
-int	check_sq(char *s)
-{
-	int i = 0;
-	int c = 0;
-	while (s[i])
-	{
-		if (s[i] == '\'')
-			c++;
-		i++;
-	}
-	return ((c % 2));
-}
-
 int	check_oerr(char *s)
 {
 	int i = 0;
@@ -121,7 +95,31 @@ int	check_oerr(char *s)
 			i++;
 	}
 	if ((sq % 2) || (dq % 2))
+	{
+		write(2, "syntax error near unexpected token\n", 35);
 		return (1);
+	}
+	return (0);
+}
+
+int	check_pipes(char *s)
+{
+	int i = 0;
+
+	if ((s[i] == '|') || s[ft_strlen(s)-1] == '|')
+	{
+		write(2, "syntax error near unexpected token\n", 35);
+		return (1);
+	}
+	while (s[i])
+	{
+		if (s[i+1] && s[i] == '|' && s[i+1] == '|')
+		{
+			write(2, "syntax error near unexpected token\n", 35);
+			return (1);
+		}
+		i++;
+	}
 	return (0);
 }
 
@@ -134,7 +132,7 @@ int	check_syntax(char *s)
 	add_history(s);
 	if (check_oerr(s))
 		return (1);
+	if (check_pipes(s))
+		return (1);
 	return (0);
 }
-
-

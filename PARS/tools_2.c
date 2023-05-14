@@ -13,6 +13,26 @@
 // # include "minishell_pars.h"
 #include "Minishell.h"
 
+int	check_syntax2(t_lexer	**h_lexer)
+{
+	t_lexer *node;
+
+	node = *h_lexer;
+	while (node->next)
+	{
+		if ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD))
+		{
+			if ((node->next->type == R_OA) || (node->next->type == R_OT) || (node->next->type == R_IN) || (node->next->type == R_HD))
+			{
+				printf("syntax error near unexpected token '%s'\n", node->next->cmd);
+				return (1);	
+			}
+		}
+		node = node->next;
+	}
+	return (0);
+}
+
 t_lexer  *parser(t_collector	**collector)
 {
     char    *s;
@@ -22,12 +42,11 @@ t_lexer  *parser(t_collector	**collector)
 	head = NULL;
     s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
 	if (check_syntax(s))
-	{
-		printf ("\nERROR\n");
 		return (NULL);
-	}
     h_lexer = lexer(collector, s);
 	expander(collector, &h_lexer);
+	if (check_syntax2(&h_lexer))
+		return (NULL);
 	return (h_lexer);
 }
 
@@ -59,13 +78,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             if (!strcmp(n->cmd, ">") && n->next)
             {
                 n = n->next;
-                n->type = FIL;
+                n->type = FIL_NM;
                 add_file_node(collector, &out_files, n->cmd, O_TRUNC);
             }
             if (!strcmp(n->cmd, ">>") && n->next)
             {
                 n = n->next;
-                n->type = FIL;
+                n->type = FIL_NM;
                 add_file_node(collector, &out_files, n->cmd, O_APPEND);
             }
             n = n->next;
@@ -78,13 +97,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             if (!strcmp(n->cmd, "<") && n->next)
             {
                 n = n->next;
-                n->type = FIL;
+                n->type = FIL_NM;
                 add_file_node(collector, &in_files, n->cmd, O_TRUNC);
             }
             if (!strcmp(n->cmd, "<<") && n->next)
             {
                 n = n->next;
-                n->type = FIL;
+                n->type = FIL_NM;
                 add_file_node(collector, &in_files, n->cmd, O_APPEND);
             }
             n = n->next;
@@ -271,7 +290,7 @@ t_lexer *lexer(t_collector **collector, char *s)
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_LT);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), CMD);
             start = 0;
             l2 = 0;
         }
@@ -284,7 +303,7 @@ t_lexer *lexer(t_collector **collector, char *s)
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_LT);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), OPTN);
             start = 0;
             l2 = 0;
         }
