@@ -77,14 +77,16 @@ typedef struct s_mlist
 typedef enum e_enum
 {
     PIP,
-	ST_LT,
+	CMD,
+    OPTN,
+    ARGS,
 	ST_SQ,
 	ST_DQ,
     R_OA,
     R_OT,
     R_IN,
     R_HD,
-	FIL,
+	FIL_NM,
 	UDF
 }	t_enum;
 
