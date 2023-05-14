@@ -92,6 +92,19 @@ typedef struct s_lexer
     struct s_lexer	*next;
 }   t_lexer;
 
+typedef struct s_collector
+{
+    void            *addr;
+    struct s_collector   *next;
+}   t_collector;
+
+void	*h_malloc(t_collector **collect_head, size_t s, void *p);
+char    **ft_msplit(t_collector **collector, char const *s, char const c);
+char	*ft_mstrdup(t_collector **collector,const char *s1);
+char    *ft_mstrjoin(t_collector **collector, char const *s1, char const *s2);
+char	*ft_msubstr(t_collector **collector, char const *s, unsigned int start, size_t len);
+char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
+
 int     check_syntax(char *s);
 void	emplify(t_collector **collector, t_cmd *cmd, char **env);
 // void	*h_malloc(t_collector **collect_head, size_t s, void *p);
