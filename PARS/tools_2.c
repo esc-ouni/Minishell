@@ -13,7 +13,7 @@
 // # include "minishell_pars.h"
 #include "Minishell.h"
 
-t_lexer  *parser()
+t_lexer  *parser(t_collector	**collector)
 {
     char    *s;
 	t_mlist	*head;
@@ -26,11 +26,12 @@ t_lexer  *parser()
 		printf ("\nERROR\n");
 		return (NULL);
 	}
-    h_lexer = lexer(s);
+    h_lexer = lexer(collector, s);
+	expander(collector, &h_lexer);
 	return (h_lexer);
 }
 
-t_cmd  *parser2(t_lexer *head)
+t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 {
     char    **full_cmd;
     t_file  *out_files;
@@ -59,13 +60,13 @@ t_cmd  *parser2(t_lexer *head)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(&out_files, n->cmd, O_TRUNC);
+                add_file_node(collector, &out_files, n->cmd, O_TRUNC);
             }
             if (!strcmp(n->cmd, ">>") && n->next)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(&out_files, n->cmd, O_APPEND);
+                add_file_node(collector, &out_files, n->cmd, O_APPEND);
             }
             n = n->next;
         }
@@ -78,41 +79,19 @@ t_cmd  *parser2(t_lexer *head)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(&in_files, n->cmd, O_TRUNC);
+                add_file_node(collector, &in_files, n->cmd, O_TRUNC);
             }
             if (!strcmp(n->cmd, "<<") && n->next)
             {
                 n = n->next;
                 n->type = FIL;
-                add_file_node(&in_files, n->cmd, O_TRUNC);
+                add_file_node(collector, &in_files, n->cmd, O_APPEND);
             }
             n = n->next;
         }
 
         // GET_FULL_CMD
         n = node;
-        // while (n && n->type != PIP)
-        // {
-        //     if (node->type == FIL || node->type == R_HD || node->type == R_IN || node->type == R_OA || node->type == R_OT)
-        //     {
-        //         // n = n->next;
-        //         if (n->next)
-        //         {
-        //             if (n->next->next)
-        //                 n = n->next->next;
-        //             else
-        //             {
-        //                 n = NULL;
-        //                 break ;
-        //             }
-        //         }
-        //     }
-        //     else
-        //     {
-        //         add_to_fullcmd(&full_cmd, n);
-        //         n = n->next;
-        //     }
-        // }
 		while (n && n->type != PIP)
         {
             if (!strcmp(n->cmd, ">>") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, "<"))
@@ -130,24 +109,15 @@ t_cmd  *parser2(t_lexer *head)
             }
             else
             {
-                add_to_fullcmd(&full_cmd, n);
+                add_to_fullcmd(collector, &full_cmd, n);
                 n = n->next;
             }
         }
-        i = 0;
-        // if (full_cmd)
-        // {
-        //     while (full_cmd[i])
-        //     {
-        //         printf("%s\n", full_cmd[i]);
-        //         i++;
-        //     }
-        // }
         if (n)
         {
             if (n->type == PIP)
             {
-                add_to_cmd(&cmd, full_cmd, out_files, in_files);
+                add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
                 full_cmd = NULL;
                 out_files = NULL;
                 in_files = NULL;
@@ -157,17 +127,15 @@ t_cmd  *parser2(t_lexer *head)
         }
         else
         {
-            add_to_cmd(&cmd, full_cmd, out_files, in_files);
+            add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
             full_cmd = NULL;
             out_files = NULL;
             in_files = NULL;
             i2++;
-            // n = n->next;   
             node = n;
         }
         node = n;
     }
-    // i = 0;
 
     //UPDATE_CMD
     n_cmd = cmd;
@@ -247,7 +215,7 @@ void    after_parse2(t_cmd  *cmd)
     }
 }
 
-t_lexer *lexer(char *s)
+t_lexer *lexer(t_collector **collector, char *s)
 {
     int     i;
     int     l;
@@ -255,7 +223,6 @@ t_lexer *lexer(char *s)
     int     start;
     int     sz;
     t_lexer *l_node;
-    t_lexer *n;
 
     i = 0;
     start = 0;
@@ -275,7 +242,7 @@ t_lexer *lexer(char *s)
                 i++;
                 l2++;
             }
-            add_lexer(&l_node, ft_substr(s, start, l2), ST_DQ);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_DQ);
             start = 0;
             l2 = 0;
             i++;
@@ -290,7 +257,7 @@ t_lexer *lexer(char *s)
                 i++;
                 l2++;
             }
-            add_lexer(&l_node, ft_substr(s, start, l2), ST_SQ);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_SQ);
             start = 0;
             l2 = 0;
             i++;
@@ -304,7 +271,7 @@ t_lexer *lexer(char *s)
                 i++;
                 l2++;
             }
-            add_lexer(&l_node, ft_substr(s, start, l2), ST_LT);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_LT);
             start = 0;
             l2 = 0;
         }
@@ -317,7 +284,7 @@ t_lexer *lexer(char *s)
                 i++;
                 l2++;
             }
-            add_lexer(&l_node, ft_substr(s, start, l2), ST_LT);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_LT);
             start = 0;
             l2 = 0;
         }
@@ -325,46 +292,40 @@ t_lexer *lexer(char *s)
             i++;
         else if (s[i] == '|')
         {
-            add_lexer(&l_node, ft_substr(s, i, 1), PIP);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), PIP);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '>' && s[i + 1] != '>')
         {
-            add_lexer(&l_node, ft_substr(s, i, 1), R_OT);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), R_OT);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '<' && s[i + 1] != '<')
         {
-            add_lexer(&l_node, ft_substr(s, i, 1), R_IN);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), R_IN);
             i += 1;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '>' && s[i + 1] == '>')
         {
-            add_lexer(&l_node, ft_substr(s, i, 2), R_OA);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 2), R_OA);
             i += 2;
             start = 0;
             l2 = 0;
         }
         else if (s[i] == '<' && s[i + 1] == '<')
         {
-            add_lexer(&l_node, ft_substr(s, i, 2), R_HD);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 2), R_HD);
             i += 2;
             start = 0;
             l2 = 0;
         }
     }
-    n = l_node;
-    // while (n)
-    // {
-    //     printf(":%s:\n", n->cmd);
-    //     n = n->next;       
-    // }
-    // exit(0);
+	free(s);
     return (l_node);
 }

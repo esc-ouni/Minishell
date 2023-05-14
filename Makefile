@@ -44,7 +44,7 @@ EXEC_OBJ = $(EXEC_SRC:.c=.o)
 
 #		PARS
 PARS_DIR = PARS/
-PARS_SRC = PARS/tools.c   PARS/tools_1.c PARS/tools_2.c
+PARS_SRC = PARS/tools.c   PARS/tools_1.c PARS/tools_2.c PARS/ft_msplit.c   PARS/ft_mstrdup.c  PARS/ft_mstrjoin.c PARS/ft_mstrtrim.c PARS/ft_msubstr.c
 PARS_OBJ = $(PARS_SRC:.c=.o)
 
 MAIN_SRC = main.c
