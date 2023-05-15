@@ -104,22 +104,22 @@ void printTYPE(t_enum num)
 t_lexer  *parser(t_collector	**collector)
 {
     char    *s;
-	t_mlist	*head;
 	t_lexer	*h_lexer;
+	t_lexer	*h2_lexer;
 
-	head = NULL;
     s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
 	// if (check_syntax(s))
 	// 	return (NULL);
     h_lexer = lexer(collector, s);
-	while (h_lexer)
+    h2_lexer = h_lexer;
+	while (h2_lexer)
 	{
-		printf("\n'%s' type ", h_lexer->cmd);
-		printTYPE(h_lexer->type);
-		h_lexer = h_lexer->next;
+		printf("\n'%s' type ", h2_lexer->cmd);
+		printTYPE(h2_lexer->type);
+		h2_lexer = h2_lexer->next;
 	}
 	printf("\n");
-	return (NULL);
+	// return (NULL);
 	expander(collector, &h_lexer);
 	// if (check_syntax2(&h_lexer))
 	// 	return (NULL);
@@ -132,6 +132,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     t_file  *out_files;
     t_file  *in_files;
     t_lexer  *node;
+    t_lexer  *h_lexer;
     t_lexer  *n;
     t_cmd   *cmd;
     t_cmd   *n_cmd;
@@ -141,6 +142,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     if (!head)
         return (NULL);
     node = head;
+    h_lexer = head;
     full_cmd = NULL;
     cmd = NULL;
     out_files = NULL;
@@ -189,7 +191,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
 		while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, ">>") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, "<"))
+            if (n->type == R_IN || n->type == R_HD || n->type == R_OT || n->type == R_OA)
             {
                 if (n->next)
                 {
@@ -257,6 +259,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
     }
+	while (h_lexer)
+	{
+		printf("\n'%s' type ", h_lexer->cmd);
+		printTYPE(h_lexer->type);
+		h_lexer = h_lexer->next;
+	}
+    // return (NULL);
     return (cmd);
 }
 
@@ -313,7 +322,6 @@ void    after_parse2(t_cmd  *cmd)
 t_lexer *lexer(t_collector **collector, char *s)
 {
     int     i;
-    int     l;
     int     l2;
     int     start;
     int     sz;
@@ -321,7 +329,6 @@ t_lexer *lexer(t_collector **collector, char *s)
 
     i = 0;
     start = 0;
-    l = 0;
     l2 = 0;
     sz = ft_strlen(s);
     l_node = NULL;
