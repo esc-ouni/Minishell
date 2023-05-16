@@ -259,12 +259,12 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
     }
-	while (h_lexer)
-	{
-		printf("\n'%s' type ", h_lexer->cmd);
-		printTYPE(h_lexer->type);
-		h_lexer = h_lexer->next;
-	}
+	// while (h_lexer)
+	// {
+	// 	printf("\n'%s' type ", h_lexer->cmd);
+	// 	printTYPE(h_lexer->type);
+	// 	h_lexer = h_lexer->next;
+	// }
     // return (NULL);
     return (cmd);
 }
