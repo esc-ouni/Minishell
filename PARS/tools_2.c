@@ -38,17 +38,89 @@ int	check_syntax2(t_lexer	**h_lexer)
 	return (0);
 }
 
+void printTYPE(t_enum num) 
+{
+    switch (num) 
+	{
+        case PIP:
+		{
+            printf("Pipe\n");
+            break;
+		}
+        case CMD:
+		{
+            printf("CMD\n");
+            break;
+		}
+        case OPTN:
+		{
+            printf("OPTN\n");
+            break;
+		}
+        case ARGS:
+		{
+            printf("ARGS\n");
+            break;
+		}
+        case ST_SQ:
+		{
+            printf("ST_SQ\n");
+            break;
+		}
+        case ST_DQ:
+		{
+            printf("ST_DQ\n");
+            break;
+		}
+        case R_OA:
+		{
+            printf("R_OA\n");
+            break;
+		}
+        case R_OT:
+		{
+            printf("R_OT\n");
+            break;
+		}
+        case R_IN:
+		{
+            printf("R_IN\n");
+            break;
+		}
+        case R_HD:
+		{
+            printf("R_HD\n");
+            break;
+		}
+        case FIL_NM:
+		{
+            printf("FIL_NM\n");
+            break;
+		}
+        default:
+            printf("Unknown Type\n");
+    }
+}
+
 t_lexer  *parser(t_collector	**collector)
 {
     char    *s;
-	t_mlist	*head;
 	t_lexer	*h_lexer;
+	// t_lexer	*h2_lexer;
 
-	head = NULL;
     s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
 	if (check_syntax(s))
 		return (NULL);
     h_lexer = lexer(collector, s);
+    // h2_lexer = h_lexer;
+	// while (h2_lexer)
+	// {
+	// 	printf("\n'%s' type ", h2_lexer->cmd);
+	// 	printTYPE(h2_lexer->type);
+	// 	h2_lexer = h2_lexer->next;
+	// }
+	// printf("\n");
+	// return (NULL);
 	expander(collector, &h_lexer);
 	if (check_syntax2(&h_lexer))
 		return (NULL);
@@ -61,6 +133,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     t_file  *out_files;
     t_file  *in_files;
     t_lexer  *node;
+    t_lexer  *h_lexer;
     t_lexer  *n;
     t_cmd   *cmd;
     t_cmd   *n_cmd;
@@ -70,6 +143,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     if (!head)
         return (NULL);
     node = head;
+    h_lexer = head;
     full_cmd = NULL;
     cmd = NULL;
     out_files = NULL;
@@ -80,13 +154,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, ">") && n->next)
+            if (n->cmd && !strcmp(n->cmd, ">") && n->next)
             {
                 n = n->next;
                 n->type = FIL_NM;
                 add_file_node(collector, &out_files, n->cmd, O_TRUNC);
             }
-            if (!strcmp(n->cmd, ">>") && n->next)
+            if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
             {
                 n = n->next;
                 n->type = FIL_NM;
@@ -99,13 +173,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, "<") && n->next)
+            if (n->cmd && !strcmp(n->cmd, "<") && n->next)
             {
                 n = n->next;
                 n->type = FIL_NM;
                 add_file_node(collector, &in_files, n->cmd, O_TRUNC);
             }
-            if (!strcmp(n->cmd, "<<") && n->next)
+            if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
             {
                 n = n->next;
                 n->type = FIL_NM;
@@ -118,7 +192,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
 		while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, ">>") || !strcmp(n->cmd, "<<") || !strcmp(n->cmd, ">") || !strcmp(n->cmd, "<"))
+            if (n->type == R_IN || n->type == R_HD || n->type == R_OT || n->type == R_OA)
             {
                 if (n->next)
                 {
@@ -160,7 +234,6 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         }
         node = n;
     }
-
     //UPDATE_CMD
     n_cmd = cmd;
     while (n_cmd)
@@ -186,6 +259,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
     }
+	// while (h_lexer)
+	// {
+	// 	printf("\n'%s' type ", h_lexer->cmd);
+	// 	printTYPE(h_lexer->type);
+	// 	h_lexer = h_lexer->next;
+	// }
+    // return (NULL);
     return (cmd);
 }
 
@@ -242,7 +322,6 @@ void    after_parse2(t_cmd  *cmd)
 t_lexer *lexer(t_collector **collector, char *s)
 {
     int     i;
-    int     l;
     int     l2;
     int     start;
     int     sz;
@@ -250,7 +329,6 @@ t_lexer *lexer(t_collector **collector, char *s)
 
     i = 0;
     start = 0;
-    l = 0;
     l2 = 0;
     sz = ft_strlen(s);
     l_node = NULL;
@@ -286,6 +364,9 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
             i++;
         }
+        // if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' && s[i] && s[i] != '>' && s[i + 1] != '<' && s[i] != '|')
+		// {		
+		// }
         if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ' && s[i] != '-')
         {
             if (!start)

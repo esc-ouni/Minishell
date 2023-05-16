@@ -19,17 +19,14 @@ char	*ft_mstrdup(t_collector **collector, const char *s1)
 
 	i = 0;
 	s = NULL;
-	s = (char *)h_malloc(collector, sizeof(char) * (ft_strlen(s1) + 1), s);
-	if (s == NULL)
+	if (!s1)
 		return (NULL);
-	else
+	s = (char *)h_malloc(collector, sizeof(char) * (ft_strlen(s1) + 1), s);
+	while (s1[i] != '\0')
 	{
-		while (s1[i] != '\0')
-		{
-			s[i] = s1[i];
-			i++;
-		}
-		s[i] = '\0';
+		s[i] = s1[i];
+		i++;
 	}
+	s[i] = '\0';
 	return (s);
 }
