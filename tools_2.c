@@ -109,8 +109,8 @@ t_lexer  *parser(t_collector	**collector)
 	// t_lexer	*h2_lexer;
 
     s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
-	if (check_syntax(s))
-		return (NULL);
+	// if (check_syntax(s))
+	// 	return (NULL);
     h_lexer = lexer(collector, s);
     // h2_lexer = h_lexer;
 	// while (h2_lexer)
@@ -122,8 +122,8 @@ t_lexer  *parser(t_collector	**collector)
 	// printf("\n");
 	// return (NULL);
 	expander(collector, &h_lexer);
-	if (check_syntax2(&h_lexer))
-		return (NULL);
+	// if (check_syntax2(&h_lexer))
+	// 	return (NULL);
 	return (h_lexer);
 }
 
@@ -364,9 +364,6 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
             i++;
         }
-        // if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' && s[i] && s[i] != '>' && s[i + 1] != '<' && s[i] != '|')
-		// {		
-		// }
         if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ' && s[i] != '-')
         {
             if (!start)
@@ -394,7 +391,12 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
         }
         else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-            i++;
+		{
+			add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), WH_SP);
+            i += 1;
+            start = 0;
+            l2 = 0;
+		}
         else if (s[i] == '|')
         {
             add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), PIP);

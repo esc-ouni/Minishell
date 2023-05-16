@@ -42,6 +42,7 @@ typedef enum e_enum
 	CMD,
     OPTN,
     ARGS,
+	WH_SP,
 	ST_SQ,
 	ST_DQ,
     R_OA,
