@@ -411,7 +411,6 @@ void	expander(t_collector **collector, t_lexer **head)
 				while (s[i])
 				{
 					str = ft_mstrjoin(collector, str, getenv(s[i]));
-					printf("%s\n", str);
 					i++;
 				}
 			}
