@@ -154,13 +154,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, ">") && n->next)
+            if (n->cmd && !strcmp(n->cmd, ">") && n->next)
             {
                 n = n->next;
                 n->type = FIL_NM;
                 add_file_node(collector, &out_files, n->cmd, O_TRUNC);
             }
-            if (!strcmp(n->cmd, ">>") && n->next)
+            if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
             {
                 n = n->next;
                 n->type = FIL_NM;
@@ -173,13 +173,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (!strcmp(n->cmd, "<") && n->next)
+            if (n->cmd && !strcmp(n->cmd, "<") && n->next)
             {
                 n = n->next;
                 n->type = FIL_NM;
                 add_file_node(collector, &in_files, n->cmd, O_TRUNC);
             }
-            if (!strcmp(n->cmd, "<<") && n->next)
+            if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
             {
                 n = n->next;
                 n->type = FIL_NM;
@@ -234,7 +234,6 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         }
         node = n;
     }
-
     //UPDATE_CMD
     n_cmd = cmd;
     while (n_cmd)

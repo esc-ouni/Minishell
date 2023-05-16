@@ -404,32 +404,30 @@ void	expander(t_collector **collector, t_lexer **head)
 		{
 			if (node->cmd[0] == '$')
 			{
+				i = 0;
 				s = ft_msplit(collector, node->cmd, '$');
-				// str = ft_mstrdup(collector, getenv(s[i]));
 				str = getenv(s[i]);
 				i++;
 				while (s[i])
 				{
-					// str = ft_mstrjoin(collector, str, ft_mstrdup(collector, getenv(s[i])));
 					str = ft_mstrjoin(collector, str, getenv(s[i]));
+					printf("%s\n", str);
 					i++;
 				}
 			}
 			else
 			{
+				i = 0;
 				s = ft_msplit(collector, node->cmd, '$');
 				str = ft_mstrdup(collector, s[i]);
 				i++;
 				while (s[i])
 				{
-					// str = ft_mstrjoin(collector, str, ft_mstrdup(collector, getenv(s[i])));
 					str = ft_mstrjoin(collector, str, getenv(s[i]));
 					i++;
 				}
 			}
 			node->cmd = ft_mstrdup(collector, str);
-			// node->cmd = str;
-			// free(str);
 		}
 		str = NULL;
 		s = NULL;
