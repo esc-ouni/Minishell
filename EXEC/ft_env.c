@@ -68,8 +68,6 @@ char    **ft_set_env(t_env *env_lst, char **myenv)
     int     i;
 
     i = 0;
-    // if (myenv)
-    //     ft_free_env(myenv);
     res = (char **)malloc(sizeof(char *) * (env_size(env_lst) + 1));
     while (env_lst)
     {
@@ -81,21 +79,45 @@ char    **ft_set_env(t_env *env_lst, char **myenv)
     return (res);
 }
 
+char    **ft_make_double_char(t_env *env_lst)
+{
+    int i;
+    char    **res;
+
+    i = env_size(env_lst);
+    res = (char **)malloc(sizeof(char *) * (i + 1));
+    i = 0;
+    while (env_lst)
+    {
+        res[i] = ft_strdup(env_lst->str);
+        i++;
+        env_lst = env_lst->next;
+    }
+    res[i] = NULL;
+    return (res);
+}
+
 char    **ft_export(t_env **env_lst, char *str, char **myenv)
 {
+    char **res;
+    if (!str)
+        return (myenv);
     env_add_back(env_lst, new_env(str));
-    return (ft_set_env(env_lst, myenv));
+    res = ft_make_double_char(*env_lst);
+    return (res);
 }
 
 
-void    ft_unset_lst(t_env **env_lst, char *str)
+int    ft_unset_lst(t_env **env_lst, char *str)
 {
     t_env    *tmp;
     t_env    *tmp2;
 
     tmp = NULL;
     tmp2 = NULL;
-    while (env_lst)
+    if (!str)
+        return 0;
+    while (*env_lst)
     {
         if ((*env_lst)->next && !strncmp((*env_lst)->next->str, str, ft_strlen(str)))
         {
@@ -104,17 +126,20 @@ void    ft_unset_lst(t_env **env_lst, char *str)
                 tmp2 = (*env_lst)->next->next;
             (*env_lst)->next = tmp2;
             free(tmp);
-            return ;
+            return (1) ;
         }
         *env_lst = (*env_lst)->next;
     }
+    return (0);
 }
 
 char    **ft_unset(t_env **env_lst, char *str, char **myenv)
 {
     t_env   *head;
+
     head = *env_lst;
-    ft_unset_lst(env_lst, str);
+    if (!ft_unset_lst(env_lst, str))
+        return (myenv);
     *env_lst = head;
     return (ft_set_env(*env_lst, myenv));
 }

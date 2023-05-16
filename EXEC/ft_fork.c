@@ -9,12 +9,12 @@ int ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst)
 		ft_quit(NOT);
 	else if (lol->builtflag == EXPT)
 	{
-		*myenv = ft_export(env_lst, lol->cmd[1], *myenv);
+		*myenv = ft_export(env_lst, lol->cmd[1],*myenv);
 		return (0);
 	}
 	else if(lol->builtflag == UNST)
 	{
-		*myenv = ft_unset(&env_lst, lol->cmd[1], *myenv);
+		*myenv = ft_unset(env_lst, lol->cmd[1], *myenv);
         return (0);
 	}
     return (1);
