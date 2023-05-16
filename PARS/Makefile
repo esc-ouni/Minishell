@@ -41,23 +41,23 @@ OBJ_M  = $(MND:%.c=%.o)
 
 OBJ_T  = $(TLS:%.c=%.o)
 
-all:
-	gcc Minishell.c tools.c tools_1.c tools_2.c ft_msplit.c ft_mstrdup.c ft_mstrjoin.c ft_mstrtrim.c ft_msubstr.c libft.a -lreadline -L /Users/idouni/.brew/opt/readline/lib -o $(NAME)
-	@clear && echo "==$(NAME)_compiled=============="
-	./Minishell
-
-# all: LIBFT $(NAME)
-
-# LIBFT:
-# 	@make -C LIBF
-
-# $(NAME): $(OBJ_M) $(OBJ_T) $(HR)
-# 	@$(CC) $(FLAGS) LIBF/libft.a $(OBJ_T) $(OBJ_M) -o $(NAME) -L $(LINK) -lreadline
+# all:
+# 	gcc Minishell.c tools.c tools_1.c tools_2.c ft_msplit.c ft_mstrdup.c ft_mstrjoin.c ft_mstrtrim.c ft_msubstr.c libft.a -lreadline -L /Users/idouni/.brew/opt/readline/lib -o $(NAME)
 # 	@clear && echo "==$(NAME)_compiled=============="
 # 	./Minishell
 
-# %.o: %.c $(HR)
-# 	$(CC) $(FLAGS) -c $< -o $@ -I$(INCLUDES) -I$(INC)
+all: LIBFT $(NAME)
+
+LIBFT:
+	@make -C LIBF
+
+$(NAME): $(OBJ_M) $(OBJ_T) $(HR)
+	@$(CC) $(FLAGS) LIBF/libft.a $(OBJ_T) $(OBJ_M) -o $(NAME) -L $(LINK) -lreadline
+	@clear && echo "==$(NAME)_compiled=============="
+	./Minishell
+
+%.o: %.c $(HR)
+	$(CC) $(FLAGS) -c $< -o $@ -I$(INCLUDES) -I$(INC)
 
 clean:
 	@make clean -C LIBF
