@@ -64,9 +64,8 @@ int ft_parent(t_cmd *lol, int *fd, int *pid)
 		close (fd[0]);
 }
 
-int	ft_heredoc(t_cmd *cmd)
+int	ft_heredoc(t_cmd *cmd, int *fd)
 {
-	int	fd[2];
 	int	pid;
 	char	*line;
 
@@ -90,6 +89,7 @@ int	ft_heredoc(t_cmd *cmd)
 	{
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
+		waitpid(pid, NULL, 0);
 	}
 }
 
@@ -97,6 +97,7 @@ int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 {
 	int	pid;
 	int fd[2];
+	int	here[2];
 
 	lol->delim = "LOL";
 	lol->heredoc = 1;
@@ -108,12 +109,14 @@ int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 		dup2(lol->cmd_fdin, STDIN_FILENO);
 	}
 	if (lol->heredoc)
-		ft_heredoc(lol);
+		ft_heredoc(lol, here);
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
         ft_child(lol, fd, *env_lst, *myenv);
 	else
         ft_parent(lol, fd, pid);
+	close(here[0]);
+	close(here[1]);
 	return 0;
 }
