@@ -60,8 +60,6 @@ typedef struct s_cmd
 	int				first_cmd;
 	int				last_cmd;
 	t_built			builtflag;
-	int				heredoc;
-	char			*delim;
 	//7odoud
 	int				init_stdin;
 	int				cmd_fdin;
@@ -129,7 +127,7 @@ void	ft_env(char **myenv);
 char	*ft_get_path(char **cmd, char **env);
 void	sig_handle(int sig);
 void	ft_quit(t_built flag);
-int	ft_heredoc(t_cmd *cmd);
+int		ft_heredoc(t_cmd *cmd, char *delimiter);
 // void    start(void);
 // int     check_syntax(char *s);
 // void    after_parse(t_mlist  *head);

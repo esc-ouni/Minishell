@@ -64,7 +64,7 @@ int ft_parent(t_cmd *lol, int *fd, int *pid)
 		close (fd[0]);
 }
 
-int	ft_heredoc(t_cmd *cmd)
+int	ft_heredoc(t_cmd *cmd, char *delimiter)
 {
 	int		pid;
 	char	*line;
@@ -78,7 +78,7 @@ int	ft_heredoc(t_cmd *cmd)
 		line = get_next_line(0);
 		while (line)
 		{
-			if (!ft_strncmp(line, cmd->delim, ft_strlen(cmd->delim)))
+			if (!ft_strncmp(line, delimiter, ft_strlen(delimiter)))
 				break ;
 			write(fd[1], line, ft_strlen(line));
 			free(line);
@@ -100,7 +100,6 @@ int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 	int	pid;
 	int fd[2];
 
-	lol->delim = "out";
 	if (!ft_built_in_first(lol, myenv, env_lst))
         return (0);
 	if (lol->in_files)

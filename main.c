@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/17 03:51:58 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/17 04:28:21 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_open_in_file(t_cmd *lol)
 	{
 		lol->cmd_fdin = open(files->filename, O_RDONLY);
 		if (files->o_flags == O_APPEND)
-			ft_heredoc(lol);
+			ft_heredoc(lol, files->filename);
 		if (lol->cmd_fdin < 0)
 			return (perror(""), 1);
 		files = files->next;
