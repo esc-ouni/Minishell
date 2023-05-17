@@ -108,7 +108,7 @@ t_lexer  *parser(t_collector	**collector)
 	t_lexer	*h_lexer;
 	// t_lexer	*h2_lexer;
 
-    s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
+    s = readline("\x1B[34m" "3===D💦 :" "\x1B[0m");
 	if (check_syntax(s))
 		return (NULL);
     h_lexer = lexer(collector, s);
