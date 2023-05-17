@@ -42,9 +42,16 @@ int	ft_echo(t_cmd *lol)
 {
 	char	*s;
 	int		i;
+	int		option;
 
 	i = 1;
+	option = 0;
 	s = NULL;
+	if (!strncmp(lol->cmd[i], "-n", ft_strlen(lol->cmd[i])))
+	{
+		option = 1;
+		i++;
+	}
 	if (lol->cmd[i])
 	{
 		while (lol->cmd[i])
@@ -54,7 +61,9 @@ int	ft_echo(t_cmd *lol)
 				s = ft_strjoin(s, " ");
 			i++;
 		}
-		printf("%s\n", s);
+		printf("%s", s);
+		if (!option)
+			printf("\n");
 	}
 	else
 		printf("\n");
