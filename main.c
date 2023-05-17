@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/12 02:34:31 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/17 02:35:27 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	ft_execution(t_cmd *cmd, t_env **env_lst,char ***myenv)
 			cmd = cmd->next;
 		}
 }
+
 int main(int ac, char **av, char **env)
 {
 	(void)av;

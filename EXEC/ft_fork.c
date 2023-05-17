@@ -64,11 +64,42 @@ int ft_parent(t_cmd *lol, int *fd, int *pid)
 		close (fd[0]);
 }
 
+int	ft_heredoc(t_cmd *cmd)
+{
+	int	fd[2];
+	int	pid;
+	char	*line;
+
+	pipe(fd);
+	pid = fork();
+	if (!pid)
+	{
+		close (fd[0]);
+		line = get_next_line(0);
+		while (line)
+		{
+			if (!ft_strncmp(line, cmd->delim, ft_strlen(cmd->delim)))
+				break ;
+			write(fd[1], line, ft_strlen(line));
+			free(line);
+			line = get_next_line(0);
+		}
+		exit(0);
+	}
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+	}
+}
+
 int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 {
 	int	pid;
 	int fd[2];
 
+	lol->delim = "LOL";
+	lol->heredoc = 1;
 	if (!ft_built_in_first(lol, myenv, env_lst))
         return (0);
 	if (lol->in_files)
@@ -76,6 +107,8 @@ int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 		ft_open_in_file(lol);
 		dup2(lol->cmd_fdin, STDIN_FILENO);
 	}
+	if (lol->heredoc)
+		ft_heredoc(lol);
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
