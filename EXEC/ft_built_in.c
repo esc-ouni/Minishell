@@ -41,9 +41,21 @@ int	ft_pwd()
 int	ft_echo(t_cmd *lol)
 {
 	char	*s;
+	int		i;
 
-	if (lol->cmd[1])
-		printf("%s\n", lol->cmd[1]);
+	i = 1;
+	s = NULL;
+	if (lol->cmd[i])
+	{
+		while (lol->cmd[i])
+		{
+			s = ft_strjoin(s, lol->cmd[i]);
+			if (lol->cmd[i + 1])
+				s = ft_strjoin(s, " ");
+			i++;
+		}
+		printf("%s\n", s);
+	}
 	else
 		printf("\n");
 	return (0);
