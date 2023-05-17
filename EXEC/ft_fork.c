@@ -99,8 +99,6 @@ int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 	int fd[2];
 	int	here[2];
 
-	lol->delim = "LOL";
-	lol->heredoc = 1;
 	if (!ft_built_in_first(lol, myenv, env_lst))
         return (0);
 	if (lol->in_files)
