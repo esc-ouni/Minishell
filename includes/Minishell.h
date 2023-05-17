@@ -129,6 +129,7 @@ void	ft_env(char **myenv);
 char	*ft_get_path(char **cmd, char **env);
 void	sig_handle(int sig);
 void	ft_quit(t_built flag);
+int	ft_heredoc(t_cmd *cmd);
 // void    start(void);
 // int     check_syntax(char *s);
 // void    after_parse(t_mlist  *head);

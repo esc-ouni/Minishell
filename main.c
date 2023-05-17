@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/17 02:35:27 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:51:58 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_open_out_files(t_cmd *lol)
 	files = lol->out_files;
 	while (files)
 	{
-		lol->cmd_fdout = open(files->filename, O_CREAT | O_TRUNC | O_WRONLY , 0664);
+		lol->cmd_fdout = open(files->filename, O_CREAT | files->o_flags | O_WRONLY , 0664);
 		if (lol->cmd_fdout < 0)
 			return (perror(""), exit(1), 1);
 		files = files->next;
@@ -50,6 +50,8 @@ int	ft_open_in_file(t_cmd *lol)
 	while (files)
 	{
 		lol->cmd_fdin = open(files->filename, O_RDONLY);
+		if (files->o_flags == O_APPEND)
+			ft_heredoc(lol);
 		if (lol->cmd_fdin < 0)
 			return (perror(""), 1);
 		files = files->next;
