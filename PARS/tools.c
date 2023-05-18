@@ -401,7 +401,9 @@ void	expander(t_collector **collector, t_lexer **head)
 {
 	t_lexer	*node;
 	int		i;
+	int		k;
 
+	k = 0;
 	i = 0;
 	char **s;
 	char *str;
@@ -426,14 +428,21 @@ void	expander(t_collector **collector, t_lexer **head)
 			}
 			else
 			{
+				if (node->cmd[0] == '\'')
+					k = 1;
 				i = 0;
 				s = ft_msplit(collector, node->cmd, '$');
 				str = ft_mstrdup(collector, s[i]);
 				i++;
 				while (s[i])
 				{
-					str = ft_mstrjoin(collector, str, getenv(s[i]));
+					str = ft_mstrjoin(collector, str, getenv(ft_mstrtrim(collector, s[i], "'")));
 					i++;
+				}
+				if (k)
+				{
+					str = ft_mstrjoin(collector, str, "'");
+					k = 0;
 				}
 			}
 			node->cmd = ft_mstrdup(collector, str);
