@@ -368,25 +368,12 @@ t_lexer *lexer(t_collector **collector, char *s)
         {
             if (!start)
                 start = i;
-            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"' && s[i] != ' ' && s[i] != '-')
-            {
-                i++;
-                l2++;
-            }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), CMD);
-            start = 0;
-            l2 = 0;
-        }
-        else if (s[i] == '-' && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ')
-        {
-            if (!start)
-                start = i;
             while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"' && s[i] != ' ')
             {
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), OPTN);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), CMD);
             start = 0;
             l2 = 0;
         }
