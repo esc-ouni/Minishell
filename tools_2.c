@@ -118,13 +118,13 @@ t_lexer  *parser(t_collector	**collector)
 		return (NULL);
     h_lexer = lexer(collector, s);
     h2_lexer = h_lexer;
-	while (h2_lexer)
-	{
-		printf("\n'%s' type ", h2_lexer->cmd);
-		printTYPE(h2_lexer->type);
-		h2_lexer = h2_lexer->next;
-	}
-	printf("\n");
+	// while (h2_lexer)
+	// {
+	// 	printf("\n'%s' type ", h2_lexer->cmd);
+	// 	printTYPE(h2_lexer->type);
+	// 	h2_lexer = h2_lexer->next;
+	// }
+	// printf("\n");
 	// return (NULL);
 	expander(collector, &h_lexer);
 	// if (check_syntax2(&h_lexer))
@@ -139,6 +139,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     t_file  *in_files;
     t_lexer  *node;
     t_lexer  *h_lexer;
+    t_lexer  *h2_lexer;
     t_lexer  *n;
     t_cmd   *cmd;
     t_cmd   *n_cmd;
@@ -149,6 +150,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         return (NULL);
     node = head;
     h_lexer = head;
+	h2_lexer = h_lexer;
     full_cmd = NULL;
     cmd = NULL;
     out_files = NULL;
@@ -277,6 +279,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
     }
+	while (h2_lexer)
+	{
+		printf("\n'%s' type ", h2_lexer->cmd);
+		printTYPE(h2_lexer->type);
+		h2_lexer = h2_lexer->next;
+	}
+	printf("\n");
     return (cmd);
 }
 
