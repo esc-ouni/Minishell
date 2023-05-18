@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 // # include "minishell_pars.h"
-#include "Minishell.h"
+#include "minishell.h"
 
 int	check_syntax2(t_lexer	**h_lexer)
 {
@@ -214,16 +214,16 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             }
             else
             {
-				if (n && n->type != WH_SP)
+				if (n && n->type != WH_SP && n->type != PIP)
 				{
                 	add_to_fullcmd(collector, &full_cmd, n, 1);
 					n = n->next;
 				}
 				else
 				{
-					if (n && n->type == WH_SP)
+					if (n && n->type == WH_SP && n->type != PIP)
 						n = n->next;
-					if (n && n->type != WH_SP)
+					if (n && n->type != WH_SP && n->type != PIP)
 					{
 						add_to_fullcmd(collector, &full_cmd, n, 0);
 						n = n->next;

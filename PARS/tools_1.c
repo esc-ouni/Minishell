@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 // # include "minishell_pars.h"
-#include "Minishell.h"
+#include "minishell.h"
 
 void	free_collect(t_collector **collect_head)
 {

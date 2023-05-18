@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_PARS_H
-# define MINISHELL_PARS_H
+# ifndef MINISHELL_H
+# define MINISHELL_H
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -110,6 +110,8 @@ typedef struct s_collector
     void            *addr;
     struct s_collector   *next;
 }   t_collector;
+
+extern int	g_exit_val;
 
 int	ft_builtin(t_cmd *lol, t_env *env_lst, char **myenv);
 int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst);

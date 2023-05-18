@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
-int	siglol = 0;
+int g_exit_val;
 
 int	ft_builtin(t_cmd *lol, t_env *env_lst, char **myenv)
 {
@@ -118,6 +118,7 @@ void	ft_execution(t_cmd *cmd, t_env **env_lst,char ***myenv)
 		}
 }
 
+
 int main(int ac, char **av, char **env)
 {
 	(void)av;
@@ -128,18 +129,14 @@ int main(int ac, char **av, char **env)
 	t_env	*myenv_list;
 	t_cmd	*cmd;
 	t_collector *collector;
-	int		i;
 	
 	collector = NULL;
-	i = 0;
 	tmp_fd_in = dup(STDIN_FILENO);
 	tmp_fd_out = dup (STDOUT_FILENO);
 	myenv_list = ft_set_env_list(env);
 	myenv = ft_set_env(myenv_list, myenv);
 	while (1)
 	{
-		i = 0;
-		siglol = 0;
 		dup2(tmp_fd_in, 0);
 		dup2(tmp_fd_out, 1);
 		signal(SIGINT, SIG_IGN);
@@ -150,4 +147,6 @@ int main(int ac, char **av, char **env)
 			continue ;
 		ft_execution(cmd, &myenv_list, &myenv);
 	}
+	if (myenv)
+		ft_free_old_env(myenv);
 }

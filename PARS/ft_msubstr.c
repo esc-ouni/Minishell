@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
 char	*ft_msubstr(t_collector **collector, char const *s, unsigned int start, size_t len)
 {

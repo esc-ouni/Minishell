@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
 char	*ft_mstrdup(t_collector **collector, const char *s1)
 {

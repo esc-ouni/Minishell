@@ -1,4 +1,4 @@
-#include <Minishell.h>
+#include <minishell.h>
 
 
 int ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst)
@@ -60,7 +60,9 @@ int ft_parent(t_cmd *lol, int *fd, int *pid)
 			while ((line = get_next_line(fd[0])))
 				write(STDOUT_FILENO, line, ft_strlen(line));
 		}
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &g_exit_val, 0);
+		if (g_exit_val)
+			g_exit_val = 127;
 		close (fd[0]);
 }
 

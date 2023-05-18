@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 static t_env   *new_env(char   *str)
 {

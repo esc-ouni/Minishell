@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 // # include "minishell_pars.h"
-#include "Minishell.h"
+#include "minishell.h"
 
 int	ft_mlstsize(t_mlist *lst)
 {
