@@ -4,6 +4,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+int	status = 0;
+
 int main() {
     pid_t pid = fork();
 
@@ -17,7 +19,7 @@ int main() {
         waitpid(pid, &status, 0);
 
         if (WIFEXITED(status)) {
-            printf("Child exited with status: %d\n", WEXITSTATUS(status));
+            printf("Child exited with status: %d\n",status);
         }
     } else {
         // Fork failed
