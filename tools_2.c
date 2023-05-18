@@ -109,8 +109,8 @@ t_lexer  *parser(t_collector	**collector)
 	// t_lexer	*h2_lexer;
 
     s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
-	// if (check_syntax(s))
-	// 	return (NULL);
+	if (check_syntax(s))
+		return (NULL);
     h_lexer = lexer(collector, s);
     // h2_lexer = h_lexer;
 	// while (h2_lexer)
@@ -259,13 +259,6 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
     }
-	// while (h_lexer)
-	// {
-	// 	printf("\n'%s' type ", h_lexer->cmd);
-	// 	printTYPE(h_lexer->type);
-	// 	h_lexer = h_lexer->next;
-	// }
-    // return (NULL);
     return (cmd);
 }
 
@@ -349,7 +342,7 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
             i++;
         }
-        if (s[i] == '\'')
+        else if (s[i] == '\'')
         {
             if (!start)
                 start = i + 1;
@@ -364,7 +357,7 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
             i++;
         }
-        if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ' && s[i] != '-')
+        else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ' && s[i] != '-')
         {
             if (!start)
                 start = i;
