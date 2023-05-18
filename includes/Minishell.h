@@ -80,6 +80,7 @@ typedef enum e_enum
 	CMD,
     OPTN,
     ARGS,
+	WH_SP,
 	ST_SQ,
 	ST_DQ,
     R_OA,
@@ -161,9 +162,8 @@ void	ft_mlstclear(t_mlist **lst);
 void 	add_file_node(t_collector	**collector, t_file **head, char *filename, int flag);
 void 	add_file_file(t_collector **collector, t_file **head, t_file *file);
 void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files);
-void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n);
+void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j);
 void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
 void	*h_malloc(t_collector **collect_head, size_t s, void *p);
-
 # endif

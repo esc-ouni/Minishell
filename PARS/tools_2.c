@@ -42,6 +42,11 @@ void printTYPE(t_enum num)
 {
     switch (num) 
 	{
+        case WH_SP:
+		{
+            printf("WH_SP\n");
+            break;
+		}
         case PIP:
 		{
             printf("Pipe\n");
@@ -106,9 +111,9 @@ t_lexer  *parser(t_collector	**collector)
 {
     char    *s;
 	t_lexer	*h_lexer;
-	// t_lexer	*h2_lexer;
+	t_lexer	*h2_lexer;
 
-    s = readline("\x1B[34m" "3===D💦 :" "\x1B[0m");
+    s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
 	if (check_syntax(s))
 		return (NULL);
     h_lexer = lexer(collector, s);
@@ -207,8 +212,21 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             }
             else
             {
-                add_to_fullcmd(collector, &full_cmd, n);
-                n = n->next;
+				if (n && n->type != WH_SP)
+				{
+                	add_to_fullcmd(collector, &full_cmd, n, 1);
+					n = n->next;
+				}
+				else
+				{
+					if (n && n->type == WH_SP)
+						n = n->next;
+					if (n && n->type != WH_SP)
+					{
+						add_to_fullcmd(collector, &full_cmd, n, 0);
+						n = n->next;
+					}
+				}
             }
         }
         if (n)
@@ -259,13 +277,6 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
     }
-	// while (h_lexer)
-	// {
-	// 	printf("\n'%s' type ", h_lexer->cmd);
-	// 	printTYPE(h_lexer->type);
-	// 	h_lexer = h_lexer->next;
-	// }
-    // return (NULL);
     return (cmd);
 }
 
@@ -349,7 +360,7 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
             i++;
         }
-        if (s[i] == '\'')
+        else if (s[i] == '\'')
         {
             if (!start)
                 start = i + 1;
@@ -364,14 +375,11 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
             i++;
         }
-        // if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' && s[i] && s[i] != '>' && s[i + 1] != '<' && s[i] != '|')
-		// {		
-		// }
-        if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ' && s[i] != '-')
+        else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
         {
             if (!start)
                 start = i;
-            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"' && s[i] != ' ' && s[i] != '-')
+            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
             {
                 i++;
                 l2++;
@@ -380,21 +388,13 @@ t_lexer *lexer(t_collector **collector, char *s)
             start = 0;
             l2 = 0;
         }
-        else if (s[i] == '-' && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ')
-        {
-            if (!start)
-                start = i;
-            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"' && s[i] != ' ')
-            {
-                i++;
-                l2++;
-            }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), OPTN);
+        else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		{
+			add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), WH_SP);
+            i += 1;
             start = 0;
             l2 = 0;
-        }
-        else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-            i++;
+		}
         else if (s[i] == '|')
         {
             add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), PIP);

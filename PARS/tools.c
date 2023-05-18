@@ -181,7 +181,7 @@ void	add_file_file(t_collector **collector, t_file **head, t_file *file)
     }
 }
 
-void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n)
+void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j)
 {
 	int	l;
     t_lexer *tmp;
@@ -204,9 +204,19 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n)
     {
         while ((*full_cmd)[l])
             l++;
-		(*full_cmd)[l] = ft_mstrdup(collector, n->cmd);
-		(*full_cmd)[l+1] = NULL;
-		return ;
+		if (j && l)
+		{
+			l--;
+			(*full_cmd)[l] = ft_mstrjoin(collector, (*full_cmd)[l], n->cmd);
+			(*full_cmd)[l+1] = NULL;
+			return ;			
+		}
+		else
+		{
+			(*full_cmd)[l] = ft_mstrdup(collector, n->cmd);
+			(*full_cmd)[l+1] = NULL;
+			return ;
+		}
     }
 }
 
