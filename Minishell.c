@@ -20,6 +20,7 @@ int main(int argc, char **argv, char **env)
     t_collector	*collector;
     t_cmd		*cmd;
 
+	g_exstat = 0;
 	collector = NULL;
     while (1)
     {

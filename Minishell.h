@@ -28,6 +28,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+int	g_exstat;
+
 typedef struct s_file
 {
 	char            *filename;
