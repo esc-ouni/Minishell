@@ -207,8 +207,16 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             }
             else
             {
-                add_to_fullcmd(collector, &full_cmd, n);
-                n = n->next;
+				if (n && n->type != WH_SP)
+				{
+                	add_to_fullcmd(collector, &full_cmd, n, 1);
+					n = n->next;
+				}
+				else if (n)
+				{
+					add_to_fullcmd(collector, &full_cmd, n, 0);
+					n = n->next;
+				}
             }
         }
         if (n)
