@@ -42,6 +42,11 @@ void printTYPE(t_enum num)
 {
     switch (num) 
 	{
+        case WH_SP:
+		{
+            printf("WH_SP\n");
+            break;
+		}
         case PIP:
 		{
             printf("Pipe\n");
@@ -106,20 +111,20 @@ t_lexer  *parser(t_collector	**collector)
 {
     char    *s;
 	t_lexer	*h_lexer;
-	// t_lexer	*h2_lexer;
+	t_lexer	*h2_lexer;
 
     s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
 	if (check_syntax(s))
 		return (NULL);
     h_lexer = lexer(collector, s);
-    // h2_lexer = h_lexer;
-	// while (h2_lexer)
-	// {
-	// 	printf("\n'%s' type ", h2_lexer->cmd);
-	// 	printTYPE(h2_lexer->type);
-	// 	h2_lexer = h2_lexer->next;
-	// }
-	// printf("\n");
+    h2_lexer = h_lexer;
+	while (h2_lexer)
+	{
+		printf("\n'%s' type ", h2_lexer->cmd);
+		printTYPE(h2_lexer->type);
+		h2_lexer = h2_lexer->next;
+	}
+	printf("\n");
 	// return (NULL);
 	expander(collector, &h_lexer);
 	// if (check_syntax2(&h_lexer))
@@ -212,10 +217,15 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
                 	add_to_fullcmd(collector, &full_cmd, n, 1);
 					n = n->next;
 				}
-				else if (n)
+				else
 				{
-					add_to_fullcmd(collector, &full_cmd, n, 0);
-					n = n->next;
+					if (n && n->type == WH_SP)
+						n = n->next;
+					if (n && n->type != WH_SP)
+					{
+						add_to_fullcmd(collector, &full_cmd, n, 0);
+						n = n->next;
+					}
 				}
             }
         }
