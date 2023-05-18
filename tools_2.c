@@ -357,11 +357,11 @@ t_lexer *lexer(t_collector **collector, char *s)
             l2 = 0;
             i++;
         }
-        else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != ' ')
+        else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
         {
             if (!start)
                 start = i;
-            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '"' && s[i] != ' ')
+            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
             {
                 i++;
                 l2++;
