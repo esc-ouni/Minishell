@@ -279,13 +279,13 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
     }
-	while (h2_lexer)
-	{
-		printf("\n'%s' type ", h2_lexer->cmd);
-		printTYPE(h2_lexer->type);
-		h2_lexer = h2_lexer->next;
-	}
-	printf("\n");
+	// while (h2_lexer)
+	// {
+	// 	printf("\n'%s' type ", h2_lexer->cmd);
+	// 	printTYPE(h2_lexer->type);
+	// 	h2_lexer = h2_lexer->next;
+	// }
+	// printf("\n");
     return (cmd);
 }
 
