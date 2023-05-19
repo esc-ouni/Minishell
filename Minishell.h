@@ -48,9 +48,7 @@ typedef struct s_env
 typedef enum e_enum
 {
     PIP,
-	CMD,
-    OPTN,
-    ARGS,
+	SCMD,
 	WH_SP,
 	ST_SQ,
 	ST_DQ,

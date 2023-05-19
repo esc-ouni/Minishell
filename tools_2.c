@@ -52,22 +52,22 @@ void printTYPE(t_enum num)
             printf("Pipe\n");
             break;
 		}
-        case CMD:
+        case SCMD:
 		{
-            printf("CMD\n");
+            printf("SCMD\n");
             break;
 		}
-        case OPTN:
-		{
-            printf("OPTN\n");
-            break;
-		}
-        case ARGS:
-		{
-            printf("ARGS\n");
-            break;
-		}
-        case ST_SQ:
+        // case OPTN:
+		// {
+        //     printf("OPTN\n");
+        //     break;
+		// }
+        // case ARGS:
+		// {
+        //     printf("ARGS\n");
+        //     break;
+		// }
+        // case ST_SQ:
 		{
             printf("ST_SQ\n");
             break;
@@ -161,38 +161,46 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (n->cmd && !strcmp(n->cmd, ">") && n->next)
-            {
-                n = n->next;
-                n->type = FIL_NM;
-                add_file_node(collector, &out_files, n->cmd, O_TRUNC);
-            }
-            if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
-            {
-                n = n->next;
-                n->type = FIL_NM;
-                add_file_node(collector, &out_files, n->cmd, O_APPEND);
-            }
-            n = n->next;
+			if (n->cmd && !strcmp(n->cmd, ">") && n->next)
+			{
+				n = n->next;
+				while (n->type == WH_SP)
+					n = n->next;
+				n->type = FIL_NM;
+				add_file_node(collector, &out_files, n->cmd, O_TRUNC);
+			}
+			if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
+			{
+				n = n->next;
+				while (n && n->type == WH_SP)
+					n = n->next;
+				n->type = FIL_NM;
+				add_file_node(collector, &out_files, n->cmd, O_APPEND);
+			}
+			n = n->next;
         }
 
         // CHECK_FOR_IN_FILES
         n = node;
         while (n && n->type != PIP)
         {
-            if (n->cmd && !strcmp(n->cmd, "<") && n->next)
-            {
-                n = n->next;
-                n->type = FIL_NM;
-                add_file_node(collector, &in_files, n->cmd, O_TRUNC);
-            }
-            if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
-            {
-                n = n->next;
-                n->type = FIL_NM;
-                add_file_node(collector, &in_files, n->cmd, O_APPEND);
-            }
-            n = n->next;
+			if (n->cmd && !strcmp(n->cmd, "<") && n->next)
+			{
+				n = n->next;
+				while (n && n->type == WH_SP)
+					n = n->next;
+				n->type = FIL_NM;
+				add_file_node(collector, &in_files, n->cmd, O_TRUNC);
+			}
+			if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
+			{
+				n = n->next;
+				while (n && n->type == WH_SP)
+					n = n->next;
+				n->type = FIL_NM;
+				add_file_node(collector, &in_files, n->cmd, O_APPEND);
+			}
+			n = n->next;
         }
 
         // GET_FULL_CMD
@@ -214,16 +222,16 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             }
             else
             {
-				if (n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
+				if (n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA && n->type != FIL_NM)
 				{
                 	add_to_fullcmd(collector, &full_cmd, n, 1);
 					n = n->next;
 				}
 				else if (n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
 				{
-					if (n && n->type == WH_SP)
+					while (n && (n->type == WH_SP || n->type == FIL_NM))
 						n = n->next;
-					if (n && n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
+					if (n && n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA) 
 					{
 						add_to_fullcmd(collector, &full_cmd, n, 0);
 						n = n->next;
@@ -393,7 +401,7 @@ t_lexer *lexer(t_collector **collector, char *s)
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), CMD);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), SCMD);
             start = 0;
             l2 = 0;
         }
