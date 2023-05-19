@@ -412,7 +412,6 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 	s = NULL;
 	str = NULL;
 	node = *head;
-	g_exit_val = 14;
 	while (node)
 	{
 		if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')))
