@@ -401,15 +401,18 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 {
 	t_lexer	*node;
 	int		i;
+	int		l;
 	int		k;
 
 	k = 0;
 	i = 0;
+	l = 0;
 	char **s;
 	char *str;
 	s = NULL;
 	str = NULL;
 	node = *head;
+	g_exit_val = 14;
 	while (node)
 	{
 		if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')))
@@ -418,20 +421,19 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 			{
 				if (ft_strlen(node->cmd) == 1)
 					break ;
-				else if (ft_strlen(node->cmd) == 2 && node->cmd[1] == '?')
-				{
-					node->cmd = ft_itoa(g_exit_val);
-					break ;
-				}
 				else
 				{
 					i = 0;
 					s = ft_msplit(collector, node->cmd, '$');
-					str = ft_getenv(collector, s[i], env);
-					i++;
 					while (s[i])
 					{
-						str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], env));
+						if (s[i][0] == '?')
+						{
+							str = ft_mstrjoin(collector, str, ft_itoa(g_exit_val));
+							str = ft_mstrjoin(collector, str, s[i]+1);
+						}
+						else
+							str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], env));
 						i++;
 					}
 				}
@@ -446,7 +448,13 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 				i++;
 				while (s[i])
 				{
-					str = ft_mstrjoin(collector, str, ft_getenv(collector, ft_mstrtrim(collector, s[i], "'"), env));
+					if (s[i][0] == '?')
+					{
+						str = ft_mstrjoin(collector, str, ft_itoa(g_exit_val));
+						str = ft_mstrjoin(collector, str, s[i]+1);
+					}
+					else
+						str = ft_mstrjoin(collector, str, ft_getenv(collector, ft_mstrtrim(collector, s[i], "'"), env));
 					i++;
 				}
 				if (k)
@@ -476,8 +484,7 @@ char	*ft_getenv(t_collector **collector, char *key, t_env **menv)
 	while (env)
 	{
 		key_part = ft_msplit(collector, env->str, '=')[0];
-		printf("%s\n", key_part);
-		if (!ft_strncmp(key, key_part, ft_strlen(key_part)))
+		if (!ft_strncmp(key, key_part, ft_strlen(key)) && ft_strlen(key) == ft_strlen(key_part))
 			return (ft_strchr(env->str, '=') + 1);
 		key_part = NULL;
 		env = env->next;
