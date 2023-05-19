@@ -120,7 +120,6 @@ char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
 
 int     check_syntax(char *s);
 void	emplify(t_collector **collector, t_cmd *cmd, char **env);
-// void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
 char	**mgetenv(t_collector **collector, char **env);
