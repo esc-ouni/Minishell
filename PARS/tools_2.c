@@ -107,7 +107,7 @@ void printTYPE(t_enum num)
     }
 }
 
-t_lexer  *parser(t_collector	**collector)
+t_lexer  *parser(t_collector	**collector, t_env **env)
 {
     char    *s;
 	t_lexer	*h_lexer;
@@ -126,7 +126,7 @@ t_lexer  *parser(t_collector	**collector)
 	// }
 	// printf("\n");
 	// return (NULL);
-	expander(collector, &h_lexer);
+	expander(collector, env, &h_lexer);
 	// if (check_syntax2(&h_lexer))
 	// 	return (NULL);
 	return (h_lexer);

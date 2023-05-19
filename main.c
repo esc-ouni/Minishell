@@ -139,7 +139,7 @@ int main(int ac, char **av, char **env)
 		dup2(tmp_fd_out, 1);
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
-		cmd = parser2(&collector, parser(&collector));
+		cmd = parser2(&collector, parser(&collector, &myenv_list));
 		emplify(&collector, cmd, env);
 		if (!cmd->cmd[0])
 			continue ;
