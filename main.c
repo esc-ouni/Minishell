@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-int g_exit_val;
-
 int	ft_builtin(t_cmd *lol, t_env *env_lst, char **myenv)
 {
 	if (lol->builtflag == ECH)
@@ -24,7 +22,6 @@ int	ft_builtin(t_cmd *lol, t_env *env_lst, char **myenv)
 		ft_env(myenv);
 	return(0);
 }
-
 
 int	ft_open_out_files(t_cmd *lol)
 {
@@ -130,6 +127,7 @@ int main(int ac, char **av, char **env)
 	t_cmd	*cmd;
 	t_collector *collector;
 	
+	g_exit_val = 0;
 	collector = NULL;
 	tmp_fd_in = dup(STDIN_FILENO);
 	tmp_fd_out = dup (STDOUT_FILENO);
@@ -146,6 +144,7 @@ int main(int ac, char **av, char **env)
 		if (!cmd->cmd[0])
 			continue ;
 		ft_execution(cmd, &myenv_list, &myenv);
+		printf("%d\n", g_exit_val);
 	}
 	if (myenv)
 		ft_free_old_env(myenv);

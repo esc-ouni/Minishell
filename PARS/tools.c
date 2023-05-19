@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 // # include "minishell_pars.h"
-#include "minishell.h"
+#include "Minishell.h"
 
 int	ft_mlstsize(t_mlist *lst)
 {
@@ -416,14 +416,19 @@ void	expander(t_collector **collector, t_lexer **head)
 		{
 			if (node->cmd[0] == '$')
 			{
-				i = 0;
-				s = ft_msplit(collector, node->cmd, '$');
-				str = getenv(s[i]);
-				i++;
-				while (s[i])
+				if (ft_strlen(node->cmd) == 1)
+					break ;				
+				else
 				{
-					str = ft_mstrjoin(collector, str, getenv(s[i]));
+					i = 0;
+					s = ft_msplit(collector, node->cmd, '$');
+					str = getenv(s[i]);
 					i++;
+					while (s[i])
+					{
+						str = ft_mstrjoin(collector, str, getenv(s[i]));
+						i++;
+					}
 				}
 			}
 			else
@@ -445,6 +450,8 @@ void	expander(t_collector **collector, t_lexer **head)
 					k = 0;
 				}
 			}
+			if (node->cmd[ft_strlen(node->cmd)-1] == '$')
+				str = ft_mstrjoin(collector, str, "$");
 			node->cmd = ft_mstrdup(collector, str);
 		}
 		str = NULL;

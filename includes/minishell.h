@@ -24,6 +24,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 
+int g_exit_val;
 
 typedef struct s_env
 {
