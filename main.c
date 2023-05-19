@@ -144,7 +144,6 @@ int main(int ac, char **av, char **env)
 		if (!cmd->cmd[0])
 			continue ;
 		ft_execution(cmd, &myenv_list, &myenv);
-		printf("%d\n", g_exit_val);
 	}
 	if (myenv)
 		ft_free_old_env(myenv);

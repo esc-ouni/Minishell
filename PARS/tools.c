@@ -417,7 +417,12 @@ void	expander(t_collector **collector, t_lexer **head)
 			if (node->cmd[0] == '$')
 			{
 				if (ft_strlen(node->cmd) == 1)
-					break ;				
+					break ;
+				else if (ft_strlen(node->cmd) == 2 && node->cmd[1] == '?')
+				{
+					node->cmd = ft_itoa(g_exit_val);
+					break ;
+				}		
 				else
 				{
 					i = 0;
