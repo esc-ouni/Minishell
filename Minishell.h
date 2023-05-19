@@ -13,6 +13,8 @@
 # ifndef MINISHELL_H
 # define MINISHELL_H
 
+int g_exit_val;
+
 # include <unistd.h>
 # include <fcntl.h>
 # include "LIBF/libft.h"
@@ -28,8 +30,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-int	g_exstat;
-
 typedef struct s_file
 {
 	char            *filename;
@@ -37,6 +37,13 @@ typedef struct s_file
 	int				o_flags; /*Append  O_TRUNC O_CREAT .... */
 	struct s_file   *next;
 }   t_file;
+
+typedef struct s_env
+{
+	char			*str;
+	struct s_env	*next;
+}	t_env;
+
 
 typedef enum e_enum
 {
@@ -103,6 +110,7 @@ typedef struct s_collector
     struct s_collector   *next;
 }   t_collector;
 
+char	*ft_getenv(t_collector **collector, char *key, t_env **menv);
 void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 char    **ft_msplit(t_collector **collector, char const *s, char const c);
 char	*ft_mstrdup(t_collector **collector,const char *s1);
@@ -118,9 +126,9 @@ char	*ft_mstrdup(t_collector **collector, const char *s1);
 char	**mgetenv(t_collector **collector, char **env);
 t_built	cmd_type(t_collector **collector, char *cmd);
 void    prompt(void);
-t_lexer	*parser(t_collector	**collector);
+t_lexer	*parser(t_collector	**collector, t_env **env);
 void	debug(void);
-void	expander(t_collector **collector, t_lexer **head);
+void	expander(t_collector **collector, t_env **env, t_lexer **head);
 t_cmd  *parser2(t_collector	**collector, t_lexer *head);
 void    after_parse2(t_cmd  *cmd);
 t_lexer *lexer(t_collector **collector, char *s);
