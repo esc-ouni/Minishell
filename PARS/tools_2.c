@@ -20,20 +20,27 @@ int	check_syntax2(t_lexer	**h_lexer)
 	node = *h_lexer;
 	while (node)
 	{
-		if ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD))
+		if (node->type == WH_SP)
+			node = node->next;
+		else if ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD))
 		{
-			if ((node->next) && ((node->next->type == R_OA) || (node->next->type == R_OT) || (node->next->type == R_IN) || (node->next->type == R_HD)))
+			node = node->next;
+			while (node && node->type == WH_SP)
+				node = node->next;
+			if ((node) && ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD || node->type == PIP)))
 			{
 				printf("syntax error near unexpected token\n");
 				return (1);	
 			}
-			else if (!node->next)
+			else if (!node)
 			{
 				printf("syntax error near unexpected token\n");
 				return (1);		
 			}
+			node = node->next;
 		}
-		node = node->next;
+		else
+			node = node->next;
 	}
 	return (0);
 }
@@ -52,22 +59,22 @@ void printTYPE(t_enum num)
             printf("Pipe\n");
             break;
 		}
-        case CMD:
+        case SCMD:
 		{
-            printf("CMD\n");
+            printf("SCMD\n");
             break;
 		}
-        case OPTN:
-		{
-            printf("OPTN\n");
-            break;
-		}
-        case ARGS:
-		{
-            printf("ARGS\n");
-            break;
-		}
-        case ST_SQ:
+        // case OPTN:
+		// {
+        //     printf("OPTN\n");
+        //     break;
+		// }
+        // case ARGS:
+		// {
+        //     printf("ARGS\n");
+        //     break;
+		// }
+        // case ST_SQ:
 		{
             printf("ST_SQ\n");
             break;
@@ -127,8 +134,8 @@ t_lexer  *parser(t_collector	**collector, t_env **env)
 	// printf("\n");
 	// return (NULL);
 	expander(collector, env, &h_lexer);
-	// if (check_syntax2(&h_lexer))
-	// 	return (NULL);
+	if (check_syntax2(&h_lexer))
+		return (NULL);
 	return (h_lexer);
 }
 
@@ -161,38 +168,46 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-            if (n->cmd && !strcmp(n->cmd, ">") && n->next)
-            {
-                n = n->next;
-                n->type = FIL_NM;
-                add_file_node(collector, &out_files, n->cmd, O_TRUNC);
-            }
-            if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
-            {
-                n = n->next;
-                n->type = FIL_NM;
-                add_file_node(collector, &out_files, n->cmd, O_APPEND);
-            }
-            n = n->next;
+			if (n->cmd && !strcmp(n->cmd, ">") && n->next)
+			{
+				n = n->next;
+				while (n->type == WH_SP)
+					n = n->next;
+				n->type = FIL_NM;
+				add_file_node(collector, &out_files, n->cmd, O_TRUNC);
+			}
+			if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
+			{
+				n = n->next;
+				while (n && n->type == WH_SP)
+					n = n->next;
+				n->type = FIL_NM;
+				add_file_node(collector, &out_files, n->cmd, O_APPEND);
+			}
+			n = n->next;
         }
 
         // CHECK_FOR_IN_FILES
         n = node;
         while (n && n->type != PIP)
         {
-            if (n->cmd && !strcmp(n->cmd, "<") && n->next)
-            {
-                n = n->next;
-                n->type = FIL_NM;
-                add_file_node(collector, &in_files, n->cmd, O_TRUNC);
-            }
-            if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
-            {
-                n = n->next;
-                n->type = FIL_NM;
-                add_file_node(collector, &in_files, n->cmd, O_APPEND);
-            }
-            n = n->next;
+			if (n->cmd && !strcmp(n->cmd, "<") && n->next)
+			{
+				n = n->next;
+				while (n && n->type == WH_SP)
+					n = n->next;
+				n->type = FIL_NM;
+				add_file_node(collector, &in_files, n->cmd, O_TRUNC);
+			}
+			if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
+			{
+				n = n->next;
+				while (n && n->type == WH_SP)
+					n = n->next;
+				n->type = FIL_NM;
+				add_file_node(collector, &in_files, n->cmd, O_APPEND);
+			}
+			n = n->next;
         }
 
         // GET_FULL_CMD
@@ -214,16 +229,16 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             }
             else
             {
-				if (n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
+				if (n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA && n->type != FIL_NM)
 				{
                 	add_to_fullcmd(collector, &full_cmd, n, 1);
 					n = n->next;
 				}
 				else if (n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
 				{
-					if (n && n->type == WH_SP)
+					while (n && (n->type == WH_SP || n->type == FIL_NM))
 						n = n->next;
-					if (n && n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
+					if (n && n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA) 
 					{
 						add_to_fullcmd(collector, &full_cmd, n, 0);
 						n = n->next;
@@ -393,7 +408,7 @@ t_lexer *lexer(t_collector **collector, char *s)
                 i++;
                 l2++;
             }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), CMD);
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), SCMD);
             start = 0;
             l2 = 0;
         }

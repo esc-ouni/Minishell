@@ -78,9 +78,7 @@ typedef struct s_mlist
 typedef enum e_enum
 {
     PIP,
-	CMD,
-    OPTN,
-    ARGS,
+	SCMD,
 	WH_SP,
 	ST_SQ,
 	ST_DQ,
@@ -91,7 +89,6 @@ typedef enum e_enum
 	FIL_NM,
 	UDF
 }	t_enum;
-
 enum    flags
 {
 	SYS,
