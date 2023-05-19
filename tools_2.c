@@ -214,16 +214,16 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             }
             else
             {
-				if (n && n->type != WH_SP)
+				if (n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
 				{
                 	add_to_fullcmd(collector, &full_cmd, n, 1);
 					n = n->next;
 				}
-				else
+				else if (n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
 				{
 					if (n && n->type == WH_SP)
 						n = n->next;
-					if (n && n->type != WH_SP)
+					if (n && n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
 					{
 						add_to_fullcmd(collector, &full_cmd, n, 0);
 						n = n->next;
