@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/02 20:54:51 by idouni            #+#    #+#              #
-#    Updated: 2023/05/20 16:05:08 by idouni           ###   ########.fr        #
+#    Updated: 2023/05/20 16:18:01 by idouni           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,22 +20,26 @@ CC     = cc
 
 RM     = rm -rf
 
-FLAGS  =  -Wall -Wextra -Werror #-fsanitize=address -g
+FLAGS  =  -Wall -Wextra -Werror
 
 HR     = Minishell.h
 
 MND    = Minishell.c
 
-TLS    = tools.c \
+TLS    = expander.c \
 		lexer.c \
 		memory.c \
 		parser.c \
-		syntax.c \
 		printer.c \
-		expander.c \
-		ft_msplit.c \
-		ft_mstrdup.c \
-		ft_mstrtrim.c \
+		syntax.c \
+		tools_1.c \
+		tools_2.c \
+		tools_3.c \
+		tools_4.c \
+		tools_5.c \
+		tools_6.c \
+		tools_7.c \
+		tools_8.c \
 
 
 OBJ_M  = $(MND:%.c=%.o)
