@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
+#    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 17:40:51 by msamhaou          #+#    #+#              #
-#    Updated: 2023/05/12 02:14:28 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/05/20 19:29:06 by idouni           ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 CC = cc
 FLAGS = -w
@@ -44,7 +44,7 @@ EXEC_OBJ = $(EXEC_SRC:.c=.o)
 
 #		PARS
 PARS_DIR = PARS/
-PARS_SRC = PARS/tools.c   PARS/tools_1.c PARS/tools_2.c PARS/ft_msplit.c   PARS/ft_mstrdup.c PARS/ft_mstrtrim.c
+PARS_SRC = PARS/expander.c PARS/lexer.c PARS/memory.c PARS/parser.c PARS/syntax.c PARS/tools_1.c PARS/tools_2.c PARS/tools_3.c PARS/tools_4.c PARS/tools_5.c PARS/tools_6.c PARS/tools_7.c PARS/tools_8.c
 PARS_OBJ = $(PARS_SRC:.c=.o)
 
 MAIN_SRC = main.c

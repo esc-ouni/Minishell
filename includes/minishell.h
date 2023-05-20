@@ -61,6 +61,7 @@ typedef struct s_cmd
 	int				first_cmd;
 	int				last_cmd;
 	t_built			builtflag;
+	int				num_cmds;
 	//7odoud
 	int				init_stdin;
 	int				cmd_fdin;

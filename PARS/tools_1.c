@@ -1,137 +1,85 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   tools_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 14:32:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/04/04 14:32:56 by idouni           ###   ########.fr       */
+/*   Created: 2023/04/03 04:40:47 by idouni            #+#    #+#             */
+/*   Updated: 2023/05/20 16:09:46 by idouni           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "Minishell.h"
 
-void	free_collect(t_collector **collect_head)
+int	ft_mlstsize(t_mlist *lst)
 {
-	t_collector *tmp;
-	t_collector *tmp2;
-	tmp = *collect_head;
+	size_t	i;
 
-	while (tmp)
+	i = 0;
+	while (lst)
 	{
-		tmp2 = tmp->next;
-		free(tmp);
-		tmp = NULL;
-		tmp = tmp2;
-	}
-}
-
-void	*h_malloc(t_collector **collector_head, size_t s, void *p)
-{
-	t_collector *tmp;
-    t_collector *new_node;
-	new_node = malloc(sizeof(t_collector));
-	p = malloc(s);
-	if (!new_node || !p)
-	{
-		printf("MALLOC\n");
-		ft_collectorclear(collector_head);
-		exit (1);
-	}
-	new_node->addr = p;
-    if (!(*collector_head))
-    {
-        *collector_head = new_node;
-        new_node->next = NULL;
-    }
-    else
-    {
-        tmp = *collector_head;
-        while (tmp->next)
-        {
-            tmp = tmp->next;
-        }
-        tmp->next = new_node;
-        new_node->next = NULL;
-    }
-	return (p);
-}
-
-int	check_oerr(char *s)
-{
-	int i = 0;
-	int sq = 0;
-	int dq = 0;
-
-	while (s[i])
-	{
-		if (s[i] == '\'')
-		{
-			sq++;
-			i++;
-			while (s[i] != '\'' && s[i])
-				i++;
-			if (s[i] == '\'')
-			{
-				sq++;
-				i++;
-			}
-		}
-		else if (s[i] == '"')
-		{
-			dq++;
-			i++;
-			while (s[i] != '"' && s[i])
-				i++;
-			if (s[i] == '"')
-			{
-				dq++;
-				i++;
-			}
-		}
-		else
-			i++;
-	}
-	if ((sq % 2) || (dq % 2))
-	{
-		write(2, "syntax error near unexpected token\n", 35);
-		return (1);
-	}
-	return (0);
-}
-
-int	check_pipes(char *s)
-{
-	int i = 0;
-
-	if ((s[i] == '|') || s[ft_strlen(s)-1] == '|')
-	{
-		write(2, "syntax error near unexpected token\n", 35);
-		return (1);
-	}
-	while (s[i])
-	{
-		if (s[i+1] && s[i] == '|' && s[i+1] == '|')
-		{
-			write(2, "syntax error near unexpected token\n", 35);
-			return (1);
-		}
+		lst = lst->next;
 		i++;
 	}
-	return (0);
+	return (i);
 }
 
-int	check_syntax(char *s)
+int	ft_cmdsize(t_cmd *cmd)
 {
-	if (!s)
-		write(1, "exit\n", 5), exit(0);
-	if (!ft_strlen(s))
-		return (1);
-	add_history(s);
-	if (check_oerr(s))
-		return (1);
-	if (check_pipes(s))
-		return (1);
-	return (0);
+	size_t	i;
+	t_cmd	*n_cmd;
+
+	i = 0;
+	n_cmd = cmd;
+	while (n_cmd)
+	{
+		n_cmd = n_cmd->next;
+		i++;
+	}
+	return (i);
+}
+
+t_mlist	*ft_mlstnew(t_collector **collector, char *s)
+{
+	t_mlist	*new_node;
+
+	new_node = NULL;
+	new_node = h_malloc(collector, sizeof(t_mlist), new_node);
+	if (new_node)
+	{
+		new_node->cmd = ft_mstrdup(collector, s);
+		new_node->next = NULL;
+	}
+	return (new_node);
+}
+
+t_mlist	*ft_mlstlast(t_mlist *lst)
+{
+	void	*node;
+
+	if (lst == NULL)
+		return (NULL);
+	node = lst;
+	while (lst != NULL)
+	{
+		node = lst;
+		lst = lst->next;
+	}
+	return (node);
+}
+
+void	ft_mlstadd_back(t_mlist **lst, t_mlist *new)
+{
+	t_mlist	*o_last;
+
+	if (*lst == NULL)
+	{
+		*lst = new;
+		new->next = NULL;
+		return ;
+	}
+	o_last = ft_mlstlast(*lst);
+	o_last->next = new;
+	new->next = NULL;
 }
