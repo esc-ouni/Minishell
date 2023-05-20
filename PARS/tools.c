@@ -220,7 +220,6 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j
     }
 }
 
-
 void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
 {
 	int		i = 0;
@@ -336,21 +335,41 @@ char	**mgetenv(t_collector **collector, char **env)
 	return (new_env);
 }
 
+char	*minimizer(t_collector **collector, char *s)
+{
+	char	*ns;
+	int		i;
+
+	i = 0;
+	ns = NULL;
+	ns = h_malloc(collector, ft_strlen(s) + 1, ns);
+	while (s[i])
+	{
+		if (s[i] <= 'Z' && s[i] >= 'A')
+			ns[i] = s[i] + 32;
+		else
+			ns[i] = s[i];
+		i++;
+	}
+	ns[i] = '\0';
+	return (ns);
+}
+
 t_built	cmd_type(t_collector **collector, char *cmd)
 {
-	if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "echo", ft_strlen("echo")) && (ft_strlen(cmd) == ft_strlen("echo")))
+	if (!ft_strncmp(minimizer(collector, cmd), "echo", ft_strlen("echo")) && (ft_strlen(cmd) == ft_strlen("echo")))
 		return(ECH);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "cd", ft_strlen("cd")) && (ft_strlen(cmd) == ft_strlen("cd")))
+	else if (!ft_strncmp(cmd, "cd", ft_strlen("cd")) && (ft_strlen(cmd) == ft_strlen("cd")))
 		return(CD);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "pwd", ft_strlen("pwd")) && (ft_strlen(cmd) == ft_strlen("pwd")))
+	else if (!ft_strncmp(minimizer(collector, cmd), "pwd", ft_strlen("pwd")) && (ft_strlen(cmd) == ft_strlen("pwd")))
 		return(PWD);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "export", ft_strlen("export")) && (ft_strlen(cmd) == ft_strlen("export")))
+    else if (!ft_strncmp(cmd, "export", ft_strlen("export")) && (ft_strlen(cmd) == ft_strlen("export")))
 		return(EXPT);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "unset", ft_strlen("unset")) && (ft_strlen(cmd) == ft_strlen("unset")))
+    else if (!ft_strncmp(cmd, "unset", ft_strlen("unset")) && (ft_strlen(cmd) == ft_strlen("unset")))
 		return(UNST);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "env", ft_strlen("env")) && (ft_strlen(cmd) == ft_strlen("env")))
+    else if (!ft_strncmp(minimizer(collector, cmd), "env", ft_strlen("env")) && (ft_strlen(cmd) == ft_strlen("env")))
 		return(ENV);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "exit", ft_strlen("exit")) && (ft_strlen(cmd) == ft_strlen("exit")))
+	else if (!ft_strncmp(cmd, "exit", ft_strlen("exit")) && (ft_strlen(cmd) == ft_strlen("exit")))
 		return(EXT);
 	else
 		return(NOT);

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// # include "minishell_pars.h"
 #include "Minishell.h"
 
 void	free_collect(t_collector **collect_head)
