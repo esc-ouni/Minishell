@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 04:40:47 by idouni            #+#    #+#             */
-/*   Updated: 2023/04/03 04:41:04 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/20 08:44:22 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,17 +127,17 @@ void	debug(void)
 	printf("\x1B[32m");
 	printf("\nDEBUG OK\n");
 	printf("\x1B[0m");
-}        
+}
 
 void	add_file_node(t_collector	**collector, t_file **head, char *filename, int flag)
 {
     t_file *tmp;
     t_file *new_node = NULL;
     new_node = h_malloc(collector, sizeof(t_file), new_node);
-    
+
     new_node->filename = ft_mstrdup(collector, filename);
     new_node->o_flags = flag;
-    
+
     if (!(*head))
     {
         *head = new_node;
@@ -160,10 +160,10 @@ void	add_file_file(t_collector **collector, t_file **head, t_file *file)
     t_file *tmp;
     t_file *new_node = NULL;
     new_node = h_malloc(collector, sizeof(t_file), new_node);
-    
+
     new_node->filename = ft_mstrdup(collector, file->filename);
     new_node->o_flags = file->o_flags;
-    
+
     if (!(*head))
     {
         *head = new_node;
@@ -199,7 +199,7 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j
 		(*full_cmd)[0] = ft_mstrdup(collector, n->cmd);
 		(*full_cmd)[1] = NULL;
 		return ;
-    }    
+    }
     else
     {
         while ((*full_cmd)[l])
@@ -209,7 +209,7 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j
 			l--;
 			(*full_cmd)[l] = ft_mstrjoin(collector, (*full_cmd)[l], n->cmd);
 			(*full_cmd)[l+1] = NULL;
-			return ;			
+			return ;
 		}
 		else
 		{
@@ -338,19 +338,19 @@ char	**mgetenv(t_collector **collector, char **env)
 
 t_built	cmd_type(t_collector **collector, char *cmd)
 {
-	if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "echo", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+	if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "echo", ft_strlen("echo")))
 		return(ECH);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "cd", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "cd", ft_strlen("cd")))
 		return(CD);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "pwd", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "pwd", ft_strlen("pwd")))
 		return(PWD);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "export", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "export", ft_strlen("export")))
 		return(EXPT);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "unset", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "unset", ft_strlen("unset")))
 		return(UNST);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "env", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "env", ft_strlen("env")))
 		return(ENV);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "exit", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "exit", ft_strlen("exit")))
 		return(EXT);
 	else
 		return(NOT);
