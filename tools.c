@@ -338,19 +338,19 @@ char	**mgetenv(t_collector **collector, char **env)
 
 t_built	cmd_type(t_collector **collector, char *cmd)
 {
-	if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "echo", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+	if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "echo", ft_strlen("echo")) && (ft_strlen(cmd) == ft_strlen("echo")))
 		return(ECH);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "cd", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "cd", ft_strlen("cd")) && (ft_strlen(cmd) == ft_strlen("cd")))
 		return(CD);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "pwd", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "pwd", ft_strlen("pwd")) && (ft_strlen(cmd) == ft_strlen("pwd")))
 		return(PWD);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "export", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "export", ft_strlen("export")) && (ft_strlen(cmd) == ft_strlen("export")))
 		return(EXPT);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "unset", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "unset", ft_strlen("unset")) && (ft_strlen(cmd) == ft_strlen("unset")))
 		return(UNST);
-    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "env", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+    else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "env", ft_strlen("env")) && (ft_strlen(cmd) == ft_strlen("env")))
 		return(ENV);
-	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "exit", ft_strlen(ft_mstrtrim(collector, cmd, " "))))
+	else if (!ft_strncmp(ft_mstrtrim(collector, cmd, " "), "exit", ft_strlen("exit")) && (ft_strlen(cmd) == ft_strlen("exit")))
 		return(EXT);
 	else
 		return(NOT);
