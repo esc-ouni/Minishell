@@ -1,16 +1,15 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 04:40:47 by idouni            #+#    #+#             */
-/*   Updated: 2023/04/03 04:41:04 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/20 16:01:32 by idouni           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
-// # include "minishell_pars.h"
 #include "Minishell.h"
 
 int	ft_mlstsize(t_mlist *lst)
@@ -101,33 +100,7 @@ void	ft_mlstclear(t_mlist **lst)
 		node = n_node;
 	}
 	*lst = NULL;
-}
-
-void	ft_collectorclear(t_collector **collector)
-{
-	t_collector	*node;
-	t_collector	*n_node;
-
-	if (!collector)
-		return ;
-	node = *collector;
-	while (node)
-	{
-		// printf("%p\n", node->addr);
-		n_node = node->next;
-		free(node->addr);
-		free(node);
-		node = n_node;
-	}
-	*collector = NULL;
-}
-
-void	debug(void)
-{
-	printf("\x1B[32m");
-	printf("\nDEBUG OK\n");
-	printf("\x1B[0m");
-}        
+}     
 
 void	add_file_node(t_collector	**collector, t_file **head, char *filename, int flag)
 {
@@ -412,82 +385,6 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 			h_file->islast = 1;
 		}
 		n_cmd = n_cmd->next;
-	}
-}
-
-
-void	expander(t_collector **collector, t_env **env, t_lexer **head)
-{
-	t_lexer	*node;
-	int		i;
-	int		l;
-	int		k;
-
-	k = 0;
-	i = 0;
-	l = 0;
-	char **s;
-	char *str;
-	s = NULL;
-	str = NULL;
-	node = *head;
-	while (node)
-	{
-		if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')))
-		{
-			if (node->cmd[0] == '$')
-			{
-				if (ft_strlen(node->cmd) == 1)
-					break ;
-				else
-				{
-					i = 0;
-					s = ft_msplit(collector, node->cmd, '$');
-					while (s[i])
-					{
-						if (s[i][0] == '?')
-						{
-							str = ft_mstrjoin(collector, str, ft_itoa(g_exit_val));
-							str = ft_mstrjoin(collector, str, s[i]+1);
-						}
-						else
-							str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], env));
-						i++;
-					}
-				}
-			}
-			else
-			{
-				if (node->cmd[0] == '\'')
-					k = 1;
-				i = 0;
-				s = ft_msplit(collector, node->cmd, '$');
-				str = ft_mstrdup(collector, s[i]);
-				i++;
-				while (s[i])
-				{
-					if (s[i][0] == '?')
-					{
-						str = ft_mstrjoin(collector, str, ft_itoa(g_exit_val));
-						str = ft_mstrjoin(collector, str, s[i]+1);
-					}
-					else
-						str = ft_mstrjoin(collector, str, ft_getenv(collector, ft_mstrtrim(collector, s[i], "'"), env));
-					i++;
-				}
-				if (k)
-				{
-					str = ft_mstrjoin(collector, str, "'");
-					k = 0;
-				}
-			}
-			if (node->cmd[ft_strlen(node->cmd)-1] == '$')
-				str = ft_mstrjoin(collector, str, "$");
-			node->cmd = ft_mstrdup(collector, str);
-		}
-		str = NULL;
-		s = NULL;
-		node = node->next;
 	}
 }
 

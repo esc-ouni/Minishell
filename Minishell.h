@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/04/02 20:55:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/20 15:52:34 by idouni           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 # ifndef MINISHELL_H
 # define MINISHELL_H
@@ -18,7 +18,6 @@ int g_exit_val;
 # include <unistd.h>
 # include <fcntl.h>
 # include "LIBF/libft.h"
-# include "G_N_L/get_next_line.h"
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
@@ -117,6 +116,7 @@ char	*ft_msubstr(t_collector **collector, char const *s, unsigned int start, siz
 char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
 
 int     check_syntax(char *s);
+int	check_syntax2(t_lexer	**h_lexer);
 void	emplify(t_collector **collector, t_cmd *cmd, char **env);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
