@@ -4,7 +4,10 @@
 int ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst)
 {
     if (lol->builtflag == CD)
-		return (ft_cd(lol), 0);
+	{
+		ft_cd(lol);
+		return (0);
+	}
 	else if (lol->builtflag == EXT)
 		ft_quit(NOT);
 	else if (lol->builtflag == EXPT)

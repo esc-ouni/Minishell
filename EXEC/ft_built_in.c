@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:50:41 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/04 17:29:22 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/20 05:57:17 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 int	ft_cd(t_cmd *lol)
 {
-	if (chdir(lol->cmd[1]) < 0)
+	char *path;
+
+	if (!lol->cmd[1])
+		path = getenv("HOME");
+	else
+		path = lol->cmd[1];
+	if ((chdir(path) < 0))
 		perror("");
 	return (0);
 }
@@ -31,7 +37,7 @@ char	*ft_getcwd()
 int	ft_pwd()
 {
 	char	*pwd;
-	
+
 	pwd = ft_getcwd();
 	printf("%s\n", pwd);
 	free(pwd);
