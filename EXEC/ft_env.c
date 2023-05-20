@@ -71,7 +71,7 @@ char    **ft_set_env(t_env *env_lst, char **myenv)
     res = (char **)malloc(sizeof(char *) * (env_size(env_lst) + 1));
     while (env_lst)
     {
-        res[i] = env_lst->str;
+        res[i] = ft_strdup(env_lst->str);
         env_lst = env_lst->next;
         i++;
     }
@@ -128,53 +128,104 @@ int ft_edit_env_str(t_env *to_edit, char *str)
 char    **ft_export(t_env **env_lst, char *str, char **myenv)
 {
     char **res;
+    t_env    *head;
     char    *ev_var;
 
     if (!ft_is_exported(str))
         return (myenv);
+    head = *env_lst;
     ev_var = ft_var_exist(*env_lst, str);
-
     if(ev_var)
         ft_edit_env_str(ev_var, str);
     else
         env_add_back(env_lst, new_env(str));
+    *env_lst = head;
     res = ft_make_double_char(*env_lst);
+    *env_lst = head;
+    ft_free_env(myenv);
     return (res);
 }
 
 
-int    ft_unset_lst(t_env **env_lst, char *str)
+int ft_isunset(char *str)
 {
-    t_env    *tmp;
-    t_env    *tmp2;
+    int i;
 
-    tmp = NULL;
-    tmp2 = NULL;
+    i = 0;
     if (!str)
-        return 0;
-    while (*env_lst)
+        return (0);
+    while (str[i])
     {
-        if ((*env_lst)->next && !strncmp((*env_lst)->next->str, str, ft_strlen(str)))
-        {
-            tmp = (*env_lst)->next;
-            if ((*env_lst)->next->next)
-                tmp2 = (*env_lst)->next->next;
-            (*env_lst)->next = tmp2;
-            free(tmp);
-            return (1) ;
-        }
-        *env_lst = (*env_lst)->next;
+        if (!ft_isalnum(str[i]) && str[i] != '_')
+            return (0);
+        i++;
     }
-    return (0);
+    return (1);
+}
+
+t_env   *ft_is_unset_exist(t_env *env_lst, char *str)
+{
+    char    **every_str;
+
+    while (env_lst)
+    {
+        every_str = ft_split(env_lst->str, '=');
+        if (!ft_strncmp(every_str[0], str, ft_strlen(str)))
+        {
+            ft_free_env(every_str);
+            return (env_lst);
+        }
+        ft_free_env(every_str);
+        env_lst = env_lst->next;
+    }
+    return (NULL);
+}
+
+t_env *ft_find_prev(t_env *env_lst, t_env *env_node)
+{
+    while (env_lst)
+    {
+        if (env_lst->next == env_node)
+            return (env_lst);
+        env_lst = env_lst->next;
+    }
+    return (NULL);
+}
+
+void    ft_remove_node(t_env **env_lst, t_env *to_remove)
+{
+    //if first node
+    t_env   *previous_node;
+
+    if (*env_lst == to_remove)
+    {
+        *env_lst = to_remove->next;
+        free(to_remove);
+    }
+    previous_node = ft_find_prev(*env_lst, to_remove);
+    if(previous_node)
+    {
+        if (!to_remove->next)
+            previous_node->next = NULL;
+        else
+            previous_node->next = to_remove->next;
+        free(to_remove);
+    }
 }
 
 char    **ft_unset(t_env **env_lst, char *str, char **myenv)
 {
-    t_env   *head;
+    t_env   *to_unset;
+    char    **res;
 
-    head = *env_lst;
-    if (!ft_unset_lst(env_lst, str))
+    if (!ft_isunset(str))
         return (myenv);
-    *env_lst = head;
-    return (ft_set_env(*env_lst, myenv));
+    to_unset = ft_is_unset_exist(*env_lst, str);
+    if (!to_unset)
+        return (myenv);
+    else
+        ft_remove_node(env_lst, to_unset);
+    res = ft_make_double_char(*env_lst);
+    ft_free_env(myenv);
+    return (res);
 }
