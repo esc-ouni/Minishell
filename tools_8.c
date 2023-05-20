@@ -2,9 +2,9 @@
 
 void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 {
-    t_file   *h_file;
-    t_cmd *n_cmd;
-    char **menv;
+    t_file	*h_file;
+    t_cmd	*n_cmd;
+    char	**menv;
 
 	if (!cmd)
 		return ;

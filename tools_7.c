@@ -29,9 +29,10 @@ void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	ty
 
 char	**mgetenv(t_collector **collector, char **env)
 {
-	int		i = 0;
+	int		i;
 	char	**new_env;
 
+	i = 0;
 	new_env = NULL;
 	while (env[i])
         i++;
@@ -82,4 +83,3 @@ t_built	cmd_type(t_collector **collector, char *cmd)
 	else
 		return(NOT);
 }
-
