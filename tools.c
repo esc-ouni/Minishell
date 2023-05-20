@@ -361,7 +361,7 @@ t_built	cmd_type(t_collector **collector, char *cmd)
 		return(ECH);
 	else if (!ft_strncmp(cmd, "cd", ft_strlen("cd")) && (ft_strlen(cmd) == ft_strlen("cd")))
 		return(CD);
-	else if (!ft_strncmp(minimizer(collector, cmd),, "pwd", ft_strlen("pwd")) && (ft_strlen(cmd) == ft_strlen("pwd")))
+	else if (!ft_strncmp(minimizer(collector, cmd), "pwd", ft_strlen("pwd")) && (ft_strlen(cmd) == ft_strlen("pwd")))
 		return(PWD);
     else if (!ft_strncmp(cmd, "export", ft_strlen("export")) && (ft_strlen(cmd) == ft_strlen("export")))
 		return(EXPT);
