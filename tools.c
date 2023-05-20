@@ -220,7 +220,6 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j
     }
 }
 
-
 void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
 {
 	int		i = 0;

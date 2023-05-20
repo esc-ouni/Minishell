@@ -64,17 +64,7 @@ void printTYPE(t_enum num)
             printf("SCMD\n");
             break;
 		}
-        // case OPTN:
-		// {
-        //     printf("OPTN\n");
-        //     break;
-		// }
-        // case ARGS:
-		// {
-        //     printf("ARGS\n");
-        //     break;
-		// }
-        // case ST_SQ:
+        case ST_SQ:
 		{
             printf("ST_SQ\n");
             break;
