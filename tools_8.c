@@ -12,7 +12,7 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
     n_cmd = cmd;
 	while (n_cmd)
 	{
-		// n_cmd->num_cmds = ft_mlstsize(cmd);
+		n_cmd->num_cmds = ft_cmdsize(cmd);
 		n_cmd->myenv = menv;
 		if (n_cmd->cmd[0])
 			n_cmd->builtflag = cmd_type(collector, n_cmd->cmd[0]);
@@ -42,16 +42,15 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 
 char	*ft_getenv(t_collector **collector, char *key, t_env **menv)
 {
-	(void)key;
 	t_env	*env;
-
-	env = *menv;
 	char *key_part;
+
 	key_part = NULL;
+	env = *menv;
 	while (env)
 	{
 		key_part = ft_msplit(collector, env->str, '=')[0];
-		if (!ft_strncmp(key, key_part, ft_strlen(key)) && ft_strlen(key) == ft_strlen(key_part))
+		if (!(ft_strncmp(key, key_part, ft_strlen(key))) && (ft_strlen(key) == ft_strlen(key_part)))
 			return (ft_strchr(env->str, '=') + 1);
 		key_part = NULL;
 		env = env->next;
