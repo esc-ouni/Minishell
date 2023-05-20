@@ -1,5 +1,15 @@
 #include "Minishell.h"
 
+int	searcher_for_spc(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != '*' && s[i] != '+' && s[i] != '-' && s[i] != '>' && s[i] != '<' && s[i] != '\\' && s[i] != '!' && s[i] != '#' && s[i] != ' ' && s[i] != '\t')
+		i++;
+	return i;
+}
+
 void	expander(t_collector **collector, t_env **env, t_lexer **head)
 {
 	t_lexer	*node;
@@ -29,10 +39,18 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 					s = ft_msplit(collector, node->cmd, '$');
 					while (s[i])
 					{
-						if (s[i][0] == '?')
+						if (ft_isdigit(s[i][0]))
+							str = ft_mstrjoin(collector, str, s[i]+1);
+						else if (s[i][0] == '?')
 						{
 							str = ft_mstrjoin(collector, str, ft_itoa(g_exit_val));
 							str = ft_mstrjoin(collector, str, s[i]+1);
+						}
+						else if (searcher_for_spc(s[i]))
+						{
+							l = searcher_for_spc(s[i]);
+							str = ft_mstrjoin(collector, str, ft_getenv(collector, ft_msubstr(collector, s[i], 0, l), env));
+							str = ft_mstrjoin(collector, str, s[i]+l);
 						}
 						else
 							str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], env));
@@ -50,13 +68,21 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 				i++;
 				while (s[i])
 				{
-					if (s[i][0] == '?')
+					if (ft_isdigit(s[i][0]))
+						str = ft_mstrjoin(collector, str, s[i]+1);
+					else if (s[i][0] == '?')
 					{
 						str = ft_mstrjoin(collector, str, ft_itoa(g_exit_val));
 						str = ft_mstrjoin(collector, str, s[i]+1);
 					}
+					else if (searcher_for_spc(s[i]))
+					{
+						l = searcher_for_spc(s[i]);
+						str = ft_mstrjoin(collector, str, ft_getenv(collector, ft_msubstr(collector, s[i], 0, l), env));
+						str = ft_mstrjoin(collector, str, s[i]+l);
+					}
 					else
-						str = ft_mstrjoin(collector, str, ft_getenv(collector, ft_mstrtrim(collector, s[i], "'"), env));
+						str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], env));
 					i++;
 				}
 				if (k)
