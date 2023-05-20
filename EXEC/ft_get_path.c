@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:39:57 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/12 02:32:32 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/20 06:07:23 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,3 @@ char	*ft_get_path(char **cmd, char **env)
 	}
 	return (NULL);
 }
-
-// int	ft_execute(char *arg, char **env)
-// {
-// 	char *path;
-// 	char **cmd;
-
-// 	cmd = ft_split(arg, ' ');
-// 	path = ft_get_path(cmd[0], env);
-// 	execve(path, cmd, env);
-// 	return (0);
-// }

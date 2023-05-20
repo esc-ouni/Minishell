@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:50:41 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/20 05:57:17 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/20 08:03:21 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_cd(t_cmd *lol)
 {
-	char *path;
+	char	*path;
 
 	if (!lol->cmd[1])
 		path = getenv("HOME");
@@ -25,7 +25,7 @@ int	ft_cd(t_cmd *lol)
 	return (0);
 }
 
-char	*ft_getcwd()
+char	*ft_getcwd(void)
 {
 	char	*buff;
 
@@ -34,14 +34,24 @@ char	*ft_getcwd()
 	return (buff);
 }
 
-int	ft_pwd()
+int	ft_pwd(void)
 {
 	char	*pwd;
 
 	pwd = ft_getcwd();
 	printf("%s\n", pwd);
 	free(pwd);
-	return(0);
+	return (0);
+}
+
+int	ft_echo_option(t_cmd *cmd, int *i)
+{
+	if (!strncmp(cmd->cmd[*i], "-n", ft_strlen(cmd->cmd[*i])))
+	{
+		(*i)++;
+		return (1);
+	}
+	return (0);
 }
 
 int	ft_echo(t_cmd *lol)
@@ -51,13 +61,8 @@ int	ft_echo(t_cmd *lol)
 	int		option;
 
 	i = 1;
-	option = 0;
+	option = ft_echo_option(lol, &i);
 	s = NULL;
-	if (!strncmp(lol->cmd[i], "-n", ft_strlen(lol->cmd[i])))
-	{
-		option = 1;
-		i++;
-	}
 	if (lol->cmd[i])
 	{
 		while (lol->cmd[i])
