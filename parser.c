@@ -23,43 +23,30 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     t_file		*out_files;
     t_file		*in_files;
     t_lexer		*node;
-    t_lexer		*n;
     t_cmd		*cmd;
     
     if (!head)
         return (NULL);
     node = head;
-    full_cmd = NULL;
     cmd = NULL;
+    full_cmd = NULL;
     out_files = NULL;
     in_files = NULL;
     while (node)
     {
-        // CHECK_FOR_OUT_FILES
-        // n = node;
 		check_for_out_files(collector, &out_files, node);
-
-        // CHECK_FOR_IN_FILES
-        // n = node;
 		check_for_in_files(collector, &in_files, node);
-
-        // GET_FULL_CMD
-        n = node;
-		get_full_cmd(collector, &n, &full_cmd);
-        if (n)
-        {
-            if (n->type == PIP)
-            {
-                add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
-                n = n->next;   
-            }
-        }
-        else
+		get_full_cmd(collector, &node, &full_cmd);
+		if (node && node->type == PIP)
+		{
+			add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
+			node = node->next;   
+		}
+        else if (!node)
             add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
 		full_cmd = NULL;
 		out_files = NULL;
 		in_files = NULL;
-        node = n;
     }
     //UPDATE_CMD
 	update_cmd(cmd);
@@ -69,7 +56,9 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 
 void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd)
 {
-	int j = 1;
+	int j;
+
+	j = 1;
 	while ((*n) && (*n)->type != PIP)
 	{
 		if ((*n)->type == WH_SP)
