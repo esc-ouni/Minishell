@@ -1,8 +1,48 @@
 #include "Minishell.h"
 
+void	dq_lex(t_collector **collector, t_lexer *l_node, char *s, int *i)
+{
+    int     start;
+    int     l;
+
+	l = 0;
+	(*i)++;
+	start = *i;
+	while (s[(*i)] != '"' && s[(*i)])
+	{
+		(*i)++;
+		l++;
+	}
+	add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l), ST_DQ);
+	(*i)++;
+}
+
+void	sq_lex(t_collector **collector, t_lexer *l_node, char *s, int *i)
+{
+    int     start;
+    int     l;
+
+	l = 0;
+	(*i)++;
+	start = *i;
+	while (s[(*i)] != '\'' && s[(*i)])
+	{
+		(*i)++;
+		l++;
+	}
+	add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l), ST_SQ);
+	(*i)++;
+}
+
+void	scmd_lex()
+{
+
+}
+
 t_lexer *lexer(t_collector **collector, char *s)
 {
     int     i;
+    int     l;
     int     l2;
     int     start;
     int     sz;
@@ -11,52 +51,24 @@ t_lexer *lexer(t_collector **collector, char *s)
     i = 0;
     start = 0;
     l2 = 0;
+    l = 0;
     sz = ft_strlen(s);
     l_node = NULL;
     while (i < sz && s[i])
     {
-        if (s[i] == '"')
-        {
-            if (!start)
-                start = i + 1;
-            i++;
-            while (s[i] != '"' && s[i])
-            {
-                i++;
-                l2++;
-            }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_DQ);
-            start = 0;
-            l2 = 0;
-            i++;
-        }
+		if (s[i] == '"')
+			dq_lex(collector, l_node, s, &i);
         else if (s[i] == '\'')
-        {
-            if (!start)
-                start = i + 1;
-            i++;
-            while (s[i] != '\'' && s[i])
-            {
-                i++;
-                l2++;
-            }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), ST_SQ);
-            start = 0;
-            l2 = 0;
-            i++;
-        }
+			sq_lex(collector, l_node, s, &i);
         else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
         {
-            if (!start)
-                start = i;
+            start = i;
             while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
             {
                 i++;
-                l2++;
+                l++;
             }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l2), SCMD);
-            start = 0;
-            l2 = 0;
+            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l), SCMD);
         }
         else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
 		{
