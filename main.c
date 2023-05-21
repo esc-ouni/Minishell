@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 01:30:57 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/21 08:16:51 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_builtin(t_cmd *lol, t_env *env_lst, char **myenv)
 		ft_pwd();
 	else if (lol->builtflag == ENV)
 		ft_env(myenv);
-	return(0);
+	return (0);
 }
 
 int	ft_open_out_files(t_cmd *lol)
@@ -30,12 +30,12 @@ int	ft_open_out_files(t_cmd *lol)
 	files = lol->out_files;
 	while (files)
 	{
-		lol->cmd_fdout = open(files->filename, O_CREAT | files->o_flags | O_WRONLY , 0664);
+		lol->cmd_fdout = open(files->filename, O_CREAT
+				| files->o_flags | O_WRONLY, 0664);
 		if (lol->cmd_fdout < 0)
 			return (perror(""), exit(1), 1);
 		files = files->next;
 	}
-
 	return (0);
 }
 
@@ -50,13 +50,14 @@ int	ft_open_in_file(t_cmd *lol)
 		if (files->o_flags == O_APPEND)
 			ft_heredoc(lol, files->filename);
 		if (lol->cmd_fdin < 0)
+		{
+			g_exit_val = 1;
 			return (perror(""), 1);
+		}
 		files = files->next;
 	}
 	return (0);
 }
-
-
 
 void	ft_free_pos(char **strp, int pos)
 {
@@ -65,19 +66,19 @@ void	ft_free_pos(char **strp, int pos)
 	free(strp);
 }
 
-
 /********************SIGNALES********************/
+
 void	sig_handle(int sig)
 {
 	if (sig == SIGINT)
 	{
-		// write(1, "\n", 1);
-		// rl_on_new_line();
-		// rl_replace_line("", 0);/*should be one after history setup*/
-		// rl_redisplay();
-		// prompt();
-		// siglol = 1;
+
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
+
 }
 
 void	ft_quit(t_built flag)
@@ -115,6 +116,26 @@ void	ft_execution(t_cmd *cmd, t_env **env_lst,char ***myenv)
 		}
 }
 
+void	ft_free_env_lst(t_env **env_lst)
+{
+	t_env	*tmp;
+
+	while (*env_lst)
+	{
+		tmp = *env_lst;
+		*env_lst = (*env_lst)->next;
+		free(tmp);
+	}
+}
+
+void	ft_end_free(t_env **env_lst, char **myenv)
+{
+	if (myenv)
+		ft_free_stringp(myenv);
+	if (*env_lst)
+		ft_free_env_lst(env_lst);
+	exit(0);
+}
 
 int main(int ac, char **av, char **env)
 {
@@ -137,14 +158,13 @@ int main(int ac, char **av, char **env)
 	{
 		dup2(tmp_fd_in, 0);
 		dup2(tmp_fd_out, 1);
-		signal(SIGINT, SIG_IGN);
+		signal(SIGINT, sig_handle);
 		signal(SIGQUIT, SIG_IGN);
 		cmd = parser2(&collector, parser(&collector, &myenv_list));
 		emplify(&collector, cmd, env);
-		if (!cmd->cmd[0])
+		if (!cmd)
 			continue ;
 		ft_execution(cmd, &myenv_list, &myenv);
 	}
-	if (myenv)
-		ft_free_stringp(myenv);
+	ft_end_free(&myenv_list, myenv);
 }

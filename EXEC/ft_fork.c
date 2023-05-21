@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 01:21:06 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/21 07:52:36 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 		return (0);
 	if (lol->in_files)
 	{
-		ft_open_in_file(lol);
+		if (ft_open_in_file(lol))
+			return (1);
 		dup2(lol->cmd_fdin, STDIN_FILENO);
 	}
 	pipe(fd);

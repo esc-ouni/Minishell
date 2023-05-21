@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 01:24:45 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/21 07:48:55 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_env	*new_env(char *str)
 	t_env	*lst;
 
 	lst = malloc(sizeof(t_env));
+	if (!lst)
+		return (NULL);
 	lst->str = str;
 	lst->next = NULL;
 	return (lst);
@@ -27,6 +29,8 @@ void	env_add_back(t_env **env, t_env *toadd)
 	t_env	*head;
 
 	head = *env;
+	if (!toadd)
+		ft_free_env_lst(env);
 	if (!(*env))
 	{
 		*env = new_env(toadd->str);
