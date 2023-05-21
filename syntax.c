@@ -43,10 +43,7 @@ int	check_oerr(char *s)
 			i++;
 	}
 	if ((sq % 2) || (dq % 2))
-	{
-		write(2, "syntax error near unexpected token\n", 35);
-		return (1);
-	}
+		return (syntx_err(), 1);
 	return (0);
 }
 
@@ -55,20 +52,19 @@ int	check_pipes(char *s)
 	int i = 0;
 
 	if ((s[i] == '|') || s[ft_strlen(s)-1] == '|')
-	{
-		write(2, "syntax error near unexpected token\n", 35);
-		return (1);
-	}
+			return (syntx_err(), 1);
 	while (s[i])
 	{
 		if (s[i+1] && s[i] == '|' && s[i+1] == '|')
-		{
-			write(2, "syntax error near unexpected token\n", 35);
-			return (1);
-		}
+			return (syntx_err(), 1);
 		i++;
 	}
 	return (0);
+}
+
+void	syntx_err()
+{
+	write(2, "syntax error ...\n", 18);
 }
 
 int	check_syntax(char *s)
@@ -100,15 +96,9 @@ int	check_syntax2(t_lexer **h_lexer)
 			while (node && node->type == WH_SP)
 				node = node->next;
 			if ((node) && ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD || node->type == PIP)))
-			{
-				printf("syntax error near unexpected token\n");
-				return (1);	
-			}
+				return (syntx_err(), 1);
 			else if (!node)
-			{
-				printf("syntax error near unexpected token\n");
-				return (1);		
-			}
+				return (syntx_err(), 1);
 			node = node->next;
 		}
 		else
