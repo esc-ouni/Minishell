@@ -88,16 +88,10 @@ void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
 t_lexer *lexer(t_collector **collector, char *s)
 {
     int     i;
-    int     l;
-    int     l2;
-    int     start;
     int     sz;
     t_lexer *l_node;
 
     i = 0;
-    start = 0;
-    l2 = 0;
-    l = 0;
     sz = ft_strlen(s);
     l_node = NULL;
     while (i < sz && s[i])
