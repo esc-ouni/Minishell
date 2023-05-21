@@ -10,6 +10,18 @@ int	searcher_for_spc(char *s)
 	return i;
 }
 
+void	expand_c1(t_collector **collector, char *s,char **str, int *i)
+{
+	(*str) = ft_mstrdup(collector, s);
+	(*i)++;
+}
+
+void	expand_ev(t_collector **collector, char **str, char *s)
+{
+	(*str) = ft_mstrjoin(collector, (*str), ft_itoa(g_exit_val));
+	(*str) = ft_mstrjoin(collector, (*str), s+1);
+}
+
 void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 {
 	int		i;
@@ -20,19 +32,13 @@ void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 	l = 0;
 	s = ft_msplit(collector, node->cmd, '$');
 	if (node->cmd[0] != '$')
-	{
-		(*str) = ft_mstrdup(collector, s[i]);
-		i++;
-	}
+		expand_c1(collector, s[i], str, &i);
 	while (s[i])
 	{
 		if (ft_isdigit(s[i][0]))
 			(*str) = ft_mstrjoin(collector, (*str), s[i]+1);
 		else if (s[i][0] == '?')
-		{
-			(*str) = ft_mstrjoin(collector, (*str), ft_itoa(g_exit_val));
-			(*str) = ft_mstrjoin(collector, (*str), s[i]+1);
-		}
+			expand_ev(collector, str, s[i]);
 		else if (searcher_for_spc(s[i]))
 		{
 			l = searcher_for_spc(s[i]);
