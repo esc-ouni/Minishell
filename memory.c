@@ -5,20 +5,18 @@ void	*h_malloc(t_collector **collector_head, size_t s, void *p)
 {
 	t_collector *tmp;
     t_collector *new_node;
+
 	new_node = malloc(sizeof(t_collector));
 	p = malloc(s);
 	if (!new_node || !p)
 	{
-		printf("MALLOC\n");
+		write (2, "MALLOC_FAILED\n", 15);
 		ft_collectorclear(collector_head);
 		exit (1);
 	}
 	new_node->addr = p;
     if (!(*collector_head))
-    {
         *collector_head = new_node;
-        new_node->next = NULL;
-    }
     else
     {
         tmp = *collector_head;
@@ -27,8 +25,8 @@ void	*h_malloc(t_collector **collector_head, size_t s, void *p)
             tmp = tmp->next;
         }
         tmp->next = new_node;
-        new_node->next = NULL;
     }
+    new_node->next = NULL;
 	return (p);
 }
 
@@ -56,4 +54,4 @@ void	debug(void)
 	printf("\x1B[32m");
 	printf("\nDEBUG OK\n");
 	printf("\x1B[0m");
-}   
+}

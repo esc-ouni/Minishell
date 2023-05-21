@@ -40,4 +40,3 @@ char	*ft_mstrjoin(t_collector **collector, char const *s1, char const *s2)
 	}
 	return (ns);
 }
-
