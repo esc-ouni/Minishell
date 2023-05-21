@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:50:41 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 01:18:40 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/21 04:09:32 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_pwd(void)
 
 int	ft_echo_option(t_cmd *cmd, int *i)
 {
-	if (!strncmp(cmd->cmd[*i], "-n", ft_strlen(cmd->cmd[*i])))
+	if (!strncmp(cmd->cmd[*i], "-n", ft_strlen("-n")))
 	{
 		(*i)++;
 		return (1);
