@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/21 12:34:52 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/21 13:54:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -120,6 +120,8 @@ void	update_cmd(t_cmd *cmd);
 int		check_syntax2(t_lexer	**h_lexer);
 void	check_for_in_files(t_collector **collector, t_file **in_files, t_lexer *n);
 void	check_for_out_files(t_collector **collector, t_file **out_files, t_lexer *n);
+void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd);
+
 
 void	emplify(t_collector **collector, t_cmd *cmd, char **env);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);

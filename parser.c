@@ -15,7 +15,12 @@ t_lexer  *parser(t_collector	**collector, t_env **env)
 	return (h_lexer);
 }
 
-void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd);
+void	parser_init(t_file **out_files, t_file **in_files, char ***full_cmd)
+{
+	*full_cmd = NULL;
+    *out_files = NULL;
+    *in_files = NULL;
+}
 
 t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 {
@@ -29,9 +34,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         return (NULL);
     node = head;
     cmd = NULL;
-    full_cmd = NULL;
-    out_files = NULL;
-    in_files = NULL;
+	parser_init(&out_files, &in_files, &full_cmd);
     while (node)
     {
 		check_for_out_files(collector, &out_files, node);
@@ -44,12 +47,8 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 		}
         else if (!node)
             add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
-		full_cmd = NULL;
-		out_files = NULL;
-		in_files = NULL;
+		parser_init(&out_files, &in_files, &full_cmd);
     }
-    //UPDATE_CMD
-	update_cmd(cmd);
     return (cmd);
 }
 
