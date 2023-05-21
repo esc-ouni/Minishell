@@ -22,17 +22,17 @@ void	parser_init(t_file **out_files, t_file **in_files, char ***full_cmd)
     *in_files = NULL;
 }
 
-t_cmd  *parser2(t_collector	**collector, t_lexer *head)
+t_cmd  *parser2(t_collector	**collector, t_lexer *node)
 {
     char		**full_cmd;
     t_file		*out_files;
     t_file		*in_files;
-    t_lexer		*node;
+    // t_lexer		*node;
     t_cmd		*cmd;
     
-    if (!head)
+    if (!node)
         return (NULL);
-    node = head;
+    // node = head;
     cmd = NULL;
 	parser_init(&out_files, &in_files, &full_cmd);
     while (node)
