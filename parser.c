@@ -120,6 +120,7 @@ void	check_for_out_files(t_collector **collector, t_file **out_files, t_lexer *n
 	}
 }
 
+
 void	update_cmd(t_cmd *cmd)
 {
 	int		i;
@@ -127,28 +128,20 @@ void	update_cmd(t_cmd *cmd)
 
 	i = 0;
 	n_cmd = cmd;
-    while (n_cmd)
-    {
-        if (i == 0)
-        {
-            n_cmd->first_cmd = 1;
-            n_cmd->last_cmd = 0;
-        }
-        i++;
-        n_cmd = n_cmd->next;
-    }
-    n_cmd = cmd;
-    if (ft_cmdsize(n_cmd) == 1)
+    if (n_cmd && ft_cmdsize(n_cmd) == 1)
     {
         n_cmd->first_cmd = 1;
         n_cmd->last_cmd = 1;
     }
-    else
-    {
+	else if (n_cmd)
+	{
+		n_cmd->first_cmd = 0;
+    	n_cmd->last_cmd = 0;
+		if (i == 0)
+            n_cmd->first_cmd = 1;
+        i++;
         while (n_cmd->next)
             n_cmd = n_cmd->next;
-        n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
-    }
+	}
 }
-
