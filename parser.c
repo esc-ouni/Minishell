@@ -18,23 +18,17 @@ t_lexer  *parser(t_collector	**collector, t_env **env)
 
 t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 {
-    char    **full_cmd;
-    t_file  *out_files;
-    t_file  *in_files;
-    t_lexer  *node;
-    t_lexer  *h_lexer;
-    t_lexer  *h2_lexer;
-    t_lexer  *n;
-    t_cmd   *cmd;
-    // t_cmd   *n_cmd;
-    // int i = 0;
-    int i2 = 0;
-
+    char		**full_cmd;
+    t_file		*out_files;
+    t_file		*in_files;
+    t_lexer		*node;
+    t_lexer		*n;
+    t_cmd		*cmd;
+    
+	int j = 1;
     if (!head)
         return (NULL);
     node = head;
-    h_lexer = head;
-	h2_lexer = h_lexer;
     full_cmd = NULL;
     cmd = NULL;
     out_files = NULL;
@@ -53,65 +47,41 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
 		while (n && n->type != PIP)
         {
-            if (n->type == R_IN || n->type == R_HD || n->type == R_OT || n->type == R_OA)
-            {
-                if (n->next)
-                {
-                    if (n->next->next)
-                        n = n->next->next;
-                    else
-                    {
-                        n = NULL;
-                        break ;
-                    }
-                }
-            }
-            else
-            {
-				if (n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA && n->type != FIL_NM)
-				{
-                	add_to_fullcmd(collector, &full_cmd, n, 1);
-					n = n->next;
-				}
-				else if (n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
-				{
-					while (n && (n->type == WH_SP || n->type == FIL_NM))
-						n = n->next;
-					if (n && n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA) 
-					{
-						add_to_fullcmd(collector, &full_cmd, n, 0);
-						n = n->next;
-					}
-				}
-            }
+			if (n->type == WH_SP)
+				j = 0;
+            else if (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ)
+			{
+                add_to_fullcmd(collector, &full_cmd, n, j);
+				j = 1;
+			}
+			n = n->next;
         }
         if (n)
         {
             if (n->type == PIP)
             {
                 add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
-                full_cmd = NULL;
-                out_files = NULL;
-                in_files = NULL;
-                i2++;
                 n = n->next;   
             }
         }
         else
         {
             add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
-            full_cmd = NULL;
-            out_files = NULL;
-            in_files = NULL;
-            i2++;
             node = n;
         }
+		full_cmd = NULL;
+		out_files = NULL;
+		in_files = NULL;
         node = n;
     }
     //UPDATE_CMD
 	update_cmd(cmd);
     return (cmd);
 }
+
+
+
+
 
 void	check_for_in_files(t_collector **collector, t_file **in_files, t_lexer *n)
 {
