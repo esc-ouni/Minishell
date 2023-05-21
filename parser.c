@@ -15,6 +15,7 @@ t_lexer  *parser(t_collector	**collector, t_env **env)
 	return (h_lexer);
 }
 
+void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd);
 
 t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 {
@@ -25,7 +26,6 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     t_lexer		*n;
     t_cmd		*cmd;
     
-	int j = 1;
     if (!head)
         return (NULL);
     node = head;
@@ -36,26 +36,16 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     while (node)
     {
         // CHECK_FOR_OUT_FILES
-        n = node;
-		check_for_out_files(collector, &out_files, n);
+        // n = node;
+		check_for_out_files(collector, &out_files, node);
 
         // CHECK_FOR_IN_FILES
-        n = node;
-		check_for_in_files(collector, &in_files, n);
+        // n = node;
+		check_for_in_files(collector, &in_files, node);
 
         // GET_FULL_CMD
         n = node;
-		while (n && n->type != PIP)
-        {
-			if (n->type == WH_SP)
-				j = 0;
-            else if (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ)
-			{
-                add_to_fullcmd(collector, &full_cmd, n, j);
-				j = 1;
-			}
-			n = n->next;
-        }
+		get_full_cmd(collector, &n, &full_cmd);
         if (n)
         {
             if (n->type == PIP)
@@ -65,10 +55,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
             }
         }
         else
-        {
             add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
-            node = n;
-        }
 		full_cmd = NULL;
 		out_files = NULL;
 		in_files = NULL;
@@ -80,7 +67,21 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 }
 
 
-
+void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd)
+{
+	int j = 1;
+	while ((*n) && (*n)->type != PIP)
+	{
+		if ((*n)->type == WH_SP)
+			j = 0;
+		else if ((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ)
+		{
+			add_to_fullcmd(collector, full_cmd, (*n), j);
+			j = 1;
+		}
+		(*n) = (*n)->next;
+	}
+}
 
 
 void	check_for_in_files(t_collector **collector, t_file **in_files, t_lexer *n)
