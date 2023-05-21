@@ -1,8 +1,8 @@
 #include "Minishell.h"
 
+
 void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 {
-    t_file	*h_file;
     t_cmd	*n_cmd;
     char	**menv;
 
@@ -16,27 +16,34 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 		n_cmd->myenv = menv;
 		if (n_cmd->cmd[0])
 			n_cmd->builtflag = cmd_type(collector, n_cmd->cmd[0]);
-		h_file = n_cmd->out_files;
-		if (h_file)
-		{
-			while (h_file->next)
-			{
-				h_file->islast = 0;
-				h_file = h_file->next;
-			}
-			h_file->islast = 1;
-		}
-		h_file = n_cmd->in_files;
-		if (h_file)
-		{
-			while (h_file->next)
-			{
-				h_file->islast = 0;
-				h_file = h_file->next;
-			}
-			h_file->islast = 1;
-		}
+		update_in_out_files(n_cmd->out_files, n_cmd->in_files);
 		n_cmd = n_cmd->next;
+	}
+}
+
+void	update_in_out_files(t_file *out_files, t_file *in_files)
+{
+    t_file	*h_file;
+
+	h_file = out_files;
+	if (h_file)
+	{
+		while (h_file->next)
+		{
+			h_file->islast = 0;
+			h_file = h_file->next;
+		}
+		h_file->islast = 1;
+	}
+	h_file = in_files;
+	if (h_file)
+	{
+		while (h_file->next)
+		{
+			h_file->islast = 0;
+			h_file = h_file->next;
+		}
+		h_file->islast = 1;
 	}
 }
 

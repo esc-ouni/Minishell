@@ -47,9 +47,9 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *node)
             add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
 		parser_init(&out_files, &in_files, &full_cmd);
     }
+	update_cmd(cmd);
     return (cmd);
 }
-
 
 void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd)
 {
@@ -68,7 +68,6 @@ void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd)
 		(*n) = (*n)->next;
 	}
 }
-
 
 void	check_for_in_files(t_collector **collector, t_file **in_files, t_lexer *n)
 {
@@ -118,7 +117,6 @@ void	check_for_out_files(t_collector **collector, t_file **out_files, t_lexer *n
 	}
 }
 
-
 void	update_cmd(t_cmd *cmd)
 {
 	int		i;
@@ -131,7 +129,7 @@ void	update_cmd(t_cmd *cmd)
         n_cmd->first_cmd = 1;
         n_cmd->last_cmd = 1;
     }
-	else if (n_cmd)
+	else if (n_cmd && ft_cmdsize(n_cmd) != 1)
 	{
 		n_cmd->first_cmd = 0;
     	n_cmd->last_cmd = 0;
@@ -141,5 +139,6 @@ void	update_cmd(t_cmd *cmd)
         while (n_cmd->next)
             n_cmd = n_cmd->next;
         n_cmd->last_cmd = 1;
+		n_cmd->first_cmd = 0;
 	}
 }
