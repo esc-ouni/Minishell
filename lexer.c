@@ -1,6 +1,6 @@
 #include "Minishell.h"
 
-void	dq_lex(t_collector **collector, t_lexer *l_node, char *s, int *i)
+void	dq_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
 {
     int     start;
     int     l;
@@ -13,11 +13,11 @@ void	dq_lex(t_collector **collector, t_lexer *l_node, char *s, int *i)
 		(*i)++;
 		l++;
 	}
-	add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l), ST_DQ);
+	add_lexer(collector, l_node, ft_msubstr(collector, s, start, l), ST_DQ);
 	(*i)++;
 }
 
-void	sq_lex(t_collector **collector, t_lexer *l_node, char *s, int *i)
+void	sq_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
 {
     int     start;
     int     l;
@@ -30,13 +30,59 @@ void	sq_lex(t_collector **collector, t_lexer *l_node, char *s, int *i)
 		(*i)++;
 		l++;
 	}
-	add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l), ST_SQ);
+	add_lexer(collector, l_node, ft_msubstr(collector, s, start, l), ST_SQ);
 	(*i)++;
 }
 
-void	scmd_lex()
+void	scmd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
 {
+    int     start;
+    int     l;
 
+	l = 0;
+	start = (*i);
+	while (ft_isascii(s[(*i)]) && s[(*i)] && s[(*i)] != '>' && s[(*i)] != '<' && s[(*i)] != '|' && s[(*i)] != '\'' && s[(*i)] != '"' && s[(*i)] != ' ')
+	{
+		(*i)++;
+		l++;
+	}
+	add_lexer(collector, l_node, ft_msubstr(collector, s, start, l), SCMD);
+}
+
+void	whsp_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
+{
+	add_lexer(collector, l_node, ft_msubstr(collector, s, (*i), 1), WH_SP);
+	(*i) += 1;
+}
+
+void	pip_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
+{
+	add_lexer(collector, l_node, ft_msubstr(collector, s, *i, 1), PIP);
+	(*i) += 1;
+}
+
+void	rot_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
+{
+	add_lexer(collector, l_node, ft_msubstr(collector, s, (*i), 1), R_OT);
+	(*i) += 1;
+}
+
+void	rin_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
+{
+	add_lexer(collector, l_node, ft_msubstr(collector, s, (*i), 1), R_IN);
+	(*i) += 1;
+}
+
+void	roa_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
+{
+	add_lexer(collector, l_node, ft_msubstr(collector, s, (*i), 2), R_OA);
+	(*i) += 2;
+}
+
+void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
+{
+	add_lexer(collector, l_node, ft_msubstr(collector, s, (*i), 2), R_HD);
+	(*i) += 2;
 }
 
 t_lexer *lexer(t_collector **collector, char *s)
@@ -57,61 +103,23 @@ t_lexer *lexer(t_collector **collector, char *s)
     while (i < sz && s[i])
     {
 		if (s[i] == '"')
-			dq_lex(collector, l_node, s, &i);
+			dq_lex(collector, &l_node, s, &i);
         else if (s[i] == '\'')
-			sq_lex(collector, l_node, s, &i);
+			sq_lex(collector, &l_node, s, &i);
         else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
-        {
-            start = i;
-            while (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' && s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
-            {
-                i++;
-                l++;
-            }
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, start, l), SCMD);
-        }
+			scmd_lex(collector, &l_node, s, &i);
         else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-		{
-			add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), WH_SP);
-            i += 1;
-            start = 0;
-            l2 = 0;
-		}
+			whsp_lex(collector, &l_node, s, &i);
         else if (s[i] == '|')
-        {
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), PIP);
-            i += 1;
-            start = 0;
-            l2 = 0;
-        }
+			pip_lex(collector, &l_node, s, &i);
         else if (s[i] == '>' && s[i + 1] != '>')
-        {
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), R_OT);
-            i += 1;
-            start = 0;
-            l2 = 0;
-        }
+			rot_lex(collector, &l_node, s, &i);
         else if (s[i] == '<' && s[i + 1] != '<')
-        {
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 1), R_IN);
-            i += 1;
-            start = 0;
-            l2 = 0;
-        }
+			rin_lex(collector, &l_node, s, &i);
         else if (s[i] == '>' && s[i + 1] == '>')
-        {
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 2), R_OA);
-            i += 2;
-            start = 0;
-            l2 = 0;
-        }
+			roa_lex(collector, &l_node, s, &i);
         else if (s[i] == '<' && s[i + 1] == '<')
-        {
-            add_lexer(collector, &l_node, ft_msubstr(collector, s, i, 2), R_HD);
-            i += 2;
-            start = 0;
-            l2 = 0;
-        }
+			rhd_lex(collector, &l_node, s, &i);
     }
 	free(s);
     return (l_node);
