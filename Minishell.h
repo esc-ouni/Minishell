@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/20 15:52:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/21 12:34:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -116,7 +116,11 @@ char	*ft_msubstr(t_collector **collector, char const *s, unsigned int start, siz
 char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
 
 int     check_syntax(char *s);
-int	check_syntax2(t_lexer	**h_lexer);
+void	update_cmd(t_cmd *cmd);
+int		check_syntax2(t_lexer	**h_lexer);
+void	check_for_in_files(t_collector **collector, t_file **in_files, t_lexer *n);
+void	check_for_out_files(t_collector **collector, t_file **out_files, t_lexer *n);
+
 void	emplify(t_collector **collector, t_cmd *cmd, char **env);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);

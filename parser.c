@@ -15,6 +15,7 @@ t_lexer  *parser(t_collector	**collector, t_env **env)
 	return (h_lexer);
 }
 
+
 t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 {
     char    **full_cmd;
@@ -25,8 +26,8 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     t_lexer  *h2_lexer;
     t_lexer  *n;
     t_cmd   *cmd;
-    t_cmd   *n_cmd;
-    int i = 0;
+    // t_cmd   *n_cmd;
+    // int i = 0;
     int i2 = 0;
 
     if (!head)
@@ -42,49 +43,11 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
     {
         // CHECK_FOR_OUT_FILES
         n = node;
-        while (n && n->type != PIP)
-        {
-			if (n->cmd && !strcmp(n->cmd, ">") && n->next)
-			{
-				n = n->next;
-				while (n->type == WH_SP)
-					n = n->next;
-				n->type = FIL_NM;
-				add_file_node(collector, &out_files, n->cmd, O_TRUNC);
-			}
-			if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
-			{
-				n = n->next;
-				while (n && n->type == WH_SP)
-					n = n->next;
-				n->type = FIL_NM;
-				add_file_node(collector, &out_files, n->cmd, O_APPEND);
-			}
-			n = n->next;
-        }
+		check_for_out_files(collector, &out_files, n);
 
         // CHECK_FOR_IN_FILES
         n = node;
-        while (n && n->type != PIP)
-        {
-			if (n->cmd && !strcmp(n->cmd, "<") && n->next)
-			{
-				n = n->next;
-				while (n && n->type == WH_SP)
-					n = n->next;
-				n->type = FIL_NM;
-				add_file_node(collector, &in_files, n->cmd, O_TRUNC);
-			}
-			if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
-			{
-				n = n->next;
-				while (n && n->type == WH_SP)
-					n = n->next;
-				n->type = FIL_NM;
-				add_file_node(collector, &in_files, n->cmd, O_APPEND);
-			}
-			n = n->next;
-        }
+		check_for_in_files(collector, &in_files, n);
 
         // GET_FULL_CMD
         n = node;
@@ -146,7 +109,65 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         node = n;
     }
     //UPDATE_CMD
-    n_cmd = cmd;
+	update_cmd(cmd);
+    return (cmd);
+}
+
+void	check_for_in_files(t_collector **collector, t_file **in_files, t_lexer *n)
+{
+	while (n && n->type != PIP)
+	{
+		if (n->cmd && !strcmp(n->cmd, "<") && n->next)
+		{
+			n = n->next;
+			while (n && n->type == WH_SP)
+				n = n->next;
+			n->type = FIL_NM;
+			add_file_node(collector, in_files, n->cmd, O_TRUNC);
+		}
+		if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
+		{
+			n = n->next;
+			while (n && n->type == WH_SP)
+				n = n->next;
+			n->type = FIL_NM;
+			add_file_node(collector, in_files, n->cmd, O_APPEND);
+		}
+		n = n->next;
+	}
+}
+
+void	check_for_out_files(t_collector **collector, t_file **out_files, t_lexer *n)
+{
+	while (n && n->type != PIP)
+	{
+		if (n->cmd && !strcmp(n->cmd, ">") && n->next)
+		{
+			n = n->next;
+			while (n->type == WH_SP)
+				n = n->next;
+			n->type = FIL_NM;
+			add_file_node(collector, out_files, n->cmd, O_TRUNC);
+		}
+		if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
+		{
+			n = n->next;
+			while (n && n->type == WH_SP)
+				n = n->next;
+			n->type = FIL_NM;
+			add_file_node(collector, out_files, n->cmd, O_APPEND);
+		}
+		n = n->next;
+	}
+}
+
+void	update_cmd(t_cmd *cmd)
+{
+	int		i;
+    t_cmd   *n_cmd;
+
+	i = 0;
+	n_cmd = cmd;
     while (n_cmd)
     {
         if (i == 0)
@@ -170,5 +191,5 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n_cmd->first_cmd = 0;
         n_cmd->last_cmd = 1;
     }
-    return (cmd);
 }
+
