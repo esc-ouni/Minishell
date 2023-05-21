@@ -27,12 +27,10 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *node)
     char		**full_cmd;
     t_file		*out_files;
     t_file		*in_files;
-    // t_lexer		*node;
     t_cmd		*cmd;
     
     if (!node)
         return (NULL);
-    // node = head;
     cmd = NULL;
 	parser_init(&out_files, &in_files, &full_cmd);
     while (node)
@@ -43,7 +41,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *node)
 		if (node && node->type == PIP)
 		{
 			add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
-			node = node->next;   
+			node = node->next; 
 		}
         else if (!node)
             add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
