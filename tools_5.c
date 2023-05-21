@@ -70,25 +70,30 @@ void	add_file_file(t_collector **collector, t_file **head, t_file *file)
     }
 }
 
-void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j)
+void	add_to_fullcmd_st(t_collector	**collector, char ***full_cmd, t_lexer *n)
 {
 	int	l;
     t_lexer *tmp;
 
 	l = 0;
+	tmp = n;
+	while(tmp && tmp->type != PIP)
+	{
+		l++;
+		tmp = tmp->next;
+	}
+	(*full_cmd) = h_malloc(collector, sizeof(char *) * (l + 1), *full_cmd);
+	(*full_cmd)[0] = ft_mstrdup(collector, n->cmd);
+	(*full_cmd)[1] = NULL;
+}
+
+void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j)
+{
+	int	l;
+
+	l = 0;
     if (!((*full_cmd)))
-    {
-		tmp = n;
-		while(tmp && tmp->type != PIP)
-		{
-			l++;
-			tmp = tmp->next;
-		}
-		(*full_cmd) = h_malloc(collector, sizeof(char *) * (l + 1), *full_cmd);
-		(*full_cmd)[0] = ft_mstrdup(collector, n->cmd);
-		(*full_cmd)[1] = NULL;
-		return ;
-    }    
+		return (add_to_fullcmd_st(collector, full_cmd, n)); 
     else
     {
         while ((*full_cmd)[l])
