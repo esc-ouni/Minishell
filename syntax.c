@@ -1,5 +1,32 @@
 #include "Minishell.h"
 
+void	count_sq(char *s, int *i, int *sq)
+{
+	(*sq)++;
+	(*i)++;
+	while (s[(*i)] != '\'' && s[(*i)])
+		(*i)++;
+	if (s[(*i)] == '\'')
+	{
+		(*sq)++;
+		(*i)++;
+	}
+}
+
+
+void	count_dq(char *s, int *i, int *dq)
+{
+	(*dq)++;
+	(*i)++;
+	while (s[(*i)] != '"' && s[(*i)])
+		(*i)++;
+	if (s[(*i)] == '"')
+	{
+		(*dq)++;
+		(*i)++;
+	}
+}
+
 int	check_oerr(char *s)
 {
 	int i = 0;
@@ -9,29 +36,9 @@ int	check_oerr(char *s)
 	while (s[i])
 	{
 		if (s[i] == '\'')
-		{
-			sq++;
-			i++;
-			while (s[i] != '\'' && s[i])
-				i++;
-			if (s[i] == '\'')
-			{
-				sq++;
-				i++;
-			}
-		}
+			count_sq(s, &i, &sq);
 		else if (s[i] == '"')
-		{
-			dq++;
-			i++;
-			while (s[i] != '"' && s[i])
-				i++;
-			if (s[i] == '"')
-			{
-				dq++;
-				i++;
-			}
-		}
+			count_dq(s, &i, &dq);
 		else
 			i++;
 	}
@@ -78,7 +85,7 @@ int	check_syntax(char *s)
 	return (0);
 }
 
-int	check_syntax2(t_lexer	**h_lexer)
+int	check_syntax2(t_lexer **h_lexer)
 {
 	t_lexer *node;
 

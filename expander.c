@@ -54,9 +54,9 @@ void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 void	expander(t_collector **collector, t_env **env, t_lexer **head)
 {
 	t_lexer	*node;
-
 	char **s;
 	char *str;
+
 	s = NULL;
 	str = NULL;
 	node = *head;
