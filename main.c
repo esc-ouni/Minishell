@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/17 04:28:21 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/21 01:30:57 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	ft_open_out_files(t_cmd *lol)
 			return (perror(""), exit(1), 1);
 		files = files->next;
 	}
-	
+
 	return (0);
 }
 
 int	ft_open_in_file(t_cmd *lol)
 {
 	t_file	*files;
-	
+
 	files = lol->in_files;
 	while (files)
 	{
@@ -126,7 +126,7 @@ int main(int ac, char **av, char **env)
 	t_env	*myenv_list;
 	t_cmd	*cmd;
 	t_collector *collector;
-	
+
 	g_exit_val = 0;
 	collector = NULL;
 	tmp_fd_in = dup(STDIN_FILENO);
@@ -146,5 +146,5 @@ int main(int ac, char **av, char **env)
 		ft_execution(cmd, &myenv_list, &myenv);
 	}
 	if (myenv)
-		ft_free_old_env(myenv);
+		ft_free_stringp(myenv);
 }

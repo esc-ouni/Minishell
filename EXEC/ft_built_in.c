@@ -6,24 +6,11 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:50:41 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/20 08:03:21 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/21 01:18:40 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_cd(t_cmd *lol)
-{
-	char	*path;
-
-	if (!lol->cmd[1])
-		path = getenv("HOME");
-	else
-		path = lol->cmd[1];
-	if ((chdir(path) < 0))
-		perror("");
-	return (0);
-}
 
 char	*ft_getcwd(void)
 {
@@ -79,23 +66,4 @@ int	ft_echo(t_cmd *lol)
 	else
 		printf("\n");
 	return (0);
-}
-
-void	ft_free_old_env(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-		free(env[i++]);
-	free(env);
-}
-
-void	ft_env(char **myenv)
-{
-	int	i;
-
-	i = 0;
-	while (myenv[i])
-		ft_putendl_fd(myenv[i++], STDOUT_FILENO);
 }

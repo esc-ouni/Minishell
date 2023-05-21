@@ -6,33 +6,11 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/20 08:40:16 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/21 01:21:06 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst)
-{
-	if (lol->builtflag == CD)
-	{
-		ft_cd(lol);
-		return (0);
-	}
-	else if (lol->builtflag == EXT)
-		ft_quit(NOT);
-	else if (lol->builtflag == EXPT)
-	{
-		*myenv = ft_export(env_lst, lol->cmd[1],*myenv);
-		return (0);
-	}
-	else if (lol->builtflag == UNST)
-	{
-		*myenv = ft_unset(env_lst, lol->cmd[1], *myenv);
-		return (0);
-	}
-	return (1);
-}
 
 int	ft_child(t_cmd *lol, int *fd, t_env *env_lst, char **myenv)
 {

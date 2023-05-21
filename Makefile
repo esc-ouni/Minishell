@@ -1,14 +1,14 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idouni <idouni@student.42.fr>              +#+  +:+       +#+         #
+#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 17:40:51 by msamhaou          #+#    #+#              #
-#    Updated: 2023/05/20 19:29:06 by idouni           ###   ########.fr        #
+#    Updated: 2023/05/21 01:22:38 by msamhaou         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 CC = cc
 FLAGS = -w
@@ -39,7 +39,8 @@ GNL_OBJ = $(GNL_SRC:.c=.o)
 
 #		EXEC
 EXEC_DIR = EXEC/
-EXEC_SRC = EXEC/ft_built_in.c EXEC/ft_get_path.c EXEC/ft_env.c EXEC/ft_fork.c
+EXEC_SRC =	EXEC/ft_built_in.c	EXEC/ft_built_in_plus.c EXEC/ft_env.c	EXEC/ft_env_plus.c\
+			EXEC/ft_env_tools.c	EXEC/ft_export.c	EXEC/ft_fork.c	EXEC/ft_get_path.c	EXEC/ft_unset.c
 EXEC_OBJ = $(EXEC_SRC:.c=.o)
 
 #		PARS

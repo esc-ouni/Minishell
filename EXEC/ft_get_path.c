@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:39:57 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/20 06:07:23 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/21 00:55:24 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*ft_get_rawpath(char **env)
 {
-	int	i;
+	int		i;
 	char	*nedl;
 	char	*rawpath;
 
@@ -74,7 +74,7 @@ char	*ft_get_path(char **cmd, char **env)
 	while (rawjoin[i])
 	{
 		if (!access(rawjoin[i], X_OK))
-			return(rawjoin[i]);
+			return (rawjoin[i]);
 		i++;
 	}
 	return (NULL);
