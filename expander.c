@@ -10,16 +10,45 @@ int	searcher_for_spc(char *s)
 	return i;
 }
 
+void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
+{
+	int		i;
+	int		l;
+	char **s;
+
+	i = 0;
+	l = 0;
+	s = ft_msplit(collector, node->cmd, '$');
+	if (node->cmd[0] != '$')
+	{
+		(*str) = ft_mstrdup(collector, s[i]);
+		i++;
+	}
+	while (s[i])
+	{
+		if (ft_isdigit(s[i][0]))
+			(*str) = ft_mstrjoin(collector, (*str), s[i]+1);
+		else if (s[i][0] == '?')
+		{
+			(*str) = ft_mstrjoin(collector, (*str), ft_itoa(g_exit_val));
+			(*str) = ft_mstrjoin(collector, (*str), s[i]+1);
+		}
+		else if (searcher_for_spc(s[i]))
+		{
+			l = searcher_for_spc(s[i]);
+			(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, ft_msubstr(collector, s[i], 0, l), env));
+			(*str) = ft_mstrjoin(collector, (*str), s[i]+l);
+		}
+		else
+			(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, s[i], env));
+		i++;
+	}
+}
+
 void	expander(t_collector **collector, t_env **env, t_lexer **head)
 {
 	t_lexer	*node;
-	int		i;
-	int		l;
-	int		k;
 
-	k = 0;
-	i = 0;
-	l = 0;
 	char **s;
 	char *str;
 	s = NULL;
@@ -33,35 +62,10 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 				break ;
 			else
 			{
-				i = 0;
-				s = ft_msplit(collector, node->cmd, '$');
-				if (node->cmd[0] != '$')
-				{
-					str = ft_mstrdup(collector, s[i]);
-					i++;
-				}
-				while (s[i])
-				{
-					if (ft_isdigit(s[i][0]))
-						str = ft_mstrjoin(collector, str, s[i]+1);
-					else if (s[i][0] == '?')
-					{
-						str = ft_mstrjoin(collector, str, ft_itoa(g_exit_val));
-						str = ft_mstrjoin(collector, str, s[i]+1);
-					}
-					else if (searcher_for_spc(s[i]))
-					{
-						l = searcher_for_spc(s[i]);
-						str = ft_mstrjoin(collector, str, ft_getenv(collector, ft_msubstr(collector, s[i], 0, l), env));
-						str = ft_mstrjoin(collector, str, s[i]+l);
-					}
-					else
-						str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], env));
-					i++;
-				}
+				expnd_2(collector, env, node, &str);
+				if (node->cmd[ft_strlen(node->cmd)-1] == '$')
+					str = ft_mstrjoin(collector, str, "$");
 			}
-			if (node->cmd[ft_strlen(node->cmd)-1] == '$')
-				str = ft_mstrjoin(collector, str, "$");
 			node->cmd = ft_mstrdup(collector, str);
 		}
 		str = NULL;
