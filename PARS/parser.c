@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:34:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 17:45:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_lexer *n)
 {
 	while (n && n->type != PIP)
 	{
-		if (n->cmd && !strcmp(n->cmd, "<") && n->next)
+		if (n->cmd && n->type == R_IN && n->next)
 		{
 			n = n->next;
 			while (n && n->type == WH_SP)
@@ -88,7 +88,7 @@ t_lexer *n)
 			n->type = FIL_NM;
 			add_file_node(collector, in_files, n->cmd, O_TRUNC);
 		}
-		if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
+		if (n->cmd && n->type == R_HD && n->next)
 		{
 			n = n->next;
 			while (n && n->type == WH_SP)
@@ -105,7 +105,7 @@ t_lexer *n)
 {
 	while (n && n->type != PIP)
 	{
-		if (n->cmd && !strcmp(n->cmd, ">") && n->next)
+		if (n->cmd && n->type == R_OT && n->next)
 		{
 			n = n->next;
 			while (n->type == WH_SP)
@@ -113,7 +113,7 @@ t_lexer *n)
 			n->type = FIL_NM;
 			add_file_node(collector, out_files, n->cmd, O_TRUNC);
 		}
-		if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
+		if (n->cmd && n->type == R_OA && n->next)
 		{
 			n = n->next;
 			while (n && n->type == WH_SP)
