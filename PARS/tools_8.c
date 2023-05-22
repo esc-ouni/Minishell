@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:45:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 17:48:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 
 	if (!cmd)
 		return ;
-	menv = mgetenv(collector, env);
 	n_cmd = cmd;
 	while (n_cmd)
 	{
 		n_cmd->num_cmds = ft_cmdsize(cmd);
-		// n_cmd->myenv = menv;
 		if (n_cmd->cmd[0])
 			n_cmd->builtflag = cmd_type(collector, n_cmd->cmd[0]);
 		update_in_out_files(n_cmd->out_files, n_cmd->in_files);
