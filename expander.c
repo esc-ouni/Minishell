@@ -5,12 +5,14 @@ int	searcher_for_spc(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && s[i] != '$' && s[i] != '*' && s[i] != '+' && s[i] != '-' && s[i] != '>' && s[i] != '<' && s[i] != '\\' && s[i] != '!' && s[i] != '#' && s[i] != ' ' && s[i] != '\t' && s[i] != '\'')
+	while (s[i] && s[i] != '$' && s[i] != '*' && s[i] != '+' && s[i] != '-' && \
+	s[i] != '>' && s[i] != '<' && s[i] != '\\' && s[i] != '|' && s[i] != '!' \
+	&& s[i] != '#' && s[i] != ' ' && s[i] != '\t' && s[i] != '\'')
 		i++;
-	return i;
+	return (i);
 }
 
-void	expand_c1(t_collector **collector, char *s,char **str, int *i)
+void	expand_c1(t_collector **collector, char *s ,char **str, int *i)
 {
 	(*str) = ft_mstrdup(collector, s);
 	(*i)++;
@@ -19,14 +21,14 @@ void	expand_c1(t_collector **collector, char *s,char **str, int *i)
 void	expand_ev(t_collector **collector, char **str, char *s)
 {
 	(*str) = ft_mstrjoin(collector, (*str), ft_itoa(g_exit_val));
-	(*str) = ft_mstrjoin(collector, (*str), s+1);
+	(*str) = ft_mstrjoin(collector, (*str), s + 1);
 }
 
 void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 {
 	int		i;
 	int		l;
-	char **s;
+	char	**s;
 
 	i = 0;
 	l = 0;
@@ -43,7 +45,7 @@ void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 		{
 			l = searcher_for_spc(s[i]);
 			(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, ft_msubstr(collector, s[i], 0, l), env));
-			(*str) = ft_mstrjoin(collector, (*str), s[i]+l);
+			(*str) = ft_mstrjoin(collector, (*str), s[i] + l);
 		}
 		else
 			(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, s[i], env));
@@ -54,8 +56,8 @@ void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 void	expander(t_collector **collector, t_env **env, t_lexer **head)
 {
 	t_lexer	*node;
-	char **s;
-	char *str;
+	char	**s;
+	char	*str;
 
 	s = NULL;
 	str = NULL;
@@ -69,7 +71,7 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 			else
 			{
 				expnd_2(collector, env, node, &str);
-				if (node->cmd[ft_strlen(node->cmd)-1] == '$')
+				if (node->cmd[ft_strlen (node->cmd) - 1] == '$')
 					str = ft_mstrjoin(collector, str, "$");
 			}
 			node->cmd = ft_mstrdup(collector, str);
