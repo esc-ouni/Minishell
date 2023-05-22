@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 16:01:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:37:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,21 @@ void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
 {
 	add_lexer(collector, l_node, ft_msubstr(collector, s, (*i), 2), R_HD);
 	(*i) += 2;
+}
+
+int	check_syntax(char *s)
+{
+	if (!s)
+	{
+		write(1, "exit\n", 5);
+		exit (0);
+	}
+	if (!ft_strlen(s))
+		return (1);
+	add_history(s);
+	if (check_oerr(s))
+		return (1);
+	if (check_pipes(s))
+		return (1);
+	return (0);
 }

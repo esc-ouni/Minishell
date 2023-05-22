@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 16:30:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:35:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,32 @@ t_files *files)
 		tmp->next = new_cmd;
 	}
 	new_cmd->next = NULL;
+}
+
+int	check_syntax2(t_lexer **h_lexer)
+{
+	t_lexer	*node;
+
+	node = *h_lexer;
+	while (node)
+	{
+		if (node->type == WH_SP)
+			node = node->next;
+		else if ((node->type == R_OA) || (node->type == R_OT) || \
+		(node->type == R_IN) || (node->type == R_HD))
+		{
+			node = node->next;
+			while (node && node->type == WH_SP)
+				node = node->next;
+			if ((node) && ((node->type == R_OA) || (node->type == R_OT) || \
+			(node->type == R_IN) || (node->type == R_HD || node->type == PIP)))
+				return (syntx_err(), 1);
+			else if (!node)
+				return (syntx_err(), 1);
+			node = node->next;
+		}
+		else
+			node = node->next;
+	}
+	return (0);
 }

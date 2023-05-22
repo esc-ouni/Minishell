@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:37 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 16:22:06 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:34:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,42 +81,3 @@ void	syntx_err(void)
 	write(2, "syntax error ...\n", 18);
 }
 
-int	check_syntax(char *s)
-{
-	if (!s)
-		write(1, "exit\n", 5), exit(0);
-	if (!ft_strlen(s))
-		return (1);
-	add_history(s);
-	if (check_oerr(s))
-		return (1);
-	if (check_pipes(s))
-		return (1);
-	return (0);
-}
-
-int	check_syntax2(t_lexer **h_lexer)
-{
-	t_lexer	*node;
-
-	node = *h_lexer;
-	while (node)
-	{
-		if (node->type == WH_SP)
-			node = node->next;
-		else if ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD))
-		{
-			node = node->next;
-			while (node && node->type == WH_SP)
-				node = node->next;
-			if ((node) && ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD || node->type == PIP)))
-				return (syntx_err(), 1);
-			else if (!node)
-				return (syntx_err(), 1);
-			node = node->next;
-		}
-		else
-			node = node->next;
-	}
-	return (0);
-}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 14:32:16 by idouni            #+#    #+#             */
-/*   Updated: 2022/11/12 19:27:47 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:32:27 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -42,7 +41,6 @@ char	*ft_strchr(const char *s, int c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
-// char	*ft_msubstr(char const *s, unsigned int start, size_t len);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);

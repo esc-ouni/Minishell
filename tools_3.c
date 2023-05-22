@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:24 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 16:23:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:33:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set)
 	return (ns);
 }
 
-char	*ft_msubstr(t_collector **collector, char const *s, unsigned int start, size_t len)
+char	*ft_msubstr(t_collector **collector, char const *s, unsigned int \
+start, size_t len)
 {
 	char	*ns;
 	size_t	l;
