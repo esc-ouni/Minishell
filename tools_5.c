@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools_5.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 16:23:36 by idouni            #+#    #+#             */
+/*   Updated: 2023/05/22 16:30:11 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Minishell.h"
 
 void	ft_mlstclear(t_mlist **lst)
@@ -16,68 +28,65 @@ void	ft_mlstclear(t_mlist **lst)
 		node = n_node;
 	}
 	*lst = NULL;
-}     
+}
 
-void	add_file_node(t_collector	**collector, t_file **head, char *filename, int flag)
+void	add_file_node(t_collector **collector, t_file **head, \
+char *filename, int flag)
 {
-    t_file *tmp;
-    t_file *new_node = NULL;
-    new_node = h_malloc(collector, sizeof(t_file), new_node);
-    
-    new_node->filename = ft_mstrdup(collector, filename);
-    new_node->o_flags = flag;
-    
-    if (!(*head))
-    {
-        *head = new_node;
-        new_node->next = NULL;
-    }
-    else
-    {
-        tmp = *head;
-        while (tmp->next)
-        {
-            tmp = tmp->next;
-        }
-        tmp->next = new_node;
-        new_node->next = NULL;
-    }
+	t_file	*tmp;
+	t_file	*new_node;
+
+	new_node = NULL;
+	new_node = h_malloc(collector, sizeof(t_file), new_node);
+	new_node->filename = ft_mstrdup(collector, filename);
+	new_node->o_flags = flag;
+	if (!(*head))
+	{
+		*head = new_node;
+		new_node->next = NULL;
+	}
+	else
+	{
+		tmp = *head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_node;
+		new_node->next = NULL;
+	}
 }
 
 void	add_file_file(t_collector **collector, t_file **head, t_file *file)
 {
-    t_file *tmp;
-    t_file *new_node = NULL;
-    new_node = h_malloc(collector, sizeof(t_file), new_node);
-    
-    new_node->filename = ft_mstrdup(collector, file->filename);
-    new_node->o_flags = file->o_flags;
-    
-    if (!(*head))
-    {
-        *head = new_node;
-        new_node->next = NULL;
-    }
-    else
-    {
-        tmp = *head;
-        while (tmp->next)
-        {
-            tmp = tmp->next;
-        }
-        tmp->next = new_node;
-        new_node->next = NULL;
-    }
+	t_file	*tmp;
+	t_file	*new_node;
+
+	new_node = NULL;
+	new_node = h_malloc(collector, sizeof(t_file), new_node);
+	new_node->filename = ft_mstrdup(collector, file->filename);
+	new_node->o_flags = file->o_flags;
+	if (!(*head))
+	{
+		*head = new_node;
+		new_node->next = NULL;
+	}
+	else
+	{
+		tmp = *head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_node;
+		new_node->next = NULL;
+	}
 }
 
-void	add_to_fullcmd_st(t_collector	**collector, char ***full_cmd, t_lexer *n)
+void	add_to_fullcmd_st(t_collector **collector, char ***full_cmd, t_lexer *n)
 {
-	int	l;
-    t_lexer *tmp;
+	int		l;
+	t_lexer	*tmp;
 
 	l = 0;
 	tmp = n;
-	while(tmp && tmp->type != PIP)
+	while (tmp && tmp->type != PIP)
 	{
 		l++;
 		tmp = tmp->next;
@@ -87,29 +96,30 @@ void	add_to_fullcmd_st(t_collector	**collector, char ***full_cmd, t_lexer *n)
 	(*full_cmd)[1] = NULL;
 }
 
-void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j)
+void	add_to_fullcmd(t_collector **collector, char ***full_cmd, \
+t_lexer *n, int j)
 {
 	int	l;
 
 	l = 0;
-    if (!((*full_cmd)))
-		return (add_to_fullcmd_st(collector, full_cmd, n)); 
-    else
-    {
-        while ((*full_cmd)[l])
-            l++;
+	if (!((*full_cmd)))
+		return (add_to_fullcmd_st(collector, full_cmd, n));
+	else
+	{
+		while ((*full_cmd)[l])
+			l++;
 		if (j && l)
 		{
 			l--;
 			(*full_cmd)[l] = ft_mstrjoin(collector, (*full_cmd)[l], n->cmd);
-			(*full_cmd)[l+1] = NULL;
-			return ;			
+			(*full_cmd)[l + 1] = NULL;
+			return ;
 		}
 		else
 		{
 			(*full_cmd)[l] = ft_mstrdup(collector, n->cmd);
-			(*full_cmd)[l+1] = NULL;
+			(*full_cmd)[l + 1] = NULL;
 			return ;
 		}
-    }
+	}
 }

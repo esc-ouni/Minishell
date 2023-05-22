@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 16:23:10 by idouni            #+#    #+#             */
+/*   Updated: 2023/05/22 16:23:11 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Minishell.h"
 
 static char	**free_s(char **p, int l)
@@ -49,7 +61,8 @@ static size_t	lenfinder(char const *s, char c, int start)
 	return (0);
 }
 
-static char	**ft_msplitp2(t_collector **collector,char **p, char const *s, char const c)
+static char	**ft_msplitp2(t_collector **collector, char **p, \
+char const *s, char const c)
 {
 	size_t		i;
 	size_t		l;

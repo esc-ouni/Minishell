@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 16:20:37 by idouni            #+#    #+#             */
+/*   Updated: 2023/05/22 16:22:06 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Minishell.h"
 
 void	count_sq(char *s, int *i, int *sq)
@@ -12,7 +24,6 @@ void	count_sq(char *s, int *i, int *sq)
 		(*i)++;
 	}
 }
-
 
 void	count_dq(char *s, int *i, int *dq)
 {
@@ -29,10 +40,13 @@ void	count_dq(char *s, int *i, int *dq)
 
 int	check_oerr(char *s)
 {
-	int i = 0;
-	int sq = 0;
-	int dq = 0;
+	int	i;
+	int	sq;
+	int	dq;
 
+	i = 0;
+	sq = 0;
+	dq = 0;
 	while (s[i])
 	{
 		if (s[i] == '\'')
@@ -52,7 +66,7 @@ int	check_pipes(char *s)
 	int i = 0;
 
 	if ((s[i] == '|') || s[ft_strlen(s)-1] == '|')
-			return (syntx_err(), 1);
+		return (syntx_err(), 1);
 	while (s[i])
 	{
 		if (s[i+1] && s[i] == '|' && s[i+1] == '|')
@@ -62,7 +76,7 @@ int	check_pipes(char *s)
 	return (0);
 }
 
-void	syntx_err()
+void	syntx_err(void)
 {
 	write(2, "syntax error ...\n", 18);
 }
@@ -83,7 +97,7 @@ int	check_syntax(char *s)
 
 int	check_syntax2(t_lexer **h_lexer)
 {
-	t_lexer *node;
+	t_lexer	*node;
 
 	node = *h_lexer;
 	while (node)

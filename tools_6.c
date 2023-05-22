@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools_6.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 16:30:30 by idouni            #+#    #+#             */
+/*   Updated: 2023/05/22 16:30:42 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Minishell.h"
 
 char	**allocate_full_cmd(t_collector **collector, char **full_cmd)
 {
 	char	**str;
-	int	 i;
+	int		i;
 
 	i = 0;
 	str = NULL;
@@ -54,7 +66,8 @@ t_file	*allocate_in_files(t_collector **collector, t_file *in_files)
 	return (in_files2);
 }
 
-void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_files *files)
+void	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, \
+t_files *files)
 {
 	t_cmd	*new_cmd;
 	t_cmd	*tmp;
