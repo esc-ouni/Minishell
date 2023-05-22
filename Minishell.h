@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 15:54:03 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 15:57:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void	ft_collectorclear(t_collector **collector);
 void	ft_mlstclear(t_mlist **lst);
 void 	add_file_node(t_collector	**collector, t_file **head, char *filename, int flag);
 void 	add_file_file(t_collector **collector, t_file **head, t_file *file);
-// void	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files);
 void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_files *files);
 void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j);
 void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	type);

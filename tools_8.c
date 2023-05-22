@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 14:47:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:01:50 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 		update_in_out_files(n_cmd->out_files, n_cmd->in_files);
 		n_cmd = n_cmd->next;
 	}
+	update_cmd(cmd);
 }
 
 void	update_in_out_files(t_file *out_files, t_file *in_files)

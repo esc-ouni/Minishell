@@ -36,8 +36,6 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *node)
     cmd = NULL;
 	files = NULL;
 	files = h_malloc(collector, sizeof(t_files), files);
-	files->out_files = NULL;
-	files->in_files = NULL;
 	parser_init(&out_files, &in_files, &full_cmd);
     while (node)
     {
@@ -48,11 +46,9 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *node)
 			node = node->next;
 		files->out_files = out_files;
 		files->in_files = in_files;
-        // add_to_cmd(collector, &cmd, full_cmd, out_files, in_files);
         add_to_cmd(collector, &cmd, full_cmd, files);
 		parser_init(&out_files, &in_files, &full_cmd);
     }
-	update_cmd(cmd);
     return (cmd);
 }
 

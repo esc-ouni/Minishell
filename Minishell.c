@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Minishell.c                                        :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 15:30:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/20 16:20:26 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:01:37 by idouni           ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "Minishell.h"
 
@@ -68,6 +68,7 @@ int main(int argc, char **argv, char **env)
     {
         h_lexer = parser(&collector, &myenv_list);
         cmd = parser2(&collector, h_lexer);
+		// update_cmd(cmd);
         emplify(&collector, cmd, env);
         after_parse2(cmd);
 		ft_collectorclear(&collector);
