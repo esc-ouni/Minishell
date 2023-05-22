@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 static int	check(char c, char const *set)
 {
 	size_t	i;

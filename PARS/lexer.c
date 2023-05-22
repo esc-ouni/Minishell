@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 t_lexer *lexer(t_collector **collector, char *s)
 {

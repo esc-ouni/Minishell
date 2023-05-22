@@ -6,12 +6,12 @@
 #    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 17:40:51 by msamhaou          #+#    #+#              #
-#    Updated: 2023/05/21 01:22:38 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/05/22 02:43:01 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-FLAGS = -w
+FLAGS = -Wall -Wextra -Werror
 AFLAGS = -lreadline
 LINK = /Users/msamhaou/.brew/Cellar/readline/8.2.1/lib
 INCLUDES = includes/

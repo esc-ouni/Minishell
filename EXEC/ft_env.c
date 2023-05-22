@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 07:48:55 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 02:45:42 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	ft_free_stringp(char **env)
 	free(env);
 }
 
-char	**ft_set_env(t_env *env_lst, char **myenv)
+char	**ft_set_env(t_env *env_lst)
 {
 	char	**res;
 	int		i;
 
 	i = 0;
-	res = (char **)malloc(sizeof(char *) * (env_size(env_lst) + 1));
+	res = (char **)malloc(sizeof(char *) * (ft_env_size(env_lst) + 1));
 	while (env_lst)
 	{
 		res[i] = ft_strdup(env_lst->str);

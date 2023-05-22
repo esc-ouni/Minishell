@@ -6,13 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:19:48 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 01:30:46 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 02:45:04 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	env_size(t_env *myenv)
+size_t	ft_env_size(t_env *myenv)
 {
 	size_t	i;
 

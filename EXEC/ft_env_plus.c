@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:01:15 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 01:16:42 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 02:45:36 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**ft_make_double_char(t_env *env_lst)
 	int		i;
 	char	**res;
 
-	i = env_size(env_lst);
+	i = ft_env_size(env_lst);
 	res = (char **)malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while (env_lst)

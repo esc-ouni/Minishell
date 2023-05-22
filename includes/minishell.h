@@ -96,6 +96,20 @@ enum    flags
 	BUILT
 };
 
+typedef struct s_collector
+{
+    void            *addr;
+    struct s_collector   *next;
+}   t_collector;
+typedef struct s_init
+{
+	int			tmp_fd_in;
+	int			tmp_fd_out;
+	char		**myenv;
+	t_env		*myenv_list;
+	t_cmd		*cmd;
+	t_collector	*collector;
+}	t_init;
 
 typedef struct s_lexer
 {
@@ -104,15 +118,12 @@ typedef struct s_lexer
     struct s_lexer	*next;
 }   t_lexer;
 
-typedef struct s_collector
-{
-    void            *addr;
-    struct s_collector   *next;
-}   t_collector;
 
 extern int	g_exit_val;
 
-int	ft_builtin(t_cmd *lol, t_env *env_lst, char **myenv);
+int	ft_builtin(t_cmd *lol, char **myenv);
+int	ft_open_out_files(t_cmd *lol);
+int	ft_open_in_file(t_cmd *lol);
 int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst);
 int	ft_execute(char *arg, char **env);
 int     ft_cd(t_cmd *lol);
@@ -124,9 +135,11 @@ char    **ft_unset(t_env **env_lst, char *str, char **myenv);
 char	**ft_make_double_char(t_env *env_lst);
 void	ft_free_stringp(char **env);
 void	ft_free_pos(char **strp, int pos);
-char	**ft_set_env(t_env *env_lst, char **myenv);
+char	**ft_set_env(t_env *env_lst);
 void	env_add_back(t_env **env, t_env *toadd);
 t_env	*ft_set_env_list(char **env);
+size_t	ft_env_size(t_env *myenv);
+int		ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst);
 t_env	*new_env(char *str);
 void	ft_env(char **myenv);
 char	*ft_get_path(char **cmd, char **env);
@@ -171,5 +184,7 @@ void	add_to_fullcmd(t_collector	**collector, char ***full_cmd, t_lexer *n, int j
 void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
 void	*h_malloc(t_collector **collect_head, size_t s, void *p);
+
+int	check_syntax2(t_lexer	**h_lexer);
 
 # endif

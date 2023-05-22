@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 t_lexer  *parser(t_collector	**collector, t_env **env)
 {
@@ -114,7 +114,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 				{
 					while (n && (n->type == WH_SP || n->type == FIL_NM))
 						n = n->next;
-					if (n && n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA) 
+					if (n && n->type != WH_SP && n->type != PIP && n && n->type != R_IN && n->type != R_HD && n->type != R_OT && n->type != R_OA)
 					{
 						add_to_fullcmd(collector, &full_cmd, n, 0);
 						n = n->next;
@@ -131,7 +131,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
                 out_files = NULL;
                 in_files = NULL;
                 i2++;
-                n = n->next;   
+                n = n->next;
             }
         }
         else

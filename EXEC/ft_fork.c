@@ -6,13 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 07:52:36 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 03:01:16 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_child(t_cmd *lol, int *fd, t_env *env_lst, char **myenv)
+int	ft_child(t_cmd *lol, int *fd, char **myenv)
 {
 	close(fd[0]);
 	if (lol->out_files)
@@ -24,7 +24,7 @@ int	ft_child(t_cmd *lol, int *fd, t_env *env_lst, char **myenv)
 		dup2(fd[1], STDOUT_FILENO);
 	if (lol->builtflag)
 	{
-		ft_builtin(lol, env_lst, myenv);
+		ft_builtin(lol, myenv);
 		exit (0);
 	}
 	else if (lol->builtflag == NOT)
@@ -36,6 +36,7 @@ int	ft_child(t_cmd *lol, int *fd, t_env *env_lst, char **myenv)
 		}
 		exit(0);
 	}
+	return (1);
 }
 
 int	ft_parent(t_cmd *lol, int *fd, int *pid)
@@ -56,13 +57,14 @@ int	ft_parent(t_cmd *lol, int *fd, int *pid)
 			line = get_next_line(fd[0]);
 		}
 	}
-	waitpid(pid, &g_exit_val, 0);
+	waitpid(*pid, &g_exit_val, 0);
 	if (g_exit_val)
 		g_exit_val = 127;
 	close (fd[0]);
+	return (0);
 }
 
-int	ft_heredoc_child(t_cmd *cmd, int *fd, char *delimiter)
+int	ft_heredoc_child(int *fd, char *delimiter)
 {
 	char	*line;
 
@@ -80,18 +82,18 @@ int	ft_heredoc_child(t_cmd *cmd, int *fd, char *delimiter)
 		line = get_next_line(0);
 	}
 	exit(0);
+	return (0);
 }
 
 int	ft_heredoc(t_cmd *cmd, char *delimiter)
 {
 	int		pid;
-	char	*line;
 	int		fd[2];
 
 	pipe(fd);
 	pid = fork();
 	if (!pid)
-		ft_heredoc_child(cmd, fd, delimiter);
+		ft_heredoc_child(fd, delimiter);
 	else
 	{
 		close(fd[1]);
@@ -99,6 +101,7 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter)
 		waitpid(pid, NULL, 0);
 		close(fd[0]);
 	}
+	return (0);
 }
 
 int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
@@ -117,8 +120,8 @@ int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
-		ft_child(lol, fd, *env_lst, *myenv);
+		ft_child(lol, fd, *myenv);
 	else
-		ft_parent(lol, fd, pid);
+		ft_parent(lol, fd, &pid);
 	return (0);
 }

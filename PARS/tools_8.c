@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 {
@@ -13,7 +13,6 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 	while (n_cmd)
 	{
 		n_cmd->num_cmds = ft_cmdsize(cmd);
-		n_cmd->myenv = menv;
 		if (n_cmd->cmd[0])
 			n_cmd->builtflag = cmd_type(collector, n_cmd->cmd[0]);
 		h_file = n_cmd->out_files;

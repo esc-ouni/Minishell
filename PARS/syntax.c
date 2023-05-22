@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 int	check_oerr(char *s)
 {
@@ -95,12 +95,12 @@ int	check_syntax2(t_lexer	**h_lexer)
 			if ((node) && ((node->type == R_OA) || (node->type == R_OT) || (node->type == R_IN) || (node->type == R_HD || node->type == PIP)))
 			{
 				printf("syntax error near unexpected token\n");
-				return (1);	
+				return (1);
 			}
 			else if (!node)
 			{
 				printf("syntax error near unexpected token\n");
-				return (1);		
+				return (1);
 			}
 			node = node->next;
 		}

@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 void	add_lexer(t_collector **collector, t_lexer **head, char *content, t_enum	type)
 {

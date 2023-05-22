@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 04:40:47 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/21 01:02:15 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 02:57:15 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,7 +368,6 @@ void	emplify(t_collector **collector, t_cmd *cmd, char **env)
 	while (n_cmd)
 	{
 		// n_cmd->num_cmds = ft_mlstsize(cmd);
-		n_cmd->myenv = menv;
 		if (n_cmd->cmd[0])
 			n_cmd->builtflag = cmd_type(collector, n_cmd->cmd[0]);
 		h_file = n_cmd->out_files;

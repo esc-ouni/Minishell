@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:03:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 01:13:35 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 02:46:34 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	ft_edit_env_str(t_env *to_edit, char *str)
 {
 	free(to_edit->str);
 	to_edit->str = ft_strdup(str);
+	return (0);
 }
 
 static t_env	*ft_var_exist(t_env *env_lst, char *str)
@@ -44,7 +45,7 @@ char	**ft_export(t_env **env_lst, char *str, char **myenv)
 {
 	char	**res;
 	t_env	*head;
-	char	*ev_var;
+	t_env	*ev_var;
 
 	if (!ft_is_exported(str))
 		return (myenv);

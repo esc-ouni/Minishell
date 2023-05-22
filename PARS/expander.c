@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 int	searcher_for_spc(char *s)
 {

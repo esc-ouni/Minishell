@@ -1,5 +1,5 @@
 
-#include "Minishell.h"
+#include "minishell.h"
 
 void	*h_malloc(t_collector **collector_head, size_t s, void *p)
 {
@@ -56,4 +56,4 @@ void	debug(void)
 	printf("\x1B[32m");
 	printf("\nDEBUG OK\n");
 	printf("\x1B[0m");
-}   
+}

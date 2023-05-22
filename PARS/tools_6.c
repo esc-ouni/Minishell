@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
 {
