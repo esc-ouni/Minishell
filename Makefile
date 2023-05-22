@@ -14,6 +14,7 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror
 AFLAGS = -lreadline
 LINK = /Users/msamhaou/.brew/Cellar/readline/8.2.1/lib
+HEADERS = includes/get_next_line.h	includes/libft.h	includes/minishell.h
 INCLUDES = includes/
 INC=/Users/msamhaou/.brew/Cellar/readline/8.2.1/include
 
@@ -63,7 +64,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L $(LINK) -lreadline
 
-%.o : %.c
+%.o : %.c $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@ -I$(INCLUDES) -I$(INC)
 
 clean :

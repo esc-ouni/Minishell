@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/22 02:59:41 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 08:37:15 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val)
 
 t_init	*ft_init(char **env)
 {
-	t_init *res;
+	t_init	*res;
 
 	g_exit_val = 0;
 	res = malloc(sizeof(t_init));
@@ -148,7 +148,7 @@ t_init	*ft_init(char **env)
 	res->collector = NULL;
 	res->tmp_fd_in = dup(STDIN_FILENO);
 	res->tmp_fd_out = dup (STDOUT_FILENO);
-	if (res->tmp_fd_in < 0 ||res->tmp_fd_out < 0)
+	if (res->tmp_fd_in < 0 || res->tmp_fd_out < 0)
 		exit(0);
 	res->myenv_list = ft_set_env_list(env);
 	res->myenv = ft_set_env(res->myenv_list);
@@ -163,22 +163,22 @@ void	ft_norm_sucks(int ac, char **av)
 
 int	main(int ac, char **av, char **env)
 {
-
-	t_init *init_val;
+	t_init	*inval;
 
 	ft_norm_sucks(ac, av);
-	init_val = ft_init(env);
+	inval = ft_init(env);
 	while (1)
 	{
-		dup2(init_val->tmp_fd_in, 0);
-		dup2(init_val->tmp_fd_out, 1);
+		dup2(inval->tmp_fd_in, 0);
+		dup2(inval->tmp_fd_out, 1);
 		signal(SIGINT, sig_handle);
 		signal(SIGQUIT, SIG_IGN);
-		init_val->cmd = parser2(&(init_val->collector), parser(&(init_val->collector), &(init_val->myenv_list)));
-		emplify(&(init_val->collector), init_val->cmd, env);
-		if (!init_val->cmd)
+		inval->cmd = parser2(&(inval->collector) \
+			, parser(&(inval->collector), &(inval->myenv_list)));
+		emplify(&(inval->collector), inval->cmd, env);
+		if (!inval->cmd)
 			continue ;
-		ft_execution(init_val->cmd, &(init_val->myenv_list), &(init_val->myenv));
+		ft_execution(inval->cmd, &(inval->myenv_list), &(inval->myenv));
 	}
-	ft_end_free(&(init_val->myenv_list), (init_val->myenv), init_val);
+	ft_end_free(&(inval->myenv_list), (inval->myenv), inval);
 }
