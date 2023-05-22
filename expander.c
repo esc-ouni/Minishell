@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 16:20:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 17:14:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,22 @@ void	expand_ev(t_collector **collector, char **str, char *s)
 	(*str) = ft_mstrjoin(collector, (*str), s + 1);
 }
 
+void	expand_evs(t_collector **collector, char *s ,char **str, t_env **env)
+{
+	int	l;
+
+	l = searcher_for_spc(s);
+	(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, \
+	ft_msubstr(collector, s, 0, l), env));
+	(*str) = ft_mstrjoin(collector, (*str), s + l);
+}
+
 void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 {
 	int		i;
-	int		l;
 	char	**s;
 
 	i = 0;
-	l = 0;
 	s = ft_msplit(collector, node->cmd, '$');
 	if (node->cmd[0] != '$')
 		expand_c1(collector, s[i], str, &i);
@@ -54,11 +62,7 @@ void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 		else if (s[i][0] == '?')
 			expand_ev(collector, str, s[i]);
 		else if (searcher_for_spc(s[i]))
-		{
-			l = searcher_for_spc(s[i]);
-			(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, ft_msubstr(collector, s[i], 0, l), env));
-			(*str) = ft_mstrjoin(collector, (*str), s[i] + l);
-		}
+			expand_evs(collector, s[i], str, env);
 		else
 			(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, s[i], env));
 		i++;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 16:23:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:44:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,37 @@ char	*ft_mstrjoin(t_collector **collector, char const *s1, char const *s2)
 		return (ns);
 	}
 	return (ns);
+}
+
+void	update_cmd(t_cmd *cmd)
+{
+	int		i;
+	t_cmd	*n_cmd;
+
+	i = 0;
+	n_cmd = cmd;
+	if (n_cmd && ft_cmdsize(n_cmd) == 1)
+	{
+		n_cmd->first_cmd = 1;
+		n_cmd->last_cmd = 1;
+	}
+	else if (n_cmd && ft_cmdsize(n_cmd) != 1)
+	{
+		n_cmd->first_cmd = 0;
+		n_cmd->last_cmd = 0;
+		if (i == 0)
+			n_cmd->first_cmd = 1;
+		i++;
+		while (n_cmd->next)
+			n_cmd = n_cmd->next;
+		n_cmd->last_cmd = 1;
+		n_cmd->first_cmd = 0;
+	}
+}
+
+void	parser_init(t_file **out_files, t_file **in_files, char ***full_cmd)
+{
+	*full_cmd = NULL;
+	*out_files = NULL;
+	*in_files = NULL;
 }
