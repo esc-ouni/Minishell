@@ -46,22 +46,16 @@ void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file 
 		add_file_file(collector, &out_files2, out_files);
 		out_files = out_files->next;
 	}
-
 	while (in_files)
 	{
 		add_file_file(collector, &in_files2, in_files);
 		in_files = in_files->next;
 	}
-
 	new_cmd->cmd = str;
 	new_cmd->out_files = out_files2;
 	new_cmd->in_files = in_files2;
-
 	if (!(*head))
-    {
         *head = new_cmd;
-        new_cmd->next = NULL;
-    }
     else
     {
         tmp = *head;
@@ -70,6 +64,6 @@ void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file 
             tmp = tmp->next;
         }
         tmp->next = new_cmd;
-        new_cmd->next = NULL;
     }
+    new_cmd->next = NULL;
 }
