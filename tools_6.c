@@ -56,7 +56,7 @@ t_file	*allocate_in_files(t_collector **collector, t_file *in_files)
 
 void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file *out_files, t_file *in_files)
 {
-	t_cmd 	*new_cmd;
+	t_cmd	*new_cmd;
 	t_cmd	*tmp;
 
 	new_cmd = NULL;
@@ -65,15 +65,13 @@ void 	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, t_file 
 	new_cmd->out_files = allocate_out_files(collector, out_files);
 	new_cmd->in_files = allocate_in_files(collector, in_files);
 	if (!(*head))
-        *head = new_cmd;
-    else
-    {
-        tmp = *head;
-        while (tmp->next)
-        {
-            tmp = tmp->next;
-        }
-        tmp->next = new_cmd;
-    }
-    new_cmd->next = NULL;
+		*head = new_cmd;
+	else
+	{
+		tmp = *head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_cmd;
+	}
+	new_cmd->next = NULL;
 }
