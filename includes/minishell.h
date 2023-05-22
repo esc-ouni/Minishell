@@ -187,7 +187,7 @@ void	roa_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rin_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 
-void	emplify(t_collector **collector, t_cmd *cmd, char **env);
+void	emplify(t_collector **collector, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
 char	**mgetenv(t_collector **collector, char **env);

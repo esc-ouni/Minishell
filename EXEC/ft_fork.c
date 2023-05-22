@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/22 03:01:16 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:52:00 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,16 @@ int	ft_parent(t_cmd *lol, int *fd, int *pid)
 int	ft_heredoc_child(int *fd, char *delimiter)
 {
 	char	*line;
+	char	*delim;
 
+	delim = ft_strjoin(delimiter, "\n");
 	close (fd[0]);
 	line = get_next_line(0);
-	while (line)
+	while (line > 0)
 	{
-		if (!ft_strncmp(line, delimiter, ft_strlen(line) - 1))
+		if (!ft_strncmp(line, delim, ft_strlen(line)))
 		{
+			ft_putendl_fd("here", 2);
 			free(line);
 			exit(0);
 		}
@@ -81,6 +84,7 @@ int	ft_heredoc_child(int *fd, char *delimiter)
 		free(line);
 		line = get_next_line(0);
 	}
+	free(delim);
 	exit(0);
 	return (0);
 }

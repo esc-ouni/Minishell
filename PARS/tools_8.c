@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   tools_8.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:48:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 19:32:43 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	emplify(t_collector **collector, t_cmd *cmd, char **env)
+void	emplify(t_collector **collector, t_cmd *cmd)
 {
 	t_cmd	*n_cmd;
-	char	**menv;
 
 	if (!cmd)
 		return ;

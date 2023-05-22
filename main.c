@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/22 17:37:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 19:33:28 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, SIG_IGN);
 		inval->cmd = parser2(&(inval->collector) \
 			, parser(&(inval->collector), &(inval->myenv_list)));
-		emplify(&(inval->collector), inval->cmd, env);
+		emplify(&(inval->collector), inval->cmd);
 		if (!inval->cmd)
 			continue ;
 		ft_execution(inval->cmd, &(inval->myenv_list), &(inval->myenv));
