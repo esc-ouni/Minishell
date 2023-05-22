@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/22 19:33:28 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:03:39 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 {
 	t_cmd	*head;
 
+	if (!cmd->cmd[0])
+		return(0);
 	head = cmd;
 	while (cmd)
 	{
