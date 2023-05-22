@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools_3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 16:23:24 by idouni            #+#    #+#             */
+/*   Updated: 2023/05/22 17:34:17 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
 static int	check(char c, char const *set)
 {
 	size_t	i;
@@ -78,7 +91,8 @@ char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set)
 	return (ns);
 }
 
-char	*ft_msubstr(t_collector **collector, char const *s, unsigned int start, size_t len)
+char	*ft_msubstr(t_collector **collector, char const *s, unsigned int \
+start, size_t len)
 {
 	char	*ns;
 	size_t	l;

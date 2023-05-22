@@ -1,27 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
+/*   Updated: 2023/05/22 17:34:17 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	searcher_for_spc(char *s)
+void	expand_c1(t_collector **collector, char *s, char **str, int *i)
 {
-	int	i;
+	(*str) = ft_mstrdup(collector, s);
+	(*i)++;
+}
+
+void	expand_ev(t_collector **collector, char **str, char *s)
+{
+	(*str) = ft_mstrjoin(collector, (*str), ft_itoa(g_exit_val));
+	(*str) = ft_mstrjoin(collector, (*str), s + 1);
+}
+
+void	expand_evs(t_collector **collector, char *s, char **str, t_env **env)
+{
+	int	l;
+
+	l = searcher_for_spc(s);
+	(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, \
+	ft_msubstr(collector, s, 0, l), env));
+	(*str) = ft_mstrjoin(collector, (*str), s + l);
+}
+
+void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
+{
+	int		i;
+	char	**s;
 
 	i = 0;
-	while (s[i] && s[i] != '$' && s[i] != '*' && s[i] != '+' && s[i] != '-' && s[i] != '>' && s[i] != '<' && s[i] != '\\' && s[i] != '!' && s[i] != '#' && s[i] != ' ' && s[i] != '\t' && s[i] != '\'')
+	s = ft_msplit(collector, node->cmd, '$');
+	if (node->cmd[0] != '$')
+		expand_c1(collector, s[i], str, &i);
+	while (s[i])
+	{
+		if (ft_isdigit(s[i][0]))
+			(*str) = ft_mstrjoin(collector, (*str), (s[i] + 1));
+		else if (s[i][0] == '?')
+			expand_ev(collector, str, s[i]);
+		else if (searcher_for_spc(s[i]))
+			expand_evs(collector, s[i], str, env);
+		else
+			(*str) = ft_mstrjoin(collector, (*str), \
+			ft_getenv(collector, s[i], env));
 		i++;
-	return i;
+	}
 }
 
 void	expander(t_collector **collector, t_env **env, t_lexer **head)
 {
 	t_lexer	*node;
-	int		i;
-	int		l;
-	int		k;
+	char	**s;
+	char	*str;
 
-	k = 0;
-	i = 0;
-	l = 0;
-	char **s;
-	char *str;
 	s = NULL;
 	str = NULL;
 	node = *head;
@@ -33,35 +75,10 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 				break ;
 			else
 			{
-				i = 0;
-				s = ft_msplit(collector, node->cmd, '$');
-				if (node->cmd[0] != '$')
-				{
-					str = ft_mstrdup(collector, s[i]);
-					i++;
-				}
-				while (s[i])
-				{
-					if (ft_isdigit(s[i][0]))
-						str = ft_mstrjoin(collector, str, s[i]+1);
-					else if (s[i][0] == '?')
-					{
-						str = ft_mstrjoin(collector, str, ft_itoa(g_exit_val));
-						str = ft_mstrjoin(collector, str, s[i]+1);
-					}
-					else if (searcher_for_spc(s[i]))
-					{
-						l = searcher_for_spc(s[i]);
-						str = ft_mstrjoin(collector, str, ft_getenv(collector, ft_msubstr(collector, s[i], 0, l), env));
-						str = ft_mstrjoin(collector, str, s[i]+l);
-					}
-					else
-						str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], env));
-					i++;
-				}
+				expnd_2(collector, env, node, &str);
+				if (node->cmd[ft_strlen (node->cmd) - 1] == '$')
+					str = ft_mstrjoin(collector, str, "$");
 			}
-			if (node->cmd[ft_strlen(node->cmd)-1] == '$')
-				str = ft_mstrjoin(collector, str, "$");
 			node->cmd = ft_mstrdup(collector, str);
 		}
 		str = NULL;

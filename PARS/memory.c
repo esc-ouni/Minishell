@@ -1,34 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   memory.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
+/*   Updated: 2023/05/22 17:34:17 by idouni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
 void	*h_malloc(t_collector **collector_head, size_t s, void *p)
 {
-	t_collector *tmp;
-    t_collector *new_node;
+	t_collector	*tmp;
+	t_collector	*new_node;
+
 	new_node = malloc(sizeof(t_collector));
 	p = malloc(s);
 	if (!new_node || !p)
 	{
-		printf("MALLOC\n");
+		write (2, "MALLOC_FAILED\n", 15);
 		ft_collectorclear(collector_head);
 		exit (1);
 	}
 	new_node->addr = p;
-    if (!(*collector_head))
-    {
-        *collector_head = new_node;
-        new_node->next = NULL;
-    }
-    else
-    {
-        tmp = *collector_head;
-        while (tmp->next)
-        {
-            tmp = tmp->next;
-        }
-        tmp->next = new_node;
-        new_node->next = NULL;
-    }
+	if (!(*collector_head))
+		*collector_head = new_node;
+	else
+	{
+		tmp = *collector_head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_node;
+	}
+	new_node->next = NULL;
 	return (p);
 }
 
@@ -42,7 +49,6 @@ void	ft_collectorclear(t_collector **collector)
 	node = *collector;
 	while (node)
 	{
-		// printf("%p\n", node->addr);
 		n_node = node->next;
 		free(node->addr);
 		free(node);
