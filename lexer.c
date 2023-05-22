@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:42:06 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 14:45:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 15:19:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,27 @@ void	lexer_p2(t_collector **collector, t_lexer **l_node, char *s, int sz)
 	{
 		if (s[i] == '"')
 			dq_lex(collector, l_node, s, &i);
-        else if (s[i] == '\'')
+		else if (s[i] == '\'')
 			sq_lex(collector, l_node, s, &i);
-        else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' \
+		else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' \
 		&& s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
 			scmd_lex(collector, l_node, s, &i);
-        else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
 			whsp_lex(collector, l_node, s, &i);
-        else if (s[i] == '|')
+		else if (s[i] == '|')
 			pip_lex(collector, l_node, s, &i);
-        else if (s[i] == '>' && s[i + 1] != '>')
+		else if (s[i] == '>' && s[i + 1] != '>')
 			rot_lex(collector, l_node, s, &i);
-        else if (s[i] == '<' && s[i + 1] != '<')
+		else if (s[i] == '<' && s[i + 1] != '<')
 			rin_lex(collector, l_node, s, &i);
-        else if (s[i] == '>' && s[i + 1] == '>')
+		else if (s[i] == '>' && s[i + 1] == '>')
 			roa_lex(collector, l_node, s, &i);
-        else if (s[i] == '<' && s[i + 1] == '<')
+		else if (s[i] == '<' && s[i + 1] == '<')
 			rhd_lex(collector, l_node, s, &i);
-    }
+	}
 }
 
-t_lexer *lexer(t_collector **collector, char *s)
+t_lexer	*lexer(t_collector **collector, char *s)
 {
 	int		sz;
 	t_lexer	*l_node;
