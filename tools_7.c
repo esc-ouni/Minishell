@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_7.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:47:39 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 14:50:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 17:18:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,16 @@ t_built	cmd_type(t_collector **collector, char *cmd)
 		return (EXT);
 	else
 		return (NOT);
+}
+
+int	searcher_for_spc(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != '$' && s[i] != '*' && s[i] != '+' && s[i] != '-' && \
+	s[i] != '>' && s[i] != '<' && s[i] != '\\' && s[i] != '|' && s[i] != '!' \
+	&& s[i] != '#' && s[i] != ' ' && s[i] != '\t' && s[i] != '\'')
+		i++;
+	return (i);
 }

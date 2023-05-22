@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:15:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 17:18:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
 int		check_syntax(char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);
+int		searcher_for_spc(char *s);
 int		check_oerr(char *s);
 void	update_cmd(t_cmd *cmd);
 int		check_syntax2(t_lexer	**h_lexer);
