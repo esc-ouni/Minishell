@@ -44,7 +44,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-			if (n->cmd && !strcmp(n->cmd, ">") && n->next)
+			if (n->cmd && !ft_strncmp(n->cmd, ">", ft_strlen(">")) && n->next)
 			{
 				n = n->next;
 				while (n->type == WH_SP)
@@ -52,7 +52,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 				n->type = FIL_NM;
 				add_file_node(collector, &out_files, n->cmd, O_TRUNC);
 			}
-			if (n->cmd && !strcmp(n->cmd, ">>") && n->next)
+			if (n->cmd && !ft_strncmp(n->cmd, ">>", ft_strlen(">>")) && n->next)
 			{
 				n = n->next;
 				while (n && n->type == WH_SP)
@@ -67,7 +67,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
         n = node;
         while (n && n->type != PIP)
         {
-			if (n->cmd && !strcmp(n->cmd, "<") && n->next)
+			if (n->cmd && !ft_strncmp(n->cmd, "<", ft_strlen("<")) && n->next)
 			{
 				n = n->next;
 				while (n && n->type == WH_SP)
@@ -75,7 +75,7 @@ t_cmd  *parser2(t_collector	**collector, t_lexer *head)
 				n->type = FIL_NM;
 				add_file_node(collector, &in_files, n->cmd, O_TRUNC);
 			}
-			if (n->cmd && !strcmp(n->cmd, "<<") && n->next)
+			if (n->cmd && !ft_strncmp(n->cmd, "<<", ft_strlen("<<")) && n->next)
 			{
 				n = n->next;
 				while (n && n->type == WH_SP)

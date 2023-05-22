@@ -33,7 +33,7 @@ int	ft_pwd(void)
 
 int	ft_echo_option(t_cmd *cmd, int *i)
 {
-	if (!strncmp(cmd->cmd[*i], "-n", ft_strlen("-n")))
+	if (!ft_strncmp(cmd->cmd[*i], "-n", ft_strlen("-n")))
 	{
 		(*i)++;
 		return (1);
