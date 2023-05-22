@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:37 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 16:34:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:41:08 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ int	check_oerr(char *s)
 
 int	check_pipes(char *s)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if ((s[i] == '|') || s[ft_strlen(s)-1] == '|')
 		return (syntx_err(), 1);
 	while (s[i])
 	{
-		if (s[i+1] && s[i] == '|' && s[i+1] == '|')
+		if (s[i + 1] && s[i] == '|' && s[i + 1] == '|')
 			return (syntx_err(), 1);
 		i++;
 	}
@@ -80,4 +81,3 @@ void	syntx_err(void)
 {
 	write(2, "syntax error ...\n", 18);
 }
-
