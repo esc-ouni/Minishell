@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/23 17:22:15 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 18:29:09 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,8 @@ t_init	*ft_init(char **env)
 void	ft_norm_sucks(int ac, char **av)
 {
 	(void)av;
-	(void)ac;
+	if (ac > 1)
+		exit (0);
 }
 
 int	main(int ac, char **av, char **env)
