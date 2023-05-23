@@ -94,11 +94,11 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter)
 	int		pid;
 	int		fd[2];
 
+	dup2(cmd->tty_in, STDIN_FILENO);
 	pipe(fd);
 	pid = fork();
 	if (!pid)
 	{
-		dup2(cmd->tty_in, STDIN_FILENO);
 		ft_heredoc_child(fd, delimiter);
 	}
 	else

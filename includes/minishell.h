@@ -22,7 +22,6 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <dirent.h>
-# include <wait.h>
 # include "libft.h"
 # include "get_next_line.h"
 
