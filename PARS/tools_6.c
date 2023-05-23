@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:45:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:20:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_files *files)
 	new_cmd->next = NULL;
 }
 
-int	check_syntax2(t_lexer **h_lexer)
+int	basic_syntax_check(t_lexer **h_lexer)
 {
 	t_lexer	*node;
 
@@ -114,5 +114,42 @@ int	check_syntax2(t_lexer **h_lexer)
 		else
 			node = node->next;
 	}
+	return (0);
+}
+
+int	check_for_udf(char *s)
+{
+	int	i;
+	
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '&' || s[i] == ';')
+			return (1);
+		i++;
+	}	
+	return (0);
+}
+
+int	basic_syntax_check2(t_lexer **h_lexer)
+{
+	t_lexer	*node;
+
+	node = *h_lexer;
+	while (node)
+	{
+		if (node->type == SCMD && check_for_udf(node->cmd))
+			return (syntx_err(), 1);
+		node = node->next;
+	}
+	return (0);
+}
+
+int	check_syntax2(t_lexer **h_lexer)
+{
+	if (basic_syntax_check(h_lexer))
+		return (1);
+	else if (basic_syntax_check2(h_lexer))
+		return (1);
 	return (0);
 }

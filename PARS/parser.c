@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:45:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:29:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ t_lexer	*parser(t_collector	**collector, t_env **env)
 
 	s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
 	if (check_syntax(s))
-		return (NULL);
+		return (ft_collectorclear(collector), NULL);
 	h_lexer = lexer(collector, s);
 	expander(collector, env, &h_lexer);
 	if (check_syntax2(&h_lexer))
-		return (NULL);
+		return (ft_collectorclear(collector), NULL);
 	return (h_lexer);
 }
 

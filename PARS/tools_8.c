@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_8.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 19:32:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:40:21 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	emplify(t_collector **collector, t_cmd *cmd)
 {
 	t_cmd	*n_cmd;
+	char	**menv;
 
 	if (!cmd)
 		return ;
+	// menv = mgetenv(collector, env);
 	n_cmd = cmd;
 	while (n_cmd)
 	{
@@ -75,6 +77,20 @@ char	*ft_getenv(t_collector **collector, char *key, t_env **menv)
 	return (NULL);
 }
 
+int	check_str(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != ' ' || s[i] != '\t')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
 {
 	add_lexer(collector, l_node, ft_msubstr(collector, s, (*i), 2), R_HD);
@@ -89,6 +105,8 @@ int	check_syntax(char *s)
 		exit (0);
 	}
 	if (!ft_strlen(s))
+		return (1);
+	if (check_str(s))
 		return (1);
 	add_history(s);
 	if (check_oerr(s))
