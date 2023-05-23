@@ -72,7 +72,7 @@ int	ft_heredoc_child(int *fd, char *delimiter)
 	delim = ft_strjoin(delimiter, "\n");
 	close (fd[0]);
 	line = get_next_line(0);
-	while (line > 0)
+	while (line)
 	{
 		if (!ft_strncmp(line, delim, ft_strlen(line)))
 		{
@@ -97,7 +97,10 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter)
 	pipe(fd);
 	pid = fork();
 	if (!pid)
+	{
+		dup2(cmd->tty_in, STDIN_FILENO);
 		ft_heredoc_child(fd, delimiter);
+	}
 	else
 	{
 		close(fd[1]);

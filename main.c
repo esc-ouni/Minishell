@@ -106,11 +106,12 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 	return (1);
 }
 
-void	ft_execution(t_cmd *cmd, t_env **env_lst, char ***myenv)
+void	ft_execution(t_cmd *cmd, t_env **env_lst, char ***myenv, t_init *init)
 {
 	ft_set_path(cmd, *myenv, *env_lst);
 	while (cmd)
 	{
+		cmd->tty_in = init->tmp_fd_in;
 		ft_fork(cmd, myenv, env_lst);
 		cmd = cmd->next;
 	}
@@ -180,7 +181,7 @@ int	main(int ac, char **av, char **env)
 		emplify(&(inval->collector), inval->cmd);
 		if (!inval->cmd)
 			continue ;
-		ft_execution(inval->cmd, &(inval->myenv_list), &(inval->myenv));
+		ft_execution(inval->cmd, &(inval->myenv_list), &(inval->myenv), inval);
 	}
 	ft_end_free(&(inval->myenv_list), (inval->myenv), inval);
 }

@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <dirent.h>
+# include <wait.h>
 # include "libft.h"
 # include "get_next_line.h"
 
@@ -57,6 +58,7 @@ typedef struct s_cmd
 {
 	t_env			*myenv;
 	char			**cmd;
+	int				tty_in;
 	t_file			*in_files;
 	t_file			*out_files;
 	int				first_cmd;
@@ -102,6 +104,7 @@ typedef struct s_collector
     void            *addr;
     struct s_collector   *next;
 }   t_collector;
+
 typedef struct s_init
 {
 	int			tmp_fd_in;

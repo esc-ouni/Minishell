@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = 
 AFLAGS = -lreadline
 LINK = /Users/msamhaou/.brew/Cellar/readline/8.2.1/lib
 HEADERS = includes/get_next_line.h	includes/libft.h	includes/minishell.h
