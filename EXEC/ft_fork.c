@@ -76,7 +76,6 @@ int	ft_heredoc_child(int *fd, char *delimiter)
 	{
 		if (!ft_strncmp(line, delim, ft_strlen(line)))
 		{
-			ft_putendl_fd("here", 2);
 			free(line);
 			exit(0);
 		}
