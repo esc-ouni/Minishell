@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:57:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 15:10:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,19 @@ void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
 void	expander(t_collector **collector, t_env **env, t_lexer **head)
 {
 	t_lexer	*node;
-	char	**s;
 	char	*str;
+	int		exp;
 
-	s = NULL;
+	exp = 1;
 	str = NULL;
 	node = *head;
 	while (node)
 	{
-		if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')))
+		if (node->type == R_HD)
+			exp = 0;
+		else if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')) && !exp)
+			exp = 1;
+		else if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')) && exp)
 		{
 			if (ft_strlen(node->cmd) == 1 && node->cmd[0] == '$')
 				break ;
@@ -82,7 +86,6 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 			node->cmd = ft_mstrdup(collector, str);
 		}
 		str = NULL;
-		s = NULL;
 		node = node->next;
 	}
 }
