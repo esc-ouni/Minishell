@@ -6,13 +6,18 @@
 #    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/02 20:54:51 by idouni            #+#    #+#              #
-#    Updated: 2023/05/23 16:19:35 by idouni           ###   ########.fr        #
+#    Updated: 2023/05/23 17:16:20 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LINK = /Users/idouni/.brew/opt/readline/lib
+# LINK = /Users/idouni/.brew/opt/readline/lib
+# INCLUDES = includes/
+# INC=/Users/idouni/.brew/opt/readline/include/readline
+
+LINK = /Users/idouni/.brew/Cellar/readline/8.2.1/lib
+HEADERS = includes/get_next_line.h	includes/libft.h	includes/minishell.h
 INCLUDES = includes/
-INC=/Users/idouni/.brew/opt/readline/include/readline
+INC=/Users/idouni/.brew/Cellar/readline/8.2.1/include
 
 NAME   = Minishell
 
