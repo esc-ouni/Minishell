@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 16:19:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:46:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,9 @@ void	roa_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rin_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 
-void	emplify(t_collector **collector, t_cmd *cmd, char **env);
+void	emplify(t_collector **collector, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
-char	**mgetenv(t_collector **collector, char **env);
 t_built	cmd_type(t_collector **collector, char *cmd);
 void	prompt(void);
 t_lexer	*parser(t_collector	**collector, t_env **env);
