@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 18:15:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:19:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
 t_lexer	*parser(t_collector	**collector, t_env **env)
 {

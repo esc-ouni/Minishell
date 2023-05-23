@@ -1,4 +1,4 @@
-#include "Minishell.h"
+#include "minishell.h"
 
 void printTYPE(t_enum num) 
 {

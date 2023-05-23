@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 18:15:57 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:20:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
 char	**allocate_full_cmd(t_collector **collector, char **full_cmd)
 {
@@ -124,7 +124,7 @@ int	check_for_udf(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '&')
+		if (s[i] == '&' || s[i] == ';')
 			return (1);
 		i++;
 	}	
@@ -151,6 +151,5 @@ int	check_syntax2(t_lexer **h_lexer)
 		return (1);
 	else if (basic_syntax_check2(h_lexer))
 		return (1);
-	
 	return (0);
 }

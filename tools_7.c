@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:47:39 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:59:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:19:34 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
 void	add_lexer(t_collector **collector, t_lexer **head, \
 char *content, t_enum	type)

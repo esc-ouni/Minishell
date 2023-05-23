@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:42:06 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:23:12 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:19:34 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
 void	dq_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
 {

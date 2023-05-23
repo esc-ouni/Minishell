@@ -276,7 +276,7 @@ Error: SPACE_EMPTY_LINE     (line:  74, col:   5):	Space on empty line
 Error: TOO_FEW_TAB          (line:  75, col:   1):	Missing tabs for indent level
 Error: SPACE_REPLACE_TAB    (line:  75, col:   5):	Found space when expecting tab
 Error: RETURN_PARENTHESIS   (line:  75, col:  12):	Return value must be in parenthesis
-Minishell.h: Error!
+minishell.h: Error!
 Error: INVALID_HEADER       (line:  12, col:   1):	Missing or invalid 42 header
 Error: PREPROC_BAD_INDENT   (line:  13, col:   1):	Bad preprocessor indentation
 Notice: GLOBAL_VAR_DETECTED  (line:  16, col:   1):	Global variable present in file. Make sure it is a reasonable choice.

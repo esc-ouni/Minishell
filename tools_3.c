@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:24 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:23:12 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:19:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
 static int	check(char c, char const *set)
 {

@@ -6,11 +6,11 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:33:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/22 17:23:12 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:19:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Minishell.h"
+#include "minishell.h"
 
 int	ft_mlstsize(t_mlist *lst)
 {
