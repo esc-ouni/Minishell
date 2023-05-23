@@ -91,16 +91,17 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 {
 	t_cmd	*head;
 
-	if (!cmd->cmd[0])
-		return(0);
 	head = cmd;
 	while (cmd)
 	{
+		if (cmd->cmd[0])
+		{
 		cmd->myenv = env_lst;
 		if (!ft_strchr(cmd->cmd[0], '/'))
 			cmd->cmd_path = ft_get_path(cmd->cmd, myenv);
 		else
 			cmd->cmd_path = cmd->cmd[0];
+		}
 		cmd = cmd->next;
 	}
 	return (1);

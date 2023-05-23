@@ -31,7 +31,8 @@ int	ft_child(t_cmd *lol, int *fd, char **myenv)
 	{
 		if ((execve(lol->cmd_path, lol->cmd, myenv) < 0) && !lol->builtflag)
 		{
-			perror("cmd doesn't exist");
+		if (lol->cmd[0])
+			ft_putendl_fd("cmd does not exist", 2);
 			exit(1);
 		}
 		exit(0);
