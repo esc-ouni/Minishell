@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/22 20:03:39 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:22:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	sig_handle(int sig)
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
@@ -138,6 +138,7 @@ void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val)
 		ft_free_env_lst(env_lst);
 	if (init_val)
 		free(init_val);
+	rl_clear_history();
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 17:40:51 by msamhaou          #+#    #+#              #
-#    Updated: 2023/05/22 17:37:36 by idouni           ###   ########.fr        #
+#    Updated: 2023/05/23 17:14:24 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,10 @@ INCLUDES = includes/
 INC=/Users/msamhaou/.brew/Cellar/readline/8.2.1/include
 
 ifeq ($(USER),idouni)
-	LINK = /Users/idouni/.brew/opt/readline/lib
+	LINK = /Users/idouni/.brew/Cellar/readline/8.2.1/lib
+	HEADERS = includes/get_next_line.h	includes/libft.h	includes/minishell.h
 	INCLUDES = includes/
-	INC=/Users/idouni/.brew/opt/readline/include/readline
+	INC=/Users/idouni/.brew/Cellar/readline/8.2.1/include
 endif
 
 #		LIBFT
@@ -62,7 +63,7 @@ all : $(NAME)
 	@clear && echo "==Minishell_compiled=============="
 
 $(NAME) : $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L $(LINK) -lreadline
+	$(CC) $(FLAGS) $(OBJ) -lreadline -L $(LINK) -o $(NAME)
 
 %.o : %.c $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@ -I$(INCLUDES) -I$(INC)
