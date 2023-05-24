@@ -29,11 +29,11 @@ void	env_add_back(t_env **env, t_env *toadd)
 	t_env	*head;
 
 	head = *env;
-	if (!toadd)
+	if (!toadd && env)
 		ft_free_env_lst(env);
 	if (!(*env))
 	{
-		*env = new_env(toadd->str);
+		*env = toadd;
 		head = *env;
 		return ;
 	}

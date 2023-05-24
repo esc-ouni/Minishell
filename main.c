@@ -161,6 +161,7 @@ t_init	*ft_init(char **env)
 	if (res->tmp_fd_in < 0 || res->tmp_fd_out < 0)
 		exit(0);
 	res->myenv_list = ft_set_env_list(env);
+    res->exp_lst = ft_set_export_lst(res->myenv_list);
 	res->myenv = ft_set_env(res->myenv_list);
 	return (res);
 }

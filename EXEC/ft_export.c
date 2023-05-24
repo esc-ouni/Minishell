@@ -41,6 +41,21 @@ static int	ft_is_exported(char *str)
 	return (0);
 }
 
+t_env   *ft_set_export_lst(t_env *env_lst)
+{
+    t_env *res;
+    t_env    *toadd;
+
+    res = NULL;
+    while (env_lst)
+    {
+        toadd = new_env(ft_strjoin("declare -x ", env_lst->str));
+        env_add_back(&res, toadd);
+        env_lst = env_lst->next;
+    }
+    return (res);
+}
+
 char	**ft_export(t_env **env_lst, char *str, char **myenv)
 {
 	char	**res;

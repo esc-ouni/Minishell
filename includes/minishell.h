@@ -110,6 +110,7 @@ typedef struct s_init
 	int			tmp_fd_out;
 	char		**myenv;
 	t_env		*myenv_list;
+    t_env       *exp_lst;
 	t_cmd		*cmd;
 	t_collector	*collector;
 }	t_init;
@@ -137,6 +138,7 @@ int     ft_cd(t_cmd *lol);
 char    *ft_getcwd();
 int     ft_pwd();
 int	ft_echo(t_cmd *lol);
+t_env   *ft_set_export_lst(t_env *env_lst);
 char	**ft_export(t_env **env_lst, char *str, char **myenv);
 char    **ft_unset(t_env **env_lst, char *str, char **myenv);
 char	**ft_make_double_char(t_env *env_lst);
