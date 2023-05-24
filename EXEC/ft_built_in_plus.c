@@ -14,6 +14,8 @@
 
 int	ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst)
 {
+	if (lol->num_cmds > 1)
+		return (1);
 	if (lol->builtflag == CD)
 	{
 		ft_cd(lol);

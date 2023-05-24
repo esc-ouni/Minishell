@@ -25,7 +25,6 @@ int	ft_child(t_cmd *lol, int *fd, char **myenv)
 	if (lol->builtflag)
 	{
 		ft_builtin(lol, myenv);
-		close(fd[1]);
 		exit (0);
 	}
 	else if (lol->builtflag == NOT)
@@ -37,7 +36,6 @@ int	ft_child(t_cmd *lol, int *fd, char **myenv)
 			close(fd[1]);
 			exit(1);
 		}
-		close(fd[1]);
 		exit(0);
 	}
 	return (1);
