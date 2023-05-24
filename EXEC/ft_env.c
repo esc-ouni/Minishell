@@ -19,7 +19,7 @@ t_env	*new_env(char *str)
 	lst = malloc(sizeof(t_env));
 	if (!lst)
 		return (NULL);
-	lst->str = str;
+	lst->str = ft_strdup(str);
 	lst->next = NULL;
 	return (lst);
 }
@@ -49,7 +49,9 @@ void	ft_free_stringp(char **env)
 
 	i = 0;
 	while (env[i])
-		free(env[i++]);
+    {
+        free(env[i++]);
+    }
 	free(env);
 }
 

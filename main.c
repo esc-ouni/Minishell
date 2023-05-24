@@ -129,6 +129,7 @@ void	ft_free_env_lst(t_env **env_lst)
 
 	while (*env_lst)
 	{
+        free((*env_lst)->str);
 		tmp = *env_lst;
 		*env_lst = (*env_lst)->next;
 		free(tmp);
@@ -141,6 +142,8 @@ void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val)
 		ft_free_stringp(myenv);
 	if (*env_lst)
 		ft_free_env_lst(env_lst);
+    if (init_val->exp_lst)
+        ft_free_env_lst(&init_val->exp_lst);
 	if (init_val)
 		free(init_val);
 	rl_clear_history();
@@ -173,10 +176,16 @@ void	ft_norm_sucks(int ac, char **av)
 		exit (0);
 }
 
+void    foo()
+{
+    system("leaks minishell");
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_init	*inval;
 
+    atexit(foo);
 	ft_norm_sucks(ac, av);
 	inval = ft_init(env);
 	while (1)

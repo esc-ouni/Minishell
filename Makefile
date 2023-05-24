@@ -60,7 +60,7 @@ OBJ = $(LIBFT_OBJ) $(GNL_OBJ) $(EXEC_OBJ) $(PARS_OBJ) $(MAIN_OBJ)
 NAME = minishell
 
 all : $(NAME)
-	@clear && echo "==Minishell_compiled=============="
+
 
 $(NAME) : $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -lreadline -L $(LINK) -o $(NAME)

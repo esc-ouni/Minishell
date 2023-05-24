@@ -41,15 +41,40 @@ static int	ft_is_exported(char *str)
 	return (0);
 }
 
+char *ft_quote_it(char *to_quote)
+{
+    char *quoted;
+    char *tmp;
+    char *tmp2;
+    char **eq;
+
+    eq = ft_split(to_quote, '=');
+    tmp = ft_strdup(eq[1]);
+    tmp2 = ft_strdup(eq[0]);
+    ft_free_stringp(eq);
+    quoted = ft_strjoin(tmp2, "="); /* tmp2 freed */
+    tmp2 = tmp;
+    tmp = ft_strjoin(ft_strdup("\""), tmp);
+    tmp = ft_strjoin(tmp, "\"");
+    quoted = ft_strjoin(quoted, tmp);
+    free(tmp);
+    free(tmp2);
+    return (quoted);
+}
+
 t_env   *ft_set_export_lst(t_env *env_lst)
 {
-    t_env *res;
-    t_env    *toadd;
+    t_env   *res;
+    t_env   *toadd;
+    char    *str;
 
     res = NULL;
+    str = NULL;
     while (env_lst)
     {
-        toadd = new_env(ft_strjoin("declare -x ", env_lst->str));
+        str = ft_quote_it(env_lst->str);
+        toadd = new_env(str);
+        free(str);
         env_add_back(&res, toadd);
         env_lst = env_lst->next;
     }
