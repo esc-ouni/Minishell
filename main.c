@@ -109,13 +109,18 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 
 void	ft_execution(t_cmd *cmd, t_env **env_lst, char ***myenv, t_init *init)
 {
+	int	cmd_num;
+
 	ft_set_path(cmd, *myenv, *env_lst);
+	cmd_num = init->cmd->num_cmds;
 	while (cmd)
 	{
 		cmd->tty_in = init->tmp_fd_in;
 		ft_fork(cmd, myenv, env_lst);
 		cmd = cmd->next;
 	}
+	while (cmd_num--)
+		wait(NULL);
 }
 
 void	ft_free_env_lst(t_env **env_lst)

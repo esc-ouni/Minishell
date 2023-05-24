@@ -25,16 +25,19 @@ int	ft_child(t_cmd *lol, int *fd, char **myenv)
 	if (lol->builtflag)
 	{
 		ft_builtin(lol, myenv);
+		close(fd[1]);
 		exit (0);
 	}
 	else if (lol->builtflag == NOT)
 	{
 		if ((execve(lol->cmd_path, lol->cmd, myenv) < 0) && !lol->builtflag)
 		{
-		if (lol->cmd[0])
-			ft_putendl_fd("cmd does not exist", 2);
+			if (lol->cmd[0])
+				ft_putendl_fd("cmd does not exist", 2);
+			close(fd[1]);
 			exit(1);
 		}
+		close(fd[1]);
 		exit(0);
 	}
 	return (1);
@@ -58,7 +61,6 @@ int	ft_parent(t_cmd *lol, int *fd, int *pid)
 			line = get_next_line(fd[0]);
 		}
 	}
-	waitpid(*pid, &g_exit_val, 0);
 	if (g_exit_val)
 		g_exit_val = 127;
 	close (fd[0]);
