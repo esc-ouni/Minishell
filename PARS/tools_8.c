@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/25 16:24:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/25 16:28:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ char	*prompt(void)
 	char *s;
 
 	rl_on_new_line();
-	write (1, "\x1B[34m" "=>" "\x1B[0m", 12);
-	s = readline("  ");
+	s = readline("\x1B[34m" "minishell > " "\x1B[0m");
 	return (s);
 }
