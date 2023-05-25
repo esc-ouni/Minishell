@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 16:40:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/25 16:24:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 void	emplify(t_collector **collector, t_cmd *cmd)
 {
 	t_cmd	*n_cmd;
-	char	**menv;
 
 	if (!cmd)
 		return ;
-	// menv = mgetenv(collector, env);
 	n_cmd = cmd;
 	while (n_cmd)
 	{
@@ -114,4 +112,14 @@ int	check_syntax(char *s)
 	if (check_pipes(s))
 		return (1);
 	return (0);
+}
+
+char	*prompt(void)
+{
+	char *s;
+
+	rl_on_new_line();
+	write (1, "\x1B[34m" "=>" "\x1B[0m", 12);
+	s = readline("  ");
+	return (s);
 }
