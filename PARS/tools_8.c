@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/25 16:37:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/25 16:44:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,7 @@ char	*prompt(void)
 {
 	char *s;
 
-	// rl_on_new_line();
-	write (1, "\x1B[34m" "bsh >" "\x1B[0m", 15);
-	s = readline(" ");
+	rl_on_new_line();
+	s = readline("\x1B[34mbsh > \x1B[0m");
 	return (s);
 }
