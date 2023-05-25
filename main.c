@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/25 16:25:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/25 16:26:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,11 +191,11 @@ int	main(int ac, char **av, char **env)
 	inval = ft_init(env);
 	while (1)
 	{
-		s = prompt();
 		dup2(inval->tmp_fd_in, 0);
 		dup2(inval->tmp_fd_out, 1);
 		signal(SIGINT, sig_handle);
 		signal(SIGQUIT, SIG_IGN);
+		s = prompt();
 		inval->cmd = parser2(&(inval->collector) \
 			, parser(&(inval->collector), &(inval->myenv_list), s));
 		emplify(&(inval->collector), inval->cmd);
