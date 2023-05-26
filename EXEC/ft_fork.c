@@ -6,13 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/22 19:58:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:58:52 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_child(t_cmd *lol, int *fd, char **myenv)
+int	ft_child(t_cmd *lol, int *fd, t_init *init)
 {
 	close(fd[0]);
 	if (lol->out_files)
@@ -24,12 +24,12 @@ int	ft_child(t_cmd *lol, int *fd, char **myenv)
 		dup2(fd[1], STDOUT_FILENO);
 	if (lol->builtflag)
 	{
-		ft_builtin(lol, myenv);
+		ft_builtin(lol, init);
 		exit (0);
 	}
 	else if (lol->builtflag == NOT)
 	{
-		if ((execve(lol->cmd_path, lol->cmd, myenv) < 0) && !lol->builtflag)
+		if ((execve(lol->cmd_path, lol->cmd, init->myenv) < 0) && !lol->builtflag)
 		{
 			if (lol->cmd[0])
 				ft_putendl_fd("cmd does not exist", 2);
@@ -111,12 +111,12 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter)
 	return (0);
 }
 
-int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
+int	ft_fork(t_cmd *lol, t_init *init)
 {
 	int	pid;
 	int	fd[2];
 
-	if (!ft_built_in_first(lol, myenv, env_lst))
+	if (!ft_built_in_first(lol, init))
 		return (0);
 	if (lol->in_files)
 	{
@@ -127,7 +127,7 @@ int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst)
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
-		ft_child(lol, fd, *myenv);
+		ft_child(lol, fd, init);
 	else
 		ft_parent(lol, fd, &pid);
 	return (0);

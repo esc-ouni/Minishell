@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/25 16:26:06 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/26 14:01:53 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_builtin(t_cmd *lol, char **myenv)
+int	ft_builtin(t_cmd *lol, t_init *init)
 {
 	if (lol->builtflag == ECH)
 		ft_echo(lol);
 	else if (lol->builtflag == PWD)
 		ft_pwd();
 	else if (lol->builtflag == ENV)
-		ft_env(myenv);
+		ft_env(init->myenv);
+	else if (lol->builtflag == EXPT && !lol->cmd[1])
+		ft_printlst(init->exp_lst);
 	return (0);
 }
 
@@ -107,17 +109,17 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 	return (1);
 }
 
-void	ft_execution(t_cmd *cmd, t_env **env_lst, char ***myenv, t_init *init)
+void	ft_execution(t_init *init)
 {
 	int	cmd_num;
 
-	ft_set_path(cmd, *myenv, *env_lst);
+	ft_set_path(init->cmd, init->myenv, init->envlst);
 	cmd_num = init->cmd->num_cmds;
-	while (cmd)
+	while (init->cmd)
 	{
-		cmd->tty_in = init->tmp_fd_in;
-		ft_fork(cmd, myenv, env_lst);
-		cmd = cmd->next;
+		init->cmd->tty_in = init->tmp_fd_in;
+		ft_fork(init->cmd, init);
+		init->cmd = init->cmd->next;
 	}
 	while (cmd_num--)
 		wait(&g_exit_val);
@@ -163,9 +165,9 @@ t_init	*ft_init(char **env)
 	res->tmp_fd_out = dup (STDOUT_FILENO);
 	if (res->tmp_fd_in < 0 || res->tmp_fd_out < 0)
 		exit(0);
-	res->myenv_list = ft_set_env_list(env);
-    res->exp_lst = ft_set_export_lst(res->myenv_list);
-	res->myenv = ft_set_env(res->myenv_list);
+	res->envlst = ft_set_env_list(env);
+    res->exp_lst = ft_set_export_lst(res->envlst);
+	res->myenv = ft_set_env(res->envlst);
 	return (res);
 }
 
@@ -186,7 +188,7 @@ int	main(int ac, char **av, char **env)
 	t_init	*inval;
 
 	char *s;
-    // atexit(foo);
+
 	ft_norm_sucks(ac, av);
 	inval = ft_init(env);
 	while (1)
@@ -197,11 +199,11 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, SIG_IGN);
 		s = prompt();
 		inval->cmd = parser2(&(inval->collector) \
-			, parser(&(inval->collector), &(inval->myenv_list), s));
+			, parser(&(inval->collector), &(inval->envlst), s));
 		emplify(&(inval->collector), inval->cmd);
 		if (!inval->cmd)
 			continue ;
-		ft_execution(inval->cmd, &(inval->myenv_list), &(inval->myenv), inval);
+		ft_execution(inval);
 	}
-	ft_end_free(&(inval->myenv_list), (inval->myenv), inval);
+	ft_end_free(&(inval->envlst), (inval->myenv), inval);
 }

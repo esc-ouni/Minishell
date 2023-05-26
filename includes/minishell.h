@@ -109,7 +109,7 @@ typedef struct s_init
 	int			tmp_fd_in;
 	int			tmp_fd_out;
 	char		**myenv;
-	t_env		*myenv_list;
+	t_env		*envlst;
     t_env       *exp_lst;
 	t_cmd		*cmd;
 	t_collector	*collector;
@@ -129,26 +129,27 @@ typedef struct s_files
 }	t_files;
 
 
-int	ft_builtin(t_cmd *lol, char **myenv);
+int	ft_builtin(t_cmd *lol, t_init *init);
 int	ft_open_out_files(t_cmd *lol);
 int	ft_open_in_file(t_cmd *lol);
-int	ft_fork(t_cmd *lol, char ***myenv, t_env **env_lst);
+int	ft_fork(t_cmd *lol, t_init *init);
 int	ft_execute(char *arg, char **env);
 int     ft_cd(t_cmd *lol);
 char    *ft_getcwd();
 int     ft_pwd();
 int	ft_echo(t_cmd *lol);
 t_env   *ft_set_export_lst(t_env *env_lst);
-char	**ft_export(t_env **env_lst, char *str, char **myenv);
-char    **ft_unset(t_env **env_lst, char *str, char **myenv);
+char	**ft_export(t_init *init, char *str);
+char    **ft_unset(t_init *init, char *str);
 char	**ft_make_double_char(t_env *env_lst);
 void	ft_free_stringp(char **env);
 void	ft_free_pos(char **strp, int pos);
 char	**ft_set_env(t_env *env_lst);
+void	ft_sort_env(t_env *envlst);
 void	env_add_back(t_env **env, t_env *toadd);
 t_env	*ft_set_env_list(char **env);
 size_t	ft_env_size(t_env *myenv);
-int		ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst);
+int		ft_built_in_first(t_cmd *lol, t_init *init);
 t_env	*new_env(char *str);
 void	ft_env(char **myenv);
 char	*ft_get_path(char **cmd, char **env);
@@ -156,6 +157,8 @@ void	sig_handle(int sig);
 void	ft_quit(t_built flag);
 int		ft_heredoc(t_cmd *cmd, char *delimiter);
 void	ft_free_env_lst(t_env **env_lst);
+
+void	ft_printlst(t_env *lst);
 // void    start(void);
 // int     check_syntax(char *s);
 // void    after_parse(t_mlist  *head);

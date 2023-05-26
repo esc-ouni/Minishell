@@ -6,13 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:17:39 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 01:21:15 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:02:10 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst)
+int	ft_built_in_first(t_cmd *lol, t_init *init)
 {
 	if (lol->num_cmds > 1)
 		return (1);
@@ -23,14 +23,14 @@ int	ft_built_in_first(t_cmd *lol, char ***myenv, t_env **env_lst)
 	}
 	else if (lol->builtflag == EXT)
 		ft_quit(NOT);
-	else if (lol->builtflag == EXPT)
+	else if (lol->builtflag == EXPT && lol->cmd[1])
 	{
-		*myenv = ft_export(env_lst, lol->cmd[1],*myenv);
+		init->myenv = ft_export(init, lol->cmd[1]);
 		return (0);
 	}
 	else if (lol->builtflag == UNST)
 	{
-		*myenv = ft_unset(env_lst, lol->cmd[1], *myenv);
+		init->myenv = ft_unset(init, lol->cmd[1]);
 		return (0);
 	}
 	return (1);

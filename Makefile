@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
+#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 17:40:51 by msamhaou          #+#    #+#              #
-#    Updated: 2023/05/23 17:14:24 by idouni           ###   ########.fr        #
+#    Updated: 2023/05/26 11:14:10 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-FLAGS = 
+FLAGS =
 AFLAGS = -lreadline
 LINK = /Users/msamhaou/.brew/Cellar/readline/8.2.1/lib
 HEADERS = includes/get_next_line.h	includes/libft.h	includes/minishell.h
@@ -41,7 +41,7 @@ GNL_OBJ = $(GNL_SRC:.c=.o)
 
 #		EXEC
 EXEC_DIR = EXEC/
-EXEC_SRC =	EXEC/ft_built_in.c	EXEC/ft_built_in_plus.c EXEC/ft_env.c	EXEC/ft_env_plus.c\
+EXEC_SRC =	EXEC/ft_built_in.c	EXEC/ft_built_in_plus.c EXEC/ft_env.c	EXEC/ft_env_plus.c	EXEC/ft_sort_env.c\
 			EXEC/ft_env_tools.c	EXEC/ft_export.c	EXEC/ft_fork.c	EXEC/ft_get_path.c	EXEC/ft_unset.c
 EXEC_OBJ = $(EXEC_SRC:.c=.o)
 
