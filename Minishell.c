@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:48:27 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 16:46:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/26 13:48:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int main(int argc, char **argv, char **env)
 {
     (void)argc;
     (void)argv;
+	char		*s;
     t_lexer		*h_lexer;
     t_collector	*collector;
     t_cmd		*cmd;
@@ -66,7 +67,8 @@ int main(int argc, char **argv, char **env)
 	myenv_list = ft_set_env_list(env);
     while (1)
     {
-        h_lexer = parser(&collector, &myenv_list);
+		s = prompt();
+        h_lexer = parser(&collector, &myenv_list, s);
         cmd = parser2(&collector, h_lexer);
         emplify(&collector, cmd);
         after_parse2(cmd);

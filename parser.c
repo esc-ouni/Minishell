@@ -6,21 +6,16 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 17:15:28 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/26 13:47:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer	*parser(t_collector	**collector, t_env **env)
+t_lexer	*parser(t_collector	**collector, t_env **env, char *s)
 {
-	char	*s;
 	t_lexer	*h_lexer;
 
-	s = readline("\x1B[34m" "BAASH>> " "\x1B[0m");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
 	if (check_syntax(s))
 		return (ft_collectorclear(collector), NULL);
 	h_lexer = lexer(collector, s);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 16:46:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/26 13:47:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,8 @@ void	emplify(t_collector **collector, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
 t_built	cmd_type(t_collector **collector, char *cmd);
-void	prompt(void);
-t_lexer	*parser(t_collector	**collector, t_env **env);
+char	*prompt(void);
+t_lexer	*parser(t_collector	**collector, t_env **env, char *s);
 void	debug(void);
 void	expander(t_collector **collector, t_env **env, t_lexer **head);
 t_cmd	*parser2(t_collector **collector, t_lexer *head);

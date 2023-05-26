@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 16:47:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/26 13:46:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,13 @@ int	check_syntax(char *s)
 	if (check_pipes(s))
 		return (1);
 	return (0);
+}
+
+char	*prompt(void)
+{
+	char *s;
+
+	rl_on_new_line();
+	s = readline("\x1B[34mbsh > \x1B[0m");
+	return (s);
 }
