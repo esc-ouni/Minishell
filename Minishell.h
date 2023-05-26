@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/26 13:47:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/26 16:48:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ void	rot_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	roa_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rin_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
+
+void printTYPE(t_enum num) ;
 
 void	emplify(t_collector **collector, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
