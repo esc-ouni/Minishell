@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:03:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/26 22:06:01 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:16:30 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,26 @@ char *ft_quote_it(char *to_quote)
     char *tmp2;
     char **eq;
 
-    eq = ft_split(to_quote, '=');
-    tmp = ft_strdup(eq[1]);
-    tmp2 = ft_strdup(eq[0]);
-    ft_free_stringp(eq);
-	tmp2 = ft_strjoin(ft_strdup("declare -x "), tmp2);
-    quoted = ft_strjoin(tmp2, "="); /* tmp2 freed */
-    tmp2 = tmp;
-    tmp = ft_strjoin(ft_strdup("\""), tmp);
-    tmp = ft_strjoin(tmp, "\"");
-    quoted = ft_strjoin(quoted, tmp);
-    free(tmp);
-    free(tmp2);
+	if (ft_strchr(to_quote, '='))
+	{
+		eq = ft_split(to_quote, '=');
+		tmp = ft_strdup(eq[1]);
+		tmp2 = ft_strdup(eq[0]);
+		ft_free_stringp(eq);
+		tmp2 = ft_strjoin(ft_strdup("declare -x "), tmp2);
+		quoted = ft_strjoin(tmp2, "="); /* tmp2 freed */
+		tmp2 = tmp;
+		tmp = ft_strjoin(ft_strdup("\""), tmp);
+		tmp = ft_strjoin(tmp, "\"");
+		quoted = ft_strjoin(quoted, tmp);
+		free(tmp);
+		free(tmp2);
+	}
+	else
+	{
+		quoted = ft_strjoin(ft_strdup("declare -x "), to_quote);
+	}
+
     return (quoted);
 }
 
@@ -98,15 +106,14 @@ char	**ft_export(t_init *init, char *str)
 	t_env	*head;
 	t_env	*ev_var;
 
-	if (!ft_is_exported(str))
-		return (init->myenv);
 	head = init->envlst;
 	ev_var = ft_var_exist(init->envlst, str);
 	if (ev_var)
 		ft_edit_env_str(ev_var, str);
 	else
 	{
-		env_add_back(&init->envlst, new_env(str));
+		if (ft_strchr(str, '='))
+			env_add_back(&init->envlst, new_env(str));
 		ft_exp_add_back(&init->exp_lst, str);
 	}
 	init->envlst = head;
