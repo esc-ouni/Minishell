@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/02 20:54:51 by idouni            #+#    #+#              #
-#    Updated: 2023/05/23 17:16:20 by idouni           ###   ########.fr        #
+#    Updated: 2023/05/26 17:10:49 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ TLS    = expander.c \
 		tools_7.c \
 		tools_8.c \
 		tools_9.c \
+		tools_10.c \
+		tools_11.c \
 
 
 OBJ_M  = $(MND:%.c=%.o)

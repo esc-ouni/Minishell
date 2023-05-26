@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/26 13:46:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/26 17:12:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,30 +95,3 @@ void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i)
 	(*i) += 2;
 }
 
-int	check_syntax(char *s)
-{
-	if (!s)
-	{
-		write(1, "exit\n", 5);
-		exit (0);
-	}
-	if (!ft_strlen(s))
-		return (1);
-	if (check_str(s))
-		return (1);
-	add_history(s);
-	if (check_oerr(s))
-		return (1);
-	if (check_pipes(s))
-		return (1);
-	return (0);
-}
-
-char	*prompt(void)
-{
-	char *s;
-
-	rl_on_new_line();
-	s = readline("\x1B[34mbsh > \x1B[0m");
-	return (s);
-}
