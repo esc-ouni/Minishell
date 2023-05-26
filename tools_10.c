@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/26 17:30:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/26 17:32:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*prompt(void)
 	char	*s;
 
 	rl_on_new_line();
-	s = readline("\x1B[34mbaash > \n\x1B[0m");
+	s = readline("\x1B[34m\nbaash > \x1B[0m");
 	return (s);
 }
 
