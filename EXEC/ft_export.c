@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:03:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/26 13:01:16 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/26 22:06:01 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,15 @@ t_env   *ft_set_export_lst(t_env *env_lst)
     return (res);
 }
 
+void	ft_exp_add_back(t_env **env, char *str)
+{
+	char	*quoted;
+
+	quoted = ft_quote_it(str);
+	env_add_back(env, new_env(quoted));
+	ft_sort_env(*env);
+}
+
 char	**ft_export(t_init *init, char *str)
 {
 	char	**res;
@@ -96,7 +105,10 @@ char	**ft_export(t_init *init, char *str)
 	if (ev_var)
 		ft_edit_env_str(ev_var, str);
 	else
+	{
 		env_add_back(&init->envlst, new_env(str));
+		ft_exp_add_back(&init->exp_lst, str);
+	}
 	init->envlst = head;
 	res = ft_make_double_char(init->envlst);
 	init->envlst = head;
