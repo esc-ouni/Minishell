@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 18:30:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/27 18:49:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,26 +192,26 @@ void strt(t_collector **collector)
 	{
         perror("Error getting terminal attr");
 		ft_collectorclear(collector);
-        exit (0);
+        exit (1);
     }
     terminal_c.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(1, 0, &terminal_c) < 0)
 	{
         perror("Error setting terminal attr");
 		ft_collectorclear(collector);
-        exit (0);
+        exit (1);
     }
 	else if (signal(SIGINT, sig_handle) == SIG_ERR)
 	{
         perror("Error handling a signal");
 		ft_collectorclear(collector);
-        exit (0);
+        exit (1);
 	}
 	else if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 	{
         perror("Error ignoring a signal");
 		ft_collectorclear(collector);
-        exit (0);
+        exit (1);
 	}
 }
 
