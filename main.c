@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 09:50:15 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:30:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,20 +184,49 @@ void    foo()
     system("leaks minishell");
 }
 
+void strt(t_collector **collector)
+{
+	struct termios terminal_c;
+
+    if (tcgetattr(1, &terminal_c) < 0) 
+	{
+        perror("Error getting terminal attr");
+		ft_collectorclear(collector);
+        exit (0);
+    }
+    terminal_c.c_lflag &= ~ECHOCTL;
+	if (tcsetattr(1, 0, &terminal_c) < 0)
+	{
+        perror("Error setting terminal attr");
+		ft_collectorclear(collector);
+        exit (0);
+    }
+	else if (signal(SIGINT, sig_handle) == SIG_ERR)
+	{
+        perror("Error handling a signal");
+		ft_collectorclear(collector);
+        exit (0);
+	}
+	else if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+	{
+        perror("Error ignoring a signal");
+		ft_collectorclear(collector);
+        exit (0);
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_init	*inval;
-
 	char *s;
 
+	strt(&(inval->collector));
 	ft_norm_sucks(ac, av);
 	inval = ft_init(env);
 	while (1)
 	{
 		dup2(inval->tmp_fd_in, 0);
 		dup2(inval->tmp_fd_out, 1);
-		signal(SIGINT, sig_handle);
-		signal(SIGQUIT, SIG_IGN);
 		s = prompt();
 		inval->cmd = parser2(&(inval->collector) \
 			, parser(&(inval->collector), &(inval->envlst), s));
