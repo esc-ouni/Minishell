@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 09:50:15 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:44:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,16 +188,29 @@ int	main(int ac, char **av, char **env)
 {
 	t_init	*inval;
 
+    // struct termios term;
+    // if (tcgetattr(0, &term) < 0) {
+    //     perror("tcgetattr");
+    //     return 1;
+    // }
+
+    // term.c_lflag &= ~ECHOCTL;
+
+	// if (tcsetattr(0, TCSANOW, &term) < 0) {
+	// perror("tcsetattr");
+	// return 1;
+    // }
+
 	char *s;
 
 	ft_norm_sucks(ac, av);
 	inval = ft_init(env);
+	signal(SIGINT, sig_handle);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		dup2(inval->tmp_fd_in, 0);
 		dup2(inval->tmp_fd_out, 1);
-		signal(SIGINT, sig_handle);
-		signal(SIGQUIT, SIG_IGN);
 		s = prompt();
 		inval->cmd = parser2(&(inval->collector) \
 			, parser(&(inval->collector), &(inval->envlst), s));
