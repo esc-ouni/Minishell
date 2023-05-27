@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/26 17:28:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/27 19:35:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,13 @@ char	*ft_getenv(t_collector **collector, char *key, t_env **menv);
 void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 char	**ft_msplit(t_collector **collector, char const *s, char const c);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
+char	*ft_mitoa(t_collector **collector, int n);
 char	*ft_mstrjoin(t_collector **collector, char const *s1, char const *s2);
 char	*ft_msubstr(t_collector **collector, char const *s, \
 unsigned int start, size_t len);
 char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
 
-int		check_syntax(char *s);
+int		check_syntax(t_collector **collector, char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);
 int		searcher_for_spc(char *s);

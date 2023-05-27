@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idouni <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 14:32:47 by idouni            #+#    #+#              #
-#    Updated: 2022/11/12 19:22:13 by idouni           ###   ########.fr        #
+#    Updated: 2023/05/27 19:33:04 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ PR     = ft_atoi.c \
 	 ft_isascii.c \
 	 ft_isdigit.c \
 	 ft_isprint.c \
-	 ft_itoa.c \
 	 ft_memchr.c \
 	 ft_memcmp.c \
 	 ft_memcpy.c \

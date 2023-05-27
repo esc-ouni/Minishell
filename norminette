@@ -1084,7 +1084,7 @@ LIBF/ft_isalpha.c: OK!
 LIBF/ft_isascii.c: OK!
 LIBF/ft_isdigit.c: OK!
 LIBF/ft_isprint.c: OK!
-LIBF/ft_itoa.c: OK!
+LIBF/ft_mitoa.c: OK!
 LIBF/ft_memchr.c: OK!
 LIBF/ft_memcmp.c: OK!
 LIBF/ft_memcpy.c: OK!

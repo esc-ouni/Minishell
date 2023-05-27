@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:48:27 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/26 13:48:12 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/27 19:27:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,27 @@ t_env    *ft_set_env_list(char **env)
 
 int main(int argc, char **argv, char **env) 
 {
+    (void)env;
     (void)argc;
     (void)argv;
 	char		*s;
     t_lexer		*h_lexer;
     t_collector	*collector;
     t_cmd		*cmd;
-	t_env		*myenv_list;
+	// t_env		*myenv_list;
 
 
 	collector = NULL;
-	myenv_list = ft_set_env_list(env);
+	// myenv_list = ft_set_env_list(env);
     while (1)
     {
 		s = prompt();
-        h_lexer = parser(&collector, &myenv_list, s);
+        h_lexer = parser(&collector, NULL, s);
         cmd = parser2(&collector, h_lexer);
         emplify(&collector, cmd);
         after_parse2(cmd);
 		ft_collectorclear(&collector);
+		system("leaks Minishell");
     }
     return 0;
 }

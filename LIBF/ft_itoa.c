@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_mitoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 12:52:30 by idouni            #+#    #+#             */
-/*   Updated: 2022/11/12 12:52:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/27 19:30:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static char	*strevv(char *s, int end, int t)
 	return (s);
 }
 
-char	*ft_itoa(int n)
+char	*ft_mitoa(t_collector **collector, int n)
 {
 	char		*s;
 	int			i;
@@ -90,6 +90,7 @@ char	*ft_itoa(int n)
 	int			nc;
 	long		nn;
 
+	s = NULL;
 	i = 0;
 	t = 0;
 	nn = n;
@@ -99,7 +100,7 @@ char	*ft_itoa(int n)
 		nc += 1;
 		t = 1;
 	}
-	s = (char *)malloc(sizeof (char) * nc);
+	s = (char *)h_malloc(collector, sizeof (char) * nc, s);
 	if (s == NULL)
 		return (NULL);
 	s = putnbr(s, nn, nc, i);
