@@ -108,6 +108,7 @@ typedef struct s_init
 {
 	int			tmp_fd_in;
 	int			tmp_fd_out;
+	int			err_in;
 	char		**myenv;
 	t_env		*envlst;
     t_env       *exp_lst;

@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/26 13:58:52 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/27 09:53:13 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	ft_child(t_cmd *lol, int *fd, t_init *init)
 {
 	close(fd[0]);
+	if (init->err_in)
+		exit(1);
 	if (lol->out_files)
 	{
 		ft_open_out_files(lol);
@@ -120,8 +122,7 @@ int	ft_fork(t_cmd *lol, t_init *init)
 		return (0);
 	if (lol->in_files)
 	{
-		if (ft_open_in_file(lol))
-			return (1);
+		init->err_in = ft_open_in_file(lol);
 		dup2(lol->cmd_fdin, STDIN_FILENO);
 	}
 	pipe(fd);
@@ -130,5 +131,6 @@ int	ft_fork(t_cmd *lol, t_init *init)
 		ft_child(lol, fd, init);
 	else
 		ft_parent(lol, fd, &pid);
+	init->err_in = 0;
 	return (0);
 }

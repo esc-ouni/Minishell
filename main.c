@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/26 14:01:53 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/27 09:50:15 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ t_init	*ft_init(char **env)
 	res->envlst = ft_set_env_list(env);
     res->exp_lst = ft_set_export_lst(res->envlst);
 	res->myenv = ft_set_env(res->envlst);
+	res->err_in = 0;
 	return (res);
 }
 
