@@ -6,24 +6,32 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 09:53:13 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:09:22 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	ft_redirect_child(t_cmd *lol, int *fd)
+{
+	if (lol->out_files)
+	{
+		ft_open_out_files(lol);
+		if (dup2(lol->cmd_fdout, STDOUT_FILENO) < 0)
+			exit(1);
+	}
+	else
+		if (dup2(fd[1], STDOUT_FILENO) < 0)
+			exit(1);
+	return (0);
+}
 
 int	ft_child(t_cmd *lol, int *fd, t_init *init)
 {
 	close(fd[0]);
 	if (init->err_in)
 		exit(1);
-	if (lol->out_files)
-	{
-		ft_open_out_files(lol);
-		dup2(lol->cmd_fdout, STDOUT_FILENO);
-	}
-	else
-		dup2(fd[1], STDOUT_FILENO);
+	ft_redirect_child(lol, fd);
 	if (lol->builtflag)
 	{
 		ft_builtin(lol, init);

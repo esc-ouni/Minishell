@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/22 02:45:42 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:36:04 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	ft_free_stringp(char **env)
 
 	i = 0;
 	while (env[i])
-    {
-        free(env[i++]);
-    }
+	{
+		free(env[i++]);
+	}
 	free(env);
 }
 

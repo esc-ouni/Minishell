@@ -158,8 +158,9 @@ void	sig_handle(int sig);
 void	ft_quit(t_built flag);
 int		ft_heredoc(t_cmd *cmd, char *delimiter);
 void	ft_free_env_lst(t_env **env_lst);
-
+int	ft_strcmp(const char *s1, const char *s2);
 void	ft_printlst(t_env *lst);
+char	*ft_trim_char(char *str, char c);
 // void    start(void);
 // int     check_syntax(char *s);
 // void    after_parse(t_mlist  *head);
