@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:03:36 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/26 12:05:45 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:28:04 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	ft_swap_str(t_env *a, t_env *b)
 
 void	ft_sort_env(t_env *envlst)
 {
-	t_env *head;
-	int	swapped;
+	t_env	*head;
+	int		swapped;
 
 	head = envlst;
 	swapped = 1;

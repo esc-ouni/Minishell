@@ -130,15 +130,15 @@ typedef struct s_files
 }	t_files;
 
 
-int	ft_builtin(t_cmd *lol, t_init *init);
-int	ft_open_out_files(t_cmd *lol);
-int	ft_open_in_file(t_cmd *lol);
-int	ft_fork(t_cmd *lol, t_init *init);
-int	ft_execute(char *arg, char **env);
-int     ft_cd(t_cmd *lol);
-char    *ft_getcwd();
-int     ft_pwd();
-int	ft_echo(t_cmd *lol);
+int		ft_builtin(t_cmd *lol, t_init *init);
+int		ft_open_out_files(t_cmd *lol);
+int		ft_open_in_file(t_cmd *lol);
+int		ft_fork(t_cmd *lol, t_init *init);
+int		ft_execute(char *arg, char **env);
+int		ft_cd(t_cmd *lol);
+char	*ft_getcwd();
+int		ft_pwd();
+int		ft_echo(t_cmd *lol);
 t_env   *ft_set_export_lst(t_env *env_lst);
 char	**ft_export(t_init *init, char *str);
 char    **ft_unset(t_init *init, char *str);
@@ -158,9 +158,17 @@ void	sig_handle(int sig);
 void	ft_quit(t_built flag);
 int		ft_heredoc(t_cmd *cmd, char *delimiter);
 void	ft_free_env_lst(t_env **env_lst);
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 void	ft_printlst(t_env *lst);
 char	*ft_trim_char(char *str, char c);
+int		ft_heredoc(t_cmd *cmd, char *delimiter);
+char	*ft_quote_it(char *to_quote);
+void	ft_replace_exp_str(t_env *to_rep, char *str);
+int	ft_trim_len(const char *str, char c);
+int	ft_len_skip(char *str, char c);
+char	*ft_trim_char(char *str, char c);
+void	ft_exp_add_back(t_env **env, char *str);
+
 // void    start(void);
 // int     check_syntax(char *s);
 // void    after_parse(t_mlist  *head);
