@@ -197,13 +197,17 @@ void	roa_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rin_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 
+void printTYPE(t_enum num) ;
+int	basic_syntax_check(t_lexer **h_lexer);
+int	check_str(char *s);
+void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str);
+void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str);
+
 void	emplify(t_collector **collector, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
-char	**mgetenv(t_collector **collector, char **env);
 t_built	cmd_type(t_collector **collector, char *cmd);
 char	*prompt(void);
-// t_lexer	*parser(t_collector	**collector, t_env **env);
 t_lexer	*parser(t_collector	**collector, t_env **env, char *s);
 void	debug(void);
 void	expander(t_collector **collector, t_env **env, t_lexer **head);
@@ -227,7 +231,5 @@ void	add_lexer(t_collector **collector, t_lexer **head, char *content, \
 t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
 void	*h_malloc(t_collector **collect_head, size_t s, void *p);
-
-int	check_syntax2(t_lexer	**h_lexer);
 
 #endif
