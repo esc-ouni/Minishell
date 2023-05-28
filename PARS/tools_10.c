@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/27 14:57:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 13:19:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*prompt(void)
 {
 	char	*s;
 
-	rl_on_new_line();
 	s = readline("BAASH >> ");
 	return (s);
 }

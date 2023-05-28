@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/28 13:08:04 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 13:33:49 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,16 +186,19 @@ void    foo()
 
 void strt(t_collector **collector)
 {
+	int t_fd;
 	struct termios terminal_c;
 
-    if (tcgetattr(1, &terminal_c) < 0) 
+	t_fd = open("/dev/tty", O_RDWR);
+
+    if (tcgetattr(t_fd, &terminal_c) < 0) 
 	{
         perror("Error getting terminal attr");
 		ft_collectorclear(collector);
         exit (1);
     }
-    terminal_c.c_lflag -= 64;
-	if (tcsetattr(1, 0, &terminal_c) < 0)
+    terminal_c.c_lflag &= ~ECHOCTL;
+	if (tcsetattr(t_fd, 0, &terminal_c) < 0)
 	{
         perror("Error setting terminal attr");
 		ft_collectorclear(collector);
