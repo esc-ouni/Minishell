@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:48:27 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/28 15:29:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 16:14:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int main(int argc, char **argv, char **env)
         emplify(&collector, cmd);
         after_parse2(cmd);
 		ft_collectorclear(&collector);
-		system("leaks Minishell");
     }
     return 0;
 }

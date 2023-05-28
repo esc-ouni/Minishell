@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/27 19:25:27 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 16:14:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		check_syntax(t_collector **collector, char *s)
 	{
 		write(1, "exit\n", 5);
 		ft_collectorclear(collector);
-		system("leaks Minishell");
 		exit (0);
 	}
 	if (!ft_strlen(s))
