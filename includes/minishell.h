@@ -16,7 +16,6 @@
 #include <termios.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <wait.h>
 # include <fcntl.h>
 # include <signal.h>
 # include <readline/history.h>
@@ -27,7 +26,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-extern int g_exit_val;
+int	g_exit_val;
 
 typedef struct s_env
 {
@@ -170,7 +169,8 @@ int		ft_trim_len(const char *str, char c);
 int		ft_len_skip(char *str, char c);
 char	*ft_trim_char(char *str, char c);
 void	ft_exp_add_back(t_env **env, char *str);
-int		ft_more_plus(const char	*str, char c);
+int		ft_valid_var(const char	*str, char c);
+t_env	*ft_exp_var_exist(t_env *exp, char *str);
 
 // void    start(void);
 // int     check_syntax(char *s);

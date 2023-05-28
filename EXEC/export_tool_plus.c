@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:17:45 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 18:20:01 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:33:01 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,13 @@ char	*ft_quote_it(char *to_quote)
 	return (quoted);
 }
 
-int	ft_more_plus(const char	*str, char c)
+int	ft_valid_var(const char	*str, char c)
 {
 	char *pstr;
 
 	pstr = (char *)str;
+	if (*pstr == '=')
+		return (1);
 	while (*pstr && *pstr != '=')
 	{
 		if ((*pstr == c) && (*(pstr + 1) != '=') || (!isalnum(*pstr) && *pstr != '_'))
