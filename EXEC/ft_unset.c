@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:10:12 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/26 13:04:12 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:54:16 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,24 @@ static void	ft_remove_node(t_env **env_lst, t_env *to_remove)
 	}
 }
 
+void	ft_unset_exp(t_init *init, char *str)
+{
+	t_env	*to_unset;
+
+	to_unset = ft_exp_var_exist(init->exp_lst, str);
+	if (!to_unset)
+		return ;
+	ft_remove_node(&init->exp_lst, to_unset);
+}
+
 char	**ft_unset(t_init *init, char *str)
 {
 	t_env	*to_unset;
 	char	**res;
 
-	if (!ft_isunset(str))
+	if (ft_valid_var(str, '+'))
 		return (init->myenv);
+	ft_unset_exp(init, str);
 	to_unset = ft_is_unset_exist(init->envlst, str);
 	if (!to_unset)
 		return (init->myenv);

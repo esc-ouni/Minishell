@@ -26,7 +26,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-int g_exit_val;
+int	g_exit_val;
 
 typedef struct s_env
 {
@@ -165,10 +165,12 @@ char	*ft_trim_char(char *str, char c);
 int		ft_heredoc(t_cmd *cmd, char *delimiter);
 char	*ft_quote_it(char *to_quote);
 void	ft_replace_exp_str(t_env *to_rep, char *str);
-int	ft_trim_len(const char *str, char c);
-int	ft_len_skip(char *str, char c);
+int		ft_trim_len(const char *str, char c);
+int		ft_len_skip(char *str, char c);
 char	*ft_trim_char(char *str, char c);
 void	ft_exp_add_back(t_env **env, char *str);
+int		ft_valid_var(const char	*str, char c);
+t_env	*ft_exp_var_exist(t_env *exp, char *str);
 
 // void    start(void);
 // int     check_syntax(char *s);

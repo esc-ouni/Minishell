@@ -6,11 +6,33 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:17:39 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/26 14:02:10 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:56:36 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_exp_loop(t_cmd *lol, t_init *init)
+{
+	int	i;
+
+	i = 1;
+	if (!lol->cmd[i])
+		return ;
+	while (lol->cmd[i])
+		init->myenv = ft_export(init, lol->cmd[i++]);
+}
+
+void	ft_unset_loop(t_cmd *lol, t_init *init)
+{
+	int	 i;
+
+	i = 1;
+	if (!lol->cmd[i])
+		return ;
+	while (lol->cmd[i])
+		init->myenv = ft_unset(init, lol->cmd[i++]);
+}
 
 int	ft_built_in_first(t_cmd *lol, t_init *init)
 {
@@ -25,12 +47,12 @@ int	ft_built_in_first(t_cmd *lol, t_init *init)
 		ft_quit(NOT);
 	else if (lol->builtflag == EXPT && lol->cmd[1])
 	{
-		init->myenv = ft_export(init, lol->cmd[1]);
+		ft_exp_loop(lol, init);
 		return (0);
 	}
 	else if (lol->builtflag == UNST)
 	{
-		init->myenv = ft_unset(init, lol->cmd[1]);
+		ft_unset_loop(lol, init);
 		return (0);
 	}
 	return (1);

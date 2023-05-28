@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:03:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 18:19:03 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:33:01 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ static void	ft_plus_eq_check(char	**str, t_env *env)
 	}
 }
 
+void	ft_put_err()
+{
+	ft_putendl_fd("minishell: not a valid identifier", 2);
+}
+
 char	**ft_export(t_init *init, char *str)
 {
 	char	**res;
@@ -63,6 +68,8 @@ char	**ft_export(t_init *init, char *str)
 	t_env	*ev_var;
 
 	head = init->envlst;
+	if (ft_valid_var(str, '+'))
+		return(ft_put_err(), init->myenv);
 	ft_plus_eq_check(&str, init->envlst);
 	ev_var = ft_var_exist(init->envlst, str);
 	if (ev_var)

@@ -70,8 +70,6 @@ int	ft_parent(t_cmd *lol, int *fd, int *pid)
 			line = get_next_line(fd[0]);
 		}
 	}
-	if (g_exit_val)
-		g_exit_val = 127;
 	close (fd[0]);
 	return (0);
 }
