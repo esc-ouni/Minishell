@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/26 17:31:06 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 15:31:24 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_lexer	*parser(t_collector	**collector, t_env **env, char *s)
 {
 	t_lexer	*h_lexer;
 
-	if (check_syntax(s))
-		return (ft_collectorclear(collector), NULL);
+	if (check_syntax(collector, s))
+		return (free(s), ft_collectorclear(collector), NULL);
 	h_lexer = lexer(collector, s);
 	expander(collector, env, &h_lexer);
 	if (check_syntax2(&h_lexer))
