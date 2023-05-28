@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+void	ft_exp_loop(t_cmd *lol, t_init *init)
+{
+	int	i;
+
+	i = 1;
+	while (lol->cmd[i])
+		init->myenv = ft_export(init, lol->cmd[i++])
+}
+
 int	ft_built_in_first(t_cmd *lol, t_init *init)
 {
 	if (lol->num_cmds > 1)
@@ -30,7 +39,7 @@ int	ft_built_in_first(t_cmd *lol, t_init *init)
 	}
 	else if (lol->builtflag == UNST)
 	{
-		init->myenv = ft_unset(init, lol->cmd[1]);
+		ft_exp_loop(lol, init);
 		return (0);
 	}
 	return (1);
