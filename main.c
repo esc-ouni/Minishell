@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 18:49:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 13:08:04 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void strt(t_collector **collector)
 		ft_collectorclear(collector);
         exit (1);
     }
-    terminal_c.c_lflag &= ~ECHOCTL;
+    terminal_c.c_lflag -= 64;
 	if (tcsetattr(1, 0, &terminal_c) < 0)
 	{
         perror("Error setting terminal attr");
@@ -215,6 +215,23 @@ void strt(t_collector **collector)
 	}
 }
 
+void	reset_io(t_init	*inval)
+{
+	if (dup2(inval->tmp_fd_in, 0) == -1)
+	{
+		perror("Error resetting input stream");
+		ft_collectorclear(&(inval->collector));
+		exit (1);
+	}
+	if (dup2(inval->tmp_fd_out, 1) == -1)
+	{
+		perror("Error resetting output stream");
+		ft_collectorclear(&(inval->collector));
+		exit (1);
+	}
+	
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_init	*inval;
@@ -225,8 +242,7 @@ int	main(int ac, char **av, char **env)
 	inval = ft_init(env);
 	while (1)
 	{
-		dup2(inval->tmp_fd_in, 0);
-		dup2(inval->tmp_fd_out, 1);
+		reset_io(inval);
 		s = prompt();
 		inval->cmd = parser2(&(inval->collector) \
 			, parser(&(inval->collector), &(inval->envlst), s));
