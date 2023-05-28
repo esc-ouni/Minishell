@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/26 17:27:15 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/27 19:35:31 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	expand_c1(t_collector **collector, char *s, char **str, int *i)
 
 void	expand_ev(t_collector **collector, char **str, char *s)
 {
-	(*str) = ft_mstrjoin(collector, (*str), ft_itoa(g_exit_val));
+	(*str) = ft_mstrjoin(collector, (*str), ft_mitoa(collector, g_exit_val));
 	(*str) = ft_mstrjoin(collector, (*str), s + 1);
 }
 

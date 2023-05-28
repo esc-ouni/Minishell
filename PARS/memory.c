@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 16:19:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/27 19:18:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_collectorclear(t_collector **collector)
 	t_collector	*node;
 	t_collector	*n_node;
 
-	if (!collector)
+	if (!(*collector))
 		return ;
 	node = *collector;
 	while (node)

@@ -6,17 +6,18 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/27 14:57:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 15:38:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_syntax(char *s)
+int		check_syntax(t_collector **collector, char *s)
 {
 	if (!s)
 	{
 		write(1, "exit\n", 5);
+		ft_collectorclear(collector);
 		exit (0);
 	}
 	if (!ft_strlen(s))

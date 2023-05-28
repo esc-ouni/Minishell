@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 18:30:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 15:54:25 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,15 +152,13 @@ void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val)
 	exit(0);
 }
 
-t_init	*ft_init(char **env)
+t_init	*ft_init(t_collector **collector,char **env)
 {
 	t_init	*res;
 
 	g_exit_val = 0;
-	res = malloc(sizeof(t_init));
-	if (!res)
-		exit(1);
-	res->collector = NULL;
+	res = NULL;
+	res = h_malloc(collector, sizeof(t_init), res);
 	res->tmp_fd_in = dup(STDIN_FILENO);
 	res->tmp_fd_out = dup (STDOUT_FILENO);
 	if (res->tmp_fd_in < 0 || res->tmp_fd_out < 0)
@@ -186,51 +184,72 @@ void    foo()
 
 void strt(t_collector **collector)
 {
+	int t_fd;
 	struct termios terminal_c;
 
-    if (tcgetattr(1, &terminal_c) < 0) 
+	t_fd = open("/dev/tty", O_RDONLY);
+
+    if (tcgetattr(t_fd, &terminal_c) < 0) 
 	{
         perror("Error getting terminal attr");
 		ft_collectorclear(collector);
-        exit (0);
+        exit (1);
     }
     terminal_c.c_lflag &= ~ECHOCTL;
-	if (tcsetattr(1, 0, &terminal_c) < 0)
+	if (tcsetattr(t_fd, 0, &terminal_c) < 0)
 	{
         perror("Error setting terminal attr");
 		ft_collectorclear(collector);
-        exit (0);
+        exit (1);
     }
 	else if (signal(SIGINT, sig_handle) == SIG_ERR)
 	{
         perror("Error handling a signal");
 		ft_collectorclear(collector);
-        exit (0);
+        exit (1);
 	}
 	else if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 	{
         perror("Error ignoring a signal");
 		ft_collectorclear(collector);
-        exit (0);
+        exit (1);
 	}
+}
+
+void	reset_io(t_collector	**collector, t_init	*inval)
+{
+	if (dup2(inval->tmp_fd_in, 0) == -1)
+	{
+		perror("Error resetting input stream");
+		ft_collectorclear(collector);
+		exit (1);
+	}
+	if (dup2(inval->tmp_fd_out, 1) == -1)
+	{
+		perror("Error resetting output stream");
+		ft_collectorclear(collector);
+		exit (1);
+	}
+	
 }
 
 int	main(int ac, char **av, char **env)
 {
 	t_init	*inval;
+	t_collector	*collector;
 	char *s;
 
-	strt(&(inval->collector));
+	collector = NULL;
+	strt(&collector);
 	ft_norm_sucks(ac, av);
-	inval = ft_init(env);
+	inval = ft_init(&collector, env);
 	while (1)
 	{
-		dup2(inval->tmp_fd_in, 0);
-		dup2(inval->tmp_fd_out, 1);
+		reset_io(&collector, inval);
 		s = prompt();
-		inval->cmd = parser2(&(inval->collector) \
-			, parser(&(inval->collector), &(inval->envlst), s));
-		emplify(&(inval->collector), inval->cmd);
+		inval->cmd = parser2(&collector \
+			, parser(&collector, &(inval->envlst), s));
+		emplify(&collector, inval->cmd);
 		if (!inval->cmd)
 			continue ;
 		ft_execution(inval);

@@ -114,7 +114,6 @@ typedef struct s_init
 	t_env		*envlst;
     t_env       *exp_lst;
 	t_cmd		*cmd;
-	t_collector	*collector;
 }	t_init;
 
 typedef struct s_lexer
@@ -130,6 +129,7 @@ typedef struct s_files
 	t_file		*in_files;
 }	t_files;
 
+#define malloc(x) NULL
 
 int		ft_builtin(t_cmd *lol, t_init *init);
 int		ft_open_out_files(t_cmd *lol);
@@ -179,12 +179,13 @@ char	*ft_getenv(t_collector **collector, char *key, t_env **menv);
 void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 char	**ft_msplit(t_collector **collector, char const *s, char const c);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
+char	*ft_mitoa(t_collector **collector, int n);
 char	*ft_mstrjoin(t_collector **collector, char const *s1, char const *s2);
 char	*ft_msubstr(t_collector **collector, char const *s, \
 unsigned int start, size_t len);
 char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
 
-int		check_syntax(char *s);
+int		check_syntax(t_collector **collector, char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);
 int		searcher_for_spc(char *s);
