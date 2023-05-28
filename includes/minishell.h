@@ -114,7 +114,6 @@ typedef struct s_init
 	t_env		*envlst;
     t_env       *exp_lst;
 	t_cmd		*cmd;
-	t_collector	*collector;
 }	t_init;
 
 typedef struct s_lexer
@@ -130,6 +129,7 @@ typedef struct s_files
 	t_file		*in_files;
 }	t_files;
 
+#define malloc(x) NULL
 
 int		ft_builtin(t_cmd *lol, t_init *init);
 int		ft_open_out_files(t_cmd *lol);
