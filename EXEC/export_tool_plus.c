@@ -60,3 +60,17 @@ char	*ft_quote_it(char *to_quote)
 	}
 	return (quoted);
 }
+
+int	ft_more_plus(const char	*str, char c)
+{
+	char *pstr;
+
+	pstr = (char *)str;
+	while (*pstr && *pstr != '=')
+	{
+		if ((*pstr == c) && (*(pstr + 1) != '=') || (!isalnum(*pstr) && *pstr != '_'))
+			return (1);
+		pstr++;
+	}
+	return (0);
+}
