@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/28 16:09:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/29 15:44:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_free_pos(char **strp, int pos)
 
 void	sig_handle(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT && var)
 	{
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
@@ -230,6 +230,7 @@ int	main(int ac, char **av, char **env)
 	t_collector	*collector;
 	char *s;
 
+	var = 1;
 	collector = NULL;
 	strt(&collector);
 	ft_norm_sucks(ac, av);
@@ -243,6 +244,8 @@ int	main(int ac, char **av, char **env)
 		emplify(&collector, inval->cmd);
 		if (!inval->cmd)
 			continue ;
+		var = 0;
 		ft_execution(inval);
+		var = 1;
 	}
 }
