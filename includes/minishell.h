@@ -13,6 +13,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# ifdef __linux__
+	#include <wait.h>
+#endif
 #include <termios.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -26,7 +29,8 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-int	g_exit_val;
+
+extern int	g_exit_val;
 
 typedef struct s_env
 {
@@ -154,9 +158,10 @@ t_env	*new_env(char *str);
 void	ft_env(char **myenv);
 char	*ft_get_path(char **cmd, char **env);
 void	sig_handle(int sig);
-void	ft_quit(t_built flag);
+void	ft_quit(t_built flag, t_init *init);
 int		ft_heredoc(t_cmd *cmd, char *delimiter);
 void	ft_free_env_lst(t_env **env_lst);
+void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_printlst(t_env *lst);
 char	*ft_trim_char(char *str, char c);

@@ -22,9 +22,9 @@ char	**ft_make_double_char(t_env *env_lst)
 	i = 0;
 	while (env_lst)
 	{
-	res[i] = ft_strdup(env_lst->str);
-	i++;
-	env_lst = env_lst->next;
+		res[i] = ft_strdup(env_lst->str);
+		i++;
+		env_lst = env_lst->next;
 	}
 	res[i] = NULL;
 	return (res);

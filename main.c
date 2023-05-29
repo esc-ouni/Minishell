@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int g_exit_val;
+
 int	ft_builtin(t_cmd *lol, t_init *init)
 {
 	if (lol->builtflag == ECH)
@@ -75,16 +77,17 @@ void	sig_handle(int sig)
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
-		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }
 
-void	ft_quit(t_built flag)
+void	ft_quit(t_built flag, t_init *init)
 {
 	if (flag == EXT)
 		write(1, "exit\n", 5);
+	ft_end_free(&(init->envlst), (init->myenv), init);
 	exit(0);
 }
 /********************SIGNALES********************/
@@ -177,10 +180,6 @@ void	ft_norm_sucks(int ac, char **av)
 		exit (0);
 }
 
-void    foo()
-{
-    system("leaks minishell");
-}
 
 void strt(t_collector **collector)
 {
@@ -246,5 +245,4 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		ft_execution(inval);
 	}
-	ft_end_free(&(inval->envlst), (inval->myenv), inval);
 }
