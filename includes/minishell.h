@@ -156,7 +156,7 @@ t_env	*new_env(char *str);
 void	ft_env(char **myenv);
 char	*ft_get_path(char **cmd, char **env);
 void	sig_handle(int sig);
-void	ft_quit(t_built flag);
+void	ft_quit(t_built flag, t_init *init);
 int		ft_heredoc(t_cmd *cmd, char *delimiter);
 void	ft_free_env_lst(t_env **env_lst);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -171,6 +171,7 @@ char	*ft_trim_char(char *str, char c);
 void	ft_exp_add_back(t_env **env, char *str);
 int		ft_valid_var(const char	*str, char c);
 t_env	*ft_exp_var_exist(t_env *exp, char *str);
+void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val);
 
 // void    start(void);
 // int     check_syntax(char *s);
