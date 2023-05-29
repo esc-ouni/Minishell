@@ -27,6 +27,8 @@
 # include "get_next_line.h"
 
 int	g_exit_val;
+int		var;
+
 
 typedef struct s_env
 {
