@@ -150,8 +150,8 @@ void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val)
 		ft_free_env_lst(env_lst);
     if (init_val->exp_lst)
         ft_free_env_lst(&init_val->exp_lst);
-	// if (init_val)
-	// 	free(init_val);
+	if (init_val)
+		free(init_val);
 	rl_clear_history();
 	exit(0);
 }
@@ -235,6 +235,7 @@ int	main(int ac, char **av, char **env)
 	collector = NULL;
 	strt(&collector);
 	ft_norm_sucks(ac, av);
+	inval = malloc(sizeof(t_init));
 	inval = ft_init(&collector, env);
 	while (1)
 	{

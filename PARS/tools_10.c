@@ -17,8 +17,8 @@ int		check_syntax(t_collector **collector, char *s, t_init *init)
 	if (!s)
 	{
 		write(1, "exit\n", 5);
-		ft_collectorclear(collector);
 		ft_end_free(&init->envlst, init->myenv, init);
+		ft_collectorclear(collector);
 		exit (0);
 	}
 	if (!ft_strlen(s))
