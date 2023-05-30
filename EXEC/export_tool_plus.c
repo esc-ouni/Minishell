@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:17:45 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 20:02:19 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:55:26 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,22 @@ char	*ft_quote_it(char *to_quote)
 
 int	ft_valid_var(const char	*str, char c)
 {
-	char *pstr;
+	char	*pstr;
 
 	pstr = (char *)str;
 	if (*pstr == '=')
 		return (1);
 	while (*pstr && *pstr != '=')
 	{
-		if (((*pstr == c) && (*(pstr + 1) != '=')) && (!isalnum(*pstr) || *pstr != '_') )
+		if (((*pstr == c) && (*(pstr + 1) != '=')) \
+		&& (!isalnum(*pstr) || *pstr != '_'))
 			return (1);
 		pstr++;
 	}
 	return (0);
+}
+
+void	ft_put_err(void)
+{
+	ft_putendl_fd("minishell: not a valid identifier", 2);
 }

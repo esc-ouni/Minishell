@@ -6,7 +6,7 @@
 #    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 17:40:51 by msamhaou          #+#    #+#              #
-#    Updated: 2023/05/28 17:00:40 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/05/30 21:14:54 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ GNL_OBJ = $(GNL_SRC:.c=.o)
 
 #		EXEC
 EXEC_DIR = EXEC/
-EXEC_SRC =	EXEC/export_tool.c      EXEC/ft_env.c           EXEC/ft_export_plus.c   EXEC/ft_sort_env.c\
-			EXEC/export_tool_plus.c EXEC/ft_env_plus.c      EXEC/ft_fork.c          EXEC/ft_unset.c\
-			EXEC/ft_built_in.c      EXEC/ft_env_tools.c     EXEC/ft_get_path.c\
-			EXEC/ft_built_in_plus.c EXEC/ft_export.c        EXEC/ft_heredoc.c
+EXEC_SRC =	EXEC/export_tool.c      EXEC/ft_built_in.c      EXEC/ft_env.c           EXEC/ft_env_tools.c\
+			EXEC/ft_export_plus.c   EXEC/ft_free.c          EXEC/ft_heredoc.c       EXEC/ft_init.c          EXEC/ft_unset.c\
+			EXEC/export_tool_plus.c EXEC/ft_built_in_plus.c EXEC/ft_env_plus.c      EXEC/ft_export.c\
+			EXEC/ft_fork.c          EXEC/ft_get_path.c      EXEC/ft_in_out_files.c  EXEC/ft_sort_env.c
 EXEC_OBJ = $(EXEC_SRC:.c=.o)
 
 #		PARS

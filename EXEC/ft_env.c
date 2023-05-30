@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 15:36:04 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 21:08:08 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,6 @@ void	env_add_back(t_env **env, t_env *toadd)
 		(*env) = (*env)->next;
 	(*env)->next = toadd;
 	*env = head;
-}
-
-void	ft_free_stringp(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		free(env[i++]);
-	}
-	free(env);
 }
 
 char	**ft_set_env(t_env *env_lst)

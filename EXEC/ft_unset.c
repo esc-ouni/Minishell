@@ -6,27 +6,11 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:10:12 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 19:51:50 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:56:11 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	ft_isunset(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-	{
-		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 static t_env	*ft_is_unset_exist(t_env *env_lst, char *str)
 {

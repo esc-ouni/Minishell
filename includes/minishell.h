@@ -13,9 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#ifdef __linux__
-	#include <wait.h>
-#endif
 #include <termios.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -29,8 +26,8 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-extern int	g_exit_val;
-extern int		var;
+int	g_exit_val;
+int		var;
 
 
 typedef struct s_env
@@ -174,6 +171,11 @@ void	ft_exp_add_back(t_env **env, char *str);
 int		ft_valid_var(const char	*str, char c);
 t_env	*ft_exp_var_exist(t_env *exp, char *str);
 void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val);
+void	ft_put_err(void);
+void	ft_norm_sucks(int ac, char **av);
+t_init	*ft_init(t_collector **collector, char **env);
+void	reset_io(t_collector **collector, t_init *inval);
+void	strt(t_collector **collector);
 
 // void    start(void);
 // int     check_syntax(char *s);

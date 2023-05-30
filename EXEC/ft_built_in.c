@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:50:41 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 04:09:32 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 21:10:10 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,18 @@ int	ft_echo(t_cmd *lol)
 	}
 	else
 		printf("\n");
+	return (0);
+}
+
+int	ft_builtin(t_cmd *lol, t_init *init)
+{
+	if (lol->builtflag == ECH)
+		ft_echo(lol);
+	else if (lol->builtflag == PWD)
+		ft_pwd();
+	else if (lol->builtflag == ENV)
+		ft_env(init->myenv);
+	else if (lol->builtflag == EXPT && !lol->cmd[1])
+		ft_printlst(init->exp_lst);
 	return (0);
 }

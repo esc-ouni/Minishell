@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:17:39 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/28 16:56:36 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:53:16 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_exp_loop(t_cmd *lol, t_init *init)
 
 void	ft_unset_loop(t_cmd *lol, t_init *init)
 {
-	int	 i;
+	int	i;
 
 	i = 1;
 	if (!lol->cmd[i])

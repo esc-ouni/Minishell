@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 14:05:23 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:54:41 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	ft_redirect_child(t_cmd *lol, int *fd, t_init *init)
 	else
 	{
 		if (lol->next)
-			{if (dup2(fd[1], STDOUT_FILENO) < 0)
-				exit(1);}
+		{
+			if (dup2(fd[1], STDOUT_FILENO) < 0)
+				exit(1);
+		}
 		else
 			dup2(init->tmp_fd_out, STDOUT_FILENO);
 	}
