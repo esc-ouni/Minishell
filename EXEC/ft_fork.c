@@ -6,13 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 18:27:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:05:23 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_redirect_child(t_cmd *lol, int *fd)
+int	ft_redirect_child(t_cmd *lol, int *fd, t_init *init)
 {
 	if (lol->out_files)
 	{
@@ -21,8 +21,13 @@ int	ft_redirect_child(t_cmd *lol, int *fd)
 			exit(1);
 	}
 	else
-		if (dup2(fd[1], STDOUT_FILENO) < 0)
-			exit(1);
+	{
+		if (lol->next)
+			{if (dup2(fd[1], STDOUT_FILENO) < 0)
+				exit(1);}
+		else
+			dup2(init->tmp_fd_out, STDOUT_FILENO);
+	}
 	return (0);
 }
 
@@ -31,7 +36,7 @@ int	ft_child(t_cmd *lol, int *fd, t_init *init)
 	close(fd[0]);
 	if (init->err_in)
 		exit(1);
-	ft_redirect_child(lol, fd);
+	ft_redirect_child(lol, fd, init);
 	if (lol->builtflag)
 	{
 		ft_builtin(lol, init);
@@ -60,16 +65,6 @@ int	ft_parent(t_cmd *lol, int *fd, int *pid)
 	dup2(fd[0], STDIN_FILENO);
 	if (lol->cmd_fdin)
 		close(lol->cmd_fdin);
-	if (lol->last_cmd)
-	{
-		line = get_next_line(fd[0]);
-		while (line)
-		{
-			write(STDOUT_FILENO, line, ft_strlen(line));
-			free(line);
-			line = get_next_line(fd[0]);
-		}
-	}
 	close (fd[0]);
 	return (0);
 }
