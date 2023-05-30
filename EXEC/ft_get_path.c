@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:39:57 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/21 00:55:24 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:37:54 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static char	**ft_split_raw(char *arg, char **env)
 		return (NULL);
 	i = 0;
 	rawpath = ft_get_rawpath(env);
+	printf("%p\n", rawpath);
 	if (!rawpath)
 		return (NULL);
 	paths = ft_split(rawpath, ':');
@@ -51,9 +52,7 @@ static char	**ft_split_raw(char *arg, char **env)
 	free(rawpath);
 	while (paths[i])
 	{
-		tmp = paths[i];
 		paths[i] = ft_strjoin(paths[i], "/");
-		tmp = paths[i];
 		paths[i] = ft_strjoin(paths[i], arg);
 		i++;
 	}
@@ -63,6 +62,7 @@ static char	**ft_split_raw(char *arg, char **env)
 char	*ft_get_path(char **cmd, char **env)
 {
 	char	**rawjoin;
+	char	*res;
 	int		i;
 
 	if (!cmd || !env)
@@ -74,8 +74,12 @@ char	*ft_get_path(char **cmd, char **env)
 	while (rawjoin[i])
 	{
 		if (!access(rawjoin[i], X_OK))
-			return (rawjoin[i]);
+		{
+			res = ft_strdup(rawjoin[i]);
+			return (ft_free_stringp(rawjoin), res);
+		}
 		i++;
 	}
+	ft_free_stringp(rawjoin);
 	return (NULL);
 }

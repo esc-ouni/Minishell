@@ -164,7 +164,6 @@ int		ft_heredoc(t_cmd *cmd, char *delimiter);
 void	ft_free_env_lst(t_env **env_lst);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_printlst(t_env *lst);
-char	*ft_trim_char(char *str, char c);
 int		ft_heredoc(t_cmd *cmd, char *delimiter);
 char	*ft_quote_it(char *to_quote);
 void	ft_replace_exp_str(t_env *to_rep, char *str);

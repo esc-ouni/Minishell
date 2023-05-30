@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 14:15:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/30 18:53:49 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ void strt(t_collector **collector)
 	t_fd = open("/dev/tty", O_RDONLY);
 	if (t_fd == -1)
         perror("Error getting terminal fd"), err = 1;
-    if (tcgetattr(t_fd, &terminal_c) < 0) 
+    if (tcgetattr(t_fd, &terminal_c) < 0)
         perror("Error getting terminal attr"), err = 1;
     terminal_c.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(t_fd, 0, &terminal_c) < 0)
@@ -204,7 +204,7 @@ void strt(t_collector **collector)
 	if (err)
 	{
 		ft_collectorclear(collector);
-        exit (1);	
+        exit (1);
 	}
 }
 
@@ -222,7 +222,12 @@ void	reset_io(t_collector	**collector, t_init	*inval)
 		ft_collectorclear(collector);
 		exit (1);
 	}
-	
+
+}
+
+void	foo()
+{
+	system("leaks minishell");
 }
 
 int	main(int ac, char **av, char **env)
@@ -231,6 +236,7 @@ int	main(int ac, char **av, char **env)
 	t_collector	*collector;
 	char *s;
 
+	atexit(foo);
 	var = 1;
 	collector = NULL;
 	strt(&collector);
