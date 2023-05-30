@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:10:12 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/28 16:54:16 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:13:26 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	ft_unset_exp(t_init *init, char *str)
 {
 	t_env	*to_unset;
 
+	if (!str)
+		return ;
 	to_unset = ft_exp_var_exist(init->exp_lst, str);
 	if (!to_unset)
 		return ;
