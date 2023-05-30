@@ -242,6 +242,6 @@ t_lexer *n, int j);
 void	add_lexer(t_collector **collector, t_lexer **head, char *content, \
 t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
-void	*h_malloc(t_collector **collect_head, size_t s, void *p);
+// void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 
 #endif
