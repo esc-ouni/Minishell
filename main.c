@@ -3,18 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2023/05/28 17:16:10 by msamhaou         ###   ########.fr       */
-=======
 /*   Updated: 2023/05/29 15:44:52 by idouni           ###   ########.fr       */
->>>>>>> 459b5fe642c484b3f1cf60997fb15998e8cf3e7d
-=======
-/*   Updated: 2023/05/30 09:34:18 by msamhaou         ###   ########.fr       */
->>>>>>> 771dc0f34ce183c4bd7aa10f677aeb210ba41c0d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +191,7 @@ void strt(t_collector **collector)
 	t_fd = open("/dev/tty", O_RDONLY);
 	if (t_fd == -1)
         perror("Error getting terminal fd"), err = 1;
-    if (tcgetattr(t_fd, &terminal_c) < 0)
+    if (tcgetattr(t_fd, &terminal_c) < 0) 
         perror("Error getting terminal attr"), err = 1;
     terminal_c.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(t_fd, 0, &terminal_c) < 0)
@@ -211,7 +203,7 @@ void strt(t_collector **collector)
 	if (err)
 	{
 		ft_collectorclear(collector);
-        exit (1);
+        exit (1);	
 	}
 }
 
@@ -229,14 +221,7 @@ void	reset_io(t_collector	**collector, t_init	*inval)
 		ft_collectorclear(collector);
 		exit (1);
 	}
-
-<<<<<<< HEAD
-=======
-}
-void	foo()
-{
-	system("leaks minishell");
->>>>>>> 771dc0f34ce183c4bd7aa10f677aeb210ba41c0d
+	
 }
 
 int	main(int ac, char **av, char **env)
@@ -245,7 +230,6 @@ int	main(int ac, char **av, char **env)
 	t_collector	*collector;
 	char *s;
 
-	atexit(foo);
 	var = 1;
 	collector = NULL;
 	strt(&collector);

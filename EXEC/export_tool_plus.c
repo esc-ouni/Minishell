@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:17:45 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 11:14:16 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:33:01 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ static char	*ft_quote_two(char	**eq)
 {
 	char	*tmp;
 	char	*tmp2;
-	char	*tmp3;
 	char	*quoted;
 
 	tmp = ft_strdup(eq[1]);
-	tmp3 = ft_strdup(eq[0]);
+	tmp2 = ft_strdup(eq[0]);
 	ft_free_stringp(eq);
-	tmp2 = ft_strjoin(ft_strdup("declare -x "), tmp3);
-	free(tmp3);
+	tmp2 = ft_strjoin(ft_strdup("declare -x "), tmp2);
 	quoted = ft_strjoin(tmp2, "=");
 	tmp2 = tmp;
 	tmp = ft_strjoin(ft_strdup("\""), tmp);
@@ -46,23 +44,21 @@ static char	*ft_quote_two(char	**eq)
 char	*ft_quote_it(char *to_quote)
 {
 	char	*quoted;
-	char	*tmp;
 	char	**eq;
 
 	if (ft_strchr(to_quote, '='))
 	{
 		eq = ft_split(to_quote, '=');
 		if (!eq[1])
-		{
-			quoted = ft_quote_one(to_quote);
-			return (free(to_quote), ft_free_stringp(eq), quoted);
-		}
+			return (quoted = ft_quote_one(to_quote));
 		else
 			quoted = ft_quote_two(eq);
 	}
 	else
+	{
 		quoted = ft_strjoin(ft_strdup("declare -x "), to_quote);
-	return (free(to_quote), quoted);
+	}
+	return (quoted);
 }
 
 int	ft_valid_var(const char	*str, char c)
@@ -70,7 +66,7 @@ int	ft_valid_var(const char	*str, char c)
 	char *pstr;
 
 	pstr = (char *)str;
-	if (*pstr == '=' || !*pstr)
+	if (*pstr == '=')
 		return (1);
 	while (*pstr && *pstr != '=')
 	{
