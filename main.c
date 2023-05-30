@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 18:53:49 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:55:36 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,12 +236,11 @@ int	main(int ac, char **av, char **env)
 	t_collector	*collector;
 	char *s;
 
-	atexit(foo);
+	// atexit(foo);
 	var = 1;
 	collector = NULL;
 	strt(&collector);
 	ft_norm_sucks(ac, av);
-	inval = malloc(sizeof(t_init));
 	inval = ft_init(&collector, env);
 	while (1)
 	{

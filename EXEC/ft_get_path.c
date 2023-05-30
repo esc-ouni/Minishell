@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:39:57 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 19:37:54 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:41:02 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static char	**ft_split_raw(char *arg, char **env)
 		return (NULL);
 	i = 0;
 	rawpath = ft_get_rawpath(env);
-	printf("%p\n", rawpath);
 	if (!rawpath)
 		return (NULL);
 	paths = ft_split(rawpath, ':');

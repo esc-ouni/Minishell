@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:10:12 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/28 16:54:16 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:51:50 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	ft_remove_node(t_env **env_lst, t_env *to_remove)
 	if (*env_lst == to_remove)
 	{
 		*env_lst = to_remove->next;
+		free(to_remove->str);
 		free(to_remove);
 	}
 	previous_node = ft_find_prev(*env_lst, to_remove);
@@ -73,6 +74,7 @@ static void	ft_remove_node(t_env **env_lst, t_env *to_remove)
 			previous_node->next = NULL;
 		else
 			previous_node->next = to_remove->next;
+		free(to_remove->str);
 		free(to_remove);
 	}
 }
