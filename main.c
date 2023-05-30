@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2023/05/28 17:16:10 by msamhaou         ###   ########.fr       */
 =======
 /*   Updated: 2023/05/29 15:44:52 by idouni           ###   ########.fr       */
 >>>>>>> 459b5fe642c484b3f1cf60997fb15998e8cf3e7d
+=======
+/*   Updated: 2023/05/30 09:34:18 by msamhaou         ###   ########.fr       */
+>>>>>>> 771dc0f34ce183c4bd7aa10f677aeb210ba41c0d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +230,13 @@ void	reset_io(t_collector	**collector, t_init	*inval)
 		exit (1);
 	}
 
+<<<<<<< HEAD
+=======
+}
+void	foo()
+{
+	system("leaks minishell");
+>>>>>>> 771dc0f34ce183c4bd7aa10f677aeb210ba41c0d
 }
 
 int	main(int ac, char **av, char **env)
@@ -234,6 +245,7 @@ int	main(int ac, char **av, char **env)
 	t_collector	*collector;
 	char *s;
 
+	atexit(foo);
 	var = 1;
 	collector = NULL;
 	strt(&collector);
