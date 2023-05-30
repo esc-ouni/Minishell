@@ -13,6 +13,7 @@
 #include "minishell.h"
 
 int g_exit_val;
+int	var;
 
 int	ft_builtin(t_cmd *lol, t_init *init)
 {
@@ -87,7 +88,7 @@ void	ft_quit(t_built flag, t_init *init)
 {
 	if (flag == EXT)
 		write(1, "exit\n", 5);
-	ft_end_free(&(init->envlst), (init->myenv), init);
+	// ft_end_free(&(init->envlst), (init->myenv), init);
 	exit(0);
 }
 /********************SIGNALES********************/
@@ -149,8 +150,8 @@ void	ft_end_free(t_env **env_lst, char **myenv, t_init *init_val)
 		ft_free_env_lst(env_lst);
     if (init_val->exp_lst)
         ft_free_env_lst(&init_val->exp_lst);
-	if (init_val)
-		free(init_val);
+	// if (init_val)
+	// 	free(init_val);
 	rl_clear_history();
 	exit(0);
 }
@@ -240,7 +241,7 @@ int	main(int ac, char **av, char **env)
 		reset_io(&collector, inval);
 		s = prompt();
 		inval->cmd = parser2(&collector \
-			, parser(&collector, &(inval->envlst), s));
+			, parser(&collector, &(inval->envlst), s, inval));
 		emplify(&collector, inval->cmd);
 		if (!inval->cmd)
 			continue ;

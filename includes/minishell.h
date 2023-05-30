@@ -13,6 +13,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#ifdef __linux__
+	#include <wait.h>
+#endif
 #include <termios.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -26,8 +29,8 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-int	g_exit_val;
-int		var;
+extern int	g_exit_val;
+extern int		var;
 
 
 typedef struct s_env
@@ -188,7 +191,7 @@ char	*ft_msubstr(t_collector **collector, char const *s, \
 unsigned int start, size_t len);
 char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
 
-int		check_syntax(t_collector **collector, char *s);
+int		check_syntax(t_collector **collector, char *s, t_init *init);
 void	syntx_err(void);
 int		check_pipes(char *s);
 int		searcher_for_spc(char *s);
@@ -220,7 +223,7 @@ t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
 t_built	cmd_type(t_collector **collector, char *cmd);
 char	*prompt(void);
-t_lexer	*parser(t_collector	**collector, t_env **env, char *s);
+t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init);
 void	debug(void);
 void	expander(t_collector **collector, t_env **env, t_lexer **head);
 t_cmd	*parser2(t_collector **collector, t_lexer *head);

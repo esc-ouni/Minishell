@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-t_lexer	*parser(t_collector	**collector, t_env **env, char *s)
+t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init)
 {
 	t_lexer	*h_lexer;
 
-	if (check_syntax(collector, s))
+	if (check_syntax(collector, s, init))
 		return (free(s), ft_collectorclear(collector), NULL);
 	h_lexer = lexer(collector, s);
 	expander(collector, env, &h_lexer);
