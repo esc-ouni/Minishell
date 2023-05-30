@@ -6,11 +6,17 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/28 17:16:10 by msamhaou         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/29 15:44:52 by idouni           ###   ########.fr       */
+>>>>>>> 459b5fe642c484b3f1cf60997fb15998e8cf3e7d
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int g_exit_val;
 
 int	ft_builtin(t_cmd *lol, t_init *init)
 {
@@ -72,19 +78,20 @@ void	ft_free_pos(char **strp, int pos)
 
 void	sig_handle(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT && var)
 	{
 		write(1, "\n", 1);
-		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }
 
-void	ft_quit(t_built flag)
+void	ft_quit(t_built flag, t_init *init)
 {
 	if (flag == EXT)
 		write(1, "exit\n", 5);
+	ft_end_free(&(init->envlst), (init->myenv), init);
 	exit(0);
 }
 /********************SIGNALES********************/
@@ -177,10 +184,6 @@ void	ft_norm_sucks(int ac, char **av)
 		exit (0);
 }
 
-void    foo()
-{
-    system("leaks minishell");
-}
 
 void strt(t_collector **collector)
 {
@@ -231,6 +234,7 @@ int	main(int ac, char **av, char **env)
 	t_collector	*collector;
 	char *s;
 
+	var = 1;
 	collector = NULL;
 	strt(&collector);
 	ft_norm_sucks(ac, av);
@@ -244,7 +248,8 @@ int	main(int ac, char **av, char **env)
 		emplify(&collector, inval->cmd);
 		if (!inval->cmd)
 			continue ;
+		var = 0;
 		ft_execution(inval);
+		var = 1;
 	}
-	ft_end_free(&(inval->envlst), (inval->myenv), inval);
 }

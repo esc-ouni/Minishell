@@ -44,6 +44,7 @@ void	ft_exp_add_back(t_env **env, char *str)
 		ft_replace_exp_str(exist, str);
 	quoted = ft_quote_it(str);
 	env_add_back(env, new_env(quoted));
+	free(quoted);
 	ft_sort_env(*env);
 }
 

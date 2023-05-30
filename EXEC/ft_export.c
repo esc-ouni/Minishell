@@ -27,7 +27,10 @@ static t_env	*ft_var_exist(t_env *env_lst, char *str)
 	while (env_lst)
 	{
 		if (!ft_strncmp(env_lst->str, var[0], ft_strlen(var[0])))
+		{
+			ft_free_stringp(var);
 			return (env_lst);
+		}
 		env_lst = env_lst->next;
 	}
 	ft_free_stringp(var);
@@ -45,6 +48,7 @@ static void	ft_plus_eq_check(char	**str, t_env *env)
 {
 	t_env	*exist;
 	char	*trimmed;
+	char	**tmp;
 
 	exist = NULL;
 	if (ft_strnstr(*str, "+=", ft_strlen(*str)))
@@ -52,7 +56,11 @@ static void	ft_plus_eq_check(char	**str, t_env *env)
 		*str = ft_trim_char(*str, '+');
 		exist = ft_var_exist(env, *str);
 		if (exist)
-			*str = ft_strjoin(*str, ft_split(*str, '=')[1]);
+		{
+			tmp = ft_split(*str, '=');
+			*str = ft_strjoin(*str, tmp[1]);
+			ft_free_stringp(tmp);
+		}
 	}
 }
 

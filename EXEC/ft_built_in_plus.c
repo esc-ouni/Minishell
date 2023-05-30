@@ -44,7 +44,7 @@ int	ft_built_in_first(t_cmd *lol, t_init *init)
 		return (0);
 	}
 	else if (lol->builtflag == EXT)
-		ft_quit(NOT);
+		ft_quit(NOT, init);
 	else if (lol->builtflag == EXPT && lol->cmd[1])
 	{
 		ft_exp_loop(lol, init);
