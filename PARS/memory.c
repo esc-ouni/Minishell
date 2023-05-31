@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/27 19:18:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/28 18:26:45 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*h_malloc(t_collector **collector_head, size_t s, void *p)
 	p = malloc(s);
 	if (!new_node || !p)
 	{
-		write (2, "MALLOC_FAILED\n", 15);
+		write (2, "\033[0;32mMALLOC_FAILED\033[0;37m\n", 29);
 		ft_collectorclear(collector_head);
 		exit (1);
 	}
