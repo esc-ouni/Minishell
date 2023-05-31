@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 21:10:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 12:44:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 17:03:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	strt(t_collector **collector)
 		perror("Error ignoring a signal"), err = 1;
 	if (err)
 	{
-		ft_collectorclear(collector);
+		// ft_collectorclear(collector);
 		exit (1);
 	}
 }
