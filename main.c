@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:12:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:13:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 	return (1);
 }
 
-void	ft_execution(t_init *init, int *g_exit_val)
+void	ft_execution(t_init *init, int *exit_val)
 {
 	int	cmd_num;
 
@@ -59,11 +59,11 @@ void	ft_execution(t_init *init, int *g_exit_val)
 	while (init->cmd)
 	{
 		init->cmd->tty_in = init->tmp_fd_in;
-		ft_fork(init->cmd, init, g_exit_val);
+		ft_fork(init->cmd, init, exit_val);
 		init->cmd = init->cmd->next;
 	}
 	while (cmd_num--)
-		wait(&(*g_exit_val));
+		wait(&(*exit_val));
 }
 
 void	foo()
@@ -76,10 +76,10 @@ int	main(int ac, char **av, char **env)
 	t_init		*inval;
 	t_collector	*collector;
 	char		*s;
-	int			g_exit_val;
+	int			exit_val;
 
 	// atexit(foo);
-	g_exit_val = 0;
+	exit_val = 0;
 	g_var = 1;
 	collector = NULL;
 	ft_norm_sucks(ac, av);
@@ -90,13 +90,13 @@ int	main(int ac, char **av, char **env)
 		reset_io(&collector, inval);
 		s = prompt();
 		inval->cmd = parser2(&collector \
-			, parser(&collector, &(inval->envlst), s, inval, &g_exit_val));
+			, parser(&collector, &(inval->envlst), s, inval, &exit_val));
 		emplify(&collector, inval->cmd);
 		if (!inval->cmd)
 			continue ;
 		g_var = 0;
 		after_parse2(inval->cmd);
-		ft_execution(inval, &g_exit_val);
+		ft_execution(inval, &exit_val);
 		g_var = 1;
 	}
 }

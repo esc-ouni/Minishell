@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:00:47 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:13:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_parent(t_cmd *lol, int *fd, int *pid)
 	return (0);
 }
 
-int	ft_fork(t_cmd *lol, t_init *init, int *g_exit_val)
+int	ft_fork(t_cmd *lol, t_init *init, int *exit_val)
 {
 	int	pid;
 	int	fd[2];
@@ -80,7 +80,7 @@ int	ft_fork(t_cmd *lol, t_init *init, int *g_exit_val)
 		return (0);
 	if (lol->in_files)
 	{
-		init->err_in = ft_open_in_file(lol, g_exit_val);
+		init->err_in = ft_open_in_file(lol, exit_val);
 		dup2(lol->cmd_fdin, STDIN_FILENO);
 	}
 	pipe(fd);
