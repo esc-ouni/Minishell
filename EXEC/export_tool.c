@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:16:45 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 18:20:26 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:34:47 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ char	*ft_trim_char(char *str, char c)
 		res[j++] = str[k++];
 	}
 	res[j] = '\0';
+	free(str);
 	return (res);
 }

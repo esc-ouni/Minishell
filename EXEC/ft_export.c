@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:03:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 20:55:21 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:34:12 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,20 @@ static void	ft_plus_eq_check(char	**str, t_env *env)
 {
 	t_env	*exist;
 	char	*trimmed;
-	char	**tmp;
+	char	**spl;
 
 	exist = NULL;
 	if (ft_strnstr(*str, "+=", ft_strlen(*str)))
 	{
 		*str = ft_trim_char(*str, '+');
+		trimmed = *str;
 		exist = ft_var_exist(env, *str);
 		if (exist)
 		{
-			tmp = ft_split(*str, '=');
-			*str = ft_strjoin(*str, tmp[1]);
-			ft_free_stringp(tmp);
+			spl = ft_split(*str, '=');
+			free(trimmed);
+			*str = ft_strjoin(ft_strdup(exist->str), spl[1]);
+			ft_free_stringp(spl);
 		}
 	}
 }

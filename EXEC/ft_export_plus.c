@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:10:15 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/27 18:32:38 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:26:12 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ void	ft_exp_add_back(t_env **env, char *str)
 
 	exist = ft_exp_var_exist(*env, str);
 	if (exist)
-		ft_replace_exp_str(exist, str);
+	{
+		quoted = ft_quote_it(str);
+		free(str);
+		ft_replace_exp_str(exist, quoted);
+		free(quoted);
+		return ;
+	}
 	quoted = ft_quote_it(str);
 	env_add_back(env, new_env(quoted));
 	free(quoted);

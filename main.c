@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 21:12:36 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:09:49 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,18 @@ void	ft_execution(t_init *init)
 		wait(&g_exit_val);
 }
 
+void	foo()
+{
+	system("leaks minishell");
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_init		*inval;
 	t_collector	*collector;
 	char		*s;
 
+	atexit(foo);
 	var = 1;
 	collector = NULL;
 	strt(&collector);
