@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:13:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:18:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int ac, char **av, char **env)
 		if (!inval->cmd)
 			continue ;
 		g_var = 0;
-		after_parse2(inval->cmd);
+		// after_parse2(inval->cmd);
 		ft_execution(inval, &exit_val);
 		g_var = 1;
 	}
