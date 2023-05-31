@@ -51,7 +51,7 @@ char	*ft_quote_it(char *to_quote)
 
 	if (ft_strchr(to_quote, '='))
 	{
-		eq = ft_split(to_quote, '=');
+		eq = ft_soft_split(to_quote, '=');
 		if (!eq[1])
 			return (ft_free_stringp(eq), quoted = ft_quote_one(to_quote));
 		else

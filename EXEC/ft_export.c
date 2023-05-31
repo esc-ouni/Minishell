@@ -23,7 +23,7 @@ static t_env	*ft_var_exist(t_env *env_lst, char *str)
 {
 	char	**var;
 
-	var = ft_split(str, '=');
+	var = ft_soft_split(str, '=');
 	while (env_lst)
 	{
 		if (!ft_strncmp(env_lst->str, var[0], ft_strlen(var[0])))
@@ -58,7 +58,7 @@ static void	ft_plus_eq_check(char	**str, t_env *env)
 		exist = ft_var_exist(env, *str);
 		if (exist)
 		{
-			spl = ft_split(*str, '=');
+			spl = ft_soft_split(*str, '=');
 			free(trimmed);
 			*str = ft_strjoin(ft_strdup(exist->str), spl[1]);
 			ft_free_stringp(spl);

@@ -45,7 +45,7 @@ GNL_OBJ = $(GNL_SRC:.c=.o)
 EXEC_DIR = EXEC/
 EXEC_SRC =	EXEC/export_tool.c      EXEC/ft_built_in.c      EXEC/ft_env.c           EXEC/ft_env_tools.c\
 			EXEC/ft_export_plus.c   EXEC/ft_free.c          EXEC/ft_heredoc.c       EXEC/ft_init.c          EXEC/ft_unset.c\
-			EXEC/export_tool_plus.c EXEC/ft_built_in_plus.c EXEC/ft_env_plus.c      EXEC/ft_export.c\
+			EXEC/export_tool_plus.c EXEC/ft_built_in_plus.c EXEC/ft_env_plus.c      EXEC/ft_export.c	EXEC/ft_soft_split.c\
 			EXEC/ft_fork.c          EXEC/ft_get_path.c      EXEC/ft_in_out_files.c  EXEC/ft_sort_env.c
 EXEC_OBJ = $(EXEC_SRC:.c=.o)
 
