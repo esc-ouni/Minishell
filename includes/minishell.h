@@ -13,6 +13,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#ifdef __linux__
+	#include <wait.h>
+#endif
+
 #include <termios.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -26,8 +30,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-int		g_var;
-
+ extern int	g_var;
 
 typedef struct s_env
 {
@@ -183,6 +186,7 @@ void	ft_norm_sucks(int ac, char **av);
 t_init	*ft_init(t_collector **collector, char **env);
 void	reset_io(t_collector **collector, t_init *inval);
 void	strt(t_collector **collector);
+char    **ft_soft_split(char *str, char c);
 
 // void    start(void);
 // int     check_syntax(char *s);

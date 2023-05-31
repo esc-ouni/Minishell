@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int		g_var;
+
 void	sig_handle(int sig)
 {
 	if (sig == SIGINT && g_var)
