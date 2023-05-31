@@ -26,7 +26,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-int		var;
+int		g_var;
 
 
 typedef struct s_env

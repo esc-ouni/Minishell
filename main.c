@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:06:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:12:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sig_handle(int sig)
 {
-	if (sig == SIGINT && var)
+	if (sig == SIGINT && g_var)
 	{
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
@@ -80,7 +80,7 @@ int	main(int ac, char **av, char **env)
 
 	// atexit(foo);
 	g_exit_val = 0;
-	var = 1;
+	g_var = 1;
 	collector = NULL;
 	ft_norm_sucks(ac, av);
 	strt(&collector);
@@ -94,9 +94,9 @@ int	main(int ac, char **av, char **env)
 		emplify(&collector, inval->cmd);
 		if (!inval->cmd)
 			continue ;
-		var = 0;
+		g_var = 0;
 		after_parse2(inval->cmd);
 		ft_execution(inval, &g_exit_val);
-		var = 1;
+		g_var = 1;
 	}
 }
