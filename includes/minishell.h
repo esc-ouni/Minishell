@@ -130,6 +130,12 @@ typedef struct s_files
 	t_file		*in_files;
 }	t_files;
 
+typedef struct s_nrm
+{
+	t_env	**env;
+	int		*exit_val;
+}	t_nrm;
+
 int		ft_builtin(t_cmd *lol, t_init *init);
 int		ft_open_out_files(t_cmd *lol);
 // int		ft_open_in_file(t_cmd *lol);
@@ -218,9 +224,10 @@ void printTYPE(t_enum num) ;
 int	basic_syntax_check(t_lexer **h_lexer);
 int	check_str(char *s);
 // void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str);
-void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str, int *exit_val);
 // void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str);
-void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str, int *exit_val);
+void	expnd_v(t_collector **collector, t_lexer *node, char **str, t_nrm	*nrm);
+void	expnd_2(t_collector **collector, t_lexer *node, char **str, t_nrm	*nrm);
+t_lexer	*parser(t_collector	**collector, char *s, t_init *init, t_nrm	*nrm);
 
 void	emplify(t_collector **collector, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
@@ -228,7 +235,6 @@ char	*ft_mstrdup(t_collector **collector, const char *s1);
 t_built	cmd_type(t_collector **collector, char *cmd);
 char	*prompt(void);
 // t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init);
-t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init,  int *exit_val);
 void	debug(void);
 // void	expander(t_collector **collector, t_env **env, t_lexer **head);
 void	expander(t_collector **collector, t_env **env, t_lexer **head, int *exit_val);

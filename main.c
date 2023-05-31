@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:18:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:51:16 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,23 @@ int	main(int ac, char **av, char **env)
 	int			exit_val;
 
 	// atexit(foo);
-	exit_val = 0;
+	t_nrm	*nrm;
+
 	g_var = 1;
 	collector = NULL;
 	ft_norm_sucks(ac, av);
 	strt(&collector);
+	nrm = NULL;
 	inval = ft_init(&collector, env);
+	nrm = h_malloc(&collector, sizeof(t_nrm), nrm);
+	nrm->exit_val = &exit_val;
+	nrm->env = &(inval->envlst);
 	while (1)
 	{
 		reset_io(&collector, inval);
 		s = prompt();
 		inval->cmd = parser2(&collector \
-			, parser(&collector, &(inval->envlst), s, inval, &exit_val));
+			, parser(&collector, s, inval, nrm));
 		emplify(&collector, inval->cmd);
 		if (!inval->cmd)
 			continue ;

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/31 18:13:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:51:41 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	expand_evs(t_collector **collector, char *s, char **str, t_env **env)
 	(*str) = ft_mstrjoin(collector, (*str), s + l);
 }
 
-void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str, int *exit_val)
+void	expnd_2(t_collector **collector, t_lexer *node, char **str, t_nrm *nrm)
 {
 	int		i;
 	char	**s;
@@ -48,12 +48,12 @@ void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str, in
 		if (ft_isdigit(s[i][0]))
 			(*str) = ft_mstrjoin(collector, (*str), (s[i] + 1));
 		else if (s[i][0] == '?')
-			expand_ev(collector, str, s[i], exit_val);
+			expand_ev(collector, str, s[i], nrm->exit_val);
 		else if (searcher_for_spc(s[i]))
-			expand_evs(collector, s[i], str, env);
+			expand_evs(collector, s[i], str, nrm->env);
 		else
 			(*str) = ft_mstrjoin(collector, (*str), \
-			ft_getenv(collector, s[i], env));
+			ft_getenv(collector, s[i], nrm->env));
 		i++;
 	}
 	if (node->cmd[ft_strlen (node->cmd) - 1] == '$')
@@ -65,7 +65,12 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head, int *exit_va
 	t_lexer	*node;
 	char	*str;
 	int		exp;
+	t_nrm	*nrm;
 
+	nrm = NULL;
+	nrm = h_malloc(collector, sizeof(t_nrm), nrm);
+	nrm->env = env;
+	nrm->exit_val = exit_val;
 	exp = 1;
 	node = *head;
 	while (node)
@@ -77,7 +82,7 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head, int *exit_va
 			exp = 1;
 		else if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')) && exp)
 		{
-			expnd_v(collector, env, node, &str, exit_val);
+			expnd_v(collector, node, &str, nrm);
 			node->cmd = ft_mstrdup(collector, str);	
 		}
 		node = node->next;
