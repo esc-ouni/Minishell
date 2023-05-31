@@ -69,7 +69,7 @@ int	ft_valid_var(const char	*str, char c)
 	char	*pstr;
 
 	pstr = (char *)str;
-	if (*pstr == '=')
+	if (*pstr == '=' || *pstr == '+')
 		return (1);
 	while (*pstr && *pstr != '=')
 	{
