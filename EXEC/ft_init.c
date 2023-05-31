@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 21:10:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 21:12:44 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:44:24 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,20 @@ void	ft_norm_sucks(int ac, char **av)
 
 void	reset_io(t_collector **collector, t_init *inval)
 {
-	if (dup2(inval->tmp_fd_in, 0) == -1)
-	{
-		perror("Error resetting input stream");
-		ft_collectorclear(collector);
-		exit (1);
-	}
-	if (dup2(inval->tmp_fd_out, 1) == -1)
-	{
-		perror("Error resetting output stream");
-		ft_collectorclear(collector);
-		exit (1);
-	}
+	dup2(inval->tmp_fd_out, 1);
+	dup2(inval->tmp_fd_in, 0);
+	// if (dup2(inval->tmp_fd_in, 0) == -1)
+	// {
+	// 	perror("Error resetting input stream");
+	// 	ft_collectorclear(collector);
+	// 	exit (1);
+	// }
+	// if (dup2(inval->tmp_fd_out, 1) == -1)
+	// {
+	// 	perror("Error resetting output stream");
+	// 	ft_collectorclear(collector);
+	// 	exit (1);
+	// }
 }
 
 void	strt(t_collector **collector)
