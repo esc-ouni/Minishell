@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/31 17:03:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 17:57:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,18 @@ void	*h_malloc(t_collector **collector_head, size_t s, void *p)
 	}
 	new_node->addr = p;
 	if (!(*collector_head))
+	{
 		*collector_head = new_node;
+		new_node->next = NULL;
+	}
 	else
 	{
 		tmp = *collector_head;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new_node;
+		new_node->next = NULL;
 	}
-	new_node->next = NULL;
 	return (p);
 }
 

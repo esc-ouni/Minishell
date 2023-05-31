@@ -26,7 +26,6 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-int	g_exit_val;
 int		var;
 
 
@@ -133,8 +132,10 @@ typedef struct s_files
 
 int		ft_builtin(t_cmd *lol, t_init *init);
 int		ft_open_out_files(t_cmd *lol);
-int		ft_open_in_file(t_cmd *lol);
-int		ft_fork(t_cmd *lol, t_init *init);
+// int		ft_open_in_file(t_cmd *lol);
+int		ft_open_in_file(t_cmd *lol, int *g_exit_val);
+// int		ft_fork(t_cmd *lol, t_init *init);
+int	ft_fork(t_cmd *lol, t_init *init, int *g_exit_val);
 int		ft_execute(char *arg, char **env);
 int		ft_cd(t_cmd *lol);
 char	*ft_getcwd();
@@ -216,17 +217,21 @@ void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void printTYPE(t_enum num) ;
 int	basic_syntax_check(t_lexer **h_lexer);
 int	check_str(char *s);
-void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str);
-void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str);
+// void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str);
+void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str, int *g_exit_val);
+// void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str);
+void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str, int *g_exit_val);
 
 void	emplify(t_collector **collector, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
 t_built	cmd_type(t_collector **collector, char *cmd);
 char	*prompt(void);
-t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init);
+// t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init);
+t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init,  int *g_exit_val);
 void	debug(void);
-void	expander(t_collector **collector, t_env **env, t_lexer **head);
+// void	expander(t_collector **collector, t_env **env, t_lexer **head);
+void	expander(t_collector **collector, t_env **env, t_lexer **head, int *g_exit_val);
 t_cmd	*parser2(t_collector **collector, t_lexer *head);
 void	after_parse2(t_cmd *cmd);
 t_lexer	*lexer(t_collector **collector, char *s);

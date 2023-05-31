@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/27 19:32:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:03:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	parser_init(t_file **out_files, t_file **in_files, char ***full_cmd)
 	*in_files = NULL;
 }
 
-void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str)
+void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str, int *g_exit_val)
 {
 	if (ft_strlen (node->cmd) == 1 && node->cmd[0] == '$' && \
 	((node->next && node->next->type != ST_SQ && \
@@ -95,5 +95,5 @@ void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str)
 	else if ((ft_strlen(node->cmd) == 1 && node->cmd[0] == '$'))
 		(*str) = ft_mstrjoin(collector, (*str), NULL);
 	else
-		expnd_2(collector, env, node, str);
+		expnd_2(collector, env, node, str, g_exit_val);
 }

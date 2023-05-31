@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 21:10:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 17:03:15 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 17:58:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ t_init	*ft_init(t_collector **collector, char **env)
 {
 	t_init	*res;
 
-	g_exit_val = 0;
 	res = NULL;
 	res = h_malloc(collector, sizeof(t_init), res);
 	res->tmp_fd_in = dup(STDIN_FILENO);

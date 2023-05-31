@@ -6,20 +6,20 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/31 16:57:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:04:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init)
+t_lexer	*parser(t_collector	**collector, t_env **env, char *s, t_init *init,  int *g_exit_val)
 {
 	t_lexer	*h_lexer;
 
 	if (check_syntax(collector, s, init))
 		return (NULL);
 	h_lexer = lexer(collector, s);
-	expander(collector, env, &h_lexer);
+	expander(collector, env, &h_lexer, g_exit_val);
 	if (check_syntax2(&h_lexer))
 		return (NULL);
 	return (h_lexer);
