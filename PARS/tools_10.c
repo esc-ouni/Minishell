@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/31 12:48:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 15:31:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int		check_syntax(t_collector **collector, char *s, t_init *init)
 	int	err;
 
 	err = 0;
-	if (!ft_strlen(s))
-		err = 1;
-	else if (!s)
+	if (!s)
 	{
 		write(1, "exit\n", 5);
 		ft_end_free(&init->envlst, init->myenv, init);
 		ft_collectorclear(collector);
 		exit (0);
 	}
+	else if (!ft_strlen(s))
+		err = 1;
 	if (check_str(s))
 		err = 1;
 	add_history(s);

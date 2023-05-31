@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 12:49:23 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 15:31:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int	main(int ac, char **av, char **env)
 		if (!inval->cmd)
 			continue ;
 		var = 0;
-		// after_parse2(inval->cmd);
-		ft_execution(inval);
+		after_parse2(inval->cmd);
+		// ft_execution(inval);
 		var = 1;
 	}
 }
