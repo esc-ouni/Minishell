@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/31 12:47:15 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:48:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		check_syntax(t_collector **collector, char *s, t_init *init)
 	else if (!s)
 	{
 		write(1, "exit\n", 5);
-		// ft_end_free(&init->envlst, init->myenv, init);
+		ft_end_free(&init->envlst, init->myenv, init);
 		ft_collectorclear(collector);
 		exit (0);
 	}
