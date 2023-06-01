@@ -17,7 +17,10 @@ int		g_var;
 void	sig_hdandle(int sig)
 {
 	if (sig == 2)
+	{
+		write(1, "^\\C\n", 4);
 		exit(0);
+	}
 	if (sig == 3)
 	{
 		write(1, "^\\Quit: 3\n", 11);
