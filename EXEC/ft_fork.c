@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:04:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/01 10:53:50 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/01 12:31:20 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ int	ft_fork(t_cmd *lol, t_init *init, t_collector **collector, t_nrm *nrm)
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
+	{
+		signal(SIGINT, sig_hdandle);
+		signal(SIGQUIT, sig_hdandle);
 		ft_child(lol, fd, init);
+	}
 	else
 		ft_parent(lol, fd, &pid);
 	init->err_in = 0;

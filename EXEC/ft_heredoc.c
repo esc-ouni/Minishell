@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:27:11 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/01 10:49:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/01 12:21:44 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static int	ft_heredoc_child(int *fd, char *delimiter, t_collector **collector, t
 	char	*line;
 	char	*delim;
 
-	signal(SIGQUIT, sig_hdandle);
-	signal(SIGINT, sig_hdandle);
+	signal(SIGINT, sig_hdc);
 	delim = ft_strjoin(delimiter, "\n");
 	close (fd[0]);
 	line = get_next_line(0);

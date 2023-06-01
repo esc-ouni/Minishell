@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/01 11:03:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/01 12:31:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 int		g_var;
 
+void	sig_hdc(int sig)
+{
+	if (sig == 2)
+		exit(0);
+}
+
 void	sig_hdandle(int sig)
 {
 	if (sig == 2)
 	{
-		write(1, "^\\C\n", 4);
+		write(2, "^\\C\n", 4);
 		exit(0);
 	}
-	if (sig == 3)
+	if (sig == 3 &&)
 	{
-		write(1, "^\\Quit: 3\n", 11);
+		write(2, "^\\Quit: 3\n", 11);
 		exit(0);
 	}
 }
@@ -69,7 +75,7 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 void	ft_execution(t_init *init, t_collector **collector, t_nrm *nrm)
 {
 	int	cmd_num;
-
+	
 	ft_set_path(init->cmd, init->myenv, init->envlst);
 	cmd_num = init->cmd->num_cmds;
 	while (init->cmd)
@@ -79,7 +85,9 @@ void	ft_execution(t_init *init, t_collector **collector, t_nrm *nrm)
 		init->cmd = init->cmd->next;
 	}
 	while (cmd_num--)
+	{
 		wait(&(*(nrm->exit_val)));
+	}
 }
 
 void	foo()
@@ -93,7 +101,7 @@ int	main(int ac, char **av, char **env)
 	t_collector	*collector;
 	char		*s;
 	int			exit_val;
-	t_nrm	*nrm;
+	t_nrm		*nrm;
 
 	// atexit(foo);
 
