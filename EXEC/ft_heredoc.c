@@ -35,6 +35,8 @@ static int	ft_heredoc_child(int *fd, char *delimiter, t_collector **collector, t
 	char	*line;
 	char	*delim;
 
+	signal(SIGQUIT, sig_hdandle);
+	signal(SIGINT, sig_hdandle);
 	delim = ft_strjoin(delimiter, "\n");
 	close (fd[0]);
 	line = get_next_line(0);

@@ -14,6 +14,17 @@
 
 int		g_var;
 
+void	sig_hdandle(int sig)
+{
+	if (sig == 2)
+		exit(0);
+	if (sig == 3)
+	{
+		write(1, "^\\Quit: 3\n", 11);
+		exit(0);
+	}
+}
+
 void	sig_handle(int sig)
 {
 	if (sig == SIGINT && g_var)
@@ -103,7 +114,7 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		g_var = 0;
 		// after_parse2(inval->cmd);
-		ft_execution(inval, collector, nrm);
+		ft_execution(inval, &collector, nrm);
 		g_var = 1;
 	}
 }

@@ -40,7 +40,7 @@ int	ft_open_in_file(t_cmd *lol, t_collector **collector, t_nrm *nrm)
 			ft_heredoc(lol, files->filename, collector, nrm);
 		if (lol->cmd_fdin < 0)
 		{
-			nrm->exit_val = 1;
+			*(nrm->exit_val) = 1;
 			return (perror(""), 1);
 		}
 		files = files->next;

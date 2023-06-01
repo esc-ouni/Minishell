@@ -139,6 +139,7 @@ typedef struct s_nrm
 	int		*exit_val;
 }	t_nrm;
 
+void	sig_hdandle(int sig);
 int		ft_builtin(t_cmd *lol, t_init *init);
 int		ft_open_out_files(t_cmd *lol);
 // int		ft_open_in_file(t_cmd *lol);
