@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 21:05:03 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:13:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/01 10:51:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_open_out_files(t_cmd *lol)
 	return (0);
 }
 
-int	ft_open_in_file(t_cmd *lol, int *exit_val)
+int	ft_open_in_file(t_cmd *lol, t_collector **collector, t_nrm *nrm)
 {
 	t_file	*files;
 
@@ -37,10 +37,10 @@ int	ft_open_in_file(t_cmd *lol, int *exit_val)
 	{
 		lol->cmd_fdin = open(files->filename, O_RDONLY);
 		if (files->o_flags == O_APPEND)
-			ft_heredoc(lol, files->filename);
+			ft_heredoc(lol, files->filename, collector, nrm);
 		if (lol->cmd_fdin < 0)
 		{
-			(*exit_val) = 1;
+			nrm->exit_val = 1;
 			return (perror(""), 1);
 		}
 		files = files->next;

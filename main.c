@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:53:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/01 11:03:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 	return (1);
 }
 
-void	ft_execution(t_init *init, int *exit_val)
+void	ft_execution(t_init *init, t_collector **collector, t_nrm *nrm)
 {
 	int	cmd_num;
 
@@ -61,11 +61,11 @@ void	ft_execution(t_init *init, int *exit_val)
 	while (init->cmd)
 	{
 		init->cmd->tty_in = init->tmp_fd_in;
-		ft_fork(init->cmd, init, exit_val);
+		ft_fork(init->cmd, init, collector, nrm);
 		init->cmd = init->cmd->next;
 	}
 	while (cmd_num--)
-		wait(&(*exit_val));
+		wait(&(*(nrm->exit_val)));
 }
 
 void	foo()
@@ -103,7 +103,7 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		g_var = 0;
 		// after_parse2(inval->cmd);
-		ft_execution(inval, &exit_val);
+		ft_execution(inval, collector, nrm);
 		g_var = 1;
 	}
 }

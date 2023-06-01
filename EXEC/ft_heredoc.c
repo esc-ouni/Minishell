@@ -3,16 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:27:11 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 13:58:01 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/01 10:49:18 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_heredoc_child(int *fd, char *delimiter)
+char	*hd_expand(char *line, t_nrm *nrm, t_collector **collector)
+{
+	int		i;
+	char	*str;
+	char	**s;
+
+	str = NULL;
+	if(!line)
+		return (line);
+	i = 0;
+	s = ft_msplit(collector, line, '$');
+	if (line[0] == '$')
+	{
+		str = ft_getenv(collector, s[i++], nrm->env);
+	}
+	return (str);	
+}
+
+static int	ft_heredoc_child(int *fd, char *delimiter, t_collector **collector, t_nrm *nrm)
 {
 	char	*line;
 	char	*delim;
@@ -27,6 +45,7 @@ static int	ft_heredoc_child(int *fd, char *delimiter)
 			free(line);
 			exit(0);
 		}
+		line = hd_expand(line, nrm, collector);
 		write(fd[1], line, ft_strlen(line));
 		free(line);
 		line = get_next_line(0);
@@ -36,7 +55,7 @@ static int	ft_heredoc_child(int *fd, char *delimiter)
 	return (0);
 }
 
-int	ft_heredoc(t_cmd *cmd, char *delimiter)
+int	ft_heredoc(t_cmd *cmd, char *delimiter, t_collector **collector, t_nrm *nrm)
 {
 	int		pid;
 	int		fd[2];
@@ -46,7 +65,7 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter)
 	pid = fork();
 	if (!pid)
 	{
-		ft_heredoc_child(fd, delimiter);
+		ft_heredoc_child(fd, delimiter, collector, nrm);
 	}
 	else
 	{
