@@ -141,6 +141,7 @@ typedef struct s_nrm
 
 void	sig_hdandle(int sig);
 void	sig_hdc(int sig);
+// void	sig_hdc(int sig);
 int		ft_builtin(t_cmd *lol, t_init *init);
 int		ft_open_out_files(t_cmd *lol);
 // int		ft_open_in_file(t_cmd *lol);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/01 12:31:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/01 14:36:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@ int		g_var;
 
 void	sig_hdc(int sig)
 {
-	if (sig == 2)
+	if (sig == 2 && !g_var)
 		exit(0);
 }
 
 void	sig_hdandle(int sig)
 {
-	if (sig == 2)
+	// write(2, "OKK\n", 4);
+	if (sig == 2 && !g_var)
 	{
 		write(2, "^\\C\n", 4);
-		exit(0);
+		// exit(0);
 	}
-	if (sig == 3 &&)
+	if (sig == 3 && !g_var)
 	{
 		write(2, "^\\Quit: 3\n", 11);
-		exit(0);
+		// exit(0);
+		// rl_replace_line("", 0);
+		// rl_on_new_line();
+		// rl_redisplay();
 	}
 }
 
@@ -85,9 +89,7 @@ void	ft_execution(t_init *init, t_collector **collector, t_nrm *nrm)
 		init->cmd = init->cmd->next;
 	}
 	while (cmd_num--)
-	{
 		wait(&(*(nrm->exit_val)));
-	}
 }
 
 void	foo()
@@ -116,6 +118,8 @@ int	main(int ac, char **av, char **env)
 	nrm->env = &(inval->envlst);
 	while (1)
 	{
+		signal(SIGINT, sig_handle);
+		signal(SIGQUIT, SIG_IGN);
 		reset_io(&collector, inval);
 		s = prompt();
 		inval->cmd = parser2(&collector \
