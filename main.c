@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:53:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/01 17:07:08 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,6 @@ void	ft_execution(t_init *init, int *exit_val)
 		wait(&(*exit_val));
 }
 
-void	foo()
-{
-	system("leaks minishell");
-}
-
 int	main(int ac, char **av, char **env)
 {
 	t_init		*inval;
@@ -81,29 +76,40 @@ int	main(int ac, char **av, char **env)
 	int			exit_val;
 	t_nrm	*nrm;
 
-	// atexit(foo);
-
 	g_var = 1;
 	nrm = NULL;
 	collector = NULL;
 	ft_norm_sucks(ac, av);
 	strt(&collector);
 	inval = ft_init(&collector, env);
-	nrm = h_malloc(&collector, sizeof(t_nrm), nrm);
-	nrm->exit_val = &exit_val;
-	nrm->env = &(inval->envlst);
 	while (1)
 	{
+		// if(!inval)
+		// {
+		// 	inval = ft_init(&collector, env);
+		// }
+		if(!nrm)
+		{
+			nrm = h_malloc(&collector, sizeof(t_nrm), nrm);
+			nrm->exit_val = &exit_val;
+			nrm->env = &(inval->envlst);
+		}
 		reset_io(&collector, inval);
 		s = prompt();
 		inval->cmd = parser2(&collector \
 			, parser(&collector, s, inval, nrm));
 		emplify(&collector, inval->cmd);
 		if (!inval->cmd)
+		{
+			// free(inval->cmd);
+			// inval->cmd = NULL;
+			ft_collectorclear(&collector);
 			continue ;
+		}
 		g_var = 0;
 		// after_parse2(inval->cmd);
 		ft_execution(inval, &exit_val);
 		g_var = 1;
+		ft_collectorclear(&collector);
 	}
 }

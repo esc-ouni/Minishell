@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 21:10:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/31 18:22:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/01 17:07:44 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	ft_norm_sucks(int ac, char **av)
 
 void	reset_io(t_collector **collector, t_init *inval)
 {
-	// dup2(inval->tmp_fd_out, 1);
-	// 	printf("the fd is : %d\n", inval->tmp_fd_in);
-	// dup2(inval->tmp_fd_in, 0);
+	dup2(inval->tmp_fd_out, 1);
+	dup2(inval->tmp_fd_in, 0);
+		// printf("the fd is : %d\n", inval->tmp_fd_in);
 	// 	printf("the fd is : %d\n", inval->tmp_fd_out);
-	if (dup2(inval->tmp_fd_in, 0) == -1)
-	{
-		perror("Error resetting input stream");
-		ft_collectorclear(collector);
-		exit (1);
-	}
-	if (dup2(inval->tmp_fd_out, 1) == -1)
-	{
-		perror("Error resetting output stream");
-		ft_collectorclear(collector);
-		exit (1);
-	}
+	// if (dup2(inval->tmp_fd_in, 0) == -1)
+	// {
+	// 	perror("Error resetting input stream");
+	// 	ft_collectorclear(collector);
+	// 	exit (1);
+	// }
+	// if (dup2(inval->tmp_fd_out, 1) == -1)
+	// {
+	// 	perror("Error resetting output stream");
+	// 	ft_collectorclear(collector);
+	// 	exit (1);
+	// }
 }
 
 void	strt(t_collector **collector)
@@ -69,8 +69,7 @@ t_init	*ft_init(t_collector **collector, char **env)
 {
 	t_init	*res;
 
-	res = NULL;
-	res = h_malloc(collector, sizeof(t_init), res);
+	res = malloc(sizeof(t_init));
 	res->tmp_fd_in = dup(STDIN_FILENO);
 	res->tmp_fd_out = dup (STDOUT_FILENO);
 	if (res->tmp_fd_in < 0 || res->tmp_fd_out < 0)
