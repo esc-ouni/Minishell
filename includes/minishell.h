@@ -150,6 +150,7 @@ int		ft_cd(t_cmd *lol);
 char	*ft_getcwd();
 int		ft_pwd();
 int		ft_echo(t_cmd *lol);
+void	sig_hdandle(int sig);
 t_env   *ft_set_export_lst(t_env *env_lst);
 char	**ft_export(t_init *init, char *str);
 char    **ft_unset(t_init *init, char *str);

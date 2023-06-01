@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:39:57 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 19:41:02 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:41:58 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ static char	**ft_split_raw(char *arg, char **env)
 		i++;
 	}
 	return (paths);
+}
+
+void	sig_hdandle(int sig)
+{
+	if (sig == SIGINT)
+		exit(0);
 }
 
 char	*ft_get_path(char **cmd, char **env)

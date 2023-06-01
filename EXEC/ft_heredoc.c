@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:27:11 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/05/30 13:58:01 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:41:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	ft_heredoc_child(int *fd, char *delimiter)
 	char	*delim;
 
 	delim = ft_strjoin(delimiter, "\n");
+	signal(SIGINT, sig_hdandle);
 	close (fd[0]);
 	line = get_next_line(0);
 	while (line)
