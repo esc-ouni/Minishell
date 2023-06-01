@@ -6,34 +6,13 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:35:34 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/01 14:47:37 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:53:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int		g_var;
-
-void	sig_hdc(int sig)
-{
-	if (sig == 2 && !g_var)
-		exit(0);
-}
-
-void	sig_hdandle(int sig)
-{
-	// write(2, "OKK\n", 4);
-	if (sig == 2 && !g_var)
-	{
-		write(2, "^\\C\n", 5);
-		// exit(0);
-	}
-	if (sig == 3 && !g_var)
-	{
-		write(2, "^\\Quit: 3\n", 11);
-		// exit(0);
-	}
-}
 
 void	sig_handle(int sig)
 {
@@ -49,9 +28,7 @@ void	sig_handle(int sig)
 void	ft_quit(t_built flag, t_init *init)
 {
 	if (flag == EXT)
-	{
 		write(1, "exit\n", 5);
-	}
 	exit(0);
 }
 
@@ -75,20 +52,20 @@ int	ft_set_path(t_cmd *cmd, char **myenv, t_env *env_lst)
 	return (1);
 }
 
-void	ft_execution(t_init *init, t_collector **collector, t_nrm *nrm)
+void	ft_execution(t_init *init, int *exit_val)
 {
 	int	cmd_num;
-	
+
 	ft_set_path(init->cmd, init->myenv, init->envlst);
 	cmd_num = init->cmd->num_cmds;
 	while (init->cmd)
 	{
 		init->cmd->tty_in = init->tmp_fd_in;
-		ft_fork(init->cmd, init, collector, nrm);
+		ft_fork(init->cmd, init, exit_val);
 		init->cmd = init->cmd->next;
 	}
 	while (cmd_num--)
-		wait(&(*(nrm->exit_val)));
+		wait(&(*exit_val));
 }
 
 void	foo()
@@ -102,7 +79,7 @@ int	main(int ac, char **av, char **env)
 	t_collector	*collector;
 	char		*s;
 	int			exit_val;
-	t_nrm		*nrm;
+	t_nrm	*nrm;
 
 	// atexit(foo);
 
@@ -117,8 +94,6 @@ int	main(int ac, char **av, char **env)
 	nrm->env = &(inval->envlst);
 	while (1)
 	{
-		signal(SIGINT, sig_handle);
-		signal(SIGQUIT, SIG_IGN);
 		reset_io(&collector, inval);
 		s = prompt();
 		inval->cmd = parser2(&collector \
@@ -128,7 +103,7 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		g_var = 0;
 		// after_parse2(inval->cmd);
-		ft_execution(inval, &collector, nrm);
+		ft_execution(inval, &exit_val);
 		g_var = 1;
 	}
 }

@@ -3,39 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:27:11 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/01 12:21:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:58:01 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*hd_expand(char *line, t_nrm *nrm, t_collector **collector)
-{
-	int		i;
-	char	*str;
-	char	**s;
-
-	str = NULL;
-	if(!line)
-		return (line);
-	i = 0;
-	s = ft_msplit(collector, line, '$');
-	if (line[0] == '$')
-	{
-		str = ft_getenv(collector, s[i++], nrm->env);
-	}
-	return (str);	
-}
-
-static int	ft_heredoc_child(int *fd, char *delimiter, t_collector **collector, t_nrm *nrm)
+static int	ft_heredoc_child(int *fd, char *delimiter)
 {
 	char	*line;
 	char	*delim;
 
-	signal(SIGINT, sig_hdc);
 	delim = ft_strjoin(delimiter, "\n");
 	close (fd[0]);
 	line = get_next_line(0);
@@ -46,7 +27,6 @@ static int	ft_heredoc_child(int *fd, char *delimiter, t_collector **collector, t
 			free(line);
 			exit(0);
 		}
-		line = hd_expand(line, nrm, collector);
 		write(fd[1], line, ft_strlen(line));
 		free(line);
 		line = get_next_line(0);
@@ -56,7 +36,7 @@ static int	ft_heredoc_child(int *fd, char *delimiter, t_collector **collector, t
 	return (0);
 }
 
-int	ft_heredoc(t_cmd *cmd, char *delimiter, t_collector **collector, t_nrm *nrm)
+int	ft_heredoc(t_cmd *cmd, char *delimiter)
 {
 	int		pid;
 	int		fd[2];
@@ -66,7 +46,7 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter, t_collector **collector, t_nrm *nrm)
 	pid = fork();
 	if (!pid)
 	{
-		ft_heredoc_child(fd, delimiter, collector, nrm);
+		ft_heredoc_child(fd, delimiter);
 	}
 	else
 	{
