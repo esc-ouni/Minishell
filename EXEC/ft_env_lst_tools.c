@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:16:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/02 11:17:09 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:27:52 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_envlst	*ft_env_new_node(char *str)
 	node = (t_envlst *)malloc(sizeof(t_envlst));
 	node->str = ft_strdup(str);
 	node->next = NULL;
+	return (node);
 }
 
 t_envlst	*ft_last_envlst(t_envlst *envlst)

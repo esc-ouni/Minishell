@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_env.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msamhaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 11:18:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/02 15:36:42 by msamhaou         ###   ########.fr       */
+/*   Created: 2022/10/31 00:42:32 by msamhaou          #+#    #+#             */
+/*   Updated: 2022/10/31 00:42:51 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_set_env_lst(t_struct *cable, char **ev)
+void	ft_striteri(char *s, void (*f) (unsigned int, char*))
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	cable->envlst = NULL;
-	while (ev[i])
-		ft_env_add_back(&cable->envlst, ft_env_new_node(ev[i++]));
+	if (s && f)
+	{
+		while (s[i])
+		{
+			f(i, &s[i]);
+			i++;
+		}
+	}
 }
-
-void	ft_env_set(t_struct *cable, char **ev)
-{
-	ft_set_env_lst(cable, ev);
-}
-

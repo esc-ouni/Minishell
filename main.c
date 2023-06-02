@@ -1,4 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/02 15:41:45 by msamhaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "minishell.h"
 
 void	ft_init(int ac, char **av, char **ev, t_struct **cable)
 {
@@ -10,7 +22,7 @@ void	ft_init(int ac, char **av, char **ev, t_struct **cable)
 
 void	program(t_struct *cable)
 {
-	
+
 }
 
 int	main(int ac, char **av, char **ev)

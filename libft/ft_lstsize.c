@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_env.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msamhaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 11:18:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/02 15:36:42 by msamhaou         ###   ########.fr       */
+/*   Created: 2022/10/27 14:44:06 by msamhaou          #+#    #+#             */
+/*   Updated: 2022/10/27 14:49:00 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_set_env_lst(t_struct *cable, char **ev)
+int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
 	i = 0;
-	cable->envlst = NULL;
-	while (ev[i])
-		ft_env_add_back(&cable->envlst, ft_env_new_node(ev[i++]));
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
 }
-
-void	ft_env_set(t_struct *cable, char **ev)
-{
-	ft_set_env_lst(cable, ev);
-}
-
