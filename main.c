@@ -8,8 +8,15 @@ void	ft_init(int ac, char **av, char **ev, t_struct **cable)
 	ft_env_set(*cable, ev);
 }
 
+void	program(t_struct *cable)
+{
+	
+}
+
 int	main(int ac, char **av, char **ev)
 {
 	t_struct	*cable;
 	ft_init(ac, av, ev, &cable);
+	while (1)
+		program(cable);
 }
