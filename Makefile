@@ -6,7 +6,7 @@
 #    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/02 15:39:25 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/06/02 16:00:59 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBFT_OBJ_FILE = $(LIBFT_SRC_FILES:.c=.o)
 LIBFT_OBJ = $(addprefix $(OBJ_DIR),$(LIBFT_OBJ_FILE))
 
 EXEC_DIR = EXEC/
-EXEC_SRC_FILES = ft_env_lst_tools.c ft_exp_lst_tools.c ft_set_env.c       ft_set_exp.c
+EXEC_SRC_FILES = ft_env_lst_tools.c	ft_exp_lst_tools.c	ft_set_env.c	ft_set_exp.c
 EXEC_SRC = $(addprefix $(EXEC_DIR), $(EXEC_SRC_FILES))
 EXEC_OBJ_FILES = $(EXEC_SRC_FILES:.c=.o)
 EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))
@@ -50,7 +50,7 @@ NAME = minishell
 all : $(NAME)
 
 $(NAME) : $(OBJ_DIR) $(ALL_OBJ)
-	$(CC) $(FLAGS) $(ALL_OBJ) -lreadline -L $(LINK) -o $(NAME)
+	$(CC) $(FLAGS) $(ALL_OBJ) -lreadline -o $(NAME)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
