@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/02 16:00:45 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/03 11:38:43 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	program(t_struct *cable)
 
 int	main(int ac, char **av, char **ev)
 {
-	t_struct	*cable;
-	ft_init(ac, av, ev, &cable);
-	while (1)
-		program(cable);
+	char	*lol= ft_strdup("hi");
+	return (0);
 }
