@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 21:15:58 by msamhaou          #+#    #+#             */
-/*   Updated: 2022/10/19 11:23:43 by msamhaou         ###   ########.fr       */
+/*   Created: 2022/10/17 10:40:42 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/03 12:18:00 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_num(int c)
 {
-	unsigned char	*ms;
-
-	ms = (unsigned char *)s;
-	while (n--)
-	{
-		if (*ms == (unsigned char)c)
-			return (ms);
-		ms++;
-	}
+	if (c >= '0'&& c <= '9')
+		return (1);
 	return (0);
 }
