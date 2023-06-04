@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Minishell.h                                        :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/04 11:40:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/04 18:28:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,37 @@ typedef struct s_lexer
 	struct s_lexer	*next;
 }	t_lexer;
 
+typedef enum e_flag
+{
+	TMP,
+	NTMP,
+	ALL
+}	t_flag;
+
+typedef struct s_ntmp
+{
+    void            *ntmp_addr;
+    struct s_ntmp	*next;
+}   t_ntmp;
+
+typedef struct s_tmp
+{
+    void           	*tmp_addr;
+    struct s_tmp	*next;
+}   t_tmp;
+
 typedef struct s_collector
 {
-	void				*addr;
-	struct s_collector	*next;
-}	t_collector;
+    t_tmp				*tmp_cltr;
+    t_ntmp				*ntmp_cltr;
+}   t_collector;
+
+void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
+void	ft_collectorclear(t_collector **collector, t_flag flag);
+
 
 char	*ft_getenv(t_collector **collector, char *key, t_env **menv);
-void	*h_malloc(t_collector **collect_head, size_t s, void *p);
+// void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 char	**ft_msplit(t_collector **collector, char const *s, char const c);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
 char	*ft_mitoa(t_collector **collector, int n);
