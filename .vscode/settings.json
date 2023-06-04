@@ -21,6 +21,8 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"vector": "c",
-		"_pthread_attr_t.h": "c"
+		"_pthread_attr_t.h": "c",
+		"__locale": "c",
+		"cstring": "c"
 	}
 }

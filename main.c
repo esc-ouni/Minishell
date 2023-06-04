@@ -6,18 +6,19 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/03 15:01:36 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/04 16:31:17 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
 void	ft_init(int ac, char **av, char **ev, t_struct **cab)
 {
 	t_struct	*cable;
+
 	(void)ac;
 	(void)av;
-
 	cable = (t_struct *)malloc(sizeof(t_struct));
 	ft_set_env_lst(cable, ev);
 	ft_env_set(cable);
