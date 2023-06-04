@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   Minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/04 18:38:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/04 19:21:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,6 @@ t_mlist	*ft_mlstlast(t_mlist *lst);
 int		ft_mlstsize(t_mlist *lst);
 void	ft_mlstadd_back(t_mlist **lst, t_mlist *new);
 void	ft_mlstadd_front(t_mlist **lst, t_mlist *new);
-void	ft_collectorclear(t_collector **collector);
 void	ft_mlstclear(t_mlist **lst);
 void	add_file_node(t_collector	**collector, t_file **head, \
 char *filename, int flag);
@@ -198,6 +197,5 @@ t_lexer *n, int j);
 void	add_lexer(t_collector **collector, t_lexer **head, char *content, \
 t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
-void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 
 #endif

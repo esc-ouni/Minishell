@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:48:27 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/28 16:14:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/04 19:21:26 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int main(int argc, char **argv, char **env)
         cmd = parser2(&collector, h_lexer);
         emplify(&collector, cmd);
         after_parse2(cmd);
-		ft_collectorclear(&collector);
     }
     return 0;
 }
