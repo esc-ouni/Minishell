@@ -6,11 +6,24 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:16:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/02 15:27:52 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:44:23 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+size_t	ft_envlst_size(t_envlst *envlst)
+{
+	size_t	i;
+
+	i = 0;
+	while (envlst)
+	{
+		i++;
+		envlst = envlst->next;
+	}
+	return (i);
+}
 
 t_envlst	*ft_env_new_node(char *str)
 {

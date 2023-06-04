@@ -6,27 +6,42 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/03 11:38:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:01:36 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_init(int ac, char **av, char **ev, t_struct **cable)
+void	ft_init(int ac, char **av, char **ev, t_struct **cab)
 {
+	t_struct	*cable;
 	(void)ac;
 	(void)av;
-	*cable = (t_struct *)malloc(sizeof(t_struct));
-	// ft_env_set(*cable, ev);
+
+	cable = (t_struct *)malloc(sizeof(t_struct));
+	ft_set_env_lst(cable, ev);
+	ft_env_set(cable);
+	ft_exp_set(cable);
+	cable->cmd = NULL;
+	cable->friwi = NULL;
+	cable->exit_val = 0;
+	cable->var = 0;
+	cable->is_heredoc = 0;
+	cable->cmd_numb = 0;
+	*cab = cable;
 }
 
 void	program(t_struct *cable)
 {
-
+	ft_exec(cable);
 }
 
 int	main(int ac, char **av, char **ev)
 {
-	char	*lol= ft_strdup("hi");
+	t_struct	*cable;
+
+	ft_init(ac, av, ev, &cable);
+	while (1)
+		program(cable);
 	return (0);
 }

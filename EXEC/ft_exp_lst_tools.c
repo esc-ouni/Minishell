@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:53 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/02 11:48:22 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/03 14:51:37 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_exp	*ft_exp_new_node(char *str)
 	node = (t_exp *)malloc(sizeof(t_exp));
 	node->str = ft_strdup(str);
 	node->next = NULL;
+	return (node);
 }
 
 t_exp	*ft_last_explst(t_exp *envlst)
