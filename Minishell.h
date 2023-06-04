@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/04 18:28:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/04 18:38:21 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,6 @@ typedef struct s_lexer
 	struct s_lexer	*next;
 }	t_lexer;
 
-typedef enum e_flag
-{
-	TMP,
-	NTMP,
-	ALL
-}	t_flag;
 
 typedef struct s_ntmp
 {
@@ -130,9 +124,15 @@ typedef struct s_collector
     t_ntmp				*ntmp_cltr;
 }   t_collector;
 
+typedef enum e_flag
+{
+	TMP,
+	NTMP,
+	ALL
+}	t_flag;
+
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
-
 
 char	*ft_getenv(t_collector **collector, char *key, t_env **menv);
 // void	*h_malloc(t_collector **collect_head, size_t s, void *p);
