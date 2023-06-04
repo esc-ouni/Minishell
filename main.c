@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/04 16:31:17 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/04 17:18:47 by taha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	main(int ac, char **av, char **ev)
 	t_struct	*cable;
 
 	ft_init(ac, av, ev, &cable);
-	while (1)
-		program(cable);
+	// while (1)
+	// 	program(cable);
+	for(;cable->exp; cable->exp = cable->exp->next)
+		printf("%s\n", cable->exp->str);
 	return (0);
 }

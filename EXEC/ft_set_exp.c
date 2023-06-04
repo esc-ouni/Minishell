@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_exp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/04 16:27:24 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/04 17:33:38 by taha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_swap_str(t_exp *a, t_exp *b)
+void	ft_swap_str(char **a, char **b)
 {
 	char	*tmp;
 
-	tmp = a->str;
-	a->str = b->str;
-	b->str = tmp;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
@@ -50,13 +50,26 @@ void	ft_cpy_env_to_exp(t_struct *cable)
 void	ft_alpha_order(t_struct *cable)
 {
 	t_exp	*exp;
+	t_exp	*head;
+	int	swapped;
 
 	exp = cable->exp;
-	while (exp->next)
+	head = exp;
+	swapped = 1;
+	while(swapped)
 	{
-		if (ft_strcmp(exp->str, exp->next->str) > 0)
-			ft_swap_str(exp, exp->next);
-		exp = exp->next;
+		exp = head;
+		swapped = 0;
+		while (exp->next)
+		{
+			if (ft_strcmp(exp->str, exp->next->str) > 0)
+			{
+				ft_swap_str(&exp->str, &exp->next->str);
+				swapped = 1;
+				break ;
+			}
+			exp = exp->next;
+		}
 	}
 }
 
