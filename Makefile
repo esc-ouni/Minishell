@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
+#    By: taha <taha@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/03 11:28:22 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/06/04 16:00:38 by taha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,9 @@ OBJ_DIR = obj/
 #********* LIBFT *************
 LIBFT_DIR = libft/
 LIBFT_SRC_FILES =	ft_atoi.c         ft_isascii.c      ft_itoa.c         ft_lstdelone.c    ft_lstsize.c      ft_memmove.c      ft_putnbr_fd.c    ft_strdup.c       ft_strlcpy.c      ft_strnstr.c      ft_tolower.c\
-				ft_bzero.c        ft_isdigit.c      ft_lstadd_back.c  ft_lstiter.c      ft_memchr.c       ft_memset.c       ft_putstr_fd.c    ft_striteri.c     ft_strlen.c       ft_strrchr.c      ft_toupper.c\
-				ft_calloc.c       ft_islpha.c       ft_lstadd_front.c ft_lstlast.c      ft_memcmp.c       ft_putchar_fd.c   ft_split.c        ft_strjoin.c      ft_strmapi.c      ft_strtrim.c\
-				ft_isalnum.c      ft_isprint.c      ft_lstclear.c     ft_lstnew.c       ft_memcpy.c       ft_putendl_fd.c   ft_strchr.c       ft_strlcat.c      ft_strncmp.c      ft_substr.c
+					ft_bzero.c        ft_isdigit.c      ft_lstadd_back.c  ft_lstiter.c      ft_memchr.c       ft_memset.c       ft_putstr_fd.c    ft_striteri.c     ft_strlen.c       ft_strrchr.c      ft_toupper.c\
+					ft_calloc.c       ft_islpha.c       ft_lstadd_front.c ft_lstlast.c      ft_memcmp.c       ft_putchar_fd.c   ft_split.c        ft_strjoin.c      ft_strmapi.c      ft_strtrim.c\
+					ft_isalnum.c      ft_isprint.c      ft_lstclear.c     ft_lstnew.c       ft_memcpy.c       ft_putendl_fd.c   ft_strchr.c       ft_strlcat.c      ft_strncmp.c      ft_substr.c
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), $(LIBFT_SRC_FILES))
 LIBFT_OBJ_FILE = $(LIBFT_SRC_FILES:.c=.o)
 LIBFT_OBJ = $(addprefix $(OBJ_DIR),$(LIBFT_OBJ_FILE))
@@ -55,9 +55,9 @@ $(NAME) : $(OBJ_DIR) $(ALL_OBJ)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
-$(LIBFT_OBJ) : $(LIBFT_SRC)
+$(OBJ_DIR)%.o : $(LIBFT_DIR)%.c
 	$(CC) -c $< -o $@ $(INCLU)
-$(EXEC_OBJ) : $(EXEC_SRC)
+$(OBJ_DIR)%.o : $(EXEC_DIR)%.c
 	$(CC)  -c $< -o $@ $(INCLU)
 $(MAIN_OBJ) : $(MAIN_SRC_FILE)
 	$(CC) -c $< -o $@ $(INCLU)
