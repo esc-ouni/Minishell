@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/28 15:31:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/04 13:55:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,49 +76,85 @@ void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd)
 void	check_for_in_files(t_collector **collector, t_file **in_files, \
 t_lexer *n)
 {
-	while (n && n->type != PIP)
+	char *filename;
+
+	while (n && n->cmd && n->type != PIP)
 	{
-		if (n->cmd && n->type == R_IN && n->next)
+		filename = NULL;
+		if (n && n->cmd && n->type == R_IN && n->next)
 		{
 			n = n->next;
 			while (n && n->type == WH_SP)
 				n = n->next;
-			n->type = FIL_NM;
-			add_file_node(collector, in_files, n->cmd, O_TRUNC);
+			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
+			{
+				n->type = FIL_NM;
+				filename = ft_mstrjoin(collector, filename, n->cmd);
+				n = n->next;
+			}
+			add_file_node(collector, in_files, filename, O_TRUNC);
+			printf("%s\n", filename);
 		}
+		filename = NULL;
 		if (n->cmd && n->type == R_HD && n->next)
 		{
 			n = n->next;
 			while (n && n->type == WH_SP)
 				n = n->next;
-			n->type = FIL_NM;
-			add_file_node(collector, in_files, n->cmd, O_APPEND);
+			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
+			{
+				n->type = FIL_NM;
+				filename = ft_mstrjoin(collector, filename, n->cmd);
+				n = n->next;
+			}
+			add_file_node(collector, in_files, filename, O_APPEND);
 		}
-		n = n->next;
+		if (n)
+			n = n->next;
+		else
+			break ;
 	}
 }
 
 void	check_for_out_files(t_collector **collector, t_file **out_files, \
 t_lexer *n)
 {
-	while (n && n->type != PIP)
+	char *filename;
+
+	while (n && n->cmd && n->type != PIP)
 	{
-		if (n->cmd && n->type == R_OT && n->next)
+		filename = NULL;
+		if (n && n->cmd && n->type == R_OT && n->next)
 		{
 			n = n->next;
-			while (n->type == WH_SP)
+			while (n && n->type == WH_SP)
 				n = n->next;
-			n->type = FIL_NM;
-			add_file_node(collector, out_files, n->cmd, O_TRUNC);
+			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
+			{
+				n->type = FIL_NM;
+				filename = ft_mstrjoin(collector, filename, n->cmd);
+				n = n->next;
+			}
+			add_file_node(collector, out_files, filename, O_TRUNC);
+			printf("%s\n", filename);
 		}
+		filename = NULL;
 		if (n->cmd && n->type == R_OA && n->next)
 		{
 			n = n->next;
 			while (n && n->type == WH_SP)
 				n = n->next;
-			n->type = FIL_NM;
-			add_file_node(collector, out_files, n->cmd, O_APPEND);
+			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
+			{
+				n->type = FIL_NM;
+				filename = ft_mstrjoin(collector, filename, n->cmd);
+				n = n->next;
+			}
+			add_file_node(collector, out_files, filename, O_APPEND);
 		}
-		n = n->next;
+		if (n)
+			n = n->next;
+		else
+			break ;
 	}
 }
