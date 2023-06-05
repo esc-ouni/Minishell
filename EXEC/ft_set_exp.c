@@ -6,7 +6,11 @@
 /*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:21 by msamhaou          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/04 17:33:38 by taha             ###   ########.fr       */
+=======
+/*   Updated: 2023/06/04 19:18:59 by taha             ###   ########.fr       */
+>>>>>>> 1bf1e1777d526c95039636c0e537209e3aef6a5d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +40,15 @@ int	ft_strcmp(const char *s1, const char *s2)
 void	ft_cpy_env_to_exp(t_struct *cable)
 {
 	t_envlst	*env;
+	char		*newstr;
 	t_exp	*exp;
 
 	cable->exp = NULL;
 	env = cable->envlst;
 	while (env)
 	{
-		ft_exp_add_back(&cable->exp, ft_exp_new_node(env->str));
+		newstr = ft_exported_str(env->str);
+		ft_exp_add_back(&cable->exp, ft_exp_new_node(newstr));
 		env = env->next;
 	}
 }

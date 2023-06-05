@@ -6,7 +6,11 @@
 /*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/04 17:18:47 by taha             ###   ########.fr       */
+=======
+/*   Updated: 2023/06/04 19:15:49 by taha             ###   ########.fr       */
+>>>>>>> 1bf1e1777d526c95039636c0e537209e3aef6a5d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +46,15 @@ int	main(int ac, char **av, char **ev)
 	t_struct	*cable;
 
 	ft_init(ac, av, ev, &cable);
+<<<<<<< HEAD
 	// while (1)
 	// 	program(cable);
 	for(;cable->exp; cable->exp = cable->exp->next)
 		printf("%s\n", cable->exp->str);
 	return (0);
+=======
+	ft_export_exp(cable, "LOL=HI");
+	for(; cable->exp; cable->exp = cable->exp->next)
+		printf("%s\n", cable->exp->str);
+>>>>>>> 1bf1e1777d526c95039636c0e537209e3aef6a5d
 }

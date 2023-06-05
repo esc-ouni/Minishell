@@ -3,11 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/04 16:25:47 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:02:36 by taha             ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #ifndef	MINISHELL_H
@@ -36,12 +38,6 @@ struct s_file
 	int			o_flag;
 	t_file	*next;
 };
-
-struct s_collector
-{
-
-};
-
 
 struct s_friw
 {
@@ -83,7 +79,33 @@ struct s_struct
 	int			cmd_numb;
 };
 
+typedef struct s_ntmp
+{
+    void            *ntmp_addr;
+    struct s_ntmp	*next;
+}   t_ntmp;
 
+typedef struct s_tmp
+{
+    void           	*tmp_addr;
+    struct s_tmp	*next;
+}   t_tmp;
+
+struct s_collector
+{
+    t_tmp				*tmp_cltr;
+    t_ntmp				*ntmp_cltr;
+};
+
+typedef enum e_flag
+{
+	TMP,
+	NTMP,
+	ALL
+}	t_flag;
+
+void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
+void	ft_collectorclear(t_collector **collector, t_flag flag);
 
 void	ft_set_env_lst(t_struct *cable, char **ev);
 void	ft_env_set(t_struct *cable);
@@ -96,4 +118,9 @@ void	ft_exp_add_back(t_exp **envlst, t_exp *toadd);
 void	ft_exp_set(t_struct *cable);
 size_t	ft_envlst_size(t_envlst *envlst);
 void	ft_exec(t_struct *cable);
+void	ft_alpha_order(t_struct *cable);
+char	*ft_exported_str(char *str);
+void	ft_export_exp(t_struct *cable, char *str);
+int		ft_valid_var(const char	*str);
+
 #endif
