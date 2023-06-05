@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/05 12:52:14 by msamhaou         ###   ########.fr        #
+#    Created: 2023/06/05 14:12:10 by msamhaou          #+#    #+#              #
+#    Updated: 2023/06/05 14:20:09 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,26 +45,35 @@ EXEC_SRC = $(addprefix $(EXEC_DIR), $(EXEC_SRC_FILES))
 EXEC_OBJ_FILES = $(EXEC_SRC_FILES:.c=.o)
 EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))
 
+#********* PARS *************
+PARS_DIR = PARS/
+PARS_SRC_FILES = expander.c lexer.c memory.c parser.c syntax.c tools_1.c tools_10.c tools_11.c tools_2.c tools_3.c tools_4.c tools_5.c tools_6.c tools_7.c tools_8.c tools_9.c
+PARS_SRC = $(addprefix $(PARS_DIR), $(PARS_SRC_FILES))
+PARS_OBJ_FILES = $(PARS_SRC_FILES:.c=.o)
+PARS_OBJ = $(addprefix $(OBJ_DIR), $(PARS_OBJ_FILES))
+
 #********* MAIN *************
 MAIN_SRC_FILE = main.c
 MAIN_OBJ_FILE = main.o
 MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_OBJ_FILE))
 
 
-INCLU = -I$(INCLUDES)
-ALL_OBJ = $(LIBFT_OBJ) $(MAIN_OBJ) $(EXEC_OBJ)
+INCLU = -I$(INCLUDES) -I$(INC)
+ALL_OBJ = $(LIBFT_OBJ) $(MAIN_OBJ) $(EXEC_OBJ) $(PARS_OBJ)
 NAME = minishell
 
 all : $(NAME)
 
-$(NAME) : $(OBJ_DIR) $(LIBFT_OBJ) $(EXEC_OBJ) $(MAIN_OBJ)
-	$(CC) $(LIBFT_OBJ) $(EXEC_OBJ) $(MAIN_OBJ) -o $(NAME) $(INCLU)
+$(NAME) : $(OBJ_DIR) $(LIBFT_OBJ) $(EXEC_OBJ) $(PARS_OBJ) $(MAIN_OBJ)
+	$(CC) -lreadline $(LIBFT_OBJ) $(EXEC_OBJ) $(PARS_OBJ) $(MAIN_OBJ) -o $(NAME) $(INCLU)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
 $(OBJ_DIR)%.o : $(LIBFT_DIR)%.c
 	$(CC) -c $< -o $@ $(INCLU)
 $(OBJ_DIR)%.o : $(EXEC_DIR)%.c
+	$(CC)  -c $< -o $@ $(INCLU)
+$(OBJ_DIR)%.o : $(PARS_DIR)%.c
 	$(CC)  -c $< -o $@ $(INCLU)
 $(MAIN_OBJ) : $(MAIN_SRC_FILE)
 	$(CC) -c $< -o $@ $(INCLU)
