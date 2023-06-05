@@ -6,18 +6,59 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:53 by msamhaou          #+#    #+#             */
+
 /*   Updated: 2023/06/03 14:51:37 by msamhaou         ###   ########.fr       */
+
+/*   Updated: 2023/06/05 17:39:35 by msamhaou         ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_exp	*ft_exp_new_node(char *str)
+
+int	ft_valid_var(const char	*str)
+{
+	char	*pstr;
+
+	pstr = (char *)str;
+	if (*pstr == '=' || *pstr == '+')
+		return (0);
+	while (*pstr && *pstr != '=')
+	{
+		if (((*pstr == '+') && (*(pstr + 1) != '=')) \
+		&& (!ft_isalnum(*pstr) || *pstr != '_'))
+			return (0);
+		pstr++;
+	}
+	return (1);
+}
+
+// t_envlst	*ft_var_env_exist(t_envlst *envlst, char *str)
+// {
+// 	char	**var;
+
+// 	var = ft_soft_split(str, '=');
+// 	while (envlst)
+// 	{
+// 		if (!ft_strcmp(envlst->str, var[0]))
+// 		{
+
+// 			return (envlst);
+// 		}
+// 		envlst = envlst->next;
+// 	}
+// 	ft_free_stringp(var);
+// 	return (NULL);
+// }
+
+t_exp	*ft_exp_new_node(char *str, t_struct *cable)
+
 {
 	t_exp	*node;
 
-	node = (t_exp *)malloc(sizeof(t_exp));
-	node->str = ft_strdup(str);
+	node = (t_exp *)h_malloc(cable->collector ,sizeof(t_exp), node, NTMP);
+	node->str = ft_mstrdup(cable, str, NTMP);
 	node->next = NULL;
 	return (node);
 }

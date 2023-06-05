@@ -6,7 +6,15 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
+
 /*   Updated: 2023/06/05 16:56:06 by idouni           ###   ########.fr       */
+
+
+/*   Updated: 2023/06/05 12:54:54 by msamhaou         ###   ########.fr       */
+
+/*   Updated: 2023/06/05 16:56:06 by idouni           ###   ########.fr       */
+
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +51,12 @@ int	main(int ac, char **av, char **ev)
 	t_struct	*cable;
 	t_cmd 		*cmd;
 
+	atexit(foo);
 	prm(ac, av, ev);
 	ft_init(ev, &cable);
-	while (1)
-	{
-		cmd = get_cmd(cable);
-		//exucution
-		ft_collectorclear(cable->collector, TMP);
-	}
+	for (; cable->exp; cable->exp=cable->exp->next)
+		printf("%s\n", cable->exp->str);
+	ft_collectorclear(cable->collector, NTMP);
 	return (0);
+
 }

@@ -6,7 +6,15 @@
 #    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
+
 #    Updated: 2023/06/05 14:35:30 by idouni           ###   ########.fr        #
+
+
+#    Updated: 2023/06/05 12:52:14 by msamhaou         ###   ########.fr        #
+
+#    Updated: 2023/06/05 14:35:30 by idouni           ###   ########.fr        #
+
+
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +49,8 @@ LIBFT_OBJ = $(addprefix $(OBJ_DIR),$(LIBFT_OBJ_FILE))
 
 #********* EXEC *************
 EXEC_DIR = EXEC/
-EXEC_SRC_FILES = ft_env_lst_tools.c	ft_exp_lst_tools.c	ft_set_env.c	ft_set_exp.c	ft_exec.c 
+
+EXEC_SRC_FILES = ft_exec.c	ft_env_lst_tools.c  ft_exp_lst_tools.c  ft_export.c  ft_set_env.c  ft_set_exp.c  ft_unset.c ft_free.c
 EXEC_SRC = $(addprefix $(EXEC_DIR), $(EXEC_SRC_FILES))
 EXEC_OBJ_FILES = $(EXEC_SRC_FILES:.c=.o)
 EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))
