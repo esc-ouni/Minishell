@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 16:13:28 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 21:43:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,17 @@ char	*s_expander(t_struct *cable, char *line)
 	s = NULL;
 	if (!line || !ft_strchr(line, '$'))
 		return(line);
+
 	s = ft_msplit(cable, line, '$', TMP);
+	if (!s[0])
+		return ("$");
 	if (line[0] == '$')
-		str = ft_mstrjoin(cable, str, ft_getenv(cable, s[i]), TMP);
+	{
+		if (searcher_for_spc(s[i]))
+			expand_evs(cable, s[i], &str);
+		else
+			str = ft_mstrjoin(cable, str, ft_getenv(cable, s[i]), TMP);
+	}
 	else
 		str = ft_mstrjoin(cable, str, s[i], TMP);
 	i++;
@@ -112,7 +120,7 @@ char	*s_expander(t_struct *cable, char *line)
 			str = ft_mstrjoin(cable, str, \
 			ft_getenv(cable, s[i]), TMP);
 		i++;
-	}	
+	}
 	if (line[ft_strlen (line) - 1] == '$')
 		str = ft_mstrjoin(cable, str, "$", TMP);
 	return (str);
