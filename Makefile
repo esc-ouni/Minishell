@@ -6,7 +6,7 @@
 #    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/05 18:34:07 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/06/05 18:52:32 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LIBFT_DIR = libft/
 LIBFT_SRC_FILES =	ft_atoi.c         ft_isascii.c      ft_itoa.c         ft_lstdelone.c    ft_lstsize.c      ft_memmove.c      ft_putnbr_fd.c    ft_strdup.c       ft_strlcpy.c      ft_strnstr.c      ft_tolower.c\
 					ft_bzero.c        ft_isdigit.c      ft_lstadd_back.c  ft_lstiter.c      ft_memchr.c       ft_memset.c       ft_putstr_fd.c    ft_striteri.c     ft_strlen.c       ft_strrchr.c      ft_toupper.c\
 					ft_calloc.c       ft_islpha.c       ft_lstadd_front.c ft_lstlast.c      ft_memcmp.c       ft_putchar_fd.c   ft_split.c        ft_strjoin.c      ft_strmapi.c      ft_strtrim.c      ft_soft_split.c\
-					ft_isalnum.c      ft_isprint.c      ft_lstclear.c     ft_lstnew.c       ft_memcpy.c       ft_putendl_fd.c   ft_strchr.c       ft_strlcat.c      ft_strncmp.c      ft_substr.c
+					ft_isalnum.c      ft_isprint.c      ft_lstclear.c     ft_lstnew.c       ft_memcpy.c       ft_putendl_fd.c   ft_strchr.c       ft_strlcat.c      ft_strncmp.c      ft_substr.c       ft_trim_len.c
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), $(LIBFT_SRC_FILES))
 LIBFT_OBJ_FILE = $(LIBFT_SRC_FILES:.c=.o)
 LIBFT_OBJ = $(addprefix $(OBJ_DIR),$(LIBFT_OBJ_FILE))
@@ -49,7 +49,7 @@ LIBFT_OBJ = $(addprefix $(OBJ_DIR),$(LIBFT_OBJ_FILE))
 
 #********* EXEC *************
 EXEC_DIR = EXEC/
-EXEC_SRC_FILES = ft_exec.c	ft_env_lst_tools.c  ft_exp_lst_tools.c  ft_export.c  ft_set_env.c  ft_set_exp.c  ft_unset.c ft_free.c
+EXEC_SRC_FILES = ft_exec.c	ft_env_lst_tools.c  ft_exp_lst_tools.c  ft_export.c  ft_set_env.c  ft_set_exp.c  ft_unset.c ft_free.c ft_msoft_split.c
 EXEC_SRC = $(addprefix $(EXEC_DIR), $(EXEC_SRC_FILES))
 EXEC_OBJ_FILES = $(EXEC_SRC_FILES:.c=.o)
 EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))

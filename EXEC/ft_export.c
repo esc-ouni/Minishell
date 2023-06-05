@@ -5,20 +5,20 @@ void	ft_replace_exp()
 
 }
 
-char	*ft_exported_str(char *str)
+char	*ft_exported_str(char *str, t_struct *cable)
 {
 	char	**eq;
 	char	*left;
 	char	*right;
 
-	eq = ft_soft_split_include(str, '=');
-	left = ft_strjoin(ft_strdup("declare -x "), eq[0]);
+	eq = ft_msoft_split_include(str, '=', cable);
+	left = ft_mstrjoin(cable, "declare -x ", eq[0], NTMP);
 	if (!eq[1][0] && !ft_strchr(eq[0], '='))
-		return (ft_free_stringp(eq), left);
-	right = ft_strjoin(ft_strdup("\""), eq[1]);
-	right = ft_strjoin(right, "\"");
-	left = ft_strjoin(left, right);
-	return (ft_free_stringp(eq), free(right), left);
+		return (left);
+	right = ft_mstrjoin(cable, "\"", eq[1], TMP);
+	right = ft_mstrjoin(cable, right, "\"", TMP);
+	left = ft_mstrjoin(cable, left, right, NTMP);
+	return (left);
 }
 
 void	ft_export_env(t_struct *cable, char	*str)
@@ -32,7 +32,7 @@ void	ft_export_env(t_struct *cable, char	*str)
 void	ft_export_exp(t_struct *cable, char *str)
 {
 	char	*expstr;
-	expstr = ft_exported_str(str);
+	expstr = ft_exported_str(str, cable);
 	// if(exist)
 	// 	replace
 	// else

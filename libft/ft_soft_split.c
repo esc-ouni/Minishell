@@ -1,15 +1,5 @@
 #include "libft.h"
 
-static int	ft_trim_len(const char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
-}
-
 char    **ft_soft_split_include(char *str, char c)
 {
     char    **res;
