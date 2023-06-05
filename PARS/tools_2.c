@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:10 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 11:55:03 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:14:09 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char const *s, char const c)
 	return (p);
 }
 
-char	**ft_msplit(t_struct *cable, char const *s, char const c)
+char	**ft_msplit(t_struct *cable, char const *s, char const c, t_flag flag)
 {
 	size_t		n;
 	char		**p;
@@ -98,7 +98,7 @@ char	**ft_msplit(t_struct *cable, char const *s, char const c)
 	if (!s)
 		return (NULL);
 	n = count_str(s, c);
-	p = (char **)h_malloc(cable->collector, sizeof (char *) * (n + 1), p, NTMP);
+	p = (char **)h_malloc(cable->collector, sizeof (char *) * (n + 1), p, flag);
 	if (p)
 	{
 		p = ft_msplitp2(cable, p, s, c);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:36 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 12:03:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:17:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char *filename, int flag)
 
 	new_node = NULL;
 	new_node = h_malloc(cable->collector, sizeof(t_file), new_node, TMP);
-	new_node->filename = ft_mstrdup(cable, filename);
+	new_node->filename = ft_mstrdup(cable, filename, TMP);
 	new_node->o_flag = flag;
 	if (!(*head))
 	{
@@ -62,7 +62,7 @@ void	add_file_file(t_struct *cable, t_file **head, t_file *file)
 
 	new_node = NULL;
 	new_node = h_malloc(cable->collector, sizeof(t_file), new_node, TMP);
-	new_node->filename = ft_mstrdup(cable, file->filename);
+	new_node->filename = ft_mstrdup(cable, file->filename, TMP);
 	new_node->o_flag = file->o_flag;
 	if (!(*head))
 	{
@@ -92,7 +92,7 @@ void	add_to_fullcmd_st(t_struct *cable, char ***full_cmd, t_lexer *n)
 		tmp = tmp->next;
 	}
 	(*full_cmd) = h_malloc(cable->collector, sizeof(char *) * (l + 1), *full_cmd, TMP);
-	(*full_cmd)[0] = ft_mstrdup(cable, n->cmd);
+	(*full_cmd)[0] = ft_mstrdup(cable, n->cmd, TMP);
 	(*full_cmd)[1] = NULL;
 }
 
@@ -111,13 +111,13 @@ t_lexer *n, int j)
 		if (j && l)
 		{
 			l--;
-			(*full_cmd)[l] = ft_mstrjoin(cable, (*full_cmd)[l], n->cmd);
+			(*full_cmd)[l] = ft_mstrjoin(cable, (*full_cmd)[l], n->cmd, TMP);
 			(*full_cmd)[l + 1] = NULL;
 			return ;
 		}
 		else
 		{
-			(*full_cmd)[l] = ft_mstrdup(cable, n->cmd);
+			(*full_cmd)[l] = ft_mstrdup(cable, n->cmd, TMP);
 			(*full_cmd)[l + 1] = NULL;
 			return ;
 		}

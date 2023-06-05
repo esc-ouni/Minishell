@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 11:58:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:17:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_mstrdup(t_struct *cable, const char *s1)
+char	*ft_mstrdup(t_struct *cable, const char *s1, t_flag flag)
 {
 	size_t	i;
 	char	*s;
@@ -21,7 +21,7 @@ char	*ft_mstrdup(t_struct *cable, const char *s1)
 	s = NULL;
 	if (!s1)
 		return (NULL);
-	s = (char *)h_malloc(cable->collector, sizeof(char) * (ft_strlen(s1) + 1), s, NTMP);
+	s = (char *)h_malloc(cable->collector, sizeof(char) * (ft_strlen(s1) + 1), s, flag);
 	while (s1[i] != '\0')
 	{
 		s[i] = s1[i];
@@ -31,7 +31,7 @@ char	*ft_mstrdup(t_struct *cable, const char *s1)
 	return (s);
 }
 
-char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2)
+char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2, t_flag flag)
 {
 	size_t		l1;
 	size_t		l2;
@@ -40,7 +40,7 @@ char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2)
 	ns = NULL;
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);
-	ns = (char *)h_malloc(cable->collector, sizeof(char) * (l1 + l2 + 1), ns, NTMP);
+	ns = (char *)h_malloc(cable->collector, sizeof(char) * (l1 + l2 + 1), ns, flag);
 	if (ns)
 	{
 		if (s1)
@@ -91,9 +91,9 @@ void	expnd_v(t_struct *cable, t_lexer *node, char **str)
 	if (ft_strlen (node->cmd) == 1 && node->cmd[0] == '$' && \
 	((node->next && node->next->type != ST_SQ && \
 	node->next->type != ST_DQ) || !node->next))
-		(*str) = ft_mstrjoin(cable, (*str), node->cmd);
+		(*str) = ft_mstrjoin(cable, (*str), node->cmd, TMP);
 	else if ((ft_strlen(node->cmd) == 1 && node->cmd[0] == '$'))
-		(*str) = ft_mstrjoin(cable, (*str), NULL);
+		(*str) = ft_mstrjoin(cable, (*str), NULL, TMP);
 	else
 		expnd_2(cable, node, str);
 }

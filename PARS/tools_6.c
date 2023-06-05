@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 12:05:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:17:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**allocate_full_cmd(t_struct *cable, char **full_cmd)
 		i = 0;
 		while (full_cmd[i])
 		{
-			str[i] = ft_mstrdup(cable, full_cmd[i]);
+			str[i] = ft_mstrdup(cable, full_cmd[i], TMP);
 			i++;
 		}
 		str[i] = NULL;

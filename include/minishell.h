@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 14:27:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:24:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,14 +158,20 @@ void	ft_exec(t_struct *cable);
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
 
+char	**ft_msplit(t_struct *cable, char const *s, char const c, t_flag flag);
+char	*ft_mstrdup(t_struct *cable, const char *s1, t_flag flag);
+char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2, t_flag flag);
+char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set, t_flag flag);
+
+// char	**ft_msplit(t_struct *cable, char const *s, char const c);
+// char	*ft_mstrdup(t_struct *cable, const char *s1);
+// char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2);
+// char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
+
 char	*ft_getenv(t_struct *cable, char *key);
-char	**ft_msplit(t_struct *cable, char const *s, char const c);
-char	*ft_mstrdup(t_struct *cable, const char *s1);
 char	*ft_mitoa(t_struct *cable);
-char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2);
 char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
-char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
 
 t_cmd	*get_cmd(t_struct *cable);
 int		check_syntax(t_struct *cable, char *s);
@@ -190,7 +196,6 @@ void	rin_lex(t_struct *cable, t_lexer **l_node, char *s, int *i);
 void	rhd_lex(t_struct *cable, t_lexer **l_node, char *s, int *i);
 void	emplify(t_struct *cable, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_struct *cable, char *s);
-char	*ft_mstrdup(t_struct *cable, const char *s1);
 t_built	cmd_type(t_struct *cable, char *cmd);
 char	*prompt(void);
 t_lexer	*parser(t_struct *cable, char *s);
