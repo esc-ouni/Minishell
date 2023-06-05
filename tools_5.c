@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:36 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 16:19:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 12:03:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void	ft_mlstclear(t_mlist **lst)
 	*lst = NULL;
 }
 
-void	add_file_node(t_collector **collector, t_file **head, \
+void	add_file_node(t_struct *cable, t_file **head, \
 char *filename, int flag)
 {
 	t_file	*tmp;
 	t_file	*new_node;
 
 	new_node = NULL;
-	new_node = h_malloc(collector, sizeof(t_file), new_node);
-	new_node->filename = ft_mstrdup(collector, filename);
-	new_node->o_flags = flag;
+	new_node = h_malloc(cable->collector, sizeof(t_file), new_node, TMP);
+	new_node->filename = ft_mstrdup(cable, filename);
+	new_node->o_flag = flag;
 	if (!(*head))
 	{
 		*head = new_node;
@@ -55,15 +55,15 @@ char *filename, int flag)
 	}
 }
 
-void	add_file_file(t_collector **collector, t_file **head, t_file *file)
+void	add_file_file(t_struct *cable, t_file **head, t_file *file)
 {
 	t_file	*tmp;
 	t_file	*new_node;
 
 	new_node = NULL;
-	new_node = h_malloc(collector, sizeof(t_file), new_node);
-	new_node->filename = ft_mstrdup(collector, file->filename);
-	new_node->o_flags = file->o_flags;
+	new_node = h_malloc(cable->collector, sizeof(t_file), new_node, TMP);
+	new_node->filename = ft_mstrdup(cable, file->filename);
+	new_node->o_flag = file->o_flag;
 	if (!(*head))
 	{
 		*head = new_node;
@@ -79,7 +79,7 @@ void	add_file_file(t_collector **collector, t_file **head, t_file *file)
 	}
 }
 
-void	add_to_fullcmd_st(t_collector **collector, char ***full_cmd, t_lexer *n)
+void	add_to_fullcmd_st(t_struct *cable, char ***full_cmd, t_lexer *n)
 {
 	int		l;
 	t_lexer	*tmp;
@@ -91,19 +91,19 @@ void	add_to_fullcmd_st(t_collector **collector, char ***full_cmd, t_lexer *n)
 		l++;
 		tmp = tmp->next;
 	}
-	(*full_cmd) = h_malloc(collector, sizeof(char *) * (l + 1), *full_cmd);
-	(*full_cmd)[0] = ft_mstrdup(collector, n->cmd);
+	(*full_cmd) = h_malloc(cable->collector, sizeof(char *) * (l + 1), *full_cmd, TMP);
+	(*full_cmd)[0] = ft_mstrdup(cable, n->cmd);
 	(*full_cmd)[1] = NULL;
 }
 
-void	add_to_fullcmd(t_collector **collector, char ***full_cmd, \
+void	add_to_fullcmd(t_struct *cable, char ***full_cmd, \
 t_lexer *n, int j)
 {
 	int	l;
 
 	l = 0;
 	if (!((*full_cmd)))
-		return (add_to_fullcmd_st(collector, full_cmd, n));
+		return (add_to_fullcmd_st(cable, full_cmd, n));
 	else
 	{
 		while ((*full_cmd)[l])
@@ -111,13 +111,13 @@ t_lexer *n, int j)
 		if (j && l)
 		{
 			l--;
-			(*full_cmd)[l] = ft_mstrjoin(collector, (*full_cmd)[l], n->cmd);
+			(*full_cmd)[l] = ft_mstrjoin(cable, (*full_cmd)[l], n->cmd);
 			(*full_cmd)[l + 1] = NULL;
 			return ;
 		}
 		else
 		{
-			(*full_cmd)[l] = ft_mstrdup(collector, n->cmd);
+			(*full_cmd)[l] = ft_mstrdup(cable, n->cmd);
 			(*full_cmd)[l + 1] = NULL;
 			return ;
 		}

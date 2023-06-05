@@ -100,7 +100,7 @@ char	*ft_mitoa(t_collector **collector, int n)
 		nc += 1;
 		t = 1;
 	}
-	s = (char *)h_malloc(collector, sizeof (char) * nc, s);
+	s = (char *)h_malloc(cable->collector, sizeof (char) * nc, s);
 	if (s == NULL)
 		return (NULL);
 	s = putnbr(s, nn, nc, i);

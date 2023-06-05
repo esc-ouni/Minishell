@@ -6,61 +6,61 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 10:55:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 11:43:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	expand_c1(t_collector **collector, char *s, char **str, int *i)
+void	expand_c1(t_struct *cable, char *s, char **str, int *i)
 {
-	(*str) = ft_mstrdup(collector, s);
+	(*str) = ft_mstrdup(cable, s);
 	(*i)++;
 }
 
-void	expand_ev(t_collector **collector, char **str, char *s)
+void	expand_ev(t_struct *cable, char **str, char *s)
 {
-	(*str) = ft_mstrjoin(collector, (*str), ft_mitoa(collector, g_exit_val));
-	(*str) = ft_mstrjoin(collector, (*str), s + 1);
+	(*str) = ft_mstrjoin(cable, (*str), ft_mitoa(cable));
+	(*str) = ft_mstrjoin(cable, (*str), s + 1);
 }
 
-void	expand_evs(t_collector **collector, char *s, char **str, t_env **env)
+void	expand_evs(t_struct *cable, char *s, char **str)
 {
 	int	l;
 
 	l = searcher_for_spc(s);
-	(*str) = ft_mstrjoin(collector, (*str), ft_getenv(collector, \
-	ft_msubstr(collector, s, 0, l), env));
-	(*str) = ft_mstrjoin(collector, (*str), s + l);
+	(*str) = ft_mstrjoin(cable, (*str), ft_getenv(cable, \
+	ft_msubstr(cable, s, 0, l)));
+	(*str) = ft_mstrjoin(cable, (*str), s + l);
 }
 
-void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str)
+void	expnd_2(t_struct *cable, t_lexer *node, char **str)
 {
 	int		i;
 	char	**s;
 
 	i = 0;
-	s = ft_msplit(collector, node->cmd, '$');
+	s = ft_msplit(cable, node->cmd, '$');
 	if (node->cmd[0] != '$')
-		expand_c1(collector, s[i], str, &i);
+		expand_c1(cable, s[i], str, &i);
 	while (s[i])
 	{
 		if (ft_isdigit(s[i][0]))
-			(*str) = ft_mstrjoin(collector, (*str), (s[i] + 1));
+			(*str) = ft_mstrjoin(cable, (*str), (s[i] + 1));
 		else if (s[i][0] == '?')
-			expand_ev(collector, str, s[i]);
+			expand_ev(cable, str, s[i]);
 		else if (searcher_for_spc(s[i]))
-			expand_evs(collector, s[i], str, env);
+			expand_evs(cable, s[i], str);
 		else
-			(*str) = ft_mstrjoin(collector, (*str), \
-			ft_getenv(collector, s[i], env));
+			(*str) = ft_mstrjoin(cable, (*str), \
+			ft_getenv(cable, s[i]));
 		i++;
 	}
 	if (node->cmd[ft_strlen (node->cmd) - 1] == '$')
-		(*str) = ft_mstrjoin(collector, (*str), "$");
+		(*str) = ft_mstrjoin(cable, (*str), "$");
 }
 
-void	expander(t_collector **collector, t_env **env, t_lexer **head)
+void	expander(t_struct *cable, t_lexer **head)
 {
 	t_lexer	*node;
 	char	*str;
@@ -77,14 +77,14 @@ void	expander(t_collector **collector, t_env **env, t_lexer **head)
 			exp = 1;
 		else if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')) && exp)
 		{
-			expnd_v(collector, env, node, &str);
-			node->cmd = ft_mstrdup(collector, str);	
+			expnd_v(cable, node, &str);
+			node->cmd = ft_mstrdup(cable, str);	
 		}
 		node = node->next;
 	}
 }
 
-char	*s_expander(t_collector **collector, t_env **menv, char *line)
+char	*s_expander(t_struct *cable, char *line)
 {
 	char **s;
 	int i = 0;
@@ -94,27 +94,27 @@ char	*s_expander(t_collector **collector, t_env **menv, char *line)
 	s = NULL;
 	if (!line || !ft_strchr(line, '$'))
 		return(line);
-	s = ft_msplit(collector, line, '$');
+	s = ft_msplit(cable, line, '$');
 	if (line[0] == '$')
-		str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], menv));
+		str = ft_mstrjoin(cable, str, ft_getenv(cable, s[i]));
 	else
-		str = ft_mstrjoin(collector, str, s[i]);
+		str = ft_mstrjoin(cable, str, s[i]);
 	i++;
 	while(s[i])
 	{
 		if (ft_isdigit(s[i][0]))
-			str = ft_mstrjoin(collector, str, (s[i] + 1));
+			str = ft_mstrjoin(cable, str, (s[i] + 1));
 		else if (s[i][0] == '?')
-			expand_ev(collector, &str, s[i]);
+			expand_ev(cable, &str, s[i]);
 		else if (searcher_for_spc(s[i]))
-			expand_evs(collector, s[i], &str, menv);
+			expand_evs(cable, s[i], &str);
 		else
-			str = ft_mstrjoin(collector, str, \
-			ft_getenv(collector, s[i], menv));
+			str = ft_mstrjoin(cable, str, \
+			ft_getenv(cable, s[i]));
 		i++;
 	}	
 	if (line[ft_strlen (line) - 1] == '$')
-		str = ft_mstrjoin(collector, str, "$");
+		str = ft_mstrjoin(cable, str, "$");
 	return (str);
 }
 

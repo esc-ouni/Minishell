@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/02 20:54:51 by idouni            #+#    #+#              #
-#    Updated: 2023/05/26 17:10:49 by idouni           ###   ########.fr        #
+#    Updated: 2023/06/05 11:52:01 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ TLS    = expander.c \
 		lexer.c \
 		memory.c \
 		parser.c \
-		printer.c \
 		syntax.c \
 		tools_1.c \
 		tools_2.c \

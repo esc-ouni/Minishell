@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:30:30 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/26 17:09:22 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 12:05:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**allocate_full_cmd(t_collector **collector, char **full_cmd)
+char	**allocate_full_cmd(t_struct *cable, char **full_cmd)
 {
 	char	**str;
 	int		i;
@@ -23,60 +23,60 @@ char	**allocate_full_cmd(t_collector **collector, char **full_cmd)
 	{
 		while (full_cmd[i])
 			i++;
-		str = h_malloc(collector, sizeof(char *) * (i + 1), str);
+		str = h_malloc(cable->collector, sizeof(char *) * (i + 1), str, TMP);
 		i = 0;
 		while (full_cmd[i])
 		{
-			str[i] = ft_mstrdup(collector, full_cmd[i]);
+			str[i] = ft_mstrdup(cable, full_cmd[i]);
 			i++;
 		}
 		str[i] = NULL;
 	}
 	else
 	{
-		str = h_malloc(collector, sizeof(char *), str);
+		str = h_malloc(cable->collector, sizeof(char *), str, TMP);
 		str[0] = NULL;
 	}
 	return (str);
 }
 
-t_file	*allocate_out_files(t_collector **collector, t_file *out_files)
+t_file	*allocate_out_files(t_struct *cable, t_file *out_files)
 {
 	t_file	*out_files2;
 
 	out_files2 = NULL;
 	while (out_files)
 	{
-		add_file_file(collector, &out_files2, out_files);
+		add_file_file(cable, &out_files2, out_files);
 		out_files = out_files->next;
 	}
 	return (out_files2);
 }
 
-t_file	*allocate_in_files(t_collector **collector, t_file *in_files)
+t_file	*allocate_in_files(t_struct *cable, t_file *in_files)
 {
 	t_file	*in_files2;
 
 	in_files2 = NULL;
 	while (in_files)
 	{
-		add_file_file(collector, &in_files2, in_files);
+		add_file_file(cable, &in_files2, in_files);
 		in_files = in_files->next;
 	}
 	return (in_files2);
 }
 
-void	add_to_cmd(t_collector **collector, t_cmd **head, char **full_cmd, \
+void	add_to_cmd(t_struct *cable, t_cmd **head, char **full_cmd, \
 t_files *files)
 {
 	t_cmd	*new_cmd;
 	t_cmd	*tmp;
 
 	new_cmd = NULL;
-	new_cmd = h_malloc(collector, sizeof(t_cmd), new_cmd);
-	new_cmd->cmd = allocate_full_cmd(collector, full_cmd);
-	new_cmd->out_files = allocate_out_files(collector, files->out_files);
-	new_cmd->in_files = allocate_in_files(collector, files->in_files);
+	new_cmd = h_malloc(cable->collector, sizeof(t_cmd), new_cmd, TMP);
+	new_cmd->cmd = allocate_full_cmd(cable, full_cmd);
+	new_cmd->out_files = allocate_out_files(cable, files->out_files);
+	new_cmd->in_files = allocate_in_files(cable, files->in_files);
 	if (!(*head))
 		*head = new_cmd;
 	else
