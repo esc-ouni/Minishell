@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/04 21:02:36 by taha             ###   ########.fr       */
+/*   Updated: 2023/06/05 12:51:56 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void	ft_alpha_order(t_struct *cable);
 char	*ft_exported_str(char *str);
 void	ft_export_exp(t_struct *cable, char *str);
 int		ft_valid_var(const char	*str);
+void	ft_free_stringp(char **env);
 
 #endif

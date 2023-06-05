@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exp_lst_tools.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:53 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/04 21:02:26 by taha             ###   ########.fr       */
+/*   Updated: 2023/06/05 12:27:36 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_valid_var(const char	*str)
 	while (*pstr && *pstr != '=')
 	{
 		if (((*pstr == '+') && (*(pstr + 1) != '=')) \
-		&& (!isalnum(*pstr) || *pstr != '_'))
+		&& (!ft_isalnum(*pstr) || *pstr != '_'))
 			return (0);
 		pstr++;
 	}

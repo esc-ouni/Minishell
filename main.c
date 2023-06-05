@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/04 17:18:47 by taha             ###   ########.fr       */
-=======
-/*   Updated: 2023/06/04 19:15:49 by taha             ###   ########.fr       */
->>>>>>> 1bf1e1777d526c95039636c0e537209e3aef6a5d
+/*   Updated: 2023/06/05 12:54:54 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include "minishell.h"
@@ -41,20 +38,18 @@ void	program(t_struct *cable)
 	ft_exec(cable);
 }
 
+void	foo()
+{
+	system("leaks minishell");
+}
 int	main(int ac, char **av, char **ev)
 {
 	t_struct	*cable;
 
+	atexit(foo);
 	ft_init(ac, av, ev, &cable);
-<<<<<<< HEAD
-	// while (1)
-	// 	program(cable);
-	for(;cable->exp; cable->exp = cable->exp->next)
-		printf("%s\n", cable->exp->str);
-	return (0);
-=======
-	ft_export_exp(cable, "LOL=HI");
+
+	ft_export_exp(cable, "LOLHI");
 	for(; cable->exp; cable->exp = cable->exp->next)
 		printf("%s\n", cable->exp->str);
->>>>>>> 1bf1e1777d526c95039636c0e537209e3aef6a5d
 }
