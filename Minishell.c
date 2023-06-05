@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:48:27 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 13:28:47 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:17:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int main(int argc, char **argv, char **env)
         cmd = parser2(cable, h_lexer);
         // emplify(cable, cmd);
         after_parse2(cmd);
+		ft_collectorclear(cable->collector, TMP);
     }
     return 0;
 }
