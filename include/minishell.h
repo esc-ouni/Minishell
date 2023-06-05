@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
 
 /*   Updated: 2023/06/05 16:56:32 by idouni           ###   ########.fr       */
 
-
 /*   Updated: 2023/06/05 12:51:56 by msamhaou         ###   ########.fr       */
 
-/*   Updated: 2023/06/05 16:56:32 by idouni           ###   ########.fr       */
-
-
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #ifndef	MINISHELL_H
@@ -27,6 +25,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdlib.h>
+#include <termios.h>
 # include "libft.h"
 
 
@@ -137,11 +136,11 @@ typedef struct s_tmp
     struct s_tmp	*next;
 }   t_tmp;
 
-typedef struct s_collector
+struct s_collector
 {
     t_tmp				*tmp_cltr;
     t_ntmp				*ntmp_cltr;
-}   t_collector;
+};
 
 typedef enum e_flag
 {
@@ -161,13 +160,8 @@ void	ft_exp_add_back(t_exp **envlst, t_exp *toadd);
 void	ft_exp_set(t_struct *cable);
 size_t	ft_envlst_size(t_envlst *envlst);
 void	ft_exec(t_struct *cable);
+char    **ft_msoft_split_include(char *str, char c, t_struct *cable);
 
-
-void	ft_alpha_order(t_struct *cable);
-char	*ft_exported_str(char *str);
-void	ft_export_exp(t_struct *cable, char *str);
-int		ft_valid_var(const char	*str);
-void	ft_free_stringp(char **env);
 
 
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
@@ -189,7 +183,8 @@ char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
 
 t_cmd	*get_cmd(t_struct *cable);
-void prm(int argc, char **argv, char **env);
+void	prm(int argc, char **argv, char **env);
+void	strt(t_struct *cable);
 int		check_syntax(t_struct *cable, char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);
@@ -241,6 +236,13 @@ void	expnd_v(t_struct *cable, t_lexer *node, char **str);
 void	expnd_2(t_struct *cable, t_lexer *node, char **str);
 
 void printTYPE(t_enum num) ;
+
+
+void	ft_alpha_order(t_struct *cable);
+char	*ft_exported_str(char *str, t_struct *cable);
+void	ft_export_exp(t_struct *cable, char *str);
+int		ft_valid_var(const char	*str);
+void	ft_free_stringp(char **env);
 
 
 #endif

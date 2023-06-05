@@ -6,16 +6,11 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:53 by msamhaou          #+#    #+#             */
-
-/*   Updated: 2023/06/03 14:51:37 by msamhaou         ###   ########.fr       */
-
-/*   Updated: 2023/06/05 17:39:35 by msamhaou         ###   ########.fr       */
-
+/*   Updated: 2023/06/05 18:41:29 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	ft_valid_var(const char	*str)
 {
@@ -53,11 +48,10 @@ int	ft_valid_var(const char	*str)
 // }
 
 t_exp	*ft_exp_new_node(char *str, t_struct *cable)
-
 {
 	t_exp	*node;
 
-	node = (t_exp *)h_malloc(cable->collector ,sizeof(t_exp), node, NTMP);
+	node = (t_exp *)h_malloc(cable->collector, sizeof(t_exp), node, NTMP);
 	node->str = ft_mstrdup(cable, str, NTMP);
 	node->next = NULL;
 	return (node);
