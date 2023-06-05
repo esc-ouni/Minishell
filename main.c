@@ -45,6 +45,7 @@ int	main(int ac, char **av, char **ev)
 
 	prm(ac, av, ev);
 	ft_init(ev, &cable);
+	strt(cable);
 	while (1)
 	{
 		cmd = get_cmd(cable);

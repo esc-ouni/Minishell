@@ -48,7 +48,7 @@ EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))
 
 #********* PARS *************
 PARS_DIR = PARS/
-PARS_SRC_FILES = expander.c printer.c lexer.c memory.c parser.c syntax.c tools_1.c tools_10.c tools_11.c tools_2.c tools_3.c tools_4.c tools_5.c tools_6.c tools_7.c tools_8.c tools_9.c
+PARS_SRC_FILES = expander.c printer.c lexer.c memory.c parser.c syntax.c tools_1.c tools_10.c tools_11.c tools_12.c tools_2.c tools_3.c tools_4.c tools_5.c tools_6.c tools_7.c tools_8.c tools_9.c
 PARS_SRC = $(addprefix $(PARS_DIR), $(PARS_SRC_FILES))
 PARS_OBJ_FILES = $(PARS_SRC_FILES:.c=.o)
 PARS_OBJ = $(addprefix $(OBJ_DIR), $(PARS_OBJ_FILES))

@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdlib.h>
+#include <termios.h>
 # include "libft.h"
 
 
@@ -174,7 +175,8 @@ char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
 
 t_cmd	*get_cmd(t_struct *cable);
-void prm(int argc, char **argv, char **env);
+void	prm(int argc, char **argv, char **env);
+void	strt(t_struct *cable);
 int		check_syntax(t_struct *cable, char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);
