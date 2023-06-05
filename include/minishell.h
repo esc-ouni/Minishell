@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 13:21:08 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:27:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ void	ft_exp_add_back(t_exp **envlst, t_exp *toadd);
 void	ft_exp_set(t_struct *cable);
 size_t	ft_envlst_size(t_envlst *envlst);
 void	ft_exec(t_struct *cable);
+
+
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
 
@@ -165,6 +167,7 @@ char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
 char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
 
+t_cmd	*get_cmd(t_struct *cable);
 int		check_syntax(t_struct *cable, char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);
@@ -215,6 +218,8 @@ int	basic_syntax_check(t_lexer **h_lexer);
 int	check_str(char *s);
 void	expnd_v(t_struct *cable, t_lexer *node, char **str);
 void	expnd_2(t_struct *cable, t_lexer *node, char **str);
+
+void printTYPE(t_enum num) ;
 
 
 #endif

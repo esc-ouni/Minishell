@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 14:10:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:12:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	main(int ac, char **av, char **ev)
 
 	ft_init(ac, av, ev, &cable);
 	while (1)
+	{
+		
+	}
 		program(cable);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/05 13:21:34 by idouni           ###   ########.fr        #
+#    Updated: 2023/06/05 14:32:16 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,14 @@ HEADERS = 	include/libft.h	include/minishell.h
 INCLUDES = include
 INC=/Users/msamhaou/.brew/Cellar/readline/8.2.1/include
 HEADERS =	include/libft.h	include/minishell.h
+
+ifeq ($(USER),idouni)
+	LINK = /Users/idouni/.brew/Cellar/readline/8.2.1/lib
+	HEADERS = 	include/libft.h	include/minishell.h
+	INCLUDES = include
+	INC=/Users/idouni/.brew/Cellar/readline/8.2.1/include
+	HEADERS =	include/libft.h	include/minishell.h
+endif
 
 OBJ_DIR = obj/
 

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 11:49:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 13:34:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,8 @@ t_lexer *n)
 				n = n->next;
 			}
 			add_file_node(cable, in_files, filename, O_TRUNC);
-			printf("%s\n", filename);
 		}
-		filename = NULL;
-		if (n->cmd && n->type == R_HD && n->next)
+		else if (n->cmd && n->type == R_HD && n->next)
 		{
 			n = n->next;
 			while (n && n->type == WH_SP)
@@ -136,10 +134,8 @@ t_lexer *n)
 				n = n->next;
 			}
 			add_file_node(cable, out_files, filename, O_TRUNC);
-			printf("%s\n", filename);
 		}
-		filename = NULL;
-		if (n->cmd && n->type == R_OA && n->next)
+		else if (n->cmd && n->type == R_OA && n->next)
 		{
 			n = n->next;
 			while (n && n->type == WH_SP)

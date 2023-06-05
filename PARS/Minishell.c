@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:48:27 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 12:18:30 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:26:41 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ void	ft_init(int ac, char **av, char **ev, t_struct **cab)
 	*cab = cable;
 }
 
+
 int main(int argc, char **argv, char **env) 
 {
     (void)env;
     (void)argc;
     (void)argv;
-	char		*s;
-    t_lexer		*h_lexer;
     t_cmd		*cmd;
 	t_struct *cable;	
 
@@ -47,11 +46,10 @@ int main(int argc, char **argv, char **env)
 	ft_init(argc, argv,	env, &cable);
     while (1)
     {
-		s = prompt();
-        h_lexer = parser(cable, s);
-        cmd = parser2(cable, h_lexer);
+		cmd = get_cmd(cable);
         // emplify(cable, cmd);
-        // after_parse2(cmd);
+        after_parse2(cmd);
+		ft_collectorclear(cable->collector, TMP);
     }
     return 0;
 }
