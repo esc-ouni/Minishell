@@ -26,7 +26,7 @@ void	ft_export_env(t_struct *cable, char	*str)
 	// if (exist)
 	// 	replace
 	// else
-		ft_env_add_back(&cable->envlst, ft_env_new_node(str));
+		ft_env_add_back(&cable->envlst, ft_env_new_node(str, cable));
 }
 
 void	ft_export_exp(t_struct *cable, char *str)
@@ -36,7 +36,7 @@ void	ft_export_exp(t_struct *cable, char *str)
 	// if(exist)
 	// 	replace
 	// else
-		ft_exp_add_back(&cable->exp, ft_exp_new_node(expstr));
+		ft_exp_add_back(&cable->exp, ft_exp_new_node(expstr, cable));
 		ft_alpha_order(cable);
 }
 

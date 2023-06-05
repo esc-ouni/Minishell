@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 12:27:10 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:42:02 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_cpy_env_to_exp(t_struct *cable)
 	while (env)
 	{
 		newstr = ft_exported_str(env->str);
-		ft_exp_add_back(&cable->exp, ft_exp_new_node(newstr));
+		ft_exp_add_back(&cable->exp, ft_exp_new_node(newstr, cable));
 		env = env->next;
 	}
 }

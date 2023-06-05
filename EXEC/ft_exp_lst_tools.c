@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:53 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 12:27:36 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:41:29 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	ft_valid_var(const char	*str)
 // 	return (NULL);
 // }
 
-t_exp	*ft_exp_new_node(char *str)
+t_exp	*ft_exp_new_node(char *str, t_struct *cable)
 {
 	t_exp	*node;
 
-	node = (t_exp *)malloc(sizeof(t_exp));
-	node->str = ft_strdup(str);
+	node = (t_exp *)h_malloc(cable->collector, sizeof(t_exp), node, NTMP);
+	node->str = ft_mstrdup(cable, str, NTMP);
 	node->next = NULL;
 	return (node);
 }
