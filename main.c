@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 14:12:57 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:47:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,20 @@
 void	ft_init(int ac, char **av, char **ev, t_struct **cab)
 {
 	t_struct	*cable;
-	t_collector *collector;
 
 	(void)ac;
 	(void)av;
-	collector = NULL;
-	cable = NULL;
-	cable = (t_struct *)h_malloc(&collector, sizeof(t_struct), cable, NTMP);
+	cable = (t_struct *)malloc(sizeof(t_struct));
+	ft_set_env_lst(cable, ev);
+	ft_env_set(cable);
+	ft_exp_set(cable);
 	cable->cmd = NULL;
-	cable->collector = NULL;
-	cable->collector = h_malloc(&collector, sizeof(t_collector **), cable->collector, NTMP);
-	cable->collector = &collector;
+	cable->collector = malloc(sizeof(t_collector **));
+	cable->collector[0] = NULL;
 	cable->exit_val = 0;
 	cable->var = 0;
 	cable->is_heredoc = 0;
 	cable->cmd_numb = 0;
-	ft_set_env_lst(cable, ev);
-	ft_env_set(cable);
-	ft_exp_set(cable);
 	*cab = cable;
 }
 
@@ -45,12 +41,13 @@ void	program(t_struct *cable)
 int	main(int ac, char **av, char **ev)
 {
 	t_struct	*cable;
+	t_cmd 		*cmd;
 
 	ft_init(ac, av, ev, &cable);
 	while (1)
 	{
-		
+		cmd = get_cmd(cable);
+		ft_collectorclear(cable->collector, TMP);
 	}
-		program(cable);
 	return (0);
 }

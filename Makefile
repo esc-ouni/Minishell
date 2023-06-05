@@ -6,7 +6,7 @@
 #    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/05 14:32:16 by idouni           ###   ########.fr        #
+#    Updated: 2023/06/05 14:35:30 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))
 
 #********* PARS *************
 PARS_DIR = PARS/
-PARS_SRC_FILES = expander.c lexer.c memory.c parser.c syntax.c tools_1.c tools_10.c tools_11.c tools_2.c tools_3.c tools_4.c tools_5.c tools_6.c tools_7.c tools_8.c tools_9.c
+PARS_SRC_FILES = expander.c printer.c lexer.c memory.c parser.c syntax.c tools_1.c tools_10.c tools_11.c tools_2.c tools_3.c tools_4.c tools_5.c tools_6.c tools_7.c tools_8.c tools_9.c
 PARS_SRC = $(addprefix $(PARS_DIR), $(PARS_SRC_FILES))
 PARS_OBJ_FILES = $(PARS_SRC_FILES:.c=.o)
 PARS_OBJ = $(addprefix $(OBJ_DIR), $(PARS_OBJ_FILES))
@@ -66,7 +66,7 @@ NAME = minishell
 all : $(NAME)
 
 $(NAME) : $(OBJ_DIR) $(LIBFT_OBJ) $(EXEC_OBJ) $(PARS_OBJ) $(MAIN_OBJ)
-	$(CC) $(LIBFT_OBJ) $(EXEC_OBJ) $(PARS_OBJ) $(MAIN_OBJ) -o $(NAME) $(INCLU)
+	$(CC) $(LIBFT_OBJ) $(EXEC_OBJ) $(PARS_OBJ) $(MAIN_OBJ) -o $(NAME) $(INCLU) -L $(LINK) -lreadline
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
