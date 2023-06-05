@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:33:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 11:54:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:15:20 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_mlist	*ft_mlstnew(t_struct *cable, char *s)
 	new_node = h_malloc(cable->collector, sizeof(t_mlist), new_node, NTMP);
 	if (new_node)
 	{
-		new_node->cmd = ft_mstrdup(cable, s);
+		new_node->cmd = ft_mstrdup(cable, s, TMP);
 		new_node->next = NULL;
 	}
 	return (new_node);

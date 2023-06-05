@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 15:13:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:11:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,15 +255,15 @@ typedef enum e_flag
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
 
-// char	**ft_msplit(t_struct *cable, char const *s, char const c, t_flag flag);
-// char	*ft_mstrdup(t_struct *cable, const char *s1, t_flag flag);
-// char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2, t_flag flag);
-// char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set, t_flag flag);
+char	**ft_msplit(t_struct *cable, char const *s, char const c, t_flag flag);
+char	*ft_mstrdup(t_struct *cable, const char *s1, t_flag flag);
+char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2, t_flag flag);
+char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set, t_flag flag);
 
-char	**ft_msplit(t_struct *cable, char const *s, char const c);
-char	*ft_mstrdup(t_struct *cable, const char *s1);
-char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2);
-char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
+// char	**ft_msplit(t_struct *cable, char const *s, char const c);
+// char	*ft_mstrdup(t_struct *cable, const char *s1);
+// char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2);
+// char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
 
 char	*ft_getenv(t_struct *cable, char *key);
 char	*ft_mitoa(t_struct *cable);

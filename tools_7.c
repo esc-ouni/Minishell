@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:47:39 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 12:07:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:17:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char *content, t_enum	type)
 
 	new_node = NULL;
 	new_node = h_malloc(cable->collector, sizeof(t_lexer), new_node, TMP);
-	new_node->cmd = ft_mstrdup(cable, content);
+	new_node->cmd = ft_mstrdup(cable, content, TMP);
 	new_node->type = type;
 	if (!(*head))
 	{

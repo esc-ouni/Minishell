@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 13:34:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:15:10 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_lexer *n)
 			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
 			{
 				n->type = FIL_NM;
-				filename = ft_mstrjoin(cable, filename, n->cmd);
+				filename = ft_mstrjoin(cable, filename, n->cmd, TMP);
 				n = n->next;
 			}
 			add_file_node(cable, in_files, filename, O_TRUNC);
@@ -102,7 +102,7 @@ t_lexer *n)
 			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
 			{
 				n->type = FIL_NM;
-				filename = ft_mstrjoin(cable, filename, n->cmd);
+				filename = ft_mstrjoin(cable, filename, n->cmd, TMP);
 				n = n->next;
 			}
 			add_file_node(cable, in_files, filename, O_APPEND);
@@ -130,7 +130,7 @@ t_lexer *n)
 			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
 			{
 				n->type = FIL_NM;
-				filename = ft_mstrjoin(cable, filename, n->cmd);
+				filename = ft_mstrjoin(cable, filename, n->cmd, TMP);
 				n = n->next;
 			}
 			add_file_node(cable, out_files, filename, O_TRUNC);
@@ -143,7 +143,7 @@ t_lexer *n)
 			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
 			{
 				n->type = FIL_NM;
-				filename = ft_mstrjoin(cable, filename, n->cmd);
+				filename = ft_mstrjoin(cable, filename, n->cmd, TMP);
 				n = n->next;
 			}
 			add_file_node(cable, out_files, filename, O_APPEND);
