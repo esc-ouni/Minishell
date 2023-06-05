@@ -234,6 +234,7 @@ int	basic_syntax_check(t_lexer **h_lexer);
 int	check_str(char *s);
 void	expnd_v(t_struct *cable, t_lexer *node, char **str);
 void	expnd_2(t_struct *cable, t_lexer *node, char **str);
+char	*s_expander(t_struct *cable, char *line);
 
 void printTYPE(t_enum num) ;
 

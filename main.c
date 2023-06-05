@@ -51,6 +51,7 @@ int	main(int ac, char **av, char **ev)
 {
 	t_struct	*cable;
 	t_cmd 		*cmd;
+	char		*line;
 
 	atexit(foo);
 	prm(ac, av, ev);
