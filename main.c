@@ -6,19 +6,17 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 16:32:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:47:15 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
-void	ft_init(t_collector **collector, int ac, char **av, char **ev, t_struct **cab)
+void	ft_init(t_collector **collector, char **ev, t_struct **cab)
 {
 	t_struct	*cable;
 
-	(void)ac;
-	(void)av;
 	cable = NULL;
 	cable = h_malloc(collector, sizeof(t_struct), cable, NTMP);
 	cable->collector = collector;
@@ -33,6 +31,19 @@ void	ft_init(t_collector **collector, int ac, char **av, char **ev, t_struct **c
 	*cab = cable;
 }
 
+void prm(int argc, char **argv, char **env)
+{
+	(void)argv;
+	
+	if (argc == 2)
+	{
+		execve("/bin/bash", argv, env);
+		exit(0);
+	}
+	else if(argc > 1)
+		exit(0);
+}
+
 void	program(t_struct *cable)
 {
 	ft_exec(cable);
@@ -45,7 +56,8 @@ int	main(int ac, char **av, char **ev)
 	t_collector *collector;
 
 	collector = NULL;
-	ft_init(&collector, ac, av, ev, &cable);
+	prm(ac, av, ev);
+	ft_init(&collector, ev, &cable);
 	while (1)
 	{
 		cmd = get_cmd(cable);
