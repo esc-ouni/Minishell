@@ -107,3 +107,16 @@ char	*ft_mitoa(t_struct *cable)
 	s = strevv(s, nc - 1, t);
 	return (s);
 }
+
+void prm(int argc, char **argv, char **env)
+{
+	(void)argv;
+	
+	if (argc == 2)
+	{
+		execve("/bin/bash", argv, env);
+		exit(0);
+	}
+	else if(argc > 1)
+		exit(0);
+}

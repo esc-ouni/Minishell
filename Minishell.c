@@ -36,13 +36,11 @@ void	ft_init(int ac, char **av, char **ev, t_struct **cab)
 
 int main(int argc, char **argv, char **env) 
 {
-    (void)env;
-    (void)argc;
-    (void)argv;
     t_cmd		*cmd;
 	t_struct *cable;	
 
 	cable = NULL;
+	prm(argc, argv, env);
 	ft_init(argc, argv,	env, &cable);
 	strt(cable);
     while (1)
