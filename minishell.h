@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 14:15:06 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:26:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
 char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
 
+t_cmd	*get_cmd(t_struct *cable);
 int		check_syntax(t_struct *cable, char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);

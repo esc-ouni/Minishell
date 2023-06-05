@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 12:11:56 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:26:24 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,19 @@ int		check_syntax(t_struct *cable, char *s)
 	if (check_pipes(s))
 		return (1);
 	return (0);
+}
+
+t_cmd	*get_cmd(t_struct *cable)
+{
+	char		*s;
+    t_lexer		*h_lexer;
+    t_cmd		*cmd;
+
+	cmd = NULL;
+	s = prompt();
+	h_lexer = parser(cable, s);
+	cmd = parser2(cable, h_lexer);
+	return (cmd);
 }
 
 char	*prompt(void)
