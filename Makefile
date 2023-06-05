@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
+#    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/04 16:29:16 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/06/05 11:05:27 by idouni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,17 @@ LIBFT_OBJ = $(addprefix $(OBJ_DIR),$(LIBFT_OBJ_FILE))
 
 #********* EXEC *************
 EXEC_DIR = EXEC/
-EXEC_SRC_FILES = ft_env_lst_tools.c	ft_exp_lst_tools.c	ft_set_env.c	ft_set_exp.c	ft_exec.c
+EXEC_SRC_FILES = ft_env_lst_tools.c	ft_exp_lst_tools.c	ft_set_env.c	ft_set_exp.c	ft_exec.c  expander.c lexer.c memory.c parser.c printer.c syntax.c tools_1.c tools_10.c tools_11.c tools_2.c tools_3.c tools_4.c tools_5.c tools_6.c tools_7.c tools_8.c tools_9.c
 EXEC_SRC = $(addprefix $(EXEC_DIR), $(EXEC_SRC_FILES))
 EXEC_OBJ_FILES = $(EXEC_SRC_FILES:.c=.o)
 EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))
+
+#********* PARS *************
+# PARS_DIR = PARS/
+# PARS_SRC_FILES = expander.c lexer.c memory.c parser.c printer.c syntax.c tools_1.c tools_10.c tools_11.c tools_2.c tools_3.c tools_4.c tools_5.c tools_6.c tools_7.c tools_8.c tools_9.c
+# PARS_SRC = $(addprefix $(PARS_DIR), $(PARS_SRC_FILES))
+# PARS_OBJ_FILES = $(PARS_SRC_FILES:.c=.o)
+# PARS_OBJ = $(addprefix $(OBJ_DIR), $(PARS_OBJ_FILES))
 
 #********* MAIN *************
 MAIN_SRC_FILE = main.c
