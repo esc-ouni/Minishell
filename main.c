@@ -6,9 +6,14 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
+
 /*   Updated: 2023/06/05 16:56:06 by idouni           ###   ########.fr       */
+
+/*   Updated: 2023/06/05 12:54:54 by msamhaou         ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include "minishell.h"
@@ -38,19 +43,20 @@ void	program(t_struct *cable)
 	ft_exec(cable);
 }
 
+void	foo()
+{
+	system("leaks minishell");
+}
 int	main(int ac, char **av, char **ev)
 {
 	t_struct	*cable;
 	t_cmd 		*cmd;
 
+	atexit(foo);
 	prm(ac, av, ev);
 	ft_init(ev, &cable);
 	strt(cable);
-	while (1)
-	{
-		cmd = get_cmd(cable);
-		//exucution
-		ft_collectorclear(cable->collector, TMP);
-	}
-	return (0);
+	ft_export_exp(cable, "LOLHI");
+	for(; cable->exp; cable->exp = cable->exp->next)
+		printf("%s\n", cable->exp->str);
 }
