@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 12:16:31 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:10:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,24 @@
 void	ft_init(int ac, char **av, char **ev, t_struct **cab)
 {
 	t_struct	*cable;
+	t_collector *collector;
 
 	(void)ac;
 	(void)av;
-	cable = (t_struct *)malloc(sizeof(t_struct));
-	ft_set_env_lst(cable, ev);
-	ft_env_set(cable);
-	ft_exp_set(cable);
+	collector = NULL;
+	cable = NULL;
+	cable = (t_struct *)h_malloc(&collector, sizeof(t_struct), cable, NTMP);
 	cable->cmd = NULL;
-	cable->collector = malloc(sizeof(t_collector **));
-	cable->collector[0] = NULL;
+	cable->collector = NULL;
+	cable->collector = h_malloc(&collector, sizeof(t_collector **), cable->collector, NTMP);
+	cable->collector = &collector;
 	cable->exit_val = 0;
 	cable->var = 0;
 	cable->is_heredoc = 0;
 	cable->cmd_numb = 0;
+	ft_set_env_lst(cable, ev);
+	ft_env_set(cable);
+	ft_exp_set(cable);
 	*cab = cable;
 }
 
