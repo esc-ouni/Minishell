@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 12:22:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 13:21:08 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ struct s_envlst
 struct s_struct
 {
 	char		**env;
-	t_envlst	**envlst;
+	t_envlst	*envlst;
 	t_exp		*exp;
 	t_cmd		*cmd;
 	int			exit_val;

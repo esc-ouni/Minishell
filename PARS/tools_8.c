@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 12:11:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 13:21:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_getenv(t_struct *cable, char *key)
 	t_envlst *env;
 
 	key_part = NULL;
-	env = *(cable->envlst);
+	env = cable->envlst;
 	while (env)
 	{
 		key_part = ft_msplit(cable, env->str, '=')[0];
