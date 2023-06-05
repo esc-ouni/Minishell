@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/03 14:51:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:40:35 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_set_env_lst(t_struct *cable, char **ev)
 	i = 0;
 	cable->envlst = NULL;
 	while (ev[i])
-		ft_env_add_back(&cable->envlst, ft_env_new_node(ev[i++]));
+		ft_env_add_back(&cable->envlst, ft_env_new_node(ev[i++], cable));
 }
 
 void	ft_env_set(t_struct *cable)

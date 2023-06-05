@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/04 18:27:37 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:51:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,11 @@ void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag)
 	if (!(*collector))
 	{
 		(*collector) = malloc(sizeof(t_collector));
-		(*collector)->tmp_cltr = NULL;
-		(*collector)->ntmp_cltr = NULL;
+		if (*collector)
+		{
+			(*collector)->tmp_cltr = NULL;
+			(*collector)->ntmp_cltr = NULL;
+		}
 	}
 	if (flag == TMP)
 	{

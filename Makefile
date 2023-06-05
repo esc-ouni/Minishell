@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
+#    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
+
 #    Updated: 2023/06/05 12:52:14 by msamhaou         ###   ########.fr        #
+
+#    Updated: 2023/06/05 14:35:30 by idouni           ###   ########.fr        #
+
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +22,14 @@ HEADERS = 	include/libft.h	include/minishell.h
 INCLUDES = include
 INC=/Users/msamhaou/.brew/Cellar/readline/8.2.1/include
 HEADERS =	include/libft.h	include/minishell.h
+
+ifeq ($(USER),idouni)
+	LINK = /Users/idouni/.brew/Cellar/readline/8.2.1/lib
+	HEADERS = 	include/libft.h	include/minishell.h
+	INCLUDES = include
+	INC=/Users/idouni/.brew/Cellar/readline/8.2.1/include
+	HEADERS =	include/libft.h	include/minishell.h
+endif
 
 OBJ_DIR = obj/
 
@@ -45,6 +57,13 @@ EXEC_SRC = $(addprefix $(EXEC_DIR), $(EXEC_SRC_FILES))
 EXEC_OBJ_FILES = $(EXEC_SRC_FILES:.c=.o)
 EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))
 
+#********* PARS *************
+PARS_DIR = PARS/
+PARS_SRC_FILES = expander.c printer.c lexer.c memory.c parser.c syntax.c tools_1.c tools_10.c tools_11.c tools_2.c tools_3.c tools_4.c tools_5.c tools_6.c tools_7.c tools_8.c tools_9.c
+PARS_SRC = $(addprefix $(PARS_DIR), $(PARS_SRC_FILES))
+PARS_OBJ_FILES = $(PARS_SRC_FILES:.c=.o)
+PARS_OBJ = $(addprefix $(OBJ_DIR), $(PARS_OBJ_FILES))
+
 #********* MAIN *************
 MAIN_SRC_FILE = main.c
 MAIN_OBJ_FILE = main.o
@@ -52,19 +71,21 @@ MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_OBJ_FILE))
 
 
 INCLU = -I$(INCLUDES)
-ALL_OBJ = $(LIBFT_OBJ) $(MAIN_OBJ) $(EXEC_OBJ)
+ALL_OBJ = $(LIBFT_OBJ) $(MAIN_OBJ) $(EXEC_OBJ) $(PARS_OBJ)
 NAME = minishell
 
 all : $(NAME)
 
-$(NAME) : $(OBJ_DIR) $(LIBFT_OBJ) $(EXEC_OBJ) $(MAIN_OBJ)
-	$(CC) $(LIBFT_OBJ) $(EXEC_OBJ) $(MAIN_OBJ) -o $(NAME) $(INCLU)
+$(NAME) : $(OBJ_DIR) $(LIBFT_OBJ) $(EXEC_OBJ) $(PARS_OBJ) $(MAIN_OBJ)
+	$(CC) $(LIBFT_OBJ) $(EXEC_OBJ) $(PARS_OBJ) $(MAIN_OBJ) -o $(NAME) $(INCLU) -L $(LINK) -lreadline
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
 $(OBJ_DIR)%.o : $(LIBFT_DIR)%.c
 	$(CC) -c $< -o $@ $(INCLU)
 $(OBJ_DIR)%.o : $(EXEC_DIR)%.c
+	$(CC)  -c $< -o $@ $(INCLU)
+$(OBJ_DIR)%.o : $(PARS_DIR)%.c
 	$(CC)  -c $< -o $@ $(INCLU)
 $(MAIN_OBJ) : $(MAIN_SRC_FILE)
 	$(CC) -c $< -o $@ $(INCLU)

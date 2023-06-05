@@ -14,11 +14,11 @@ char	*ft_exported_str(char *str)
 	eq = ft_soft_split_include(str, '=');
 	left = ft_strjoin(ft_strdup("declare -x "), eq[0]);
 	if (!eq[1][0] && !ft_strchr(eq[0], '='))
-		return (ft_free_stringp(eq), left);
+		return (left);
 	right = ft_strjoin(ft_strdup("\""), eq[1]);
 	right = ft_strjoin(right, "\"");
 	left = ft_strjoin(left, right);
-	return (ft_free_stringp(eq), free(right), left);
+	return (left);
 }
 
 void	ft_export_env(t_struct *cable, char	*str)
@@ -26,7 +26,7 @@ void	ft_export_env(t_struct *cable, char	*str)
 	// if (exist)
 	// 	replace
 	// else
-		ft_env_add_back(&cable->envlst, ft_env_new_node(str));
+		ft_env_add_back(&cable->envlst, ft_env_new_node(str, cable));
 }
 
 void	ft_export_exp(t_struct *cable, char *str)
@@ -36,7 +36,8 @@ void	ft_export_exp(t_struct *cable, char *str)
 	// if(exist)
 	// 	replace
 	// else
-		ft_exp_add_back(&cable->exp, ft_exp_new_node(expstr));
+		ft_exp_add_back(&cable->exp, ft_exp_new_node(expstr, cable));
+		free(expstr);
 		ft_alpha_order(cable);
 }
 
