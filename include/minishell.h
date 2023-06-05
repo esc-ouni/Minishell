@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:55 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 14:13:01 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:14:40 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,20 +150,22 @@ typedef enum e_flag
 
 void	ft_set_env_lst(t_struct *cable, char **ev);
 void	ft_env_set(t_struct *cable);
-t_envlst	*ft_env_new_node(char *str);
+t_envlst	*ft_env_new_node(char *str, t_struct *cable);
 t_envlst	*ft_last_envlst(t_envlst *envlst);
 void	ft_env_add_back(t_envlst **envlst, t_envlst *toadd);
-t_exp	*ft_exp_new_node(char *str);
+t_exp	*ft_exp_new_node(char *str, t_struct *cable);
 t_exp	*ft_last_explst(t_exp *envlst);
 void	ft_exp_add_back(t_exp **envlst, t_exp *toadd);
 void	ft_exp_set(t_struct *cable);
 size_t	ft_envlst_size(t_envlst *envlst);
 void	ft_exec(t_struct *cable);
 void	ft_alpha_order(t_struct *cable);
-char	*ft_exported_str(char *str);
+char	*ft_exported_str(char *str, t_struct *cable);
 void	ft_export_exp(t_struct *cable, char *str);
 int		ft_valid_var(const char	*str);
 void	ft_free_stringp(char **env);
+int	ft_strcmp(const char *s1, const char *s2);
+
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
 
