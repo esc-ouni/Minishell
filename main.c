@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 16:29:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:30:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int ac, char **av, char **ev)
 	while (1)
 	{
 		cmd = get_cmd(cable);
+		//exucution
 		ft_collectorclear(cable->collector, TMP);
 	}
 	return (0);
