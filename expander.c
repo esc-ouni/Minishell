@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/04 19:22:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 10:55:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char	*s_expander(t_collector **collector, t_env **menv, char *line)
 	char **s;
 	int i = 0;
 	char *str;
-	int	l;
 
 	str = NULL;
 	s = NULL;
@@ -97,23 +96,18 @@ char	*s_expander(t_collector **collector, t_env **menv, char *line)
 		return(line);
 	s = ft_msplit(collector, line, '$');
 	if (line[0] == '$')
-	{
 		str = ft_mstrjoin(collector, str, ft_getenv(collector, s[i], menv));
-		i++;
-	}
 	else
-	{
 		str = ft_mstrjoin(collector, str, s[i]);
-		i++;
-	}
+	i++;
 	while(s[i])
 	{
 		if (ft_isdigit(s[i][0]))
 			str = ft_mstrjoin(collector, str, (s[i] + 1));
 		else if (s[i][0] == '?')
-			expand_ev(collector, str, s[i]);
+			expand_ev(collector, &str, s[i]);
 		else if (searcher_for_spc(s[i]))
-			expand_evs(collector, s[i], str, menv);
+			expand_evs(collector, s[i], &str, menv);
 		else
 			str = ft_mstrjoin(collector, str, \
 			ft_getenv(collector, s[i], menv));

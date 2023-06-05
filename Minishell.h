@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/04 19:21:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 10:53:07 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,10 @@ typedef enum e_flag
 	ALL
 }	t_flag;
 
+
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
-
 char	*ft_getenv(t_collector **collector, char *key, t_env **menv);
-// void	*h_malloc(t_collector **collect_head, size_t s, void *p);
 char	**ft_msplit(t_collector **collector, char const *s, char const c);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
 char	*ft_mitoa(t_collector **collector, int n);
@@ -143,7 +142,6 @@ char	*ft_mstrjoin(t_collector **collector, char const *s1, char const *s2);
 char	*ft_msubstr(t_collector **collector, char const *s, \
 unsigned int start, size_t len);
 char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set);
-
 int		check_syntax(t_collector **collector, char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);
@@ -164,13 +162,6 @@ void	rot_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	roa_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rin_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
 void	rhd_lex(t_collector **collector, t_lexer **l_node, char *s, int *i);
-
-void printTYPE(t_enum num) ;
-int	basic_syntax_check(t_lexer **h_lexer);
-int	check_str(char *s);
-void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str);
-void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str);
-
 void	emplify(t_collector **collector, t_cmd *cmd);
 t_mlist	*ft_mlstnew(t_collector **collector, char *s);
 char	*ft_mstrdup(t_collector **collector, const char *s1);
@@ -197,5 +188,12 @@ t_lexer *n, int j);
 void	add_lexer(t_collector **collector, t_lexer **head, char *content, \
 t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
+int	basic_syntax_check(t_lexer **h_lexer);
+int	check_str(char *s);
+void	expnd_v(t_collector **collector, t_env **env, t_lexer *node, char **str);
+void	expnd_2(t_collector **collector, t_env **env, t_lexer *node, char **str);
+
+void printTYPE(t_enum num) ;
+
 
 #endif
