@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:24 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/23 16:19:35 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 11:56:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	ns_end(char const *s1, char const *set)
 	return (l_e);
 }
 
-char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set)
+char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set)
 {
 	char		*ns;
 	size_t		l;
@@ -77,9 +77,9 @@ char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set)
 	l_f = ns_start(s1, set);
 	l_e = ns_end(s1, set);
 	if (l_f > l_e)
-		return (ft_mstrdup(collector, ""));
+		return (ft_mstrdup(cable, ""));
 	l = l_e - l_f + 1;
-	ns = (char *)h_malloc(collector, sizeof (char) * (l + 1), ns);
+	ns = (char *)h_malloc(cable->collector, sizeof (char) * (l + 1), ns, TMP);
 	if (!ns)
 		return (0);
 	while (l--)
@@ -91,7 +91,7 @@ char	*ft_mstrtrim(t_collector **collector, char const *s1, char const *set)
 	return (ns);
 }
 
-char	*ft_msubstr(t_collector **collector, char const *s, unsigned int \
+char	*ft_msubstr(t_struct *cable, char const *s, unsigned int \
 start, size_t len)
 {
 	char	*ns;
@@ -101,11 +101,11 @@ start, size_t len)
 	if (s == NULL)
 		return (NULL);
 	if (start > (unsigned int)ft_strlen(s))
-		return (ft_mstrdup(collector, ""));
+		return (ft_mstrdup(cable, ""));
 	l = (unsigned int)ft_strlen(s + start);
 	if (l < len)
 		len = l;
-	ns = (char *)h_malloc(collector, sizeof (char) * (len + 1), ns);
+	ns = (char *)h_malloc(cable->collector, sizeof (char) * (len + 1), ns, TMP);
 	if (!ns)
 		return (NULL);
 	ft_strlcpy(ns, s + start, len + 1);

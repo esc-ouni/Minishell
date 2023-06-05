@@ -6,26 +6,26 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/04 13:56:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 11:49:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer	*parser(t_collector	**collector, t_env **env, char *s)
+t_lexer	*parser(t_struct *cable, char *s)
 {
 	t_lexer	*h_lexer;
 
-	if (check_syntax(collector, s))
-		return (free(s), ft_collectorclear(collector), NULL);
-	h_lexer = lexer(collector, s);
-	expander(collector, env, &h_lexer);
+	if (check_syntax(cable, s))
+		return (free(s), ft_collectorclear(cable->collector, TMP), NULL);
+	h_lexer = lexer(cable, s);
+	expander(cable, &h_lexer);
 	if (check_syntax2(&h_lexer))
-		return (ft_collectorclear(collector), NULL);
+		return (ft_collectorclear(cable->collector, TMP), NULL);
 	return (h_lexer);
 }
 
-t_cmd	*parser2(t_collector	**collector, t_lexer *node)
+t_cmd	*parser2(t_struct *cable, t_lexer *node)
 {
 	t_files		*files;
 	char		**full_cmd;
@@ -37,24 +37,24 @@ t_cmd	*parser2(t_collector	**collector, t_lexer *node)
 		return (NULL);
 	cmd = NULL;
 	files = NULL;
-	files = h_malloc(collector, sizeof(t_files), files);
+	files = h_malloc(cable->collector, sizeof(t_files), files, TMP);
 	parser_init(&out_files, &in_files, &full_cmd);
 	while (node)
 	{
-		check_for_out_files(collector, &out_files, node);
-		check_for_in_files(collector, &in_files, node);
-		get_full_cmd(collector, &node, &full_cmd);
+		check_for_out_files(cable, &out_files, node);
+		check_for_in_files(cable, &in_files, node);
+		get_full_cmd(cable, &node, &full_cmd);
 		if (node && node->type == PIP)
 			node = node->next;
 		files->out_files = out_files;
 		files->in_files = in_files;
-		add_to_cmd(collector, &cmd, full_cmd, files);
+		add_to_cmd(cable, &cmd, full_cmd, files);
 		parser_init(&out_files, &in_files, &full_cmd);
 	}
 	return (cmd);
 }
 
-void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd)
+void	get_full_cmd(t_struct *cable, t_lexer **n, char ***full_cmd)
 {
 	int	j;
 
@@ -66,14 +66,14 @@ void	get_full_cmd(t_collector **collector, t_lexer **n, char ***full_cmd)
 		else if ((*n)->type == SCMD || (*n)->type == ST_SQ \
 		|| (*n)->type == ST_DQ)
 		{
-			add_to_fullcmd(collector, full_cmd, (*n), j);
+			add_to_fullcmd(cable, full_cmd, (*n), j);
 			j = 1;
 		}
 		(*n) = (*n)->next;
 	}
 }
 
-void	check_for_in_files(t_collector **collector, t_file **in_files, \
+void	check_for_in_files(t_struct *cable, t_file **in_files, \
 t_lexer *n)
 {
 	char *filename;
@@ -89,10 +89,10 @@ t_lexer *n)
 			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
 			{
 				n->type = FIL_NM;
-				filename = ft_mstrjoin(collector, filename, n->cmd);
+				filename = ft_mstrjoin(cable, filename, n->cmd);
 				n = n->next;
 			}
-			add_file_node(collector, in_files, filename, O_TRUNC);
+			add_file_node(cable, in_files, filename, O_TRUNC);
 			printf("%s\n", filename);
 		}
 		filename = NULL;
@@ -104,10 +104,10 @@ t_lexer *n)
 			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
 			{
 				n->type = FIL_NM;
-				filename = ft_mstrjoin(collector, filename, n->cmd);
+				filename = ft_mstrjoin(cable, filename, n->cmd);
 				n = n->next;
 			}
-			add_file_node(collector, in_files, filename, O_APPEND);
+			add_file_node(cable, in_files, filename, O_APPEND);
 		}
 		if (n)
 			n = n->next;
@@ -116,7 +116,7 @@ t_lexer *n)
 	}
 }
 
-void	check_for_out_files(t_collector **collector, t_file **out_files, \
+void	check_for_out_files(t_struct *cable, t_file **out_files, \
 t_lexer *n)
 {
 	char *filename;
@@ -132,10 +132,10 @@ t_lexer *n)
 			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
 			{
 				n->type = FIL_NM;
-				filename = ft_mstrjoin(collector, filename, n->cmd);
+				filename = ft_mstrjoin(cable, filename, n->cmd);
 				n = n->next;
 			}
-			add_file_node(collector, out_files, filename, O_TRUNC);
+			add_file_node(cable, out_files, filename, O_TRUNC);
 			printf("%s\n", filename);
 		}
 		filename = NULL;
@@ -147,10 +147,10 @@ t_lexer *n)
 			while(n && n->cmd && n->type != WH_SP && n->type != PIP && (n->type == SCMD || n->type == ST_SQ || n->type == ST_DQ))
 			{
 				n->type = FIL_NM;
-				filename = ft_mstrjoin(collector, filename, n->cmd);
+				filename = ft_mstrjoin(cable, filename, n->cmd);
 				n = n->next;
 			}
-			add_file_node(collector, out_files, filename, O_APPEND);
+			add_file_node(cable, out_files, filename, O_APPEND);
 		}
 		if (n)
 			n = n->next;

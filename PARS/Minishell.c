@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   Minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 12:16:31 by idouni           ###   ########.fr       */
+/*   Created: 2023/05/22 16:48:27 by idouni            #+#    #+#             */
+/*   Updated: 2023/06/05 12:18:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -19,10 +18,11 @@ void	ft_init(int ac, char **av, char **ev, t_struct **cab)
 
 	(void)ac;
 	(void)av;
+	(void)ev;
 	cable = (t_struct *)malloc(sizeof(t_struct));
-	ft_set_env_lst(cable, ev);
-	ft_env_set(cable);
-	ft_exp_set(cable);
+	// ft_set_env_lst(cable, ev);
+	// ft_env_set(cable);
+	// ft_exp_set(cable);
 	cable->cmd = NULL;
 	cable->collector = malloc(sizeof(t_collector **));
 	cable->collector[0] = NULL;
@@ -33,17 +33,25 @@ void	ft_init(int ac, char **av, char **ev, t_struct **cab)
 	*cab = cable;
 }
 
-void	program(t_struct *cable)
+int main(int argc, char **argv, char **env) 
 {
-	ft_exec(cable);
-}
+    (void)env;
+    (void)argc;
+    (void)argv;
+	char		*s;
+    t_lexer		*h_lexer;
+    t_cmd		*cmd;
+	t_struct *cable;	
 
-int	main(int ac, char **av, char **ev)
-{
-	t_struct	*cable;
-
-	ft_init(ac, av, ev, &cable);
-	while (1)
-		program(cable);
-	return (0);
+	cable = NULL;
+	ft_init(argc, argv,	env, &cable);
+    while (1)
+    {
+		s = prompt();
+        h_lexer = parser(cable, s);
+        cmd = parser2(cable, h_lexer);
+        // emplify(cable, cmd);
+        // after_parse2(cmd);
+    }
+    return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 11:14:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 12:22:01 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "libft.h"
 
 
-typedef struct s_infile		t_file;
+typedef struct s_file		t_file;
 typedef struct s_collector	t_collector;
 typedef struct s_cmd		t_cmd;
 typedef struct s_exp		t_exp;
@@ -31,7 +31,7 @@ typedef struct s_struct		t_struct;
 
 struct s_file
 {
-	char		*file_name;
+	char		*filename;
 	int			o_flag;
 	t_file	*next;
 };
@@ -40,8 +40,8 @@ struct s_cmd
 {
 	char	**cmd;
 	char	*cmd_path;
-	t_file	*in_file;
-	t_file	*out_file;
+	t_file	*in_files;
+	t_file	*out_files;
 	t_cmd	*next;
 };
 
@@ -60,14 +60,14 @@ struct s_envlst
 struct s_struct
 {
 	char		**env;
-	t_envlst	*envlst;
+	t_envlst	**envlst;
 	t_exp		*exp;
 	t_cmd		*cmd;
 	int			exit_val;
 	int			var;
 	int			is_heredoc;
 	int			cmd_numb;
-	t_collector **s_collector;
+	t_collector **collector;
 };
 
 typedef enum e_enum
@@ -153,17 +153,18 @@ void	ft_exp_add_back(t_exp **envlst, t_exp *toadd);
 void	ft_exp_set(t_struct *cable);
 size_t	ft_envlst_size(t_envlst *envlst);
 void	ft_exec(t_struct *cable);
+void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
+void	ft_collectorclear(t_collector **collector, t_flag flag);
 
-void	*h_malloc(t_struct *cable, size_t s, void *p, t_flag flag);
-void	ft_collectorclear(t_struct *cable, t_flag flag);
-char	*ft_getenv(t_struct *cable, char *key, t_envlst **menv);
+char	*ft_getenv(t_struct *cable, char *key);
 char	**ft_msplit(t_struct *cable, char const *s, char const c);
 char	*ft_mstrdup(t_struct *cable, const char *s1);
-char	*ft_mitoa(t_struct *cable, int n);
+char	*ft_mitoa(t_struct *cable);
 char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2);
 char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
 char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
+
 int		check_syntax(t_struct *cable, char *s);
 void	syntx_err(void);
 int		check_pipes(char *s);
@@ -189,9 +190,9 @@ t_mlist	*ft_mlstnew(t_struct *cable, char *s);
 char	*ft_mstrdup(t_struct *cable, const char *s1);
 t_built	cmd_type(t_struct *cable, char *cmd);
 char	*prompt(void);
-t_lexer	*parser(t_struct *cable, t_envlst **env, char *s);
+t_lexer	*parser(t_struct *cable, char *s);
 void	debug(void);
-void	expander(t_struct *cable, t_envlst **env, t_lexer **head);
+void	expander(t_struct *cable, t_lexer **head);
 t_cmd	*parser2(t_struct *cable, t_lexer *head);
 void	after_parse2(t_cmd *cmd);
 t_lexer	*lexer(t_struct *cable, char *s);
@@ -212,7 +213,8 @@ t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
 int	basic_syntax_check(t_lexer **h_lexer);
 int	check_str(char *s);
-void	expnd_v(t_struct *cable, t_envlst **env, t_lexer *node, char **str);
-void	expnd_2(t_struct *cable, t_envlst **env, t_lexer *node, char **str);
+void	expnd_v(t_struct *cable, t_lexer *node, char **str);
+void	expnd_2(t_struct *cable, t_lexer *node, char **str);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/05/27 19:34:16 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 12:12:09 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static char	*strevv(char *s, int end, int t)
 	return (s);
 }
 
-char	*ft_mitoa(t_collector **collector, int n)
+char	*ft_mitoa(t_struct *cable)
 {
 	char		*s;
 	int			i;
@@ -93,14 +93,14 @@ char	*ft_mitoa(t_collector **collector, int n)
 	s = NULL;
 	i = 0;
 	t = 0;
-	nn = n;
+	nn = cable->exit_val;
 	nc = nbrlen(nn) + 1;
 	if (nn < 0)
 	{
 		nc += 1;
 		t = 1;
 	}
-	s = (char *)h_malloc(collector, sizeof (char) * nc, s);
+	s = (char *)h_malloc(cable->collector, sizeof (char) * nc, s, TMP);
 	if (s == NULL)
 		return (NULL);
 	s = putnbr(s, nn, nc, i);
