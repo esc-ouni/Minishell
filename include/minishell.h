@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 16:32:57 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:40:01 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,6 @@ typedef enum e_flag
 	NTMP,
 	ALL
 }	t_flag;
-
-#define malloc(x) NULL
 
 void	ft_set_env_lst(t_struct *cable, char **ev);
 void	ft_env_set(t_struct *cable);
