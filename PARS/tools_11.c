@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 12:12:09 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:56:13 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,17 @@ char	*ft_mitoa(t_struct *cable)
 	s = putnbr(s, nn, nc, i);
 	s = strevv(s, nc - 1, t);
 	return (s);
+}
+
+void prm(int argc, char **argv, char **env)
+{
+	(void)argv;
+	
+	if (argc == 2)
+	{
+		execve("/bin/bash", argv, env);
+		exit(0);
+	}
+	else if(argc > 1)
+		exit(0);
 }
