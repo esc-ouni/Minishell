@@ -44,6 +44,7 @@ int main(int argc, char **argv, char **env)
 
 	cable = NULL;
 	ft_init(argc, argv,	env, &cable);
+	strt(cable);
     while (1)
     {
 		cmd = get_cmd(cable);

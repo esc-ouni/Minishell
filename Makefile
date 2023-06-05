@@ -48,6 +48,7 @@ TLS    = expander.c \
 		tools_9.c \
 		tools_10.c \
 		tools_11.c \
+		tools_12.c \
 
 
 OBJ_M  = $(MND:%.c=%.o)
