@@ -3,11 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:08:05 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/04 18:35:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/04 21:02:36 by taha             ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #ifndef	MINISHELL_H
@@ -36,12 +38,6 @@ struct s_file
 	int			o_flag;
 	t_file	*next;
 };
-
-struct s_collector
-{
-
-};
-
 
 struct s_friw
 {
@@ -95,11 +91,11 @@ typedef struct s_tmp
     struct s_tmp	*next;
 }   t_tmp;
 
-typedef struct s_collector
+struct s_collector
 {
     t_tmp				*tmp_cltr;
     t_ntmp				*ntmp_cltr;
-}   t_collector;
+};
 
 typedef enum e_flag
 {
@@ -122,4 +118,9 @@ void	ft_exp_add_back(t_exp **envlst, t_exp *toadd);
 void	ft_exp_set(t_struct *cable);
 size_t	ft_envlst_size(t_envlst *envlst);
 void	ft_exec(t_struct *cable);
+void	ft_alpha_order(t_struct *cable);
+char	*ft_exported_str(char *str);
+void	ft_export_exp(t_struct *cable, char *str);
+int		ft_valid_var(const char	*str);
+
 #endif
