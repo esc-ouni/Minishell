@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 16:36:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 13:07:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 			n_node = node->next;
 			if (node->tmp_addr)
 			{
-				printf("%p\n", node->tmp_addr);
+				// printf("%p\n", node->tmp_addr);
 				free(node->tmp_addr);
 			}
 			free(node);
@@ -49,7 +49,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 			n_node1 = node1->next;
 			if (node1->ntmp_addr)
 			{
-				printf("%p\n", node1->ntmp_addr);
+				// printf("%p\n", node1->ntmp_addr);
 				free(node1->ntmp_addr);
 			}
 			free(node1);
@@ -65,7 +65,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 			n_node = node->next;
 			if (node->tmp_addr)
 			{
-				printf("%p\n", node->tmp_addr);
+				// printf("%p\n", node->tmp_addr);
 				free(node->tmp_addr);
 			}
 			free(node);
@@ -77,7 +77,7 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 			n_node1 = node1->next;
 			if (node1->ntmp_addr)
 			{
-				printf("%p\n", node1->ntmp_addr);
+				// printf("%p\n", node1->ntmp_addr);
 				free(node1->ntmp_addr);
 			}
 			free(node1);

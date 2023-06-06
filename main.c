@@ -41,6 +41,7 @@ void	ft_init(char **ev, t_struct **cab)
 void	program(t_struct *cable)
 {
 	cable->cmd = get_cmd(cable);
+	after_parse2(cable->cmd);
 	//exucution
 	ft_collectorclear(cable->collector, TMP);
 }
