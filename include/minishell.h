@@ -168,7 +168,7 @@ void	ft_env_set(t_struct *cable);
 t_envlst	*ft_env_new_node(char *str, t_struct *cable);
 t_envlst	*ft_last_envlst(t_envlst *envlst);
 void	ft_env_add_back(t_envlst **envlst, t_envlst *toadd);
-void	ft_export_env(t_struct *cable, char	*str);
+int	ft_export_env(t_struct *cable, char	*str);
 void	ft_export_exp(t_struct *cable, char *str);
 t_exp	*ft_exp_new_node(char *str, t_struct *cable);
 t_exp	*ft_last_explst(t_exp *envlst);
@@ -183,6 +183,7 @@ char    **ft_msoft_split_include(char *str, char c, t_struct *cable);
 int	ft_strcmp(const char *s1, const char *s2);
 char	*ft_trim_char(char *str, char c, t_struct *cable);
 int	ft_child(t_cmd *cmd, t_struct *cable);
+int	ft_set_path(t_cmd *cmd, t_struct *cable);
 int	ft_heredoc(t_cmd *cmd, char *delimiter);
 
 

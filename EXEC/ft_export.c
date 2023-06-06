@@ -45,6 +45,30 @@ void	ft_joint_to_export(t_struct *cable, char **str)
 	}
 }
 
+
+char	**ft_make_double_char(t_envlst *envlst)
+{
+	int		i;
+	char	**res;
+
+	i = ft_envlst_size(envlst);
+	res = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (envlst)
+	{
+		res[i] = ft_strdup(envlst->str);
+		i++;
+		envlst = envlst->next;
+	}
+	res[i] = NULL;
+	return (res);
+}
+
+void	ft_env_update(t_struct *cable)
+{
+	cable->env = ft_make_double_char(cable->envlst);
+}
+
 void	ft_export(t_struct *cable, char	*str)
 {
 	if (!str)
@@ -54,6 +78,9 @@ void	ft_export(t_struct *cable, char	*str)
 	if (ft_isplus(str))
 		ft_joint_to_export(cable, &str);
 	if (ft_strchr(str, '='))
-		ft_export_env(cable, str);
+	{
+		if (ft_export_env(cable, str))
+			ft_env_update(cable);
+	}
 	ft_export_exp(cable, str);
 }

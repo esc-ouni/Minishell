@@ -35,11 +35,14 @@ void	ft_init(char **ev, t_struct **cab)
 	cable->var = 0;
 	cable->is_heredoc = 0;
 	cable->cmd_numb = 0;
+	cable->tmp_fd_in = dup(0);
+	cable->tmp_fd_out = dup(1);
 	*cab = cable;
 }
 
 void	program(t_struct *cable)
 {
+	dup2(cable->tmp_fd_in, 0);
 	cable->cmd = get_cmd(cable);
 	// after_parse2(cable->cmd);
 	//exucution
