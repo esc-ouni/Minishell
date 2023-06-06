@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 17:13:09 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:14:09 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,11 +168,6 @@ char	*ft_mstrdup(t_struct *cable, const char *s1, t_flag flag);
 char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2, t_flag flag);
 char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set, t_flag flag);
 
-// char	**ft_msplit(t_struct *cable, char const *s, char const c);
-// char	*ft_mstrdup(t_struct *cable, const char *s1);
-// char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2);
-// char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
-
 char	*ft_getenv(t_struct *cable, char *key);
 char	*ft_mitoa(t_struct *cable);
 char	*ft_msubstr(t_struct *cable, char const *s, \
@@ -190,7 +185,6 @@ void	syntx_err(void);
 int		check_pipes(char *s);
 int		searcher_for_spc(char *s);
 int		check_oerr(char *s);
-// void	update_cmd(t_cmd *cmd);
 int		check_syntax2(t_lexer	**h_lexer);
 void	check_for_in_files(t_struct *cable, t_file **in_files, \
 t_lexer *n);
