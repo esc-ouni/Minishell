@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 13:53:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:05:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,27 @@ void	expander(t_struct *cable, t_lexer **head)
 	}
 }
 
+void	s_expa(t_struct *cable, char *s, char **str)
+{
+	if (searcher_for_spc(s))
+		expand_evs(cable, s, str);
+	else
+		(*str) = ft_mstrjoin(cable, (*str), ft_getenv(cable, s), TMP);
+}
+
+void	s_expa2(t_struct *cable, char *s, char **str)
+{
+	if (ft_isdigit(s[0]))
+		(*str) = ft_mstrjoin(cable, (*str), (s + 1), TMP);
+	else if (s[0] == '?')
+		expand_ev(cable, str, s);
+	else if (searcher_for_spc(s))
+		expand_evs(cable, s, str);
+	else
+		(*str) = ft_mstrjoin(cable, (*str), \
+		ft_getenv(cable, s), TMP);
+}
+
 char	*s_expander(t_struct *cable, char *line)
 {
 	char **s;
@@ -98,26 +119,13 @@ char	*s_expander(t_struct *cable, char *line)
 	if (!s[0])
 		return ("$");
 	if (line[0] == '$')
-	{
-		if (searcher_for_spc(s[i]))
-			expand_evs(cable, s[i], &str);
-		else
-			str = ft_mstrjoin(cable, str, ft_getenv(cable, s[i]), TMP);
-	}
+		s_expa(cable, s[i], &str);//to test
 	else
 		str = ft_mstrjoin(cable, str, s[i], TMP);
 	i++;
 	while (s[i])
 	{
-		if (ft_isdigit(s[i][0]))
-			str = ft_mstrjoin(cable, str, (s[i] + 1), TMP);
-		else if (s[i][0] == '?')
-			expand_ev(cable, &str, s[i]);
-		else if (searcher_for_spc(s[i]))
-			expand_evs(cable, s[i], &str);
-		else
-			str = ft_mstrjoin(cable, str, \
-			ft_getenv(cable, s[i]), TMP);
+		s_expa2(cable, s[i], &str);
 		i++;
 	}
 	if (line[ft_strlen (line) - 1] == '$')
