@@ -27,6 +27,7 @@
 # include <stdlib.h>
 #include <termios.h>
 # include "libft.h"
+# include "get_next_line.h"
 
 
 typedef struct s_file		t_file;
@@ -35,6 +36,19 @@ typedef struct s_cmd		t_cmd;
 typedef struct s_exp		t_exp;
 typedef struct s_envlst		t_envlst;
 typedef struct s_struct		t_struct;
+
+
+typedef enum e_built
+{
+	NOT,
+	ECH,
+	CD,
+	PWD,
+	EXPT,
+	UNST,
+	ENV,
+	EXT
+}	t_built;
 
 struct s_file
 {
@@ -49,6 +63,10 @@ struct s_cmd
 	char	*cmd_path;
 	t_file	*in_files;
 	t_file	*out_files;
+	int		fd_in;
+	int		fd_out;
+	int		*pipe_fd;
+	t_built	builtflag;
 	t_cmd	*next;
 };
 
@@ -70,6 +88,8 @@ struct s_struct
 	t_envlst	*envlst;
 	t_exp		*exp;
 	t_cmd		*cmd;
+	int			tmp_fd_out;
+	int			tmp_fd_in;
 	int			exit_val;
 	int			var;
 	int			is_heredoc;
@@ -92,17 +112,7 @@ typedef enum e_enum
 	UDF
 }	t_enum;
 
-typedef enum e_built
-{
-	NOT,
-	ECH,
-	CD,
-	PWD,
-	EXPT,
-	UNST,
-	ENV,
-	EXT
-}	t_built;
+
 
 typedef struct s_files
 {
@@ -172,6 +182,18 @@ t_exp	*ft_var_exp_exist(t_exp *exp, char *str);
 char    **ft_msoft_split_include(char *str, char c, t_struct *cable);
 int	ft_strcmp(const char *s1, const char *s2);
 char	*ft_trim_char(char *str, char c, t_struct *cable);
+int	ft_child(t_cmd *cmd, t_struct *cable);
+int	ft_heredoc(t_cmd *cmd, char *delimiter);
+
+
+void	ft_unset(t_struct *cable, char *str);
+int		ft_cd(t_cmd *cmd);
+void	ft_quit(t_built flag, t_struct *cable);
+int     ft_cd(t_cmd *cmd);
+int     ft_echo(t_cmd *lol);
+int     ft_pwd(void);
+int     ft_builtin(t_cmd *lol, t_struct *cable);
+void	ft_quit(t_built flag, t_struct *cable);
 
 
 

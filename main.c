@@ -43,6 +43,7 @@ void	program(t_struct *cable)
 	cable->cmd = get_cmd(cable);
 	// after_parse2(cable->cmd);
 	//exucution
+	ft_exec(cable);
 	ft_collectorclear(cable->collector, TMP);
 }
 
