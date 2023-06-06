@@ -56,7 +56,7 @@ int	main(int ac, char **av, char **ev)
 	t_cmd 		*cmd;
 	char		*line;
 
-	atexit(foo);
+	// atexit(foo);
 	prm(ac, av, ev);
 	ft_init(ev, &cable);
 	strt(cable);
