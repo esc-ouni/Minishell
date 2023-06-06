@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:31 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 16:17:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:22:41 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_mstrdup(t_struct *cable, const char *s1, t_flag flag)
 	s = NULL;
 	if (!s1)
 		return (NULL);
-	s = (char *)h_malloc(cable->collector, sizeof(char) * (ft_strlen(s1) + 1), s, flag);
+	s = (char *)h_malloc(cable->collector, sizeof(char) * \
+	(ft_strlen(s1) + 1), s, flag);
 	while (s1[i] != '\0')
 	{
 		s[i] = s1[i];
@@ -31,7 +32,8 @@ char	*ft_mstrdup(t_struct *cable, const char *s1, t_flag flag)
 	return (s);
 }
 
-char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2, t_flag flag)
+char	*ft_mstrjoin(t_struct *cable, char const *s1, \
+char const *s2, t_flag flag)
 {
 	size_t		l1;
 	size_t		l2;
@@ -40,7 +42,8 @@ char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2, t_flag flag)
 	ns = NULL;
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);
-	ns = (char *)h_malloc(cable->collector, sizeof(char) * (l1 + l2 + 1), ns, flag);
+	ns = (char *)h_malloc(cable->collector, sizeof(char) * \
+	(l1 + l2 + 1), ns, flag);
 	if (ns)
 	{
 		if (s1)

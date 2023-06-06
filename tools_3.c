@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:24 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 16:16:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:22:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static int	ns_end(char const *s1, char const *set)
 	return (l_e);
 }
 
-char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set, t_flag flag)
+char	*ft_mstrtrim(t_struct *cable, char const *s1, \
+char const *set, t_flag flag)
 {
 	char		*ns;
 	size_t		l;

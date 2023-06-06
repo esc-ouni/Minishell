@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 15:05:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:24:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,11 @@ void	s_expa2(t_struct *cable, char *s, char **str)
 
 char	*s_expander(t_struct *cable, char *line)
 {
-	char **s;
-	int i = 0;
-	char *str;
+	char	**s;
+	int		i;
+	char	*str;
 
+	i = 0;
 	str = NULL;
 	s = NULL;
 	if (!line || !ft_strchr(line, '$'))
