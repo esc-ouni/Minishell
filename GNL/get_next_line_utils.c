@@ -6,23 +6,11 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:32:28 by msamhaou          #+#    #+#             */
-/*   Updated: 2022/11/27 21:04:20 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:14:47 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 size_t	ft_linelen(char *str)
 {

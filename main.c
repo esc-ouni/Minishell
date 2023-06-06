@@ -40,7 +40,9 @@ void	ft_init(char **ev, t_struct **cab)
 
 void	program(t_struct *cable)
 {
-	ft_exec(cable);
+	char	*s = readline(">");
+	ft_unset(cable, s);
+	ft_print_envlst(cable->envlst);
 }
 
 void	foo()
@@ -52,11 +54,10 @@ int	main(int ac, char **av, char **ev)
 	t_struct	*cable;
 	t_cmd 		*cmd;
 
-	atexit(foo);
+	// atexit(foo);
 	prm(ac, av, ev);
 	ft_init(ev, &cable);
 	strt(cable);
-	ft_export_exp(cable, "LOLHI");
-	for(; cable->exp; cable->exp = cable->exp->next)
-		printf("%s\n", cable->exp->str);
+	while (1)
+		program(cable);
 }
