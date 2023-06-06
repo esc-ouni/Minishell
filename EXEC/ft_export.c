@@ -1,9 +1,5 @@
 #include "minishell.h"
 
-void	ft_replace_exp()
-{
-
-}
 
 char	*ft_exported_str(char *str, t_struct *cable)
 {
@@ -21,32 +17,42 @@ char	*ft_exported_str(char *str, t_struct *cable)
 	return (left);
 }
 
-void	ft_export_env(t_struct *cable, char	*str)
+
+
+
+
+int	ft_isplus(char *str)
 {
-	// if (exist)
-	// 	replace
-	// else
-		ft_env_add_back(&cable->envlst, ft_env_new_node(str, cable));
+	char	**eq;
+
+	eq = ft_soft_split(str, '=');
+	if (strchr(eq[0], '+'))
+		return (ft_free_stringp(eq), 1);
+	return (ft_free_stringp(eq), 0);
 }
 
-void	ft_export_exp(t_struct *cable, char *str)
+void	ft_joint_to_export(t_struct *cable, char **str)
 {
-	char	*expstr;
-	expstr = ft_exported_str(str, cable);
-	// if(exist)
-	// 	replace
-	// else
-		ft_exp_add_back(&cable->exp, ft_exp_new_node(expstr, cable));
-		ft_alpha_order(cable);
+	t_envlst	*exist;
+	char		**spl;
+	*str = ft_trim_char(*str, '+', cable);
+	exist = ft_var_env_exist(cable->envlst, *str);
+	if (exist)
+	{
+		spl = ft_soft_split(*str, '=');
+		*str = ft_mstrjoin(cable, exist->str, spl[1], NTMP);
+		ft_free_stringp(spl);
+	}
 }
 
 void	ft_export(t_struct *cable, char	*str)
 {
+	if (!str)
+		ft_print_exp(cable->exp);
 	if (!ft_valid_var(str))
 		return ;
-	/*if += find join str with exist var , if !var , lst add back new one to both*/
-	// if (ft_strnstr())
-	/*if !strch '=' add lstback to exp solo*/
+	if (ft_isplus(str))
+		ft_joint_to_export(cable, &str);
 	if (ft_strchr(str, '='))
 		ft_export_env(cable, str);
 	ft_export_exp(cable, str);
