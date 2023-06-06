@@ -53,6 +53,7 @@ typedef enum e_built
 struct s_file
 {
 	char		*filename;
+	int			islast;
 	int			o_flag;
 	t_file	*next;
 };
@@ -198,6 +199,12 @@ void	ft_quit(t_built flag, t_struct *cable);
 
 
 
+void 	free_tmp(t_collector **collector);
+void	free_ntmp(t_collector **collector);
+void 	head_alloc(t_collector **collector);
+
+void	tmp_alloc(t_collector **collector, size_t s, void **p);
+void	ntmp_alloc(t_collector **collector, size_t s, void **p);
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
 
@@ -206,16 +213,15 @@ char	*ft_mstrdup(t_struct *cable, const char *s1, t_flag flag);
 char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2, t_flag flag);
 char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set, t_flag flag);
 
-// char	**ft_msplit(t_struct *cable, char const *s, char const c);
-// char	*ft_mstrdup(t_struct *cable, const char *s1);
-// char	*ft_mstrjoin(t_struct *cable, char const *s1, char const *s2);
-// char	*ft_mstrtrim(t_struct *cable, char const *s1, char const *set);
-
 char	*ft_getenv(t_struct *cable, char *key);
 char	*ft_mitoa(t_struct *cable);
 char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
 
+void	emplify(t_struct *cable, t_cmd *cmd);
+void	update_in_out_files(t_file *out_files, t_file *in_files);
+void	check_for_in_files(t_struct *cable, t_file **in_files, t_lexer *n);
+void	check_for_out_files(t_struct *cable, t_file **out_files, t_lexer *n);
 t_cmd	*get_cmd(t_struct *cable);
 void	prm(int argc, char **argv, char **env);
 void	strt(t_struct *cable);
@@ -224,7 +230,6 @@ void	syntx_err(void);
 int		check_pipes(char *s);
 int		searcher_for_spc(char *s);
 int		check_oerr(char *s);
-void	update_cmd(t_cmd *cmd);
 int		check_syntax2(t_lexer	**h_lexer);
 void	check_for_in_files(t_struct *cable, t_file **in_files, \
 t_lexer *n);
@@ -264,12 +269,16 @@ t_lexer *n, int j);
 void	add_lexer(t_struct *cable, t_lexer **head, char *content, \
 t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
-int	basic_syntax_check(t_lexer **h_lexer);
+int		basic_syntax_check(t_lexer **h_lexer);
 int	check_str(char *s);
+void	check_for_rin(t_struct *cable, t_file **in_files, t_lexer **n);
+void	check_for_hd(t_struct *cable, t_file **in_files, t_lexer **n);
+int		basic_syntax_check2(t_lexer **h_lexer);
+void	expand_ev(t_struct *cable, char **str, char *s);
+void	expand_evs(t_struct *cable, char *s, char **str);
 void	expnd_v(t_struct *cable, t_lexer *node, char **str);
 void	expnd_2(t_struct *cable, t_lexer *node, char **str);
-
-void printTYPE(t_enum num) ;
+void	printTYPE(t_enum num) ;
 
 
 void	ft_alpha_order(t_struct *cable);

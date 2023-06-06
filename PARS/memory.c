@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 15:27:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 16:43:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,58 +83,6 @@ void	head_alloc(t_collector **collector)
 		(*collector)->tmp_cltr = NULL;
 		(*collector)->ntmp_cltr = NULL;
 	}
-}
-
-void	tmp_alloc(t_collector **collector, size_t s, void **p)
-{
-	t_tmp	*n_iter;
-	t_tmp	*tmp_c;
-
-	tmp_c = malloc(sizeof(t_tmp));
-	(*p) = malloc(s);
-	if (!tmp_c || !(*p) || !(*collector))
-	{
-		write (2, "\033[0;32mMALLOC_FAILED\033[0;37m\n", 29);
-		ft_collectorclear(collector, ALL);
-		exit (1);
-	}
-	tmp_c->tmp_addr = (*p);
-	if (!((*collector)->tmp_cltr))
-		((*collector)->tmp_cltr) = tmp_c;
-	else
-	{
-		n_iter = (*collector)->tmp_cltr;
-		while (n_iter->next)
-			n_iter = n_iter->next;
-		n_iter->next = tmp_c;
-	}
-	tmp_c->next = NULL;
-}
-
-void	ntmp_alloc(t_collector **collector, size_t s, void **p)
-{
-	t_ntmp	*n_iter1;
-	t_ntmp	*ntmp_c;
-
-	ntmp_c = malloc(sizeof(t_ntmp));
-	(*p) = malloc(s);
-	if (!ntmp_c || !(*p) || !(*collector))
-	{
-		write (2, "\033[0;32mMALLOC_FAILED\033[0;37m\n", 29);
-		ft_collectorclear(collector, ALL);
-		exit (1);
-	}
-	ntmp_c->ntmp_addr = (*p);
-	if (!((*collector)->ntmp_cltr))
-		((*collector)->ntmp_cltr) = ntmp_c;
-	else
-	{
-		n_iter1 = (*collector)->ntmp_cltr;
-		while (n_iter1->next)
-			n_iter1 = n_iter1->next;
-		n_iter1->next = ntmp_c;
-	}
-	ntmp_c->next = NULL;
 }
 
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag)
