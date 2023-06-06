@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 16:46:22 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 20:10:45 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void prm(int argc, char **argv, char **env)
+void	prm(int argc, char **argv, char **env)
 {
 	(void)argv;
 	if (argc == 2)

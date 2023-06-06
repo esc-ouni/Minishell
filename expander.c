@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:04 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 16:47:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 20:10:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	expander(t_struct *cable, t_lexer **head)
 		else if ((node->type != ST_SQ) && (ft_strchr(node->cmd, '$')) && exp)
 		{
 			expnd_v(cable, node, &str);
-			node->cmd = ft_mstrdup(cable, str, TMP);	
+			node->cmd = ft_mstrdup(cable, str, TMP);
 		}
 		node = node->next;
 	}
