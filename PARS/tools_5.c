@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:36 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 16:17:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:22:21 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	add_to_fullcmd_st(t_struct *cable, char ***full_cmd, t_lexer *n)
 		l++;
 		tmp = tmp->next;
 	}
-	(*full_cmd) = h_malloc(cable->collector, sizeof(char *) * (l + 1), *full_cmd, TMP);
+	(*full_cmd) = h_malloc(cable->collector, sizeof(char *) * \
+	(l + 1), *full_cmd, TMP);
 	(*full_cmd)[0] = ft_mstrdup(cable, n->cmd, TMP);
 	(*full_cmd)[1] = NULL;
 }

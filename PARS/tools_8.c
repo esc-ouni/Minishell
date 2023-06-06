@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 16:14:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:21:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@
 
 char	*ft_getenv(t_struct *cable, char *key)
 {
-	char	*key_part;
-	t_envlst *env;
+	char		*key_part;
+	t_envlst	*env;
 
 	key_part = NULL;
 	env = cable->envlst;
@@ -94,4 +94,3 @@ void	rhd_lex(t_struct *cable, t_lexer **l_node, char *s, int *i)
 	add_lexer(cable, l_node, ft_msubstr(cable, s, (*i), 2), R_HD);
 	(*i) += 2;
 }
-

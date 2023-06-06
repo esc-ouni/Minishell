@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 14:19:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:23:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_tmp(t_collector **collector)
+void	free_tmp(t_collector **collector)
 {
 	t_tmp	*node;
 	t_tmp	*n_node;
@@ -70,10 +70,12 @@ void	ft_collectorclear(t_collector **collector, t_flag flag)
 		free_ntmp(collector);
 		free((*collector));
 		(*collector) = NULL;
+		rl_clear_history();
+		exit(0);
 	}
 }
 
-void head_alloc(t_collector **collector)
+void	head_alloc(t_collector **collector)
 {
 	(*collector) = malloc(sizeof(t_collector));
 	if (*collector)
@@ -85,8 +87,8 @@ void head_alloc(t_collector **collector)
 
 void	tmp_alloc(t_collector **collector, size_t s, void **p)
 {
-	t_tmp 		*n_iter;
-	t_tmp 		*tmp_c;
+	t_tmp	*n_iter;
+	t_tmp	*tmp_c;
 
 	tmp_c = malloc(sizeof(t_tmp));
 	(*p) = malloc(s);
@@ -111,8 +113,8 @@ void	tmp_alloc(t_collector **collector, size_t s, void **p)
 
 void	ntmp_alloc(t_collector **collector, size_t s, void **p)
 {
-	t_ntmp 		*n_iter1;
-	t_ntmp 		*ntmp_c;
+	t_ntmp	*n_iter1;
+	t_ntmp	*ntmp_c;
 
 	ntmp_c = malloc(sizeof(t_ntmp));
 	(*p) = malloc(s);

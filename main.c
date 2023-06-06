@@ -21,7 +21,7 @@
 void	ft_init(char **ev, t_struct **cab)
 {
 	t_struct	*cable;
-	static t_collector *collector;
+	static t_collector	*collector;
 
 	collector = NULL;
 	cable = NULL;
@@ -50,6 +50,7 @@ void	foo()
 {
 	system("leaks minishell");
 }
+
 int	main(int ac, char **av, char **ev)
 {
 	t_struct	*cable;
