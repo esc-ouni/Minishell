@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 17:13:13 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 20:08:35 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	emplify(t_struct *cable, t_cmd *cmd)
 	{
 		if (n_cmd->cmd[0])
 			n_cmd->builtflag = cmd_type(cable, n_cmd->cmd[0]);
+		else
+			n_cmd->builtflag = NOT;
 		update_in_out_files(n_cmd->out_files, n_cmd->in_files);
 		n_cmd = n_cmd->next;
 	}
