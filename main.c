@@ -40,7 +40,9 @@ void	ft_init(char **ev, t_struct **cab)
 
 void	program(t_struct *cable)
 {
-	ft_exec(cable);
+	cable->cmd = get_cmd(cable);
+	//exucution
+	ft_collectorclear(cable->collector, TMP);
 }
 
 void	foo()

@@ -2,6 +2,7 @@
 	"files.associations": {
 		"__debug": "c",
 		"algorithm": "c",
-		"unordered_map": "c"
+		"unordered_map": "c",
+		"minishell.h": "c"
 	}
 }
