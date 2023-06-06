@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:53 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 18:41:29 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:44:28 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_valid_var(const char	*str)
 	char	*pstr;
 
 	pstr = (char *)str;
-	if (*pstr == '=' || *pstr == '+')
+	if (!pstr || *pstr == '=' || *pstr == '+')
 		return (0);
 	while (*pstr && *pstr != '=')
 	{
@@ -28,24 +28,6 @@ int	ft_valid_var(const char	*str)
 	}
 	return (1);
 }
-
-// t_envlst	*ft_var_env_exist(t_envlst *envlst, char *str)
-// {
-// 	char	**var;
-
-// 	var = ft_soft_split(str, '=');
-// 	while (envlst)
-// 	{
-// 		if (!ft_strcmp(envlst->str, var[0]))
-// 		{
-
-// 			return (envlst);
-// 		}
-// 		envlst = envlst->next;
-// 	}
-// 	ft_free_stringp(var);
-// 	return (NULL);
-// }
 
 t_exp	*ft_exp_new_node(char *str, t_struct *cable)
 {
