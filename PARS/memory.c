@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 15:23:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:27:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_tmp(t_collector **collector)
 		n_node = node->next;
 		if (node->tmp_addr)
 		{
-			printf("%p\n", node->tmp_addr);
+			// printf("%p\n", node->tmp_addr);
 			free(node->tmp_addr);
 		}
 		free(node);
@@ -47,7 +47,7 @@ void	free_ntmp(t_collector **collector)
 		n_node1 = node1->next;
 		if (node1->ntmp_addr)
 		{
-			printf("%p\n", node1->ntmp_addr);
+			// printf("%p\n", node1->ntmp_addr);
 			free(node1->ntmp_addr);
 		}
 		free(node1);
