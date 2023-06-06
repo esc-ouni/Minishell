@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 15:21:37 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 16:45:54 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,5 @@ int	basic_syntax_check2(t_lexer **h_lexer)
 			return (syntx_err(), 1);
 		node = node->next;
 	}
-	return (0);
-}
-
-int	check_syntax2(t_lexer **h_lexer)
-{
-	if (basic_syntax_check(h_lexer))
-		return (1);
-	else if (basic_syntax_check2(h_lexer))
-		return (1);
 	return (0);
 }

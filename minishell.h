@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 14:34:00 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 16:51:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,6 @@ typedef enum e_flag
 	ALL
 }	t_flag;
 
-
 void 	free_tmp(t_collector **collector);
 void	free_ntmp(t_collector **collector);
 void 	head_alloc(t_collector **collector);
@@ -326,12 +325,15 @@ t_lexer *n, int j);
 void	add_lexer(t_struct *cable, t_lexer **head, char *content, \
 t_enum	type);
 int		ft_cmdsize(t_cmd *cmd);
-int	basic_syntax_check(t_lexer **h_lexer);
+int		basic_syntax_check(t_lexer **h_lexer);
 int	check_str(char *s);
+void	check_for_rin(t_struct *cable, t_file **in_files, t_lexer **n);
+void	check_for_hd(t_struct *cable, t_file **in_files, t_lexer **n);
+int		basic_syntax_check2(t_lexer **h_lexer);
+void	expand_ev(t_struct *cable, char **str, char *s);
+void	expand_evs(t_struct *cable, char *s, char **str);
 void	expnd_v(t_struct *cable, t_lexer *node, char **str);
 void	expnd_2(t_struct *cable, t_lexer *node, char **str);
-
-void printTYPE(t_enum num) ;
-
+void	printTYPE(t_enum num) ;
 
 #endif
