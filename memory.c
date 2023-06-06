@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:18 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 14:12:27 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:19:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,16 @@ void	tmp_alloc(t_collector **collector, size_t s, void **p)
 		exit (1);
 	}
 	tmp_c->tmp_addr = (*p);
-	tmp_c->next = NULL;
 	if (!((*collector)->tmp_cltr))
-	{
 		((*collector)->tmp_cltr) = tmp_c;
-		((*collector)->tmp_cltr)->next = NULL;
-	}
 	else
 	{
 		n_iter = (*collector)->tmp_cltr;
 		while (n_iter->next)
 			n_iter = n_iter->next;
 		n_iter->next = tmp_c;
-		tmp_c->next = NULL;
 	}
+	tmp_c->next = NULL;
 }
 
 void	ntmp_alloc(t_collector **collector, size_t s, void **p)
@@ -127,20 +123,16 @@ void	ntmp_alloc(t_collector **collector, size_t s, void **p)
 		exit (1);
 	}
 	ntmp_c->ntmp_addr = (*p);
-	ntmp_c->next = NULL;
 	if (!((*collector)->ntmp_cltr))
-	{
 		((*collector)->ntmp_cltr) = ntmp_c;
-		((*collector)->ntmp_cltr)->next = NULL;
-	}
 	else
 	{
 		n_iter1 = (*collector)->ntmp_cltr;
 		while (n_iter1->next)
 			n_iter1 = n_iter1->next;
 		n_iter1->next = ntmp_c;
-		ntmp_c->next = NULL;
 	}
+	ntmp_c->next = NULL;
 }
 
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag)
