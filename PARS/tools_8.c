@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:34 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 20:07:23 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 20:11:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	emplify(t_struct *cable, t_cmd *cmd)
 		update_in_out_files(n_cmd->out_files, n_cmd->in_files);
 		n_cmd = n_cmd->next;
 	}
-	// update_cmd(cmd);
 }
 
 void	update_in_out_files(t_file *out_files, t_file *in_files)
