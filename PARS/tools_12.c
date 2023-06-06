@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 20:10:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 20:33:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	prm(int argc, char **argv, char **env)
 
 void	sig_h(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT && g_var)
 	{
 		write(1, "\n", 1);
 		rl_replace_line("", 0);

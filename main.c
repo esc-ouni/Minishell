@@ -44,7 +44,9 @@ void	program(t_struct *cable)
 	cable->cmd = get_cmd(cable);
 	// after_parse2(cable->cmd);
 	//exucution
+	g_var = 0;
 	ft_exec(cable);
+	g_var = 1;
 	ft_collectorclear(cable->collector, TMP);
 }
 
@@ -58,6 +60,7 @@ int	main(int ac, char **av, char **ev)
 	t_struct	*cable;
 
 	// atexit(foo);
+	g_var = 1;
 	prm(ac, av, ev);
 	ft_init(ev, &cable);
 	strt(cable);
