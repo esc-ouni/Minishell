@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 14:11:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:34:00 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,8 @@ char	*ft_mitoa(t_struct *cable);
 char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
 
+void	check_for_in_files(t_struct *cable, t_file **in_files, t_lexer *n);
+void	check_for_out_files(t_struct *cable, t_file **out_files, t_lexer *n);
 t_cmd	*get_cmd(t_struct *cable);
 void	prm(int argc, char **argv, char **env);
 void	strt(t_struct *cable);
