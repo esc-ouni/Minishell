@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:42:06 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 11:44:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 13:53:58 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	dq_lex(t_struct *cable, t_lexer **l_node, char *s, int *i)
 		(*i)++;
 		l++;
 	}
-	add_lexer(cable , l_node, ft_msubstr(cable, s, start, l), ST_DQ);
+	add_lexer(cable, l_node, ft_msubstr(cable, s, start, l), ST_DQ);
 	(*i)++;
 }
 
@@ -42,7 +42,7 @@ void	sq_lex(t_struct *cable, t_lexer **l_node, char *s, int *i)
 		(*i)++;
 		l++;
 	}
-	add_lexer(cable , l_node, ft_msubstr(cable, s, start, l), ST_SQ);
+	add_lexer(cable, l_node, ft_msubstr(cable, s, start, l), ST_SQ);
 	(*i)++;
 }
 
@@ -59,7 +59,7 @@ void	scmd_lex(t_struct *cable, t_lexer **l_node, char *s, int *i)
 		(*i)++;
 		l++;
 	}
-	add_lexer(cable , l_node, ft_msubstr(cable, s, start, l), SCMD);
+	add_lexer(cable, l_node, ft_msubstr(cable, s, start, l), SCMD);
 }
 
 void	lexer_p2(t_struct *cable, t_lexer **l_node, char *s, int sz)
@@ -70,24 +70,24 @@ void	lexer_p2(t_struct *cable, t_lexer **l_node, char *s, int sz)
 	while (i < sz && s[i])
 	{
 		if (s[i] == '"')
-			dq_lex(cable , l_node, s, &i);
+			dq_lex(cable, l_node, s, &i);
 		else if (s[i] == '\'')
-			sq_lex(cable , l_node, s, &i);
+			sq_lex(cable, l_node, s, &i);
 		else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' \
 		&& s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
-			scmd_lex(cable , l_node, s, &i);
+			scmd_lex(cable, l_node, s, &i);
 		else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-			whsp_lex(cable , l_node, s, &i);
+			whsp_lex(cable, l_node, s, &i);
 		else if (s[i] == '|')
-			pip_lex(cable , l_node, s, &i);
+			pip_lex(cable, l_node, s, &i);
 		else if (s[i] == '>' && s[i + 1] != '>')
-			rot_lex(cable , l_node, s, &i);
+			rot_lex(cable, l_node, s, &i);
 		else if (s[i] == '<' && s[i + 1] != '<')
-			rin_lex(cable , l_node, s, &i);
+			rin_lex(cable, l_node, s, &i);
 		else if (s[i] == '>' && s[i + 1] == '>')
-			roa_lex(cable , l_node, s, &i);
+			roa_lex(cable, l_node, s, &i);
 		else if (s[i] == '<' && s[i + 1] == '<')
-			rhd_lex(cable , l_node, s, &i);
+			rhd_lex(cable, l_node, s, &i);
 	}
 }
 

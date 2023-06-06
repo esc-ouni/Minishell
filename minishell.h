@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:55:46 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/05 16:11:07 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:11:21 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,12 @@ typedef enum e_flag
 }	t_flag;
 
 
+void 	free_tmp(t_collector **collector);
+void	free_ntmp(t_collector **collector);
+void 	head_alloc(t_collector **collector);
+
+void	tmp_alloc(t_collector **collector, size_t s, void **p);
+void	ntmp_alloc(t_collector **collector, size_t s, void **p);
 void	*h_malloc(t_collector **collector, size_t s, void *p, t_flag flag);
 void	ft_collectorclear(t_collector **collector, t_flag flag);
 
