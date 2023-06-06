@@ -14,8 +14,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "minishell.h"
 
 void	ft_init(char **ev, t_struct **cab)
@@ -31,7 +29,7 @@ void	ft_init(char **ev, t_struct **cab)
 	ft_env_set(cable);
 	ft_exp_set(cable);
 	cable->cmd = NULL;
-	cable->exit_val = 0;
+	cable->exit_val = 20;
 	cable->var = 0;
 	cable->is_heredoc = 0;
 	cable->cmd_numb = 0;

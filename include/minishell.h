@@ -29,7 +29,6 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-
 typedef struct s_file		t_file;
 typedef struct s_collector	t_collector;
 typedef struct s_cmd		t_cmd;
@@ -159,6 +158,8 @@ typedef enum e_flag
 	NTMP,
 	ALL
 }	t_flag;
+
+int	g_var;
 
 /*TOOOOLS*/
 void	ft_print_envlst(t_envlst *envlst);
