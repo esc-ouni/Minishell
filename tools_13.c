@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 14:44:20 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:08:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	check_for_ot(t_struct *cable, t_file **out_files, t_lexer **n)
 {
-	char *filename;
-	
+	char	*filename;
+
 	filename = NULL;
 	(*n) = (*n)->next;
 	while ((*n) && (*n)->type == WH_SP)
 		(*n) = (*n)->next;
-	while((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && ((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
+	while ((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && \
+	((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
 	{
 		(*n)->type = FIL_NM;
 		filename = ft_mstrjoin(cable, filename, (*n)->cmd, TMP);
@@ -31,13 +32,14 @@ void	check_for_ot(t_struct *cable, t_file **out_files, t_lexer **n)
 
 void	check_for_oa(t_struct *cable, t_file **out_files, t_lexer **n)
 {
-	char *filename;
-	
+	char	*filename;
+
 	filename = NULL;
 	(*n) = (*n)->next;
 	while ((*n) && (*n)->type == WH_SP)
 		(*n) = (*n)->next;
-	while((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && ((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
+	while ((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && \
+	((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
 	{
 		(*n)->type = FIL_NM;
 		filename = ft_mstrjoin(cable, filename, (*n)->cmd, TMP);
@@ -63,13 +65,14 @@ void	check_for_out_files(t_struct *cable, t_file **out_files, t_lexer *n)
 
 void	check_for_rin(t_struct *cable, t_file **in_files, t_lexer **n)
 {
-	char *filename;
-	
+	char	*filename;
+
 	filename = NULL;
 	(*n) = (*n)->next;
 	while ((*n) && (*n)->type == WH_SP)
 		(*n) = (*n)->next;
-	while((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && ((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
+	while ((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && \
+	((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
 	{
 		(*n)->type = FIL_NM;
 		filename = ft_mstrjoin(cable, filename, (*n)->cmd, TMP);
@@ -80,13 +83,14 @@ void	check_for_rin(t_struct *cable, t_file **in_files, t_lexer **n)
 
 void	check_for_hd(t_struct *cable, t_file **in_files, t_lexer **n)
 {
-	char *filename;
-	
+	char	*filename;
+
 	filename = NULL;
 	(*n) = (*n)->next;
 	while ((*n) && (*n)->type == WH_SP)
 		(*n) = (*n)->next;
-	while((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && ((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
+	while ((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && \
+	((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
 	{
 		(*n)->type = FIL_NM;
 		filename = ft_mstrjoin(cable, filename, (*n)->cmd, TMP);
@@ -94,7 +98,6 @@ void	check_for_hd(t_struct *cable, t_file **in_files, t_lexer **n)
 	}
 	add_file_node(cable, in_files, filename, O_APPEND);
 }
-
 
 void	check_for_in_files(t_struct *cable, t_file **in_files, t_lexer *n)
 {
