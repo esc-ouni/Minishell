@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:48:27 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 15:18:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:09:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char **argv, char **env)
     while (1)
     {
 		cmd = get_cmd(cable);
-        // emplify(cable, cmd);
+        emplify(cable, cmd);
         after_parse2(cmd);
 		ft_collectorclear(cable->collector, TMP);
     }

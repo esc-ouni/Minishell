@@ -98,9 +98,9 @@ void    after_parse2(t_cmd  *cmd)
             printf("'%s'->", node->in_files->filename);
             node->in_files = node->in_files->next;
         }
-        // printf("\n");
-        // printf("   cmd_type    : ");
-        // printf("%d ", node->builtflag); 
+        printf("\n");
+        printf("   cmd_type    : ");
+        printf("%d ", node->builtflag); 
         printf("\n\n");
         i++;
         node = node->next;
