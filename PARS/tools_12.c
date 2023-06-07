@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/07 14:11:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 14:21:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ void sig_h(int sig)
 {
 	if (sig == SIGINT && !g_var && g_var != 1)
 	{
-		// write(1, "^C\n", 4);
 		write (1, "HEREDOC\n", 9);
-		// rl_on_new_line();
+		// // rl_on_new_line();
 	}
 	else if (sig == SIGINT && g_var)
 	{
