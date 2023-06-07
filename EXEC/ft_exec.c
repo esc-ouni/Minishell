@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 12:42:42 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:04:02 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ int	ft_open_in_file(t_cmd *cmd, t_struct *cable)
 	while (files)
 	{
 		if (files->o_flag == O_APPEND)
-			ft_heredoc(cmd, files->filename, cable);
+			cmd->fd_in = ft_heredoc(cmd, files->filename, cable);
 		else
 			cmd->fd_in = open(files->filename, O_RDONLY);
 		if (cmd->fd_in < 0)
-			return (perror(""), -1);
+			return (perror(files->filename), -1);
+		dup2(cmd->fd_in, STDIN_FILENO);
+		close(cmd->fd_in);
 		files = files->next;
 	}
 	return (0);
@@ -80,8 +82,6 @@ int	ft_first_redirection(t_cmd *cmd, t_struct *cable)
 	if (cmd->in_files)
 	{
 		op = ft_open_in_file(cmd, cable);
-		if (!op)
-			dup2(cmd->fd_in, STDIN_FILENO);
 		if (op < 0)
 			cable->exit_val = 1;
 	}
