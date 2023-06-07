@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 16:49:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 19:23:30 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 	int 	t;
 
 	t = g_var;
-	g_var = 4;
+	g_var = 3;
 	while (1)
 	{
 		line = readline(">");
