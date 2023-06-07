@@ -74,7 +74,7 @@ void	ft_export(t_struct *cable, char	*str)
 	if (!str)
 		ft_print_exp(cable->exp);
 	if (!ft_valid_var(str))
-		return ;
+		return (ft_print_var_err(str, 0));
 	if (ft_isplus(str))
 		ft_joint_to_export(cable, &str);
 	if (ft_strchr(str, '='))

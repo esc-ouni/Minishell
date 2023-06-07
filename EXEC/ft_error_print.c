@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   ft_error_print.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 12:17:57 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 12:19:48 by msamhaou         ###   ########.fr       */
+/*   Created: 2023/06/07 12:11:35 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/07 12:18:34 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-int	ft_valid_unset(const char *str)
+void	ft_print_var_err(char *str , int type)
 {
-	char	*s;
-	s = (char *)str;
-	while (*s)
-	{
-		if (!ft_isalnum(*s) && *s != '_')
-			return (0);
-		s++;
-	}
-	return (1);
-}
-
-
-
-
-void	ft_unset(t_struct *cable, char *str)
-{
-	if (!ft_valid_unset(str))
-		return (ft_print_var_err(str, 1));
-	ft_unset_envlst(cable, str);
-	// ft_unset_explst(cable, str);
+	if (type == 0)
+		ft_putstr_fd("export: `", 2);
+	if (type == 1)
+		ft_putstr_fd("unset: `", 2);
+	ft_putstr_fd(str, 2);
+	ft_putendl_fd("': not a valid identifier", 2);
 }
