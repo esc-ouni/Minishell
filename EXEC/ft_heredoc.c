@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 11:20:09 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:43:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 	while (1)
 	{
 		line = readline(">");
-		if (!line || !ft_strlen(line))
+		if (!line)
 			break ;
+		if(!ft_strlen(line))
+			continue ;
 		if (!ft_strcmp(line, delimiter))
 		{
 			free(line);
@@ -44,7 +46,7 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter, t_struct *cable)
 	char	*name;
 
 	dup2(cable->tmp_fd_in, 0);
-	name = "GEN";
+	name = "obj/GEN";
 	/*see if that name exist*/
 	/*create file with that name*/
 
