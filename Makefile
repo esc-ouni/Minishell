@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
+#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/07 17:31:42 by idouni           ###   ########.fr        #
+#    Updated: 2023/06/07 12:15:18 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ NAME = minishell
 all : $(NAME)
 
 $(NAME) : $(OBJ_DIR) $(ALL_OBJ)
-	$(CC) -lreadline $(ALL_OBJ) -o $(NAME) -L$(LINK) -lncurses
+	$(CC) -lreadline $(ALL_OBJ) -o $(NAME) -L$(LINK)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)

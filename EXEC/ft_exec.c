@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 18:46:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 14:10:47 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 {
 	int	fd[2];
 	int	pid;
-	int t;
 
 	if (!ft_built_in_first(cmd, cable))
 		return (0);
@@ -99,18 +98,9 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 		return (1);
 	pipe(fd);
 	cmd->pipe_fd = fd;
-	if (!strncmp(cable->cmd->cmd[0], "./minishell", ft_strlen("./minishell")))
-	{
-		t = g_var;
-		g_var = 5;
-	}
 	pid = fork();
 	if (!pid)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
 		ft_child(cmd, fd, cable);
-	}
 	else
 		ft_parent(cmd, fd, cable);
 	return (0);
