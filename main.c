@@ -28,6 +28,7 @@ void	ft_init(char **ev, t_struct **cab)
 	ft_set_env_lst(cable, ev);
 	ft_env_set(cable);
 	ft_exp_set(cable);
+	ft_unset(cable, "OLDPWD");
 	cable->cmd = NULL;
 	cable->exit_val = 0;
 	cable->var = 0;

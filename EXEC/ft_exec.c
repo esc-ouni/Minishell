@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:10:47 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:32:04 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
 		return (1);
 	if (cmd->builtflag == CD)
 	{
-		ft_cd(cmd);
+		ft_cd(cmd, cable);
 		return (0);
 	}
 	else if (cmd->builtflag == EXT)

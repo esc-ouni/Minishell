@@ -6,18 +6,46 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:11:25 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:06:58 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:55:29 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd(t_cmd *cmd)
+void	ft_set_oldpwd(t_struct *cable)
+{
+	char	*pwd;
+	char	*oldpwd;
+
+	pwd = ft_getcwd();
+	oldpwd = ft_mstrjoin(cable, "OLDPWD=", pwd, NTMP);
+	free(pwd);
+	ft_export(cable, oldpwd);
+}
+
+char	*ft_get_oldpwd(t_struct *cable)
+{
+	t_envlst	*exist;
+
+	exist = ft_var_env_exist(cable->envlst, "OLDPWD=");
+	if (exist)
+		return (ft_strchr(exist->str, '=') + 1);
+	return (NULL);
+}
+
+int	ft_cd(t_cmd *cmd, t_struct *cable)
 {
 	char	*path;
 
+	ft_set_oldpwd(cable);
 	if (!cmd->cmd[1])
 		path = getenv("HOME");
+	else if (!ft_strcmp(cmd->cmd[1], "-"))
+	{
+		path = ft_get_oldpwd(cable);
+		if (!path)
+			return (ft_putendl_fd("cd: OLDPWD not set", 2), 1);
+	}
 	else
 		path = cmd->cmd[1];
 	if ((chdir(path) < 0))

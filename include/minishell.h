@@ -193,13 +193,14 @@ void	ft_skip_exp_node(t_struct *cable, t_exp *exist);
 void	ft_unset_exp(t_struct *cable, char *str);
 void	ft_print_var_err(char *str, int type);
 char	**ft_make_double_char(t_envlst *envlst);
-
+void	ft_env_update(t_struct *cable);
+char	*ft_getcwd(void);
 
 
 void	ft_unset(t_struct *cable, char *str);
-int		ft_cd(t_cmd *cmd);
+int		ft_cd(t_cmd *cmd, t_struct *cable);
 void	ft_quit(t_built flag, t_struct *cable);
-int     ft_cd(t_cmd *cmd);
+int     ft_cd(t_cmd *cmd, t_struct *cable);
 int     ft_echo(t_cmd *lol);
 int     ft_pwd(void);
 int     ft_builtin(t_cmd *lol, t_struct *cable);
