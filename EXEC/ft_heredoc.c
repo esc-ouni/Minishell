@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/06 17:58:10 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:20:09 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ char	*ft_gen_name()
 static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 {
 	char	*line;
-	char	*delim;
 
-	delim = ft_mstrjoin(cable, delimiter, "\n", TMP);
 	while (1)
 	{
 		line = readline(">");
-		if (!ft_strncmp(line, delim, ft_strlen(line)))
+		if (!line || !ft_strlen(line))
+			break ;
+		if (!ft_strcmp(line, delimiter))
 		{
 			free(line);
 			break ;
@@ -49,7 +49,7 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter, t_struct *cable)
 	/*create file with that name*/
 
 	/*open*/
-	int fd = open(name, O_CREAT | O_TRUNC | O_WRONLY);
+	int fd = open(name, O_CREAT | O_TRUNC | O_WRONLY, 0664);
 	/*write in it*/
 	ft_heredoc_write(fd, delimiter, cable);
 	/*close it*/
