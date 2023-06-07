@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 16:49:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 17:38:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,38 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 
 	t = g_var;
 	g_var = 4;
-	while (1)
+
+	pid_t hd;
+	
+	hd = fork();
+	if (hd == 0)
 	{
-		line = readline(">");
-		if (!line)
-			break ;
-		if (!ft_strlen(line))
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		while (1)
 		{
-			free(line);
-			line = NULL;
-			continue ;
+			line = readline(">");
+			if (!line)
+				break ;
+			if (!ft_strlen(line))
+			{
+				free(line);
+				line = NULL;
+				continue ;
+			}
+			if (!ft_strcmp(line, delimiter))
+			{
+				free(line);
+				line = NULL;
+				break ;
+			}
+			line = s_expander(cable, line);
+			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
 		}
-		if (!ft_strcmp(line, delimiter))
-		{
-			free(line);
-			line = NULL;
-			break ;
-		}
-		line = s_expander(cable, line);
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
 	}
+	else
+		wait(NULL);
 	g_var = t;
 	return (0);
 }

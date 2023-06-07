@@ -46,6 +46,7 @@ void	program(t_struct *cable)
 	//exucution
 	g_var = 0;
 	ft_exec(cable);
+	strt2(cable);
 	g_var = 1;
 	ft_collectorclear(cable->collector, TMP);
 }

@@ -18,6 +18,11 @@
 
 #ifndef	MINISHELL_H
 # define MINISHELL_H
+
+#include <libc.h>
+#include <curses.h>
+#include <ncurses.h>
+#include <term.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
