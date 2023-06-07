@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:22:24 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/06 15:04:21 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:33:17 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	ft_redirect_child(t_cmd *cmd, t_struct *cable)
 	return (0);
 }
 
-int	ft_child(t_cmd *cmd, t_struct *cable)
+int	ft_child(t_cmd *cmd, int *fd,t_struct *cable)
 {
-	close(cmd->pipe_fd[0]);
+	close(fd[0]);
 	// if (init->err_in)
 	// 	exit(1);
 	ft_redirect_child(cmd, cable);
@@ -67,7 +67,7 @@ int	ft_child(t_cmd *cmd, t_struct *cable)
 		{
 			if (cmd->cmd[0])
 				ft_putendl_fd("cmd does not exist", 2);
-			close(cmd->pipe_fd[1]);
+			close(fd[1]);
 			exit(1);
 		}
 		exit(0);
