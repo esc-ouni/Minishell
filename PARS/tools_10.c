@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 20:15:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 13:56:24 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_syntax(t_struct *cable, char *s)
 {
 	if (!s)
 	{
-		write(1, "exit\n", 5);
+		write(1, "exit\n", 6);
 		ft_collectorclear(cable->collector, ALL);
 		exit (0);
 	}
