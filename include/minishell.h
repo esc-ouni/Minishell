@@ -195,6 +195,7 @@ void	ft_print_var_err(char *str, int type);
 char	**ft_make_double_char(t_envlst *envlst);
 void	ft_env_update(t_struct *cable);
 char	*ft_getcwd(void);
+char	*ft_set_newpwd(t_struct *cable);
 
 
 void	ft_unset(t_struct *cable, char *str);

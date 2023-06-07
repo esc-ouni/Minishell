@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:14:25 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:26:10 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,16 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 	return (0);
 }
 
+// int	ft_heredoc_child(t_struct *cable)
+// {
+
+// }
+
 int	ft_heredoc(t_cmd *cmd, char *delimiter, t_struct *cable)
 {
 	char	*name;
 	int		fd;
+	int		*pipe;
 
 	dup2(cable->tmp_fd_in, 0);
 	name = "obj/GEN";
