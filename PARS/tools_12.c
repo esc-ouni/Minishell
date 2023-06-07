@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/07 11:00:09 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:36:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	prm(int argc, char **argv, char **env)
+void prm(int argc, char **argv, char **env)
 {
 	(void)argv;
 	if (argc == 2)
@@ -24,7 +24,7 @@ void	prm(int argc, char **argv, char **env)
 		exit(0);
 }
 
-void	sig_h(int sig)
+void sig_h(int sig)
 {
 	if (sig == SIGINT && g_var)
 	{
@@ -33,35 +33,16 @@ void	sig_h(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	else if (sig == SIGINT && !g_var)
+	else if (sig == SIGINT && !g_var && g_var != 1)
 	{
-		// write(1, "\n", 1);
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
-		// rl_redisplay();
-		exit(0);
-	}
-	else if (sig == SIGQUIT && g_var)
-	{
-		// write(1, "\n", 1);
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
-		// rl_redisplay();
-		// exit(0);
-	}
-	else if (sig == SIGQUIT && !g_var)
-	{
-		// write(1, "\n", 1);
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
-		// rl_redisplay();
-		exit(0);
+		write(g_var, "\n", 1);
+		close(g_var);
 	}
 }
 
-void	strt1(t_struct *cable, int t_fd)
+void strt1(t_struct *cable, int t_fd)
 {
-	struct termios	terminal_c;
+	struct termios terminal_c;
 
 	if (tcgetattr(t_fd, &terminal_c) < 0)
 	{
@@ -76,7 +57,7 @@ void	strt1(t_struct *cable, int t_fd)
 	}
 }
 
-void	strt2(t_struct *cable)
+void strt2(t_struct *cable)
 {
 	if (signal(SIGINT, sig_h) == SIG_ERR)
 	{
@@ -90,10 +71,10 @@ void	strt2(t_struct *cable)
 	}
 }
 
-void	strt(t_struct *cable)
+void strt(t_struct *cable)
 {
-	int				err;
-	int				t_fd;
+	int err;
+	int t_fd;
 
 	err = 0;
 	t_fd = open("/dev/tty", O_RDONLY);
