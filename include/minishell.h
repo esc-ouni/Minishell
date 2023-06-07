@@ -187,6 +187,12 @@ char	*ft_trim_char(char *str, char c, t_struct *cable);
 int	ft_child(t_cmd *cmd, int *fd,t_struct *cable);
 int	ft_set_path(t_cmd *cmd, t_struct *cable);
 int	ft_heredoc(t_cmd *cmd, char *delimiter, t_struct *cable);
+void	ft_skip_env_node(t_struct *cable, t_envlst *exist);
+void	ft_unset_envlst(t_struct *cable, char *str);
+void	ft_skip_exp_node(t_struct *cable, t_exp *exist);
+void	ft_unset_exp(t_struct *cable, char *str);
+void	ft_print_var_err(char *str, int type);
+
 
 
 void	ft_unset(t_struct *cable, char *str);

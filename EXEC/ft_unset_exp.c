@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export_exp.c                                    :+:      :+:    :+:   */
+/*   ft_unset_exp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 11:32:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 12:04:08 by msamhaou         ###   ########.fr       */
+/*   Created: 2023/06/07 11:38:13 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/07 11:54:07 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_replace_in_exp(t_struct *cable, t_exp **exist, char *str)
+void	ft_skip_exp_node(t_struct *cable, t_exp *exist)
 {
-	(*exist)->str = ft_mstrdup(cable, str, NTMP);
+	t_exp	*exp;
+
+	exp = cable->exp;
+	if (cable->exp == exist)
+		cable->exp = cable->exp->next;
+	else
+	{
+		while (exp->next != exist)
+			exp = exp->next;
+		exp->next = exp->next->next;
+	}
 }
 
-void	ft_export_exp(t_struct *cable, char *str)
+void	ft_unset_exp(t_struct *cable, char *str)
 {
-	char	*expstr;
 	t_exp	*exist;
-	expstr = ft_exported_str(str, cable);
-	exist = ft_var_exp_exist(cable->exp, expstr);
-	if(exist && ft_strchr(str, '='))
-		ft_replace_in_exp(cable, &exist, expstr);
-	else if (!exist)
-		ft_exp_add_back(&cable->exp, ft_exp_new_node(expstr, cable));
-	ft_alpha_order(cable);
+	char	*decl;
+
+	decl = ft_mstrjoin(cable, "declare -x ", str, TMP);
+	exist = ft_var_exp_exist(cable->exp, decl);
+	if (exist)
+		ft_skip_exp_node(cable, exist);
 }

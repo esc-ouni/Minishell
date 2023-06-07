@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 11:33:04 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:42:42 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ int	ft_open_in_file(t_cmd *cmd, t_struct *cable)
 	files = cmd->in_files;
 	while (files)
 	{
-		cmd->fd_in = open(files->filename, O_RDONLY);
 		if (files->o_flag == O_APPEND)
 			ft_heredoc(cmd, files->filename, cable);
+		else
+			cmd->fd_in = open(files->filename, O_RDONLY);
 		if (cmd->fd_in < 0)
-			return (perror(""), 1);
+			return (perror(""), -1);
 		files = files->next;
 	}
 	return (0);
@@ -45,7 +46,7 @@ int	ft_open_in_file(t_cmd *cmd, t_struct *cable)
 
 int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
 {
-	int i = 0;
+	int i = 1;
 
 	if (cable->cmd_numb > 1)
 		return (1);
@@ -71,13 +72,20 @@ int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
 	return (1);
 }
 
-void	ft_first_redirection(t_cmd *cmd, t_struct *cable)
+int	ft_first_redirection(t_cmd *cmd, t_struct *cable)
 {
+	int	op;
+
+	op = 0;
 	if (cmd->in_files)
 	{
-		ft_open_in_file(cmd, cable);
-		dup2(cmd->fd_in, STDIN_FILENO);
+		op = ft_open_in_file(cmd, cable);
+		if (!op)
+			dup2(cmd->fd_in, STDIN_FILENO);
+		if (op < 0)
+			cable->exit_val = 1;
 	}
+	return (op);
 }
 
 int	ft_fork(t_cmd *cmd, t_struct *cable)
@@ -87,7 +95,8 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 
 	if (!ft_built_in_first(cmd, cable))
 		return (0);
-	ft_first_redirection(cmd, cable);
+	if (ft_first_redirection(cmd, cable) < 0)
+		return (1);
 	pipe(fd);
 	cmd->pipe_fd = fd;
 	pid = fork();
@@ -125,5 +134,5 @@ void	ft_exec(t_struct *cable)
 		cmd = cmd->next;
 	}
 	while (cable->cmd_numb--)
-		wait(NULL);
+		wait(&cable->exit_val);
 }
