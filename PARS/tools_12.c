@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/07 14:02:00 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 14:21:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,29 @@ void prm(int argc, char **argv, char **env)
 
 void sig_h(int sig)
 {
-	if (sig == SIGINT && g_var)
+	if (sig == SIGINT && !g_var && g_var != 1)
+	{
+		write (1, "HEREDOC\n", 9);
+		// // rl_on_new_line();
+	}
+	else if (sig == SIGINT && g_var)
 	{
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	if (sig == SIGQUIT && g_var)
+	else if (sig == SIGQUIT && g_var)
 	{
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	if (sig == SIGQUIT && !g_var)
+	else if (sig == SIGQUIT && !g_var)
 	{
 		write(1, "^\\Quit : 3\n", 12);
 		rl_redisplay();
 	}
-	if (sig == SIGINT && !g_var)
+	else if (sig == SIGINT && !g_var)
 	{
 		write(1, "^C\n", 4);
 		rl_on_new_line();
