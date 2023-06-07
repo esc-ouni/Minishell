@@ -1,5 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/07 14:11:12 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/07 14:12:13 by msamhaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
 
 char	*ft_exported_str(char *str, t_struct *cable)
 {
@@ -17,10 +28,6 @@ char	*ft_exported_str(char *str, t_struct *cable)
 	return (left);
 }
 
-
-
-
-
 int	ft_isplus(char *str)
 {
 	char	**eq;
@@ -35,6 +42,7 @@ void	ft_joint_to_export(t_struct *cable, char **str)
 {
 	t_envlst	*exist;
 	char		**spl;
+
 	*str = ft_trim_char(*str, '+', cable);
 	exist = ft_var_env_exist(cable->envlst, *str);
 	if (exist)
@@ -44,7 +52,6 @@ void	ft_joint_to_export(t_struct *cable, char **str)
 		ft_free_stringp(spl);
 	}
 }
-
 
 char	**ft_make_double_char(t_envlst *envlst)
 {

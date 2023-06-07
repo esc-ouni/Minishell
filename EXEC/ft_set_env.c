@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 18:41:51 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:18:43 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ void	ft_env_set(t_struct *cable)
 	}
 	cable->env[i] = NULL;
 }
-

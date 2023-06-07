@@ -192,6 +192,7 @@ void	ft_unset_envlst(t_struct *cable, char *str);
 void	ft_skip_exp_node(t_struct *cable, t_exp *exist);
 void	ft_unset_exp(t_struct *cable, char *str);
 void	ft_print_var_err(char *str, int type);
+char	**ft_make_double_char(t_envlst *envlst);
 
 
 

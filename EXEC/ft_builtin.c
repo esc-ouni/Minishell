@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:11:25 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/06 15:11:02 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:06:58 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	ft_cd(t_cmd *cmd)
 		perror("");
 	return (0);
 }
+
 void	ft_quit(t_built flag, t_struct *cable)
 {
 	if (flag == EXT)

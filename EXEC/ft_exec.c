@@ -6,15 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:04:02 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:10:47 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-int	ft_parent(t_cmd *cmd, int *fd,t_struct *cable)
+int	ft_parent(t_cmd *cmd, int *fd, t_struct *cable)
 {
 	char	*line;
 
@@ -48,8 +46,9 @@ int	ft_open_in_file(t_cmd *cmd, t_struct *cable)
 
 int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
 {
-	int i = 1;
+	int	i;
 
+	i = 1;
 	if (cable->cmd_numb > 1)
 		return (1);
 	if (cmd->builtflag == CD)
@@ -101,17 +100,17 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	cmd->pipe_fd = fd;
 	pid = fork();
 	if (!pid)
-		ft_child(cmd, fd,cable);
+		ft_child(cmd, fd, cable);
 	else
-		ft_parent(cmd, fd,cable);
-	//cable err;
+		ft_parent(cmd, fd, cable);
 	return (0);
 }
 
 int	ft_cmd_count(t_cmd *cmd)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (cmd)
 	{
 		i++;

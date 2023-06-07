@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:16:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/05 18:40:32 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:08:29 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ void	ft_env_add_back(t_envlst **envlst, t_envlst *toadd)
 	else
 		ft_last_envlst(*envlst)->next = toadd;
 }
-
