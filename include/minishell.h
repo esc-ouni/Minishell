@@ -225,6 +225,10 @@ char	*ft_mitoa(t_struct *cable);
 char	*ft_msubstr(t_struct *cable, char const *s, \
 unsigned int start, size_t len);
 
+void	sig_h(int sig);
+void	strt2(t_struct *cable);
+void 	strt1(t_struct *cable);
+void 	vstrt1(t_struct *cable);
 void	emplify(t_struct *cable, t_cmd *cmd);
 void	update_in_out_files(t_file *out_files, t_file *in_files);
 void	check_for_in_files(t_struct *cable, t_file **in_files, t_lexer *n);
