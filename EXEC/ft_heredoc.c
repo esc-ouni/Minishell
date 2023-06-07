@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 17:38:14 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 18:39:24 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 			write(fd, line, ft_strlen(line));
 			write(fd, "\n", 1);
 		}
+		exit(0);
 	}
 	else
 		wait(NULL);
