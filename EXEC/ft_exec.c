@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/06 17:52:38 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:33:04 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 
 
-int	ft_parent(t_cmd *cmd, t_struct *cable)
+int	ft_parent(t_cmd *cmd, int *fd,t_struct *cable)
 {
 	char	*line;
 
-	close(cmd->pipe_fd[1]);
-	dup2(cmd->pipe_fd[0], STDIN_FILENO);
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
 	if (cmd->fd_in)
 		close(cmd->fd_in);
-	close (cmd->pipe_fd[0]);
+	close (fd[0]);
 	return (0);
 }
 
@@ -92,9 +92,9 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	cmd->pipe_fd = fd;
 	pid = fork();
 	if (!pid)
-		ft_child(cmd, cable);
+		ft_child(cmd, fd,cable);
 	else
-		ft_parent(cmd, cable);
+		ft_parent(cmd, fd,cable);
 	//cable err;
 	return (0);
 }

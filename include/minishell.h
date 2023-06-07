@@ -184,7 +184,7 @@ t_exp	*ft_var_exp_exist(t_exp *exp, char *str);
 char    **ft_msoft_split_include(char *str, char c, t_struct *cable);
 int	ft_strcmp(const char *s1, const char *s2);
 char	*ft_trim_char(char *str, char c, t_struct *cable);
-int	ft_child(t_cmd *cmd, t_struct *cable);
+int	ft_child(t_cmd *cmd, int *fd,t_struct *cable);
 int	ft_set_path(t_cmd *cmd, t_struct *cable);
 int	ft_heredoc(t_cmd *cmd, char *delimiter, t_struct *cable);
 
