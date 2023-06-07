@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 11:33:04 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:06:58 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_open_in_file(t_cmd *cmd, t_struct *cable)
 
 int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
 {
-	int i = 0;
+	int i = 1;
 
 	if (cable->cmd_numb > 1)
 		return (1);

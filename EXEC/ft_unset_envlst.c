@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   ft_unset_envlst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 12:17:57 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 11:50:10 by msamhaou         ###   ########.fr       */
+/*   Created: 2023/06/07 11:37:04 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/07 11:43:34 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-int	ft_valid_unset(const char *str)
+void	ft_skip_env_node(t_struct *cable, t_envlst *exist)
 {
-	char	*s;
-	s = (char *)str;
-	while (*s)
+	t_envlst	*envlst;
+
+	envlst = cable->envlst;
+	if (cable->envlst == exist)
+		cable->envlst = cable->envlst->next;
+	else
 	{
-		if (!ft_isalnum(*s) && *s != '_')
-			return (0);
-		s++;
+		while (envlst->next != exist)
+			envlst = envlst->next;
+		envlst->next = envlst->next->next;
 	}
-	return (1);
 }
 
 
-
-
-void	ft_unset(t_struct *cable, char *str)
+void	ft_unset_envlst(t_struct *cable, char *str)
 {
-	if (!ft_valid_unset(str))
-		return ;
-	ft_unset_envlst(cable, str);
-	// ft_unset_explst(cable, str);
+	t_envlst	*exist;
+
+	exist = ft_var_env_exist(cable->envlst, str);
+	if (exist)
+		ft_skip_env_node(cable, exist);
 }
