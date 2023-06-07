@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/07 16:21:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/07 16:42:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ void prm(int argc, char **argv, char **env)
 
 void sig_h(int sig)
 {
-	if (sig == SIGINT && g_var == 1)
+	if (sig == SIGINT && g_var > 1)
 	{
 		write (1, "HEREDOC\n", 9);
-		g_var = 0;
 		// rl_redisplay();
 		// // rl_on_new_line();
 	}

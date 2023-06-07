@@ -286,6 +286,7 @@ int	check_str(char *s);
 void	check_for_rin(t_struct *cable, t_file **in_files, t_lexer **n);
 void	check_for_hd(t_struct *cable, t_file **in_files, t_lexer **n);
 int		basic_syntax_check2(t_lexer **h_lexer);
+char	*s_expander(t_struct *cable, char *line);
 void	expand_ev(t_struct *cable, char **str, char *s);
 void	expand_evs(t_struct *cable, char *s, char **str);
 void	expnd_v(t_struct *cable, t_lexer *node, char **str);

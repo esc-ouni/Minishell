@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:14:25 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:41:59 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,28 @@
 static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 {
 	char	*line;
+	int 	t;
 
+	t = g_var;
+	g_var = 4;
 	while (1)
 	{
 		line = readline(">");
 		if (!line)
 			break ;
-		if (!ft_strlen(line))
-			continue ;
+		// if (!ft_strlen(line))
+		// 	continue ;
 		if (!ft_strcmp(line, delimiter))
 		{
 			free(line);
 			break ;
 		}
+		line = s_expander(cable, line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
-		free(line);
+		// free(line);
 	}
+	g_var = t;
 	return (0);
 }
 
