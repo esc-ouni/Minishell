@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 12:18:45 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:13:11 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_set_env_lst(t_struct *cable, char **ev)
 	cable->envlst = NULL;
 	if (ev[i])
 	{
-		printf("herre");
 		while (ev[i])
 			ft_env_add_back(&cable->envlst, ft_env_new_node(ev[i++], cable));
 	}
