@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 14:46:33 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:47:05 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	signal_dfl()
+void	signal_dfl(void)
 {
 	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
 	{
