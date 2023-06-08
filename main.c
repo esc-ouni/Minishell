@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 15:37:31 by msamhaou          #+#    #+#             */
-
-/*   Updated: 2023/06/05 16:56:06 by idouni           ###   ########.fr       */
-
-/*   Updated: 2023/06/05 12:54:54 by msamhaou         ###   ########.fr       */
-
+/*   Created: 2023/06/08 14:42:08 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/08 14:42:41 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +14,7 @@
 
 void	ft_init(char **ev, t_struct **cab)
 {
-	t_struct	*cable;
+	t_struct			*cable;
 	static t_collector	*collector;
 
 	collector = NULL;
@@ -47,11 +43,6 @@ void	program(t_struct *cable)
 	ft_exec(cable);
 	g_var = 1;
 	ft_collectorclear(cable->collector, TMP);
-}
-
-void	foo()
-{
-	system("leaks minishell");
 }
 
 int	main(int ac, char **av, char **ev)
