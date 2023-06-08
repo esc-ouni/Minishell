@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 15:43:39 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:15:59 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,8 @@ void		ft_exp_set(t_struct *cable);
 size_t		ft_envlst_size(t_envlst *envlst);
 void		ft_exec(t_struct *cable);
 void		ft_export(t_struct *cable, char	*str);
-t_envlst	*ft_var_env_exist(t_envlst *envlst, char *str);
-t_exp		*ft_var_exp_exist(t_exp *exp, char *str);
+t_envlst	*ft_var_env_exist(t_envlst *envlst, char *str, t_struct *cable);
+t_exp		*ft_var_exp_exist(t_exp *exp, char *str, t_struct *cable);
 char		**ft_msoft_split_include(char *str, char c, t_struct *cable);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_trim_char(char *str, char c, t_struct *cable);
@@ -179,18 +179,17 @@ void		ft_unset_envlst(t_struct *cable, char *str);
 void		ft_skip_exp_node(t_struct *cable, t_exp *exist);
 void		ft_unset_exp(t_struct *cable, char *str);
 void		ft_print_var_err(char *str, int type);
-char		**ft_make_double_char(t_envlst *envlst);
 void		ft_env_update(t_struct *cable);
-char		*ft_getcwd(void);
+char		*ft_getcwd(t_struct *cable);
 int			ft_fork(t_cmd *cmd, t_struct *cable);
 void		ft_joint_to_export(t_struct *cable, char **str);
-int			ft_isplus(char *str);
+int			ft_isplus(char *str, t_struct *cable);
 void		ft_unset(t_struct *cable, char *str);
 int			ft_cd(t_cmd *cmd, t_struct *cable);
 void		ft_quit(t_built flag);
 int			ft_cd(t_cmd *cmd, t_struct *cable);
-int			ft_echo(t_cmd *lol);
-int			ft_pwd(void);
+int			ft_echo(t_cmd *lol, t_struct *cable);
+int			ft_pwd(t_struct *cable);
 int			ft_builtin(t_cmd *lol, t_struct *cable);
 void		free_tmp(t_collector **collector);
 void		free_ntmp(t_collector **collector);
@@ -287,6 +286,6 @@ void		ft_alpha_order(t_struct *cable);
 char		*ft_exported_str(char *str, t_struct *cable);
 void		ft_export_exp(t_struct *cable, char *str);
 int			ft_valid_var(const char	*str);
-void		ft_free_stringp(char **env);
+char		**ft_soft_split(char *str, char c, t_struct *cable);
 
 #endif

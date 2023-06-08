@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:37:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 11:47:35 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:17:08 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_unset_envlst(t_struct *cable, char *str)
 {
 	t_envlst	*exist;
 
-	exist = ft_var_env_exist(cable->envlst, str);
+	exist = ft_var_env_exist(cable->envlst, str, cable);
 	if (exist)
 	{
 		ft_skip_env_node(cable, exist);

@@ -6,44 +6,40 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 08:59:09 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/06 09:33:31 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:16:40 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_envlst	*ft_var_env_exist(t_envlst *envlst, char *str)
+t_envlst	*ft_var_env_exist(t_envlst *envlst, char *str, t_struct *cable)
 {
 	char	**var;
 	char	**splstr;
 
-	var = ft_soft_split(str, '=');
+	var = ft_soft_split(str, '=', cable);
 	while (envlst)
 	{
-		splstr = ft_soft_split(envlst->str, '=');
+		splstr = ft_soft_split(envlst->str, '=', cable);
 		if (!ft_strcmp(splstr[0], var[0]))
-			return (ft_free_stringp(var), ft_free_stringp(splstr), envlst);
+			return (envlst);
 		envlst = envlst->next;
-		ft_free_stringp(splstr);
 	}
-	ft_free_stringp(var);
 	return (NULL);
 }
 
-t_exp	*ft_var_exp_exist(t_exp *exp, char *str)
+t_exp	*ft_var_exp_exist(t_exp *exp, char *str, t_struct *cable)
 {
 	char	**var;
 	char	**splstr;
 
-	var = ft_soft_split(str, '=');
+	var = ft_soft_split(str, '=', cable);
 	while (exp)
 	{
-		splstr = ft_soft_split(exp->str, '=');
+		splstr = ft_soft_split(exp->str, '=', cable);
 		if (!ft_strcmp(splstr[0], var[0]))
-			return (ft_free_stringp(var), ft_free_stringp(splstr), exp);
+			return (exp);
 		exp = exp->next;
-		ft_free_stringp(splstr);
 	}
-	ft_free_stringp(var);
 	return (NULL);
 }

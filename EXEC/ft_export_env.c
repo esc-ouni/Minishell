@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:33:20 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/06 16:32:32 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:14:18 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_export_env(t_struct *cable, char	*str)
 {
 	t_envlst	*exist;
 
-	exist = ft_var_env_exist(cable->envlst, str);
+	exist = ft_var_env_exist(cable->envlst, str, cable);
 	if (exist)
 	{
 		ft_replace_in_envlst(cable, &exist, str);

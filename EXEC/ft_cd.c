@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:32:10 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 11:40:53 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:14:09 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ static char	*ft_set_oldpwd(t_struct *cable)
 	char	*pwd;
 	char	*oldpwd;
 
-	pwd = ft_getcwd();
+	pwd = ft_getcwd(cable);
 	oldpwd = ft_mstrjoin(cable, "OLDPWD=", pwd, NTMP);
-	free(pwd);
 	return (oldpwd);
 }
 
@@ -28,9 +27,8 @@ static char	*ft_set_newpwd(t_struct *cable)
 	char	*pwd;
 	char	*newpwd;
 
-	pwd = ft_getcwd();
+	pwd = ft_getcwd(cable);
 	newpwd = ft_mstrjoin(cable, "PWD=", pwd, NTMP);
-	free(pwd);
 	ft_export(cable, newpwd);
 	return (newpwd);
 }
@@ -39,7 +37,7 @@ static char	*ft_get_oldpwd(t_struct *cable)
 {
 	t_envlst	*exist;
 
-	exist = ft_var_env_exist(cable->envlst, "OLDPWD=");
+	exist = ft_var_env_exist(cable->envlst, "OLDPWD=", cable);
 	if (exist)
 		return ((ft_strchr(exist->str, '=') + 1));
 	return (NULL);

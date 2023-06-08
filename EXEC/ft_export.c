@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:11:12 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 13:54:42 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:11:42 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,6 @@ char	*ft_exported_str(char *str, t_struct *cable)
 	return (left);
 }
 
-char	**ft_make_double_char(t_envlst *envlst)
-{
-	int		i;
-	char	**res;
-
-	i = ft_envlst_size(envlst);
-	res = NULL;
-	res = (char **)malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (envlst)
-	{
-		res[i] = ft_strdup(envlst->str);
-		i++;
-		envlst = envlst->next;
-	}
-	res[i] = NULL;
-	return (res);
-}
-
 void	ft_env_update(t_struct *cable)
 {
 	ft_env_set(cable);
@@ -58,7 +39,7 @@ void	ft_export(t_struct *cable, char	*str)
 		ft_print_exp(cable->exp);
 	if (!ft_valid_var(str))
 		return (ft_print_var_err(str, 0));
-	if (ft_isplus(str))
+	if (ft_isplus(str, cable))
 		ft_joint_to_export(cable, &str);
 	if (ft_strchr(str, '='))
 	{

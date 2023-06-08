@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:38:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 11:40:32 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:58:32 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_echo_option(t_cmd *cmd, int *i)
 	return (0);
 }
 
-int	ft_echo(t_cmd *lol)
+int	ft_echo(t_cmd *lol, t_struct *cable)
 {
 	char	*s;
 	int		i;
@@ -35,9 +35,9 @@ int	ft_echo(t_cmd *lol)
 	{
 		while (lol->cmd[i])
 		{
-			s = ft_strjoin(s, lol->cmd[i]);
+			s = ft_mstrjoin(cable, s, lol->cmd[i], TMP);
 			if (lol->cmd[i + 1])
-				s = ft_strjoin(s, " ");
+				s = ft_mstrjoin(cable, s, " ", TMP);
 			i++;
 		}
 		printf("%s", s);

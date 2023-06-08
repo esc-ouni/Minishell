@@ -6,13 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:25:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 14:36:59 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:35:09 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_get_rawpath(char **env)
+static char	*ft_get_rawpath(char **env, t_struct *cable)
 {
 	int		i;
 	char	*nedl;
@@ -25,14 +25,15 @@ static char	*ft_get_rawpath(char **env)
 		rawpath = ft_strnstr(env[i++], nedl, ft_strlen(nedl));
 		if (rawpath)
 		{
-			rawpath = ft_substr(rawpath, ft_strlen(nedl), ft_strlen(rawpath));
+			rawpath = ft_msubstr(cable, rawpath, ft_strlen(nedl), \
+					ft_strlen(rawpath));
 			return (rawpath);
 		}
 	}
 	return (NULL);
 }
 
-static char	**ft_split_raw(char *arg, char **env)
+static char	**ft_split_raw(char *arg, char **env, t_struct *cable)
 {
 	char	**paths;
 	char	*rawpath;
@@ -41,17 +42,16 @@ static char	**ft_split_raw(char *arg, char **env)
 	if (!arg || !env)
 		return (NULL);
 	i = 0;
-	rawpath = ft_get_rawpath(env);
+	rawpath = ft_get_rawpath(env, cable);
 	if (!rawpath)
 		return (NULL);
-	paths = ft_split(rawpath, ':');
+	paths = ft_msplit(cable, rawpath, ':', TMP);
 	if (!paths)
 		return (NULL);
-	free(rawpath);
 	while (paths[i])
 	{
-		paths[i] = ft_strjoin(paths[i], "/");
-		paths[i] = ft_strjoin(paths[i], arg);
+		paths[i] = ft_mstrjoin(cable, paths[i], "/", TMP);
+		paths[i] = ft_mstrjoin(cable, paths[i], arg, TMP);
 		i++;
 	}
 	return (paths);
@@ -65,7 +65,7 @@ static char	*ft_get_path(char **cmd, char **env, t_struct *cable)
 
 	if (!cmd || !env)
 		return (NULL);
-	rawjoin = ft_split_raw(cmd[0], env);
+	rawjoin = ft_split_raw(cmd[0], env, cable);
 	if (!rawjoin)
 		return (NULL);
 	i = 0;
@@ -74,11 +74,10 @@ static char	*ft_get_path(char **cmd, char **env, t_struct *cable)
 		if (!access(rawjoin[i], X_OK))
 		{
 			res = ft_mstrdup(cable, rawjoin[i], TMP);
-			return (ft_free_stringp(rawjoin), res);
+			return (res);
 		}
 		i++;
 	}
-	ft_free_stringp(rawjoin);
 	return (NULL);
 }
 

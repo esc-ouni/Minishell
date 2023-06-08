@@ -6,11 +6,19 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:42:08 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 14:42:41 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:34:23 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_dup(t_struct *cable)
+{
+	cable->tmp_fd_in = dup(0);
+	cable->tmp_fd_out = dup(1);
+	if (cable->tmp_fd_in < 0 || cable->tmp_fd_out < 0)
+		ft_collectorclear(cable->collector, ALL);
+}
 
 void	ft_init(char **ev, t_struct **cab)
 {
@@ -25,19 +33,19 @@ void	ft_init(char **ev, t_struct **cab)
 	ft_exp_set(cable);
 	ft_unset(cable, "OLDPWD");
 	ft_export_exp(cable, "OLDPWD");
+	ft_dup(cable);
 	cable->cmd = NULL;
 	cable->exit_val = 0;
 	cable->is_heredoc = 0;
 	cable->cmd_numb = 0;
-	cable->tmp_fd_in = dup(0);
-	cable->tmp_fd_out = dup(1);
 	*cab = cable;
 }
 
 void	program(t_struct *cable)
 {
 	ft_env_set(cable);
-	dup2(cable->tmp_fd_in, 0);
+	if (dup2(cable->tmp_fd_in, 0) < 0)
+		ft_collectorclear(cable->collector, ALL);
 	cable->cmd = get_cmd(cable);
 	g_var = 0;
 	ft_exec(cable);

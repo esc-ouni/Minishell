@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:52 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 14:33:29 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:01:09 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ void	ft_quit(t_built flag)
 	exit(0);
 }
 
-char	*ft_getcwd(void)
+char	*ft_getcwd(t_struct *cable)
 {
 	char	*buff;
 
-	buff = malloc(1024 * sizeof(char));
+	buff = NULL;
+	buff = h_malloc(cable->collector, 1024 * sizeof(char), buff, TMP);
 	getcwd(buff, 1024);
 	return (buff);
 }
 
-int	ft_pwd(void)
+int	ft_pwd(t_struct *cable)
 {
 	char	*pwd;
 
-	pwd = ft_getcwd();
+	pwd = ft_getcwd(cable);
 	printf("%s\n", pwd);
-	free(pwd);
 	return (0);
 }
 
@@ -50,9 +50,9 @@ void	ft_env(char **myenv)
 int	ft_builtin(t_cmd *lol, t_struct *cable)
 {
 	if (lol->builtflag == ECH)
-		ft_echo(lol);
+		ft_echo(lol, cable);
 	else if (lol->builtflag == PWD)
-		ft_pwd();
+		ft_pwd(cable);
 	else if (lol->builtflag == ENV)
 		ft_env(cable->env);
 	else if (lol->builtflag == EXPT && !lol->cmd[1])
