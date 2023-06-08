@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:11:12 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 11:49:37 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:54:42 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	**ft_make_double_char(t_envlst *envlst)
 	char	**res;
 
 	i = ft_envlst_size(envlst);
+	res = NULL;
 	res = (char **)malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while (envlst)
@@ -48,7 +49,7 @@ char	**ft_make_double_char(t_envlst *envlst)
 
 void	ft_env_update(t_struct *cable)
 {
-	cable->env = ft_make_double_char(cable->envlst);
+	ft_env_set(cable);
 }
 
 void	ft_export(t_struct *cable, char	*str)

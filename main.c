@@ -26,7 +26,6 @@ void	ft_init(char **ev, t_struct **cab)
 	cable = h_malloc(&collector, sizeof(t_struct), cable, NTMP);
 	cable->collector = &collector;
 	ft_set_env_lst(cable, ev);
-	ft_env_set(cable);
 	ft_exp_set(cable);
 	ft_unset(cable, "OLDPWD");
 	ft_export_exp(cable, "OLDPWD");
@@ -42,6 +41,7 @@ void	ft_init(char **ev, t_struct **cab)
 
 void	program(t_struct *cable)
 {
+	ft_env_set(cable);
 	dup2(cable->tmp_fd_in, 0);
 	cable->cmd = get_cmd(cable);
 	// after_parse2(cable->cmd);
