@@ -233,14 +233,11 @@ unsigned int start, size_t len);
 void	sig_h(int sig);
 void	strt2(t_struct *cable);
 void 	strt1(t_struct *cable);
-<<<<<<< HEAD
-void	signal_dfl(t_struct *cable);
+void	signal_dfl(void);
 int		spc_after_d(char *line);
 void	s_expa2(t_struct *cable, char *s, char **str);
 void	s_expa(t_struct *cable, char *s, char **str);
-=======
 void	signal_dfl();
->>>>>>> a8986a0c882c15abc3e1826734d7c312d27d4184
 void	emplify(t_struct *cable, t_cmd *cmd);
 void	update_in_out_files(t_file *out_files, t_file *in_files);
 void	check_for_in_files(t_struct *cable, t_file **in_files, t_lexer *n);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 14:43:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:46:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	tail(t_struct *cable, char *line, char **str)
 	free(line);
 }
 
-void	expns(t_struct *cable, char *line, char **s, char **str)
+void	expns(t_struct *cable, char **s, char **str)
 {
 	int		i;
 
@@ -67,7 +67,7 @@ char	*s_expander(t_struct *cable, char *line)
 		s_expa(cable, s[0], &str);
 	else
 		str = ft_mstrjoin(cable, str, s[0], TMP);
-	expns(cable, line, s, &str);
+	expns(cable, s, &str);
 	tail(cable, line, &str);
 	return (str);
 }
