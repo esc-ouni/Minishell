@@ -6,11 +6,25 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 16:46:54 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:13:25 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	signal_dfl(t_struct *cable)
+{
+	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+	{
+		perror("Error handling a signal");
+		exit(0);
+	}
+	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+	{
+		perror("Error handling a signal");
+		exit(0);
+	}
+}
 
 int	check_syntax2(t_lexer **h_lexer)
 {

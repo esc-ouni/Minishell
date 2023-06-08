@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 14:03:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:08:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void prm(int argc, char **argv, char **env)
 	(void)argv;
 	if (argc == 2)
 	{
+		if(!argv[1] || !ft_strlen(argv[1]))
+			exit(0);
 		execve("/bin/bash", argv, env);
 		exit(0);
 	}

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 13:24:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:11:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,7 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	{
 		if (!ft_strncmp(cable->cmd->cmd[0], "./minishell", \
 				ft_strlen("./minishell")))
-			g_var += 4;
-				
+			g_var += 4;		
 	}
 	if (!pid)
 		ft_child(cmd, fd, cable);
