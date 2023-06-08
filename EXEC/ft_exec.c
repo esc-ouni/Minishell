@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 11:47:16 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:36:03 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	ft_cmd_count(t_cmd *cmd)
 void	ft_exec(t_struct *cable)
 {
 	t_cmd	*cmd;
-	int		numl;
 
 	cmd = cable->cmd;
 	ft_set_path(cmd, cable);

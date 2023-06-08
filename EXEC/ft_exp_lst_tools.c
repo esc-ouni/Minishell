@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:53 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/06 09:44:28 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:36:52 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_exp	*ft_exp_new_node(char *str, t_struct *cable)
 {
 	t_exp	*node;
 
+	node = NULL;
 	node = (t_exp *)h_malloc(cable->collector, sizeof(t_exp), node, NTMP);
 	node->str = ft_mstrdup(cable, str, NTMP);
 	node->next = NULL;

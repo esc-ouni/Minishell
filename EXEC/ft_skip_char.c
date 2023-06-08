@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:13:06 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:18:59 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:35:55 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_trim_char(char *str, char c, t_struct *cable)
 	int		flag;
 	char	*res;
 
+	res = NULL;
 	trim_len = ft_len_skip(str, c);
 	res = h_malloc(cable->collector, sizeof(char) * trim_len + 1, res, NTMP);
 	j = 0;

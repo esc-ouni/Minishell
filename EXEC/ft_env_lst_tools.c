@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:16:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:08:29 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:33:52 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_envlst	*ft_env_new_node(char *str, t_struct *cable)
 {
 	t_envlst	*node;
 
+	node = NULL;
 	node = (t_envlst *)h_malloc(cable->collector, sizeof(t_envlst), node, NTMP);
 	node->str = ft_mstrdup(cable, str, NTMP);
 	node->next = NULL;

@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 14:11:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:34:36 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_parent(t_cmd *cmd, int *fd, t_struct *cable)
+static int	ft_parent(t_cmd *cmd, int *fd)
 {
-	char	*line;
-
 	close(fd[1]);
 	dup2(fd[0], STDIN_FILENO);
 	if (cmd->fd_in)
@@ -64,7 +62,7 @@ static int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
 		return (0);
 	}
 	else if (cmd->builtflag == EXT)
-		ft_quit(NOT, cable);
+		ft_quit(NOT);
 	else if (cmd->builtflag == EXPT && cmd->cmd[1])
 	{
 		while (cmd->cmd[i])
@@ -110,11 +108,11 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	{
 		if (!ft_strncmp(cable->cmd->cmd[0], "./minishell", \
 				ft_strlen("./minishell")))
-			g_var += 4;		
+			g_var += 4;
 	}
 	if (!pid)
 		ft_child(cmd, fd, cable);
 	else
-		ft_parent(cmd, fd, cable);
+		ft_parent(cmd, fd);
 	return (0);
 }

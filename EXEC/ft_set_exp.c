@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:21 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:18:23 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:36:35 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_cpy_env_to_exp(t_struct *cable)
 {
 	t_envlst	*env;
 	char		*newstr;
-	t_exp		*exp;
 
 	cable->exp = NULL;
 	env = cable->envlst;

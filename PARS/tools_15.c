@@ -6,13 +6,13 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 14:41:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:43:45 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	signal_dfl(t_struct *cable)
+void	signal_dfl()
 {
 	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
 	{
