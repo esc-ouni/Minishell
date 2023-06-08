@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:40 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 13:33:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 13:48:08 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,18 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 		if (!line)
 			break ;
 		if (!ft_strlen(line))
+		{
+			free(line);
 			continue ;
+		}
 		if (!ft_strcmp(line, delimiter))
 		{
 			free(line);
 			break ;
 		}
+		line = s_expander(cable, line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
-		free(line);
 	}
 	return (0);
 }
