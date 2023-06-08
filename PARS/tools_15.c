@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 14:13:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:41:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,52 @@ void	signal_dfl(t_struct *cable)
 	}
 }
 
+void	tail(t_struct *cable, char *line, char **str)
+{
+	if (line[ft_strlen (line) - 1] == '$')
+		(*str) = ft_mstrjoin(cable, (*str), "$", TMP);
+	free(line);
+}
+
+void	expns(t_struct *cable, char *line, char **s, char **str)
+{
+	int		i;
+
+	i = 1;
+	while (s[i])
+	{
+		s_expa2(cable, s[i], str);
+		i++;
+	}
+}
+
+char	*s_expander(t_struct *cable, char *line)
+{
+	char	**s;
+	char	*str;
+
+	str = NULL;
+	s = NULL;
+	if (!line)
+		return (NULL);
+	if (!ft_strchr(line, '$') || spc_after_d(line))
+	{
+		str = ft_mstrdup(cable, line, TMP);
+		free(line);
+		return (str);
+	}
+	s = ft_msplit(cable, line, '$', TMP);
+	if (!s[0])
+		return ("$");
+	if (line[0] == '$')
+		s_expa(cable, s[0], &str);
+	else
+		str = ft_mstrjoin(cable, str, s[0], TMP);
+	expns(cable, line, s, &str);
+	tail(cable, line, &str);
+	return (str);
+}
+
 int	check_syntax2(t_lexer **h_lexer)
 {
 	if (basic_syntax_check(h_lexer))
@@ -33,19 +79,4 @@ int	check_syntax2(t_lexer **h_lexer)
 	else if (basic_syntax_check2(h_lexer))
 		return (1);
 	return (0);
-}
-
-void	check_for_in_files(t_struct *cable, t_file **in_files, t_lexer *n)
-{
-	while (n && n->cmd && n->type != PIP)
-	{
-		if (n && n->cmd && n->type == R_IN && n->next)
-			check_for_rin(cable, in_files, &n);
-		else if (n->cmd && n->type == R_HD && n->next)
-			check_for_hd(cable, in_files, &n);
-		if (n)
-			n = n->next;
-		else
-			break ;
-	}
 }

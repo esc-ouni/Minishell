@@ -6,18 +6,18 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 14:08:12 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:25:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void prm(int argc, char **argv, char **env)
+void	prm(int argc, char **argv, char **env)
 {
 	(void)argv;
 	if (argc == 2)
 	{
-		if(!argv[1] || !ft_strlen(argv[1]))
+		if (!argv[1] || !ft_strlen(argv[1]))
 			exit(0);
 		execve("/bin/bash", argv, env);
 		exit(0);
@@ -26,9 +26,8 @@ void prm(int argc, char **argv, char **env)
 		exit(0);
 }
 
-void sig_h(int sig)
+void	sig_h(int sig)
 {
-
 	if (sig == SIGINT && g_var == 1)
 	{
 		write(1, "\n", 1);
@@ -53,10 +52,10 @@ void sig_h(int sig)
 	}
 }
 
-void strt1(t_struct *cable)
+void	strt1(t_struct *cable)
 {
-	int t_fd;
-	struct termios terminal_c;
+	int				t_fd;
+	struct termios	terminal_c;
 
 	t_fd = open("/dev/tty", O_RDONLY);
 	if (t_fd == -1)
@@ -64,7 +63,6 @@ void strt1(t_struct *cable)
 		perror("Error getting terminal fd");
 		ft_collectorclear(cable->collector, ALL);
 	}
-
 	if (tcgetattr(t_fd, &terminal_c) < 0)
 	{
 		perror("Error getting terminal attr");
@@ -78,7 +76,7 @@ void strt1(t_struct *cable)
 	}
 }
 
-void strt2(t_struct *cable)
+void	strt2(t_struct *cable)
 {
 	if (signal(SIGINT, sig_h) == SIG_ERR)
 	{
@@ -92,7 +90,7 @@ void strt2(t_struct *cable)
 	}
 }
 
-void strt(t_struct *cable)
+void	strt(t_struct *cable)
 {
 	strt1(cable);
 	strt2(cable);
