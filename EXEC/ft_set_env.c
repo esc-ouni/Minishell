@@ -6,11 +6,19 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:18:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 12:18:45 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_set_min_ev(t_struct *cable)
+{
+	ft_env_add_back(&cable->envlst, \
+		ft_env_new_node("PWD=/Users/msamhaou/Desktop/Minishell", cable));
+	ft_env_add_back(&cable->envlst, ft_env_new_node("SHLVL=1", cable));
+	ft_env_add_back(&cable->envlst, ft_env_new_node("_=/usr/bin/env", cable));
+}
 
 void	ft_set_env_lst(t_struct *cable, char **ev)
 {
@@ -18,8 +26,14 @@ void	ft_set_env_lst(t_struct *cable, char **ev)
 
 	i = 0;
 	cable->envlst = NULL;
-	while (ev[i])
-		ft_env_add_back(&cable->envlst, ft_env_new_node(ev[i++], cable));
+	if (ev[i])
+	{
+		printf("herre");
+		while (ev[i])
+			ft_env_add_back(&cable->envlst, ft_env_new_node(ev[i++], cable));
+	}
+	else
+		ft_set_min_ev(cable);
 }
 
 void	ft_env_set(t_struct *cable)
