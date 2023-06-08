@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 10:23:41 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:02:58 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,23 @@ int	ft_parent(t_cmd *cmd, int *fd, t_struct *cable)
 int	ft_open_in_file(t_cmd *cmd, t_struct *cable)
 {
 	t_file	*files;
-
+	int		is_here;
 	files = cmd->in_files;
+	cmd->fd_in = -1;
 	while (files)
 	{
-		if (files->o_flag == O_APPEND && !cmd->cmd[0])
-			cmd->fd_in = ft_heredoc(cmd, files->filename, cable);
-		else if (files->o_flag == O_APPEND && cmd->cmd[0])
-			cmd->fd_in = ft_heredoc_proc(files->filename, cable);
+		is_here = 0;
+		if (files->o_flag == O_APPEND)
+		{
+			is_here = 1;
+			ft_heredoc_proc(files, cable);
+		}
 		else if (files->o_flag == O_TRUNC)
 			cmd->fd_in = open(files->filename, O_RDONLY);
-		if (cmd->fd_in < 0)
+		if (cmd->fd_in < 0 && !is_here)
 			return (perror(files->filename), -1);
-		dup2(cmd->fd_in, STDIN_FILENO);
+		if (!is_here)
+			dup2(cmd->fd_in, STDIN_FILENO);
 		close(cmd->fd_in);
 		files = files->next;
 	}

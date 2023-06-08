@@ -37,40 +37,29 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 	return (0);
 }
 
-int	ft_heredoc(t_cmd *cmd, char *delimiter, t_struct *cable)
-{
-	char	*name;
-	int		fd;
-	int		*pipe;
 
-	dup2(cable->tmp_fd_in, 0);
-	name = "obj/GEN";
-	fd = open(name, O_CREAT | O_TRUNC | O_WRONLY, 0664);
-	if (fd < 0)
-		return (perror(""), exit(1), 1);
-	ft_heredoc_write(fd, delimiter, cable);
-	close(fd);
-	fd = open(name, O_RDONLY);
-	return (fd);
-}
-
-int	ft_heredoc_proc(char *delimiter, t_struct *cable)
+int	ft_heredoc_proc(t_file *file, t_struct *cable)
 {
+	int	pfd[2];
 	int	pid;
-	int fd;
 
-	fd = open("GEN", O_TRUNC|O_CREAT|O_WRONLY, 0664);
+	pipe(pfd);
 	pid = fork();
 	if (!pid)
 	{
-		ft_heredoc_write(fd, delimiter, cable);
+		close(pfd[0]);
+		dup2(cable->tmp_fd_in, STDIN_FILENO);
+		ft_heredoc_write(pfd[1], file->filename, cable);
+		close(pfd[1]);
 		exit(0);
 	}
 	else
 	{
+		close(pfd[1]);
+		if (!file->next)
+			dup2(pfd[0], STDIN_FILENO);
 		waitpid(pid, NULL, 0);
-		close(fd);
-		fd = open("GEN", O_RDONLY);
-		return (fd);
+		close(pfd[0]);
+		return (0);
 	}
 }
