@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 17:36:48 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/06 15:14:29 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:56:26 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	ft_lstiter(t_list *lst, void (*f) (void *));
 char	**ft_soft_split(char *str, char c);
 char	**ft_soft_split_include(char *str, char c);
 int		ft_trim_len(const char *str, char c);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif

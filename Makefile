@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
+#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/08 14:45:04 by idouni           ###   ########.fr        #
+#    Updated: 2023/06/08 14:57:36 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ LIBFT_OBJ = $(addprefix $(OBJ_DIR),$(LIBFT_OBJ_FILE))
 #********* EXEC *************
 EXEC_DIR = EXEC/
 EXEC_SRC_FILES =	ft_builtin.c       ft_env_lst_tools.c ft_exp_tools.c     ft_fork.c          ft_msoft_split.c   ft_skip_char.c     ft_unset_exp.c\
-					ft_cd.c            ft_error_print.c   ft_export.c        ft_free.c          ft_set_env.c       ft_test_tools.c\
+					ft_cd.c            ft_error_print.c   ft_export.c        ft_free.c          ft_set_env.c       ft_test_tools.c    ft_strjoin.c\
 					ft_child.c         ft_exec.c          ft_export_env.c    ft_heredoc.c       ft_set_exp.c       ft_unset.c\
 					ft_echo.c          ft_exp_lst_tools.c ft_export_exp.c    ft_lst_finder.c    ft_set_path.c      ft_unset_envlst.c
 EXEC_SRC = $(addprefix $(EXEC_DIR), $(EXEC_SRC_FILES))
@@ -66,13 +66,6 @@ PARS_SRC = $(addprefix $(PARS_DIR), $(PARS_SRC_FILES))
 PARS_OBJ_FILES = $(PARS_SRC_FILES:.c=.o)
 PARS_OBJ = $(addprefix $(OBJ_DIR), $(PARS_OBJ_FILES))
 
-#********* GNL **************
-GNL_DIR = GNL/
-GNL_SRC_FILES =	get_next_line.c       get_next_line_utils.c
-GNL_SRC = $(addprefix $(GNL_DIR), $(GNL_SRC_FILES))
-GNL_OBJ_FILES = $(GNL_SRC_FILES:.c=.o)
-GNL_OBJ = $(addprefix $(OBJ_DIR), $(GNL_OBJ_FILES))
-
 #********* MAIN *************
 MAIN_SRC_FILE = main.c
 MAIN_OBJ_FILE = main.o
@@ -80,7 +73,7 @@ MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_OBJ_FILE))
 
 
 INCLU = -I$(INCLUDES) -I$(INC)
-ALL_OBJ = $(LIBFT_OBJ) $(GNL_OBJ) $(MAIN_OBJ) $(EXEC_OBJ) $(PARS_OBJ)
+ALL_OBJ = $(LIBFT_OBJ) $(MAIN_OBJ) $(EXEC_OBJ) $(PARS_OBJ)
 NAME = minishell
 
 all : $(NAME)
@@ -95,8 +88,6 @@ $(OBJ_DIR)%.o : $(LIBFT_DIR)%.c
 $(OBJ_DIR)%.o : $(EXEC_DIR)%.c
 	$(CC) $(FLAGS)  -c $< -o $@ $(INCLU)
 $(OBJ_DIR)%.o : $(PARS_DIR)%.c
-	$(CC) $(FLAGS)  -c $< -o $@ $(INCLU)
-$(OBJ_DIR)%.o : $(GNL_DIR)%.c
 	$(CC) $(FLAGS)  -c $< -o $@ $(INCLU)
 $(MAIN_OBJ) : $(MAIN_SRC_FILE)
 	$(CC) $(FLAGS) -c $< -o $@ $(INCLU)

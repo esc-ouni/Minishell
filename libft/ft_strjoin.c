@@ -3,33 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:39:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2022/10/25 19:31:54 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:55:16 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
-	size_t	lens1;
-	size_t	lens2;
+	int		i;
+	int		j;
 
-	if (!s1 && !s2)
-		return (0);
-	if (!s2)
-		return ((char *)s1);
 	if (!s1)
-		return ((char *)s2);
-	lens1 = ft_strlen(s1);
-	lens2 = ft_strlen(s2);
-	str = malloc(lens1 + lens2 + 1);
+	{
+		s1 = (char *)malloc(1 * sizeof(char));
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
+	}
+	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!str)
-		return (0);
-	ft_memcpy(str, s1, lens1);
-	ft_strlcpy(str + lens1, s2, lens2 + 1);
-	return (str);
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (free(s1), str);
 }
