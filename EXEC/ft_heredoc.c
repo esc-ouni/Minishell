@@ -3,12 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 22:26:10 by msamhaou         ###   ########.fr       */
-
-/*   Updated: 2023/06/07 19:35:07 by idouni           ###   ########.fr       */
+/*   Created: 2023/06/08 11:11:40 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/08 11:47:27 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +34,6 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 	}
 	return (0);
 }
-
 
 int	ft_heredoc_proc(t_file *file, t_struct *cable)
 {

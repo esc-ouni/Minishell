@@ -195,7 +195,10 @@ void	ft_print_var_err(char *str, int type);
 char	**ft_make_double_char(t_envlst *envlst);
 void	ft_env_update(t_struct *cable);
 char	*ft_getcwd(void);
-char	*ft_set_newpwd(t_struct *cable);
+int	ft_fork(t_cmd *cmd, t_struct *cable);
+void	ft_joint_to_export(t_struct *cable, char **str);
+int	ft_isplus(char *str);
+
 
 
 

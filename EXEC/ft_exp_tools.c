@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset_envlst.c                                  :+:      :+:    :+:   */
+/*   ft_exp_tools.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/07 11:37:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 11:47:35 by msamhaou         ###   ########.fr       */
+/*   Created: 2023/06/08 11:49:09 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/08 11:50:00 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_skip_env_node(t_struct *cable, t_envlst *exist)
+int	ft_isplus(char *str)
 {
-	t_envlst	*envlst;
+	char	**eq;
 
-	envlst = cable->envlst;
-	if (cable->envlst == exist)
-		cable->envlst = cable->envlst->next;
-	else
-	{
-		while (envlst->next != exist)
-			envlst = envlst->next;
-		envlst->next = envlst->next->next;
-	}
+	eq = ft_soft_split(str, '=');
+	if (strchr(eq[0], '+'))
+		return (ft_free_stringp(eq), 1);
+	return (ft_free_stringp(eq), 0);
 }
 
-void	ft_unset_envlst(t_struct *cable, char *str)
+void	ft_joint_to_export(t_struct *cable, char **str)
 {
 	t_envlst	*exist;
+	char		**spl;
 
-	exist = ft_var_env_exist(cable->envlst, str);
+	*str = ft_trim_char(*str, '+', cable);
+	exist = ft_var_env_exist(cable->envlst, *str);
 	if (exist)
 	{
-		ft_skip_env_node(cable, exist);
-		ft_env_update(cable);
+		spl = ft_soft_split(*str, '=');
+		*str = ft_mstrjoin(cable, exist->str, spl[1], NTMP);
+		ft_free_stringp(spl);
 	}
 }
