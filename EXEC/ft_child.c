@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:22:24 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:07:58 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:07:59 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_open_out_files(t_cmd *cmd)
 				| files->o_flag | O_WRONLY, 0664);
 		if (cmd->fd_out < 0)
 			return (perror(""), exit(1), 1);
+		if (files->next)
+			close(cmd->fd_out);
 		files = files->next;
 	}
 	return (0);
