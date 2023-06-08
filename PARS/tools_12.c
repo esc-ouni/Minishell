@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 13:32:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:08:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void prm(int argc, char **argv, char **env)
 	(void)argv;
 	if (argc == 2)
 	{
+		if(!argv[1] || !ft_strlen(argv[1]))
+			exit(0);
 		execve("/bin/bash", argv, env);
 		exit(0);
 	}
@@ -39,16 +41,16 @@ void sig_h(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	// else if (sig == SIGQUIT && !g_var)
-	// {
-	// 	write(1, "^\\Quit : 3\n", 12);
-	// 	rl_redisplay();
-	// }
-	// else if (sig == SIGINT && !g_var)
-	// {
-	// 	write(1, "^C\n", 4);
-	// 	rl_on_new_line();
-	// }
+	else if (sig == SIGQUIT && !g_var)
+	{
+		write(1, "^\\Quit : 3\n", 12);
+		rl_redisplay();
+	}
+	else if (sig == SIGINT && !g_var)
+	{
+		write(1, "^C\n", 4);
+		rl_on_new_line();
+	}
 }
 
 void strt1(t_struct *cable)

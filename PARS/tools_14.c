@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/07 19:33:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:20:23 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ void	s_expa2(t_struct *cable, char *s, char **str)
 		ft_getenv(cable, s), TMP);
 }
 
+int 	spc_after_d(char *line)
+{
+	if (line[0] == '$' && (line[1] == '"' || line[1] == '\''))
+		return (1);
+	return (0);	
+}
+
 char	*s_expander(t_struct *cable, char *line)
 {
 	char	**s;
@@ -44,7 +51,7 @@ char	*s_expander(t_struct *cable, char *line)
 	s = NULL;
 	if (!line)
 		return (NULL);
-	if(!ft_strchr(line, '$'))
+	if(!ft_strchr(line, '$') || spc_after_d(line))
 	{
 		str = ft_mstrdup(cable, line, TMP);
 		free(line);

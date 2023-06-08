@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 13:48:27 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:28:04 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_env_set(t_struct *cable)
 
 	envlst = cable->envlst;
 	size = ft_envlst_size(envlst);
-	cable->env = (char **)h_malloc(cable->collector, (sizeof(char *) * (size + 1)), cable->env, TMP);
+	cable->env = (char **)h_malloc(cable->collector, \
+			(sizeof(char *) * (size + 1)), cable->env, TMP);
 	i = 0;
 	while (envlst)
 	{

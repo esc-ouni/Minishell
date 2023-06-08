@@ -31,7 +31,6 @@ void	ft_init(char **ev, t_struct **cab)
 	ft_export_exp(cable, "OLDPWD");
 	cable->cmd = NULL;
 	cable->exit_val = 0;
-	// cable->var = 0;
 	cable->is_heredoc = 0;
 	cable->cmd_numb = 0;
 	cable->tmp_fd_in = dup(0);
@@ -44,8 +43,6 @@ void	program(t_struct *cable)
 	ft_env_set(cable);
 	dup2(cable->tmp_fd_in, 0);
 	cable->cmd = get_cmd(cable);
-	// after_parse2(cable->cmd);
-	//exucution
 	g_var = 0;
 	ft_exec(cable);
 	g_var = 1;
@@ -61,7 +58,6 @@ int	main(int ac, char **av, char **ev)
 {
 	t_struct	*cable;
 
-	// atexit(foo);
 	g_var = 1;
 	prm(ac, av, ev);
 	ft_init(ev, &cable);
