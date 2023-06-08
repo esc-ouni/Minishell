@@ -6,11 +6,9 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:39:29 by msamhaou          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2023/06/07 22:26:10 by msamhaou         ###   ########.fr       */
-=======
+
 /*   Updated: 2023/06/07 19:35:07 by idouni           ###   ########.fr       */
->>>>>>> 5133c6f967228d4c308124c3cbe46c900ac54cf4
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +37,6 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 	return (0);
 }
 
-// int	ft_heredoc_child(t_struct *cable)
-// {
-
-// }
-
 int	ft_heredoc(t_cmd *cmd, char *delimiter, t_struct *cable)
 {
 	char	*name;
@@ -59,4 +52,25 @@ int	ft_heredoc(t_cmd *cmd, char *delimiter, t_struct *cable)
 	close(fd);
 	fd = open(name, O_RDONLY);
 	return (fd);
+}
+
+int	ft_heredoc_proc(char *delimiter, t_struct *cable)
+{
+	int	pid;
+	int fd;
+
+	fd = open("GEN", O_TRUNC|O_CREAT|O_WRONLY, 0664);
+	pid = fork();
+	if (!pid)
+	{
+		ft_heredoc_write(fd, delimiter, cable);
+		exit(0);
+	}
+	else
+	{
+		waitpid(pid, NULL, 0);
+		close(fd);
+		fd = open("GEN", O_RDONLY);
+		return (fd);
+	}
 }

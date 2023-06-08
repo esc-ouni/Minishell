@@ -198,6 +198,7 @@ char	*ft_getcwd(void);
 char	*ft_set_newpwd(t_struct *cable);
 
 
+
 void	ft_unset(t_struct *cable, char *str);
 int		ft_cd(t_cmd *cmd, t_struct *cable);
 void	ft_quit(t_built flag, t_struct *cable);

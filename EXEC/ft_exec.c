@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/07 20:32:04 by msamhaou         ###   ########.fr       */
-=======
-/*   Updated: 2023/06/07 20:51:34 by idouni           ###   ########.fr       */
->>>>>>> 5133c6f967228d4c308124c3cbe46c900ac54cf4
+/*   Updated: 2023/06/08 10:23:41 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -35,9 +32,11 @@ int	ft_open_in_file(t_cmd *cmd, t_struct *cable)
 	files = cmd->in_files;
 	while (files)
 	{
-		if (files->o_flag == O_APPEND)
+		if (files->o_flag == O_APPEND && !cmd->cmd[0])
 			cmd->fd_in = ft_heredoc(cmd, files->filename, cable);
-		else
+		else if (files->o_flag == O_APPEND && cmd->cmd[0])
+			cmd->fd_in = ft_heredoc_proc(files->filename, cable);
+		else if (files->o_flag == O_TRUNC)
 			cmd->fd_in = open(files->filename, O_RDONLY);
 		if (cmd->fd_in < 0)
 			return (perror(files->filename), -1);
