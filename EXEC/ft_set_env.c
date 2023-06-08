@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:04 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 13:13:11 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:38:43 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	ft_set_min_ev(t_struct *cable)
 {
 	ft_env_add_back(&cable->envlst, \
 		ft_env_new_node("PWD=/Users/msamhaou/Desktop/Minishell", cable));
-	ft_env_add_back(&cable->envlst, ft_env_new_node("SHLVL=1", cable));
 	ft_env_add_back(&cable->envlst, ft_env_new_node("_=/usr/bin/env", cable));
 }
 
