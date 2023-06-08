@@ -36,7 +36,6 @@ typedef struct s_exp		t_exp;
 typedef struct s_envlst		t_envlst;
 typedef struct s_struct		t_struct;
 
-
 typedef enum e_built
 {
 	NOT,
@@ -91,7 +90,7 @@ struct s_struct
 	int			tmp_fd_out;
 	int			tmp_fd_in;
 	int			exit_val;
-	int			var;
+	int			shlvl;
 	int			is_heredoc;
 	int			cmd_numb;
 	t_collector **collector;

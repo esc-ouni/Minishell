@@ -32,7 +32,7 @@ void	ft_init(char **ev, t_struct **cab)
 	ft_export_exp(cable, "OLDPWD");
 	cable->cmd = NULL;
 	cable->exit_val = 0;
-	cable->var = 0;
+	// cable->var = 0;
 	cable->is_heredoc = 0;
 	cable->cmd_numb = 0;
 	cable->tmp_fd_in = dup(0);
