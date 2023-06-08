@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:25:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:19:22 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:36:59 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static char	**ft_split_raw(char *arg, char **env)
 {
 	char	**paths;
 	char	*rawpath;
-	char	*tmp;
 	int		i;
 
 	if (!arg || !env)

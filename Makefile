@@ -6,13 +6,13 @@
 #    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/08 11:51:07 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/06/08 14:32:27 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
-FLAGS =
+FLAGS = -Wall -Wextra -Werror
 AFLAGS = -lreadline
 LINK = /Users/msamhaou/.brew/Cellar/readline/8.2.1/lib
 HEADERS = 	include/libft.h	include/minishell.h
@@ -86,20 +86,20 @@ NAME = minishell
 all : $(NAME)
 
 $(NAME) : $(OBJ_DIR) $(ALL_OBJ)
-	$(CC) -lreadline $(ALL_OBJ) -o $(NAME) -L$(LINK)
+	$(CC) $(FLAGS) -lreadline $(ALL_OBJ) -o $(NAME) -L$(LINK)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
 $(OBJ_DIR)%.o : $(LIBFT_DIR)%.c
-	$(CC) -c $< -o $@ $(INCLU)
+	$(CC) $(FLAGS) -c $< -o $@ $(INCLU)
 $(OBJ_DIR)%.o : $(EXEC_DIR)%.c
-	$(CC)  -c $< -o $@ $(INCLU)
+	$(CC) $(FLAGS)  -c $< -o $@ $(INCLU)
 $(OBJ_DIR)%.o : $(PARS_DIR)%.c
-	$(CC)  -c $< -o $@ $(INCLU)
+	$(CC) $(FLAGS)  -c $< -o $@ $(INCLU)
 $(OBJ_DIR)%.o : $(GNL_DIR)%.c
-	$(CC)  -c $< -o $@ $(INCLU)
+	$(CC) $(FLAGS)  -c $< -o $@ $(INCLU)
 $(MAIN_OBJ) : $(MAIN_SRC_FILE)
-	$(CC) -c $< -o $@ $(INCLU)
+	$(CC) $(FLAGS) -c $< -o $@ $(INCLU)
 clean :
 	rm -rf $(OBJ_DIR)
 fclean : clean

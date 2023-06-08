@@ -6,13 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:52 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 11:38:54 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:33:29 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_quit(t_built flag, t_struct *cable)
+void	ft_quit(t_built flag)
 {
 	if (flag == EXT)
 		write(1, "exit\n", 5);

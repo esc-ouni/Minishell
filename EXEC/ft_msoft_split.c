@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:45:08 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:16:48 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:35:07 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	**ft_msoft_split_include(char *str, char c, t_struct *cable)
 	int			trimlen;
 	t_collector	**col;
 
+	res = NULL;
 	col = cable->collector;
 	res = h_malloc(col, sizeof(char *) * 3, res, TMP);
 	tmp = res;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tools_15.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 14:13:25 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:38:06 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	signal_dfl(t_struct *cable)
+void	signal_dfl()
 {
 	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
 	{
