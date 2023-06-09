@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 16:15:59 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:42:19 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_struct		t_struct;
 typedef enum e_built
 {
 	NOT,
+	SYS,
 	ECH,
 	CD,
 	PWD,
