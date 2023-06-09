@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/09 11:42:19 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:29:24 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ struct s_struct
 	t_cmd		*cmd;
 	int			tmp_fd_out;
 	int			tmp_fd_in;
+	int			tmp_err;
 	int			exit_val;
 	int			shlvl;
 	int			is_heredoc;

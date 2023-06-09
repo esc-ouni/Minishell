@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/09 14:11:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:32:47 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,13 @@ int	ft_redirect_child(t_cmd *cmd, int *fd, t_struct *cable)
 	return (0);
 }
 
-void	ft_cmd_not(int *fd)
+void	ft_cmd_not(int *fd, t_struct *cable)
 {
-	ft_putendl_fd("cmd does not exist", 1);
+	if (dup2(cable->tmp_err, STDERR_FILENO) < 0)
+		exit(1);
+	ft_putendl_fd("cmd does not exist", STDERR_FILENO);
 	close(fd[1]);
+	close(2);
 	close(1);
 	exit(1);
 }
@@ -70,7 +73,7 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 	close(fd[0]);
 	ft_redirect_child(cmd, fd, cable);
 	if (cmd->builtflag == NOT)
-		ft_cmd_not(fd);
+		ft_cmd_not(fd, cable);
 	if (cmd->builtflag && (cmd->builtflag != SYS))
 	{
 		ft_builtin(cmd, cable);
