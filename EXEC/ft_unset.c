@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:17:57 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/07 14:20:52 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:35:33 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_valid_unset(const char *str)
 	char	*s;
 
 	s = (char *)str;
+	if (!ft_isalpha(*s) && *s != '_')
+		return (0);
 	while (*s)
 	{
 		if (!ft_isalnum(*s) && *s != '_')
