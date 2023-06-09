@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 17:36:48 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 16:20:32 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:15:14 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	ft_lstclear(t_list **lst, void (*del) (void *));
 void	ft_lstiter(t_list *lst, void (*f) (void *));
 int		ft_trim_len(const char *str, char c);
 char	*ft_strjoin(char *s1, char *s2);
+int		ft_strdigit(const char *str);
 
 #endif

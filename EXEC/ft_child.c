@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/09 14:32:47 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:51:49 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_cmd_not(int *fd, t_struct *cable)
 	close(fd[1]);
 	close(2);
 	close(1);
-	exit(1);
+	exit(127);
 }
 
 int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)

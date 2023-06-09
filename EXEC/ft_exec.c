@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 14:36:03 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:14:33 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	ft_cmd_count(t_cmd *cmd)
 	return (i);
 }
 
+void	ft_macrofy(t_struct *cable)
+{
+	if (cable->exit_val != 1)
+		cable->exit_val = WEXITSTATUS(cable->exit_val);
+}
+
 void	ft_exec(t_struct *cable)
 {
 	t_cmd	*cmd;
@@ -37,6 +43,7 @@ void	ft_exec(t_struct *cable)
 		ft_fork(cmd, cable);
 		cmd = cmd->next;
 	}
-	while (cable->cmd_numb--)
-		wait(&cable->exit_val);
+	while (wait(&cable->exit_val) != -1)
+		;
+	ft_macrofy(cable);
 }

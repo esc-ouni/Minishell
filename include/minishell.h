@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/09 14:29:24 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:17:29 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@
 # include <termios.h>
 # include "libft.h"
 
-int							g_var;
-
 typedef struct s_file		t_file;
 typedef struct s_collector	t_collector;
 typedef struct s_cmd		t_cmd;
 typedef struct s_exp		t_exp;
 typedef struct s_envlst		t_envlst;
 typedef struct s_struct		t_struct;
+int							g_var;
 
 typedef enum e_built
 {
@@ -188,7 +187,8 @@ void		ft_joint_to_export(t_struct *cable, char **str);
 int			ft_isplus(char *str, t_struct *cable);
 void		ft_unset(t_struct *cable, char *str);
 int			ft_cd(t_cmd *cmd, t_struct *cable);
-void		ft_quit(t_built flag);
+void		ft_quit(t_cmd *cmd);
+void		ft_print_err(char *str, int type);
 int			ft_cd(t_cmd *cmd, t_struct *cable);
 int			ft_echo(t_cmd *lol, t_struct *cable);
 int			ft_pwd(t_struct *cable);
@@ -287,7 +287,7 @@ void		printTYPE(t_enum num);
 void		ft_alpha_order(t_struct *cable);
 char		*ft_exported_str(char *str, t_struct *cable);
 void		ft_export_exp(t_struct *cable, char *str);
-int			ft_valid_var(const char	*str);
+int			ft_valid_var(const char *str);
 char		**ft_soft_split(char *str, char c, t_struct *cable);
 
 #endif

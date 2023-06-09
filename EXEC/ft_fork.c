@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 14:34:36 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:46:03 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
 		return (0);
 	}
 	else if (cmd->builtflag == EXT)
-		ft_quit(NOT);
+		ft_quit(cmd);
 	else if (cmd->builtflag == EXPT && cmd->cmd[1])
 	{
 		while (cmd->cmd[i])
@@ -98,7 +98,7 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	int	pid;
 
 	if (!ft_built_in_first(cmd, cable))
-		return (0);
+		return (1);
 	if (ft_first_redirection(cmd, cable) < 0)
 		return (1);
 	pipe(fd);

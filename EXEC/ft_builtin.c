@@ -6,17 +6,28 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:52 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 16:01:09 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:11:51 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_quit(t_built flag)
+void	ft_quit(t_cmd *cmd)
 {
-	if (flag == EXT)
-		write(1, "exit\n", 5);
-	exit(0);
+	int	ext;
+
+	write(1, "exit\n", 5);
+	ext = 0;
+	if (cmd->cmd[2])
+		return (ft_print_err(NULL, 0));
+	else if (!ft_strdigit(cmd->cmd[1]))
+		ft_print_err(cmd->cmd[1], 1);
+	else
+	{
+		ext = ft_atoi(cmd->cmd[1]);
+		exit(ext);
+	}
+	exit(ext);
 }
 
 char	*ft_getcwd(t_struct *cable)
