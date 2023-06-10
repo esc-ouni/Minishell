@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:25:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/09 11:44:10 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/10 12:01:37 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static char	*ft_get_path(char **cmd, char **env, t_struct *cable)
 
 int	ft_set_path(t_cmd *cmd, t_struct *cable)
 {
+	if (cmd->builtflag)
+		return (1);
 	while (cmd)
 	{
 		if (cmd->cmd[0])

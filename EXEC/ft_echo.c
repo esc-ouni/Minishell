@@ -6,45 +6,74 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:38:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 15:58:32 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:08:15 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_echo_option(t_cmd *cmd, int *i)
+static int	ft_is_n(const char *str)
 {
-	if (!ft_strncmp(cmd->cmd[*i], "-n", ft_strlen("-n")))
+	char	*s;
+
+	s = (char *)str;
+	if (*(s++) != '-')
+		return (0);
+	while (*s)
 	{
-		(*i)++;
-		return (1);
+		if (*(s++) != 'n')
+			return (0);
 	}
+	return (1);
+}
+
+static int	ft_echo_option(const char *cmd)
+{
+	char	*str;
+
+	str = (char *)cmd;
+	if (ft_is_n(str))
+		return (1);
 	return (0);
 }
 
-int	ft_echo(t_cmd *lol, t_struct *cable)
+static char	*ft_option_break(t_struct *cable, char **cmd, int *option)
+{
+	int		i;
+	int		op_end;
+	char	*s;
+
+	op_end = 0;
+	s = NULL;
+	i = 1;
+	while (cmd[i])
+	{
+		if (!op_end)
+			*option = ft_echo_option(cmd[i]);
+		if (!(*option))
+		{
+			s = ft_mstrjoin(cable, s, cmd[i], TMP);
+			if (cmd[i + 1])
+				s = ft_mstrjoin(cable, s, " ", TMP);
+			op_end = 1;
+		}
+		i++;
+	}
+	return (s);
+}
+
+int	ft_echo(t_cmd *cmd, t_struct *cable)
 {
 	char	*s;
-	int		i;
 	int		option;
 
-	i = 1;
-	option = ft_echo_option(lol, &i);
 	s = NULL;
-	if (lol->cmd[i])
-	{
-		while (lol->cmd[i])
-		{
-			s = ft_mstrjoin(cable, s, lol->cmd[i], TMP);
-			if (lol->cmd[i + 1])
-				s = ft_mstrjoin(cable, s, " ", TMP);
-			i++;
-		}
-		printf("%s", s);
-		if (!option)
-			printf("\n");
-	}
-	else
-		printf("\n");
+	option = 0;
+	if (!cmd->cmd[1])
+		return (ft_putstr_fd("\n", 1), 0);
+	s = ft_option_break(cable, cmd->cmd, &option);
+	ft_putstr_fd(s, 1);
+	if (!option)
+		ft_putstr_fd("\n", 1);
 	return (0);
 }
