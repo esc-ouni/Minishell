@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/09 17:17:29 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/10 10:50:17 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef enum e_flag
 
 void		ft_print_envlst(t_envlst *envlst);
 void		ft_print_exp(t_exp *exp);
+void		get_exitval(t_struct *cable, int extval);
 void		ft_set_env_lst(t_struct *cable, char **ev);
 void		ft_env_set(t_struct *cable);
 t_envlst	*ft_env_new_node(char *str, t_struct *cable);

@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 14:24:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/10 10:50:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,10 @@ void	get_full_cmd(t_struct *cable, t_lexer **n, char ***full_cmd)
 		}
 		(*n) = (*n)->next;
 	}
+}
+
+void	get_exitval(t_struct *cable, int extval)
+{
+	cable->exit_val = extval;
+	g_var = 1;
 }
