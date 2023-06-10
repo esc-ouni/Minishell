@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:42:08 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/10 10:50:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/10 13:29:29 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	program(t_struct *cable)
 		ft_collectorclear(cable->collector, ALL);
 	cable->cmd = get_cmd(cable);
 	ft_exec(cable);
-	get_exitval(cable, g_var);
+	set_exitval(cable, g_var);
+	g_var = 1;
 	ft_collectorclear(cable->collector, TMP);
 }
 

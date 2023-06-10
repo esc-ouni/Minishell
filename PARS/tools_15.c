@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/08 14:47:05 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/10 13:23:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	check_syntax2(t_lexer **h_lexer)
 	if (basic_syntax_check(h_lexer))
 		return (1);
 	else if (basic_syntax_check2(h_lexer))
+		return (1);
+	else if (check_pipes(h_lexer))
 		return (1);
 	return (0);
 }
