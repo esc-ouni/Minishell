@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/10 14:57:36 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/10 10:50:47 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 t_lexer	*parser(t_struct *cable, char *s)
 {
 	t_lexer	*h_lexer;
-	t_lexer	*tmp;
 
 	if (check_syntax(cable, s))
-		return (set_exitval(cable, 258), \
-		free(s), ft_collectorclear(cable->collector, TMP), NULL);
+		return (free(s), ft_collectorclear(cable->collector, TMP), NULL);
 	h_lexer = lexer(cable, s);
 	expander(cable, &h_lexer);
-	tmp = h_lexer;
 	if (check_syntax2(&h_lexer))
-		return (set_exitval(cable, 258), \
-		ft_collectorclear(cable->collector, TMP), NULL);
+		return (ft_collectorclear(cable->collector, TMP), NULL);
 	return (h_lexer);
 }
 
@@ -77,8 +73,8 @@ void	get_full_cmd(t_struct *cable, t_lexer **n, char ***full_cmd)
 	}
 }
 
-void	set_exitval(t_struct *cable, int extval)
+void	get_exitval(t_struct *cable, int extval)
 {
-	if (extval)
-		cable->exit_val = extval;
+	cable->exit_val = extval;
+	g_var = 1;
 }

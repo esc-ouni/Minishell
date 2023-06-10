@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:25:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/10 12:01:37 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/10 22:52:46 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,19 @@ static char	*ft_get_path(char **cmd, char **env, t_struct *cable)
 
 int	ft_set_path(t_cmd *cmd, t_struct *cable)
 {
-	if (cmd->builtflag)
-		return (1);
 	while (cmd)
 	{
 		if (cmd->cmd[0])
 		{
-			if (!ft_strchr(cmd->cmd[0], '/'))
-				cmd->cmd_path = ft_get_path(cmd->cmd, cable->env, cable);
-			else
-				cmd->cmd_path = cmd->cmd[0];
-			if (!access(cmd->cmd_path, X_OK))
-				cmd->builtflag = SYS;
+			if (cmd->builtflag == NOT)
+			{
+				if (!ft_strchr(cmd->cmd[0], '/'))
+					cmd->cmd_path = ft_get_path(cmd->cmd, cable->env, cable);
+				else
+					cmd->cmd_path = cmd->cmd[0];
+				if (!access(cmd->cmd_path, X_OK))
+					cmd->builtflag = SYS;
+			}
 		}
 		cmd = cmd->next;
 	}

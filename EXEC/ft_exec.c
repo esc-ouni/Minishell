@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/10 13:37:10 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/09 17:14:33 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	ft_cmd_count(t_cmd *cmd)
 
 void	ft_macrofy(t_struct *cable)
 {
-	if (!cable->cmd)
-		return ;
 	if (cable->exit_val != 1)
 		cable->exit_val = WEXITSTATUS(cable->exit_val);
 }

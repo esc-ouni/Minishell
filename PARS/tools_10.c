@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/10 13:22:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/10 10:49:49 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	check_syntax(t_struct *cable, char *s)
 		return (1);
 	add_history(s);
 	if (check_oerr(s))
+		return (1);
+	if (check_pipes(s))
 		return (1);
 	return (0);
 }
