@@ -6,16 +6,17 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/09 16:46:03 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:25:51 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_parent(t_cmd *cmd, int *fd)
+static int	ft_parent(t_struct *cable, t_cmd *cmd, int *fd)
 {
 	close(fd[1]);
-	dup2(fd[0], STDIN_FILENO);
+	if (dup2(fd[0], STDIN_FILENO) == -1)
+		return (perror(""), ft_collectorclear(cable->collector, ALL), 1);
 	if (cmd->fd_in)
 		close(cmd->fd_in);
 	close (fd[0]);
@@ -42,7 +43,8 @@ static int	ft_open_in_file(t_cmd *cmd, t_struct *cable)
 		if (cmd->fd_in < 0 && !is_here)
 			return (perror(files->filename), -1);
 		if (!is_here)
-			dup2(cmd->fd_in, STDIN_FILENO);
+			if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
+				return (perror(""), ft_collectorclear(cable->collector, ALL), -1);
 		close(cmd->fd_in);
 		files = files->next;
 	}
@@ -104,6 +106,8 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	pipe(fd);
 	cmd->pipe_fd = fd;
 	pid = fork();
+	if (pid == -1)
+		ft_collectorclear(cable->collector, ALL);
 	if (cable->cmd->cmd[0])
 	{
 		if (!ft_strncmp(cable->cmd->cmd[0], "./minishell", \
@@ -113,6 +117,6 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	if (!pid)
 		ft_child(cmd, fd, cable);
 	else
-		ft_parent(cmd, fd);
+		ft_parent(cable, cmd, fd);
 	return (0);
 }

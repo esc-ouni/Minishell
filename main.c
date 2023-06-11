@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:42:08 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/10 10:50:24 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 12:26:23 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	ft_init(char **ev, t_struct **cab)
 void	program(t_struct *cable)
 {
 	ft_env_set(cable);
-	if (dup2(cable->tmp_fd_in, 0) < 0)
-		ft_collectorclear(cable->collector, ALL);
+	if (dup2(cable->tmp_fd_in, 0) == -1)
+		return (perror(""), ft_collectorclear(cable->collector, ALL));
 	cable->cmd = get_cmd(cable);
 	ft_exec(cable);
 	get_exitval(cable, g_var);

@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:40 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 14:38:02 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:25:31 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 	return (0);
 }
 
-static void	ft_herdoc_p(t_file *file, int pid, int *pfd)
+static void	ft_herdoc_p(t_struct *cable, t_file *file, int pid, int *pfd)
 {
 	close(pfd[1]);
 	if (!file->next)
-		dup2(pfd[0], STDIN_FILENO);
+		if (dup2(pfd[0], STDIN_FILENO) == -1)
+			return (perror(""), ft_collectorclear(cable->collector, ALL));
 	waitpid(pid, NULL, 0);
 	close(pfd[0]);
 }
@@ -61,13 +62,14 @@ int	ft_heredoc_proc(t_file *file, t_struct *cable)
 	{
 		signal_dfl();
 		close(pfd[0]);
-		dup2(cable->tmp_fd_in, STDIN_FILENO);
+		if (dup2(cable->tmp_fd_in, STDIN_FILENO) == -1)
+			exit(1);
 		ft_heredoc_write(pfd[1], file->filename, cable);
 		close(pfd[1]);
 		exit(0);
 	}
 	else
-		ft_herdoc_p(file, pid, pfd);
+		ft_herdoc_p(cable, file, pid, pfd);
 	g_var = t;
 	return (0);
 }

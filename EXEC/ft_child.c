@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/09 14:51:49 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:27:17 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_redirect_child(t_cmd *cmd, int *fd, t_struct *cable)
 	if (cmd->out_files)
 	{
 		ft_open_out_files(cmd);
-		if (dup2(cmd->fd_out, STDOUT_FILENO) < 0)
+		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 		{
 			perror("");
 			exit(1);
@@ -45,21 +45,25 @@ int	ft_redirect_child(t_cmd *cmd, int *fd, t_struct *cable)
 	{
 		if (cmd->next)
 		{
-			if (dup2(fd[1], STDOUT_FILENO) < 0)
+			if (dup2(fd[1], STDOUT_FILENO) == -1)
 			{
 				perror("");
 				exit(1);
 			}
 		}
 		else
-			dup2(cable->tmp_fd_out, STDOUT_FILENO);
+			if (dup2(cable->tmp_fd_out, STDOUT_FILENO) == -1)
+			{
+				perror("");
+				exit(1);
+			}
 	}
 	return (0);
 }
 
 void	ft_cmd_not(int *fd, t_struct *cable)
 {
-	if (dup2(cable->tmp_err, STDERR_FILENO) < 0)
+	if (dup2(cable->tmp_err, STDERR_FILENO) == -1)
 		exit(1);
 	ft_putendl_fd("cmd does not exist", STDERR_FILENO);
 	close(fd[1]);
