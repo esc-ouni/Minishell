@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/11 14:39:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 21:33:53 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	sig_h(int sig)
 		write(1, "^C\n", 4);
 		rl_on_new_line();
 	}
+	else if (sig == SIGINT && g_var == 17)
+		g_var = 256;
 }
 
 void	strt1(t_struct *cable)
