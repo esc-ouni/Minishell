@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:40 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 14:30:00 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 14:40:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	ft_heredoc_proc(t_file *file, t_struct *cable)
 	pid = fork();
 	if (!pid)
 	{
+		printf("%d\n", getpid());
 		signal_dfl();
 		close(pfd[0]);
 		if (dup2(cable->tmp_fd_in, STDIN_FILENO) == -1)
