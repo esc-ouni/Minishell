@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:42:08 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 14:09:27 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 23:09:24 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ void	ft_dup(t_struct *cable)
 		ft_collectorclear(cable->collector, ALL);
 }
 
+void	ft_set_shlvl(t_struct *cable)
+{
+	char		*shlvl;
+	char		**spl;
+	t_envlst	*exist;
+	int			lvl;
+
+	exist = ft_var_env_exist(cable->envlst, "SHLVL", cable);
+	spl = ft_msoft_split_include(exist->str, '=', cable);
+	lvl = ft_atoi(spl[1]);
+	lvl++;
+	shlvl = ft_mstrjoin(cable, "SHLVL=", ft_itoa(lvl), NTMP);
+	ft_export(cable, shlvl);
+}
+
 void	ft_init(char **ev, t_struct **cab)
 {
 	t_struct			*cable;
@@ -32,6 +47,7 @@ void	ft_init(char **ev, t_struct **cab)
 	cable->collector = &collector;
 	ft_set_env_lst(cable, ev);
 	ft_exp_set(cable);
+	ft_set_shlvl(cable);
 	ft_unset(cable, "OLDPWD");
 	ft_export_exp(cable, "OLDPWD");
 	ft_dup(cable);
@@ -48,7 +64,6 @@ void	program(t_struct *cable)
 	if (dup2(cable->tmp_fd_in, 0) == -1)
 		return (perror(""), ft_collectorclear(cable->collector, ALL));
 	cable->cmd = get_cmd(cable);
-	// after_parse2(cable->cmd);
 	ft_exec(cable);
 	get_sig_exitval(cable, g_var);
 	g_var = 1;
