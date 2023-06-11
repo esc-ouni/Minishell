@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/11 14:39:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 22:25:49 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ void	sig_h(int sig)
 		g_var = 130;
 		write(1, "^C\n", 4);
 		rl_on_new_line();
+	}
+	else if (sig == SIGINT && g_var == 17)
+		g_var = 256;
+	else if (sig == SIGQUIT && g_var == 17)
+	{
+		// rl_on_new_line();
+		// rl_redisplay();
 	}
 }
 

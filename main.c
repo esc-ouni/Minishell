@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 14:42:08 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 23:09:24 by msamhaou         ###   ########.fr       */
+/*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
+/*   Updated: 2023/06/11 23:13:43 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_dup(t_struct *cable)
 {
 	cable->tmp_fd_in = dup(0);
 	cable->tmp_fd_out = dup(1);
-	cable->tmp_err = dup(2);
+	// cable->tmp_err = dup(2);
 	if (cable->tmp_fd_in < 0 || cable->tmp_fd_out < 0)
 		ft_collectorclear(cable->collector, ALL);
 }
