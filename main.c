@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 23:13:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/11 23:51:17 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_set_shlvl(t_struct *cable)
 	char		**spl;
 	t_envlst	*exist;
 	int			lvl;
+	int			t;
 
 	exist = ft_var_env_exist(cable->envlst, "SHLVL", cable);
 	if (!exist)
@@ -40,7 +41,10 @@ void	ft_set_shlvl(t_struct *cable)
 	lvl++;
 	if (lvl > 1000)
 		lvl = 0;
-	shlvl = ft_mstrjoin(cable, "SHLVL=", ft_itoa(lvl), NTMP);
+	t = cable->exit_val;
+	cable->exit_val = lvl;
+	shlvl = ft_mstrjoin(cable, "SHLVL=", ft_mitoa(cable), NTMP);
+	cable->exit_val = t;
 	ft_export(cable, shlvl);
 }
 
@@ -72,6 +76,7 @@ void	program(t_struct *cable)
 	if (dup2(cable->tmp_fd_in, 0) == -1)
 		return (perror(""), ft_collectorclear(cable->collector, ALL));
 	cable->cmd = get_cmd(cable);
+	// after_parse2(cable->cmd);
 	ft_exec(cable);
 	get_sig_exitval(cable, g_var);
 	g_var = 1;

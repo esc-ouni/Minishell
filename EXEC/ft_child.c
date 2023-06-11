@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 13:53:20 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/11 23:50:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,11 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 	}
 	else if (cmd->builtflag == SYS)
 	{
-		if (execve(cmd->cmd_path, cmd->cmd, cable->env) < 0)
+		if (execve(cmd->cmd_path, cmd->cmd, cable->env) == -1)
+		{
+			ft_putendl_fd("cmd does not exist", STDERR_FILENO);
 			ft_collectorclear(cable->collector, ALL);
+		}
 		exit(0);
 	}
 	return (1);
