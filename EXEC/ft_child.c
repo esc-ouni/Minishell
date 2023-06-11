@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 12:27:17 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/11 13:53:20 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int	ft_open_out_files(t_cmd *cmd)
 	return (0);
 }
 
-int	ft_redirect_child(t_cmd *cmd, int *fd, t_struct *cable)
+int	ft_redirect_child(t_cmd *cmd, int *fd)
 {
 	if (cmd->out_files)
 	{
 		ft_open_out_files(cmd);
 		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 		{
-			perror("");
+			perror("here 1");
 			exit(1);
 		}
 	}
@@ -47,16 +47,10 @@ int	ft_redirect_child(t_cmd *cmd, int *fd, t_struct *cable)
 		{
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 			{
-				perror("");
+				perror("here 2");
 				exit(1);
 			}
 		}
-		else
-			if (dup2(cable->tmp_fd_out, STDOUT_FILENO) == -1)
-			{
-				perror("");
-				exit(1);
-			}
 	}
 	return (0);
 }
@@ -75,7 +69,7 @@ void	ft_cmd_not(int *fd, t_struct *cable)
 int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 {
 	close(fd[0]);
-	ft_redirect_child(cmd, fd, cable);
+	ft_redirect_child(cmd, fd);
 	if (cmd->builtflag == NOT)
 		ft_cmd_not(fd, cable);
 	if (cmd->builtflag && (cmd->builtflag != SYS))
