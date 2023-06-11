@@ -29,9 +29,17 @@ void	ft_set_shlvl(t_struct *cable)
 	int			lvl;
 
 	exist = ft_var_env_exist(cable->envlst, "SHLVL", cable);
+	if (!exist)
+	{
+		shlvl = ft_mstrjoin(cable, "SHLVL=", "0", NTMP);
+		ft_export(cable, shlvl);
+		return ;
+	}
 	spl = ft_msoft_split_include(exist->str, '=', cable);
 	lvl = ft_atoi(spl[1]);
 	lvl++;
+	if (lvl > 1000)
+		lvl = 0;
 	shlvl = ft_mstrjoin(cable, "SHLVL=", ft_itoa(lvl), NTMP);
 	ft_export(cable, shlvl);
 }
