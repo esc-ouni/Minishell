@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:42:08 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 14:09:27 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 22:21:22 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_dup(t_struct *cable)
 {
 	cable->tmp_fd_in = dup(0);
 	cable->tmp_fd_out = dup(1);
-	cable->tmp_err = dup(2);
+	// cable->tmp_err = dup(2);
 	if (cable->tmp_fd_in < 0 || cable->tmp_fd_out < 0)
 		ft_collectorclear(cable->collector, ALL);
 }

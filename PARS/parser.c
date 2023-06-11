@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/11 21:36:29 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 22:23:46 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ void	set_exitval(t_struct *cable, int extval)
 
 void	get_sig_exitval(t_struct *cable, int extval)
 {
-	if (extval == 130 || extval == 131 || extval == 256)
+	if (extval == 130 || extval == 131)
 		cable->exit_val = extval;
 }
