@@ -6,9 +6,10 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:40 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 21:55:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/11 22:12:31 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -38,14 +39,17 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 	return (0);
 }
 
-static void	ft_herdoc_p(t_struct *cable, t_file *file, int pid, int *pfd)
+static int	ft_herdoc_p(t_struct *cable, t_file *file, int pid, int *pfd)
 {
 	close(pfd[1]);
+	if (cable->exit_val == 1)
+		return (-1);
 	if (!file->next)
 		if (dup2(pfd[0], STDIN_FILENO) == -1)
-			return (perror(""), ft_collectorclear(cable->collector, ALL));
+			return (perror(""), ft_collectorclear(cable->collector, ALL), -1);
 	waitpid(pid, NULL, 0);
 	close(pfd[0]);
+	return (0);
 }
 
 int	ft_heredoc_proc(t_file *file, t_struct *cable)
@@ -69,7 +73,9 @@ int	ft_heredoc_proc(t_file *file, t_struct *cable)
 		exit(0);
 	}
 	else
-		ft_herdoc_p(cable, file, pid, pfd);
+		if (ft_herdoc_p(cable, file, pid, pfd) == -1)
+			return (-1);
+	get_sig_exitval(cable, g_var);
 	g_var = t;
 	return (0);
 }
