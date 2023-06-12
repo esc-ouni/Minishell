@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 11:25:46 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:50:33 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,23 @@ void	ft_dup(t_struct *cable)
 void	ft_set_shlvl(t_struct *cable)
 {
 	char		*shlvl;
+	char		*shld;
 	char		**spl;
 	t_envlst	*exist;
+	t_envlst	*shild;
 	int			lvl;
 	int			t;
 
 	exist = ft_var_env_exist(cable->envlst, "SHLVL", cable);
+	shild = ft_var_env_exist(cable->envlst, "SHILD", cable);
+	if (!shild)
+	{
+		shlvl = ft_mstrjoin(cable, "SHLVL=", "1", NTMP);
+		ft_export(cable, shlvl);
+		shld = ft_mstrjoin(cable, "SHILD=", "1", NTMP);
+		ft_export(cable, shld);
+		return ;
+	}
 	if (!exist)
 	{
 		shlvl = ft_mstrjoin(cable, "SHLVL=", "1", NTMP);
@@ -38,8 +49,10 @@ void	ft_set_shlvl(t_struct *cable)
 	}
 	spl = ft_msoft_split_include(exist->str, '=', cable);
 	lvl = ft_atoi(spl[1]);
+	if (lvl < 0)
+		lvl = -1;
 	lvl++;
-	if (lvl > 1000)
+	if (lvl > 999)
 		lvl = 0;
 	t = cable->exit_val;
 	cable->exit_val = lvl;
