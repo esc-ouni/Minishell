@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:37 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/12 19:46:32 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/12 20:05:25 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int	check_oerr(char *s)
 
 int	check_pipes(t_lexer **h_lexer)
 {
-	if(pcheck_head(h_lexer))
+	if (pcheck_head(h_lexer))
 		return (1);
-	else if(pcheck_bdy(h_lexer))
+	else if (pcheck_bdy(h_lexer))
 		return (1);
-	else if(pcheck_tail(h_lexer))
+	else if (pcheck_tail(h_lexer))
 		return (1);
 	return (0);
 }

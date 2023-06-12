@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/12 20:02:59 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/12 20:09:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,10 @@ int	pcheck_bdy(t_lexer **h_lexer)
 			tmp = node->next;
 			while (tmp && tmp->type != PIP)
 			{
-				if (tmp->type == SCMD || tmp->type == ST_SQ || tmp->type == ST_DQ)
-				{
-					tmp = NULL;
-					return (0) ;
-				}
-				else if(tmp->type == PIP)
+				if (tmp->type == SCMD || tmp->type == ST_SQ \
+				|| tmp->type == ST_DQ)
+					return (0);
+				else if (tmp->type == PIP)
 					return (syntx_err(), 1);
 				tmp = tmp->next;
 			}
@@ -69,13 +67,14 @@ int	pcheck_tail(t_lexer **h_lexer)
 	{
 		if (node->type == PIP)
 			tmp = node;
-		else if (node->type == SCMD || node->type == ST_SQ || node->type == ST_DQ)
+		else if (node->type == SCMD || node->type == ST_SQ \
+		|| node->type == ST_DQ)
 			tmp = node;
 		node = node->next;
 	}
 	if (tmp && tmp->type == PIP)
 		return (syntx_err(), 1);
-	return (0);	
+	return (0);
 }
 
 void	debug(void)
