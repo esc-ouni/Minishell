@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 13:25:57 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:37:43 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,9 @@ void		ft_exp_add_back(t_exp **envlst, t_exp *toadd);
 void		ft_exp_set(t_struct *cable);
 size_t		ft_envlst_size(t_envlst *envlst);
 void		ft_exec(t_struct *cable);
+int			pcheck_tail(t_lexer **h_lexer);
+int			pcheck_head(t_lexer **h_lexer);
+int			pcheck_bdy(t_lexer **h_lexer);
 void		ft_export(t_struct *cable, char	*str);
 t_envlst	*ft_var_env_exist(t_envlst *envlst, char *str, t_struct *cable);
 t_exp		*ft_var_exp_exist(t_exp *exp, char *str, t_struct *cable);
