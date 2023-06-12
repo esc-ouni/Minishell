@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 13:10:20 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:15:19 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_cmd_not(int *fd)
 
 int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 {
+	signal_dfl();
 	close(fd[0]);
 	ft_redirect_child(cmd, fd);
 	if (cmd->builtflag == NOT)
