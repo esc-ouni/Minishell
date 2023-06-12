@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 23:51:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/12 11:25:46 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_dup(t_struct *cable)
 {
 	cable->tmp_fd_in = dup(0);
 	cable->tmp_fd_out = dup(1);
-	// cable->tmp_err = dup(2);
-	if (cable->tmp_fd_in < 0 || cable->tmp_fd_out < 0)
+	cable->tmp_err = dup(2);
+	if (cable->tmp_fd_in < 0 || cable->tmp_err < 0)
 		ft_collectorclear(cable->collector, ALL);
 }
 
@@ -32,7 +32,7 @@ void	ft_set_shlvl(t_struct *cable)
 	exist = ft_var_env_exist(cable->envlst, "SHLVL", cable);
 	if (!exist)
 	{
-		shlvl = ft_mstrjoin(cable, "SHLVL=", "0", NTMP);
+		shlvl = ft_mstrjoin(cable, "SHLVL=", "1", NTMP);
 		ft_export(cable, shlvl);
 		return ;
 	}
@@ -73,7 +73,7 @@ void	ft_init(char **ev, t_struct **cab)
 void	program(t_struct *cable)
 {
 	ft_env_set(cable);
-	if (dup2(cable->tmp_fd_in, 0) == -1)
+	if (dup2(cable->tmp_fd_in, 0) == -1 || dup2(cable->tmp_err, 2) == -1)
 		return (perror(""), ft_collectorclear(cable->collector, ALL));
 	cable->cmd = get_cmd(cable);
 	// after_parse2(cable->cmd);

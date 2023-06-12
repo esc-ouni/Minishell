@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 23:50:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/12 11:46:32 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_redirect_child(t_cmd *cmd, int *fd)
 		ft_open_out_files(cmd);
 		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 		{
-			perror("here 1");
+			perror("");
 			exit(1);
 		}
 	}
@@ -47,7 +47,7 @@ int	ft_redirect_child(t_cmd *cmd, int *fd)
 		{
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 			{
-				perror("here 2");
+				perror("");
 				exit(1);
 			}
 		}
@@ -55,13 +55,11 @@ int	ft_redirect_child(t_cmd *cmd, int *fd)
 	return (0);
 }
 
-void	ft_cmd_not(int *fd, t_struct *cable)
+void	ft_cmd_not(int *fd)
 {
-	if (dup2(cable->tmp_err, STDERR_FILENO) == -1)
-		exit(1);
 	ft_putendl_fd("cmd does not exist", STDERR_FILENO);
 	close(fd[1]);
-	close(2);
+	close(0);
 	close(1);
 	exit(127);
 }
@@ -71,7 +69,7 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 	close(fd[0]);
 	ft_redirect_child(cmd, fd);
 	if (cmd->builtflag == NOT)
-		ft_cmd_not(fd, cable);
+		ft_cmd_not(fd);
 	if (cmd->builtflag && (cmd->builtflag != SYS))
 	{
 		ft_builtin(cmd, cable);
@@ -86,6 +84,7 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 			ft_putendl_fd("cmd does not exist", STDERR_FILENO);
 			ft_collectorclear(cable->collector, ALL);
 		}
+		close(fd[1]);
 		exit(0);
 	}
 	return (1);
