@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 13:30:42 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:16:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	program(t_struct *cable)
 	cable->cmd = get_cmd(cable);
 	ft_exec(cable);
 	get_sig_exitval(cable, g_var);
-	g_var = 1;
 	ft_collectorclear(cable->collector, TMP);
 }
 
