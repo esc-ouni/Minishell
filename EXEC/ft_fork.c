@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 10:49:12 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:09:43 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_parent(t_struct *cable, t_cmd *cmd, int *fd)
 {
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
-		return (perror("here"), ft_collectorclear(cable->collector, ALL), 1);
+		return (perror(""), ft_collectorclear(cable->collector, ALL), 1);
 	if (cmd->fd_in)
 		close(cmd->fd_in);
 	close (fd[0]);
@@ -29,7 +29,7 @@ static int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
 
 	i = 1;
 	if (cable->cmd_numb > 1)
-		return (0);
+		return (1);
 	if (cmd->builtflag == CD)
 	{
 		ft_cd(cmd, cable);

@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 11:46:32 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:10:20 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 		ft_builtin(cmd, cable);
 		close(fd[1]);
 		close(1);
-		exit (0);
+		exit(0);
 	}
 	else if (cmd->builtflag == SYS)
 	{
