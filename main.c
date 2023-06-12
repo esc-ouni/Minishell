@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 11:50:33 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/12 12:09:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	ft_set_shlvl(t_struct *cable)
 		lvl = -1;
 	lvl++;
 	if (lvl > 999)
-		lvl = 0;
+	{
+		ft_unset(cable, "SHLVL");
+		return;
+	}
 	t = cable->exit_val;
 	cable->exit_val = lvl;
 	shlvl = ft_mstrjoin(cable, "SHLVL=", ft_mitoa(cable), NTMP);
