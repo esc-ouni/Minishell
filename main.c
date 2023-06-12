@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 12:09:42 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:30:42 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,49 +19,6 @@ void	ft_dup(t_struct *cable)
 	cable->tmp_err = dup(2);
 	if (cable->tmp_fd_in < 0 || cable->tmp_err < 0)
 		ft_collectorclear(cable->collector, ALL);
-}
-
-void	ft_set_shlvl(t_struct *cable)
-{
-	char		*shlvl;
-	char		*shld;
-	char		**spl;
-	t_envlst	*exist;
-	t_envlst	*shild;
-	int			lvl;
-	int			t;
-
-	exist = ft_var_env_exist(cable->envlst, "SHLVL", cable);
-	shild = ft_var_env_exist(cable->envlst, "SHILD", cable);
-	if (!shild)
-	{
-		shlvl = ft_mstrjoin(cable, "SHLVL=", "1", NTMP);
-		ft_export(cable, shlvl);
-		shld = ft_mstrjoin(cable, "SHILD=", "1", NTMP);
-		ft_export(cable, shld);
-		return ;
-	}
-	if (!exist)
-	{
-		shlvl = ft_mstrjoin(cable, "SHLVL=", "1", NTMP);
-		ft_export(cable, shlvl);
-		return ;
-	}
-	spl = ft_msoft_split_include(exist->str, '=', cable);
-	lvl = ft_atoi(spl[1]);
-	if (lvl < 0)
-		lvl = -1;
-	lvl++;
-	if (lvl > 999)
-	{
-		ft_unset(cable, "SHLVL");
-		return;
-	}
-	t = cable->exit_val;
-	cable->exit_val = lvl;
-	shlvl = ft_mstrjoin(cable, "SHLVL=", ft_mitoa(cable), NTMP);
-	cable->exit_val = t;
-	ft_export(cable, shlvl);
 }
 
 void	ft_init(char **ev, t_struct **cab)
@@ -92,7 +49,6 @@ void	program(t_struct *cable)
 	if (dup2(cable->tmp_fd_in, 0) == -1 || dup2(cable->tmp_err, 2) == -1)
 		return (perror(""), ft_collectorclear(cable->collector, ALL));
 	cable->cmd = get_cmd(cable);
-	// after_parse2(cable->cmd);
 	ft_exec(cable);
 	get_sig_exitval(cable, g_var);
 	g_var = 1;

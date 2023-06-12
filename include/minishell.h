@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 23:10:53 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:25:57 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ void		ft_print_exp(t_exp *exp);
 void		set_exitval(t_struct *cable, int extval);
 void		get_sig_exitval(t_struct *cable, int extval);
 void		ft_set_env_lst(t_struct *cable, char **ev);
+void		ft_set_shlvl(t_struct *cable);
 void		ft_env_set(t_struct *cable);
 t_envlst	*ft_env_new_node(char *str, t_struct *cable);
 t_envlst	*ft_last_envlst(t_envlst *envlst);

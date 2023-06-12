@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:40 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 22:28:53 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:34:59 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -55,6 +54,18 @@ static int	ft_herdoc_p(t_struct *cable, t_file *file, int pid, int *pfd)
 	return (0);
 }
 
+static int	ft_heredoc_child(t_struct *cable, t_file *file, int *pfd)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_DFL);
+	close(pfd[0]);
+	if (dup2(cable->tmp_fd_in, STDIN_FILENO) == -1)
+		exit(1);
+	ft_heredoc_write(pfd[1], file->filename, cable);
+	close(pfd[1]);
+	exit(0);
+}
+
 int	ft_heredoc_proc(t_file *file, t_struct *cable)
 {
 	int	pfd[2];
@@ -66,21 +77,14 @@ int	ft_heredoc_proc(t_file *file, t_struct *cable)
 	pipe(pfd);
 	pid = fork();
 	if (!pid)
-	{
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, SIG_DFL);
-		close(pfd[0]);
-		if (dup2(cable->tmp_fd_in, STDIN_FILENO) == -1)
-			exit(1);
-		ft_heredoc_write(pfd[1], file->filename, cable);
-		close(pfd[1]);
-		exit(0);
-	}
+		ft_heredoc_child(cable, file, pfd);
 	else
+	{
 		if (ft_herdoc_p(cable, file, pid, pfd) == -1)
 		{
-			g_var = t;	
+			g_var = t;
 			return (-1);
 		}
+	}
 	return (0);
 }
