@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:20:37 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/10 14:56:01 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/12 14:21:00 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int	check_pipes(t_lexer **h_lexer)
 	while (node)
 	{
 		if (node->type != PIP)
+		{
+			tmp = NULL;
 			break ;
+		}
 		if (node->type == PIP)
 			return (syntx_err(), 1);
 		if (node->type == WH_SP)
@@ -80,20 +83,20 @@ int	check_pipes(t_lexer **h_lexer)
 	node = *h_lexer;
 	while (node)
 	{
-		if (node->next && (node->type == PIP))
+		if (node->type == PIP && node->next)
 		{
 			tmp = node->next;
 			while (tmp)
 			{
-				if(tmp->type == PIP)
-					return (syntx_err(), 1);
-				if (tmp->type == WH_SP || tmp->type != SCMD)
-					tmp = tmp->next;
-				else if (tmp->type == SCMD)
+				if (tmp->type == SCMD || node->type == ST_SQ || node->type == ST_DQ)
 				{
 					tmp = NULL;
 					break ;
 				}
+				if(tmp->type == PIP)
+					return (syntx_err(), 1);
+				if (tmp->type == WH_SP || tmp->type != SCMD)
+					tmp = tmp->next;
 			}
 		}
 		node = node->next;

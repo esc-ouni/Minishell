@@ -59,6 +59,13 @@ void printTYPE(t_enum num)
     }
 }
 
+void	debug(void)
+{
+	printf("\x1B[32m");
+	printf("\nDEBUG OK\n");
+	printf("\x1B[0m");
+}
+
 void    after_parse2(t_cmd  *cmd)
 {
     int i = 0;
