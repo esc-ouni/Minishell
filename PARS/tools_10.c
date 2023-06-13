@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/12 17:46:37 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 16:06:12 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@ int	check_syntax(t_struct *cable, char *s)
 	return (0);
 }
 
+void	ninety_check(t_struct *cable, t_cmd *cmd)
+{
+	if (cmd)
+	{
+		if (!cmd->out_files && !cmd->in_files && !cmd->cmd)
+		{
+			cmd = NULL;
+			return (ft_collectorclear(cable->collector, TMP));
+		}
+		else if (!cmd->out_files && !cmd->in_files && !cmd->cmd && (ft_cmdsize(cmd) > 1))
+		{
+			cmd = NULL;
+			return (set_exitval(cable, 258), syntx_err(), \
+			ft_collectorclear(cable->collector, TMP));
+		}
+	}
+	
+}
+
 t_cmd	*get_cmd(t_struct *cable)
 {
 	char		*s;
@@ -41,7 +60,7 @@ t_cmd	*get_cmd(t_struct *cable)
 	h_lexer = parser(cable, s);
 	cmd = parser2(cable, h_lexer);
 	emplify(cable, cmd);
-	g_var = 0;
+	// ninety_check(cable, cmd);
 	return (cmd);
 }
 

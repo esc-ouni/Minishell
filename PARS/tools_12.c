@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/12 20:07:46 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 16:13:11 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	prm(int argc, char **argv, char **env)
 
 void	sig_h(int sig)
 {
+	printf("g_var val : %d\n", g_var);
 	if (sig == SIGINT && g_var == 1)
 	{
 		write(1, "\n", 1);
@@ -40,12 +41,12 @@ void	sig_h(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	else if (sig == SIGQUIT && !g_var)
+	else if (sig == SIGQUIT && g_var == 0)
 	{
 		g_var = 131;
 		write(1, "^\\Quit : 3\n", 12);
 	}
-	else if (sig == SIGINT && !g_var)
+	else if (sig == SIGINT && g_var == 0)
 	{
 		g_var = 130;
 		write(1, "^C\n", 4);

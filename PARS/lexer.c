@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:42:06 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/10 14:47:14 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 15:14:45 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	scmd_lex(t_struct *cable, t_lexer **l_node, char *s, int *i)
 
 	l = 0;
 	start = (*i);
-	while (ft_isascii(s[(*i)]) && s[(*i)] && s[(*i)] != '>' && s[(*i)] != '<' \
+	while (ft_isprint(s[(*i)]) && s[(*i)] && s[(*i)] != '>' && s[(*i)] != '<' \
 	&& s[(*i)] != '|' && s[(*i)] != '\'' && s[(*i)] != '"' && s[(*i)] != ' ')
 	{
 		(*i)++;
@@ -73,7 +73,7 @@ void	lexer_p2(t_struct *cable, t_lexer **l_node, char *s, int sz)
 			dq_lex(cable, l_node, s, &i);
 		else if (s[i] == '\'')
 			sq_lex(cable, l_node, s, &i);
-		else if (ft_isascii(s[i]) && s[i] && s[i] != '>' && s[i] != '<' \
+		else if (ft_isprint(s[i]) && s[i] && s[i] != '>' && s[i] != '<' \
 		&& s[i] != '|' && s[i] != '\'' && s[i] != '"' && s[i] != ' ')
 			scmd_lex(cable, l_node, s, &i);
 		else if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')

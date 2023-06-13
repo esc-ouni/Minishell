@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:43:20 by msamhaou          #+#    #+#             */
-/*   Updated: 2022/10/17 10:44:12 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/13 15:11:26 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+int	t_isascii(int c)
 {
 	if (c >= 0 && c <= 127)
 		return (1);
