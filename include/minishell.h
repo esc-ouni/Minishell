@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 19:37:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 16:04:49 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/readline.h>
 # include <stdlib.h>
 # include <termios.h>
+# include <errno.h>
 # include "libft.h"
 
 typedef struct s_file		t_file;

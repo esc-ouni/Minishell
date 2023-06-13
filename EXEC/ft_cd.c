@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:32:10 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/08 16:14:09 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:36:25 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ static char	*ft_set_newpwd(t_struct *cable)
 	char	*newpwd;
 
 	pwd = ft_getcwd(cable);
+	if (errno == ENOENT)
+	{
+		ft_putstr_fd("cd: error retrieving current directory: ", 2);
+		ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
+		ft_putendl_fd(strerror(errno), 2);
+	}
 	newpwd = ft_mstrjoin(cable, "PWD=", pwd, NTMP);
 	ft_export(cable, newpwd);
 	return (newpwd);

@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:52 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 15:23:17 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:21:55 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ char	*ft_getcwd(t_struct *cable)
 
 	buff = NULL;
 	buff = h_malloc(cable->collector, 1024 * sizeof(char), buff, TMP);
-	getcwd(buff, 1024);
+	if (!getcwd(buff, 1024) && (errno != ENOENT))
+	{
+		perror("getcwd");
+		exit(1);
+	}
 	return (buff);
 }
 
