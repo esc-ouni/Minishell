@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 21:51:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 21:55:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_redirect_child(t_cmd *cmd, int *fd)
 
 void	ft_cmd_not(int *fd)
 {
-	ft_putendl_fd("cmd does not exist", STDERR_FILENO);
+	ft_putendl_fd("cmd does not exist", STDERR_FILENO); 
 	close(fd[1]);
 	close(0);
 	close(1);
