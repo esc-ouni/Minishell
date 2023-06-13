@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:52 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 16:21:55 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:29:21 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	ft_quit(t_cmd *cmd)
 		if ((cmd->cmd[2] != NULL) && ft_strdigit(cmd->cmd[1]))
 			return (ft_print_err(NULL, 0));
 		ext = ft_atoi(cmd->cmd[1]);
+		if (ext == -1)
+		{
+			ft_print_err(cmd->cmd[1], 1);
+			ext = 255;
+		}
 	}
 	exit(ext);
 }
