@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 21:33:29 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:02:21 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,5 @@ int	main(int ac, char **av, char **ev)
 	ft_init(ev, &cable);
 	strt(cable);
 	while (1)
-	{
-		g_var = 1;
 		program(cable);
-	}
 }
