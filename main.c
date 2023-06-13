@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 16:11:38 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 21:33:29 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	ft_dup(t_struct *cable)
 	cable->tmp_fd_out = dup(1);
 	cable->tmp_err = dup(2);
 	if (cable->tmp_fd_in < 0 || cable->tmp_err < 0)
+	{
+		perror("");
 		ft_collectorclear(cable->collector, ALL);
+	}
 }
 
 void	ft_init(char **ev, t_struct **cab)
