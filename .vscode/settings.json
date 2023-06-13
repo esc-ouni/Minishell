@@ -3,6 +3,7 @@
 		"__debug": "c",
 		"algorithm": "c",
 		"unordered_map": "c",
-		"__node_handle": "c"
+		"__node_handle": "c",
+		"minishell.h": "c"
 	}
 }

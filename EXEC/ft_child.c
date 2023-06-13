@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 19:15:19 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 16:01:25 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,11 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 	signal_dfl();
 	close(fd[0]);
 	ft_redirect_child(cmd, fd);
-	if (cmd->builtflag == NOT)
-		ft_cmd_not(fd);
+	// if (cmd->builtflag == NOT && cmd->cmd && cmd->cmd[0])
+	// 	ft_cmd_not(fd);
 	if (cmd->builtflag && (cmd->builtflag != SYS))
 	{
 		ft_builtin(cmd, cable);
-		close(fd[1]);
 		close(1);
 		exit(0);
 	}

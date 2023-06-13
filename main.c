@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/12 19:43:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 16:11:38 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	program(t_struct *cable)
 	if (dup2(cable->tmp_fd_in, 0) == -1 || dup2(cable->tmp_err, 2) == -1)
 		return (perror(""), ft_collectorclear(cable->collector, ALL));
 	cable->cmd = get_cmd(cable);
+	// after_parse2(cable->cmd);
 	ft_exec(cable);
-	get_sig_exitval(cable, g_var);
 	ft_collectorclear(cable->collector, TMP);
 }
 
@@ -58,10 +58,12 @@ int	main(int ac, char **av, char **ev)
 {
 	t_struct	*cable;
 
-	g_var = 1;
 	prm(ac, av, ev);
 	ft_init(ev, &cable);
 	strt(cable);
 	while (1)
+	{
+		g_var = 1;
 		program(cable);
+	}
 }
