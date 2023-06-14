@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 14:17:04 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:55:44 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_init(char **ev, t_struct **cab)
 
 	collector = NULL;
 	cable = NULL;
+	g_var = 1;
 	cable = h_malloc(&collector, sizeof(t_struct), cable, NTMP);
 	cable->collector = &collector;
 	ft_set_env_lst(cable, ev);
