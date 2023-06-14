@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 14:19:40 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:48:43 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,15 @@ int	ft_open_pipe(t_struct *cable, int *fd)
 	return (0);
 }
 
+int	ft_forking(t_struct *cable, int *pid)
+{
+	*pid = fork();
+	if (*pid == -1)
+		return (perror("fork"), ft_close_fdtmp(cable), \
+			ft_collectorclear(cable->collector, ALL), -1);
+	return (0);
+}
+
 int	ft_fork(t_cmd *cmd, t_struct *cable)
 {
 	int	fd[2];
@@ -85,11 +94,10 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	cmd->fd_in = -1;
 	if (ft_first_redirection(cmd, cable) < 0)
 		return (1);
+	if (!cmd->cmd[0])
+		return (0);
 	ft_open_pipe(cable, fd);
-	pid = fork();
-	if (pid == -1)
-		return (perror("fork"), ft_close_fdtmp(cable), \
-			ft_collectorclear(cable->collector, ALL), -1);
+	ft_forking(cable, &pid);
 	if (cable->cmd->cmd[0])
 	{
 		if (!ft_strncmp(cable->cmd->cmd[0], "./minishell", \
