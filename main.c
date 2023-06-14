@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 23:56:21 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:17:04 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 void	ft_dup(t_struct *cable)
 {
 	cable->tmp_fd_in = dup(0);
-	cable->tmp_fd_out = dup(1);
-	cable->tmp_err = dup(2);
 	if (cable->tmp_fd_in < 0 || cable->tmp_err < 0)
 	{
 		perror("");
+		ft_collectorclear(cable->collector, ALL);
+	}
+	cable->tmp_err = dup(2);
+	if (cable->tmp_err < 0)
+	{
+		perror("");
+		ft_close(cable, cable->tmp_fd_in);
 		ft_collectorclear(cable->collector, ALL);
 	}
 }
@@ -50,7 +55,10 @@ void	program(t_struct *cable)
 {
 	ft_env_set(cable);
 	if (dup2(cable->tmp_fd_in, 0) == -1 || dup2(cable->tmp_err, 2) == -1)
-		return (perror(""), ft_collectorclear(cable->collector, ALL));
+	{
+		ft_close_fdtmp(cable);
+		return (perror("dup2"), ft_collectorclear(cable->collector, ALL));
+	}
 	cable->cmd = get_cmd(cable);
 	ft_exec(cable);
 	ft_collectorclear(cable->collector, TMP);

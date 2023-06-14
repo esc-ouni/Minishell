@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:40 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 13:34:46 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:18:48 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static int	ft_herdoc_p(t_struct *cable, t_file *file, int pid, int *pfd)
 	ft_close(cable, pfd[1]);
 	if (!file->next)
 		if (dup2(pfd[0], STDIN_FILENO) == -1)
-			return (perror(""), ft_collectorclear(cable->collector, ALL), -1);
+			return (perror("dup2"), ft_close_fdtmp(cable), \
+				ft_collectorclear(cable->collector, ALL), -1);
 	waitpid(pid, NULL, 0);
 	if (g_var == 256)
 	{
@@ -60,7 +61,10 @@ static int	ft_heredoc_child(t_struct *cable, t_file *file, int *pfd)
 	signal(SIGINT, SIG_DFL);
 	ft_close(cable, pfd[0]);
 	if (dup2(cable->tmp_fd_in, STDIN_FILENO) == -1)
+	{
+		perror("dup2");
 		exit(1);
+	}
 	ft_heredoc_write(pfd[1], file->filename, cable);
 	ft_close(cable, pfd[1]);
 	exit(0);

@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 13:33:26 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:54:00 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ struct s_struct
 	t_envlst	*envlst;
 	t_exp		*exp;
 	t_cmd		*cmd;
-	int			tmp_fd_out;
 	int			tmp_fd_in;
 	int			tmp_err;
 	int			exit_val;
@@ -152,6 +151,7 @@ typedef enum e_flag
 	ALL
 }	t_flag;
 
+void		ft_close_fdtmp(t_struct *cable);
 void		ft_close(t_struct *cable, int fd);
 int			ft_open_in_file(t_cmd *cmd, t_struct *cable);
 void		ft_print_envlst(t_envlst *envlst);

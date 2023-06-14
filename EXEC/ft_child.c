@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 13:34:07 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:30:01 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_redirect_child(t_struct *cable, t_cmd *cmd, int *fd)
 		ft_open_out_files(cable, cmd);
 		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 		{
-			perror("");
+			perror("dup2");
 			exit(1);
 		}
 	}
@@ -47,7 +47,7 @@ int	ft_redirect_child(t_struct *cable, t_cmd *cmd, int *fd)
 		{
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 			{
-				perror("");
+				perror("dup2");
 				exit(1);
 			}
 		}
@@ -82,6 +82,7 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 		if (execve(cmd->cmd_path, cmd->cmd, cable->env) == -1)
 		{
 			ft_putendl_fd("cmd does not exist", STDERR_FILENO);
+			ft_close_fdtmp(cable);
 			ft_collectorclear(cable->collector, ALL);
 		}
 		ft_close(cable, fd[1]);

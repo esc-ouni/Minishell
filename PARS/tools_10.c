@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_10.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/13 16:06:12 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/14 13:58:21 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	check_syntax(t_struct *cable, char *s)
 	if (!s)
 	{
 		write(1, "exit\n", 6);
+		ft_close_fdtmp(cable);
 		ft_collectorclear(cable->collector, ALL);
 		exit (0);
 	}
@@ -46,7 +47,7 @@ void	ninety_check(t_struct *cable, t_cmd *cmd)
 			ft_collectorclear(cable->collector, TMP));
 		}
 	}
-	
+
 }
 
 t_cmd	*get_cmd(t_struct *cable)
@@ -82,7 +83,7 @@ int	check_for_udf(char *s)
 		if (s[i] == '&' || s[i] == ';')
 			return (1);
 		i++;
-	}	
+	}
 	return (0);
 }
 

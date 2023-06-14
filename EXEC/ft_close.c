@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 11:46:18 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 13:42:57 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:58:12 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ void	ft_close(t_struct *cable, int fd)
 		else
 		{
 			perror("close");
+			ft_close_fdtmp(cable);
 			ft_collectorclear(cable->collector, ALL);
 		}
 	}
+}
+
+void	ft_close_fdtmp(t_struct *cable)
+{
+	ft_close(cable, cable->tmp_err);
+	ft_close(cable, cable->tmp_fd_in);
 }

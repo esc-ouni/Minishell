@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 12:31:16 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:31:34 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_exec(t_struct *cable)
 	cable->cmd_numb = ft_cmd_count(cmd);
 	while (cmd)
 	{
+		printf("%s\n", cmd->cmd[0]);
 		ft_fork(cmd, cable);
 		cmd = cmd->next;
 	}

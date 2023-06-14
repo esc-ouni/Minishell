@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_12.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/13 22:02:34 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/14 13:58:44 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,20 @@ void	strt1(t_struct *cable)
 	if (t_fd == -1)
 	{
 		perror("Error getting terminal fd");
+		ft_close_fdtmp(cable);
 		ft_collectorclear(cable->collector, ALL);
 	}
 	if (tcgetattr(t_fd, &terminal_c) < 0)
 	{
 		perror("Error getting terminal attr");
+		ft_close_fdtmp(cable);
 		ft_collectorclear(cable->collector, ALL);
 	}
 	terminal_c.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(t_fd, 0, &terminal_c) < 0)
 	{
 		perror("Error setting terminal attr");
+		ft_close_fdtmp(cable);
 		ft_collectorclear(cable->collector, ALL);
 	}
 }
@@ -83,11 +86,13 @@ void	strt2(t_struct *cable)
 	if (signal(SIGINT, sig_h) == SIG_ERR)
 	{
 		perror("Error handling a signal");
+		ft_close_fdtmp(cable);
 		ft_collectorclear(cable->collector, ALL);
 	}
 	if (signal(SIGQUIT, sig_h) == SIG_ERR)
 	{
 		perror("Error ignoring a signal");
+		ft_close_fdtmp(cable);
 		ft_collectorclear(cable->collector, ALL);
 	}
 }
