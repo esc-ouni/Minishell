@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:10:01 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 23:10:30 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:18:58 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_open_file_case(t_file *file, t_cmd *cmd, t_struct *cable)
 			return (perror(""), ft_collectorclear(cable->collector, ALL), -1);
 	}
 	if (file->next)
-		close(cmd->fd_in);
+		ft_close(cable, cmd->fd_in,14);
 	return (0);
 }
 

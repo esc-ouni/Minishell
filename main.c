@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 22:02:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/13 23:56:21 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	program(t_struct *cable)
 	if (dup2(cable->tmp_fd_in, 0) == -1 || dup2(cable->tmp_err, 2) == -1)
 		return (perror(""), ft_collectorclear(cable->collector, ALL));
 	cable->cmd = get_cmd(cable);
-	// after_parse2(cable->cmd);
 	ft_exec(cable);
 	ft_collectorclear(cable->collector, TMP);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 21:55:39 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/14 12:09:18 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_open_out_files(t_cmd *cmd)
+int	ft_open_out_files(t_struct *cable, t_cmd *cmd)
 {
 	t_file	*files;
 
@@ -24,17 +24,17 @@ int	ft_open_out_files(t_cmd *cmd)
 		if (cmd->fd_out < 0)
 			return (perror(""), exit(1), 1);
 		if (files->next)
-			close(cmd->fd_out);
+			ft_close(cable, cmd->fd_out, 1);
 		files = files->next;
 	}
 	return (0);
 }
 
-int	ft_redirect_child(t_cmd *cmd, int *fd)
+int	ft_redirect_child(t_struct *cable, t_cmd *cmd, int *fd)
 {
 	if (cmd->out_files)
 	{
-		ft_open_out_files(cmd);
+		ft_open_out_files(cable, cmd);
 		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 		{
 			perror("");
@@ -55,12 +55,12 @@ int	ft_redirect_child(t_cmd *cmd, int *fd)
 	return (0);
 }
 
-void	ft_cmd_not(int *fd)
+void	ft_cmd_not(t_struct *cable, int *fd)
 {
-	ft_putendl_fd("cmd does not exist", STDERR_FILENO); 
-	close(fd[1]);
-	close(0);
-	close(1);
+	ft_putendl_fd("cmd does not exist", STDERR_FILENO);
+	ft_close(cable, fd[1],2);
+	ft_close(cable, 0,3);
+	ft_close(cable, 1,4);
 	exit(127);
 }
 
@@ -68,13 +68,13 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 {
 	signal_dfl();
 	if (cmd->builtflag == NOT && cmd->cmd && cmd->cmd[0])
-		ft_cmd_not(fd);
-	close(fd[0]);
-	ft_redirect_child(cmd, fd);
+		ft_cmd_not(cable, fd);
+	ft_close(cable, fd[0],5);
+	ft_redirect_child(cable, cmd, fd);
 	if (cmd->builtflag && (cmd->builtflag != SYS))
 	{
 		ft_builtin(cmd, cable);
-		close(1);
+		ft_close(cable, 1,6);
 		exit(0);
 	}
 	else if (cmd->builtflag == SYS)
@@ -84,7 +84,7 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 			ft_putendl_fd("cmd does not exist", STDERR_FILENO);
 			ft_collectorclear(cable->collector, ALL);
 		}
-		close(fd[1]);
+		ft_close(cable, fd[1],7);
 		exit(0);
 	}
 	return (1);

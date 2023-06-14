@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+         #
+#    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/13 14:51:51 by idouni           ###   ########.fr        #
+#    Updated: 2023/06/14 11:57:12 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ LIBFT_OBJ = $(addprefix $(OBJ_DIR),$(LIBFT_OBJ_FILE))
 EXEC_DIR = EXEC/
 EXEC_SRC_FILES =	ft_builtin.c       ft_echo.c          ft_exec.c          ft_export.c        ft_fork.c          ft_msoft_split.c   ft_set_exp.c       ft_soft_split.c    ft_unset_envlst.c\
 					ft_cd.c            ft_env_lst_tools.c ft_exp_lst_tools.c ft_export_env.c    ft_heredoc.c       ft_open_files.c    ft_set_path.c      ft_test_tools.c    ft_unset_exp.c\
-					ft_child.c         ft_error_print.c   ft_exp_tools.c     ft_export_exp.c    ft_lst_finder.c    ft_set_env.c       ft_skip_char.c     ft_unset.c
+					ft_child.c         ft_error_print.c   ft_exp_tools.c     ft_export_exp.c    ft_lst_finder.c    ft_set_env.c       ft_skip_char.c     ft_unset.c		ft_close.c
 EXEC_SRC = $(addprefix $(EXEC_DIR), $(EXEC_SRC_FILES))
 EXEC_OBJ_FILES = $(EXEC_SRC_FILES:.c=.o)
 EXEC_OBJ = $(addprefix $(OBJ_DIR), $(EXEC_OBJ_FILES))

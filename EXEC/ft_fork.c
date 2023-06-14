@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 15:45:51 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/14 13:22:23 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	ft_parent(t_struct *cable, t_cmd *cmd, int *fd)
 {
-	close(fd[1]);
+	ft_close(cable, fd[1],8);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		return (perror(""), ft_collectorclear(cable->collector, ALL), 1);
-	if (cmd->fd_in)
-		close(cmd->fd_in);
-	close (fd[0]);
+	if (cmd->fd_in != -1)
+		ft_close(cable, cmd->fd_in,cmd->fd_in);
+	ft_close(cable, fd[0], 0);
 	return (0);
 }
 
@@ -73,6 +73,7 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 
 	if (!ft_built_in_first(cmd, cable))
 		return (1);
+	cmd->fd_in = -1;
 	if (ft_first_redirection(cmd, cable) < 0)
 		return (1);
 	if (pipe(fd) == -1)
