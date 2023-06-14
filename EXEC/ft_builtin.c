@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:52 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 22:46:43 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/14 16:09:55 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	ft_quit(t_cmd *cmd)
 	else
 	{
 		if (!ft_strdigit(cmd->cmd[1]))
+		{
 			ft_print_err(cmd->cmd[1], 1);
+			exit(255);
+		}
 		if ((cmd->cmd[2] != NULL) && ft_strdigit(cmd->cmd[1]))
 			return (ft_print_err(NULL, 0));
 		ext = ft_atoi(cmd->cmd[1]);
