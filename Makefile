@@ -6,7 +6,7 @@
 #    By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 11:24:33 by msamhaou          #+#    #+#              #
-#    Updated: 2023/06/14 11:57:12 by msamhaou         ###   ########.fr        #
+#    Updated: 2023/06/15 21:39:37 by msamhaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,13 +82,13 @@ $(NAME) : $(OBJ_DIR) $(ALL_OBJ)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
-$(OBJ_DIR)%.o : $(LIBFT_DIR)%.c
+$(OBJ_DIR)%.o : $(LIBFT_DIR)%.c $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@ $(INCLU)
-$(OBJ_DIR)%.o : $(EXEC_DIR)%.c
+$(OBJ_DIR)%.o : $(EXEC_DIR)%.c $(HEADERS)
 	$(CC) $(FLAGS)  -c $< -o $@ $(INCLU)
-$(OBJ_DIR)%.o : $(PARS_DIR)%.c
+$(OBJ_DIR)%.o : $(PARS_DIR)%.c $(HEADERS)
 	$(CC) $(FLAGS)  -c $< -o $@ $(INCLU)
-$(MAIN_OBJ) : $(MAIN_SRC_FILE)
+$(MAIN_OBJ) : $(MAIN_SRC_FILE) $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@ $(INCLU)
 clean :
 	rm -rf $(OBJ_DIR)
