@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:52 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 16:09:55 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/16 14:31:40 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_space_skip(char **str)
+{
+	while (**str == 32 || (**str >= 9 && **str <= 13))
+		(*str)++;
+}
 
 void	ft_quit(t_cmd *cmd)
 {
@@ -21,6 +27,7 @@ void	ft_quit(t_cmd *cmd)
 		exit(0);
 	else
 	{
+		ft_space_skip(&(cmd->cmd[1]));
 		if (!ft_strdigit(cmd->cmd[1]))
 		{
 			ft_print_err(cmd->cmd[1], 1);

@@ -6,13 +6,13 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:47:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/16 14:19:37 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:28:03 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_space_skip(const char **str, int *sign)
+static void	ft_space_skip(const char **str, int *sign)
 {
 	while (**str == 32 || (**str >= 9 && **str <= 13))
 		(*str)++;
