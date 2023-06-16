@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 13:54:00 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:24:57 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ char		*ft_getenv(t_struct *cable, char *key);
 char		*ft_mitoa(t_struct *cable);
 char		*ft_msubstr(t_struct *cable, char const *s, \
 				unsigned int start, size_t len);
+int			ft_built_in_first(t_cmd *cmd, t_struct *cable);
 void		sig_h(int sig);
 void		strt2(t_struct *cable);
 void		strt1(t_struct *cable);

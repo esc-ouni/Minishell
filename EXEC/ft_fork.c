@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/16 12:44:10 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:23:45 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,6 @@ static int	ft_parent(t_struct *cable, t_cmd *cmd, int *fd)
 		ft_close(cable, cmd->fd_in);
 	ft_close(cable, fd[0]);
 	return (0);
-}
-
-static int	ft_built_in_first(t_cmd *cmd, t_struct *cable)
-{
-	int	i;
-
-	i = 1;
-	if (cable->cmd_numb > 1)
-		return (1);
-	if (cmd->builtflag == CD)
-	{
-		ft_cd(cmd, cable);
-		return (0);
-	}
-	else if (cmd->builtflag == EXT && cable->cmd_numb == 1)
-		ft_quit(cmd);
-	else if (cmd->builtflag == EXPT && cmd->cmd[1])
-	{
-		while (cmd->cmd[i])
-			ft_export(cable, cmd->cmd[i++]);
-		return (0);
-	}
-	else if (cmd->builtflag == UNST)
-	{
-		while (cmd->cmd[i])
-			ft_unset(cable, cmd->cmd[i++]);
-		return (0);
-	}
-	return (1);
 }
 
 static int	ft_first_redirection(t_cmd *cmd, t_struct *cable)
