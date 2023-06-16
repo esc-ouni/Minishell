@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/12 20:09:06 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/16 13:47:52 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,16 @@ int	pcheck_tail(t_lexer **h_lexer)
 	return (0);
 }
 
-void	debug(void)
+int	basic_syntax_check2(t_lexer **h_lexer)
 {
-	printf("\x1B[32m");
-	printf("\nDEBUG OK\n");
-	printf("\x1B[0m");
+	t_lexer	*node;
+
+	node = *h_lexer;
+	while (node)
+	{
+		if (node->type == SCMD && check_for_udf(node->cmd))
+			return (syntx_err(), 1);
+		node = node->next;
+	}
+	return (0);
 }

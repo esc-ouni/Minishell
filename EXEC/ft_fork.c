@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/16 12:44:10 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:51:51 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,6 @@ int	ft_open_pipe(t_struct *cable, int *fd)
 {
 	if (pipe(fd) == -1)
 		return (perror("pipe"), ft_close_fdtmp(cable), \
-			ft_collectorclear(cable->collector, ALL), -1);
-	return (0);
-}
-
-int	ft_forking(t_struct *cable, int *pid)
-{
-	*pid = fork();
-	if (*pid == -1)
-		return (perror("fork"), ft_close_fdtmp(cable), \
 			ft_collectorclear(cable->collector, ALL), -1);
 	return (0);
 }

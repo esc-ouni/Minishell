@@ -6,11 +6,20 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:47:14 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/13 22:39:03 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/16 13:45:32 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	ft_catoi(const char **str, int *sign)
+{
+	if (**str == '-')
+	{
+		(*sign) *= -1;
+		(*str)++;
+	}
+}
 
 size_t	ft_atoi(const char *str)
 {
@@ -22,10 +31,7 @@ size_t	ft_atoi(const char *str)
 	while (*str == 32 || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-')
-	{
-		sign *= -1;
-		str++;
-	}
+		ft_catoi(&str, &sign);
 	else if (*str == '+')
 		str++;
 	while (*str >= '0' && *str <= '9')

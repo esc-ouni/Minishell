@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 13:54:00 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:52:14 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,10 +168,12 @@ int			ft_export_env(t_struct *cable, char	*str);
 void		ft_export_exp(t_struct *cable, char *str);
 t_exp		*ft_exp_new_node(char *str, t_struct *cable);
 t_exp		*ft_last_explst(t_exp *envlst);
+int			ft_forking(t_struct *cable, int *pid);
 void		ft_exp_add_back(t_exp **envlst, t_exp *toadd);
 void		ft_exp_set(t_struct *cable);
 size_t		ft_envlst_size(t_envlst *envlst);
 void		ft_exec(t_struct *cable);
+int			check_for_udf(char *s);
 int			pcheck_tail(t_lexer **h_lexer);
 int			pcheck_head(t_lexer **h_lexer);
 int			pcheck_bdy(t_lexer **h_lexer);
