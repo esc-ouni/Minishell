@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_10.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/14 13:58:21 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:47:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void	ninety_check(t_struct *cable, t_cmd *cmd)
 			cmd = NULL;
 			return (ft_collectorclear(cable->collector, TMP));
 		}
-		else if (!cmd->out_files && !cmd->in_files && !cmd->cmd && (ft_cmdsize(cmd) > 1))
+		else if (!cmd->out_files && !cmd->in_files \
+		&& !cmd->cmd && (ft_cmdsize(cmd) > 1))
 		{
 			cmd = NULL;
 			return (set_exitval(cable, 258), syntx_err(), \
 			ft_collectorclear(cable->collector, TMP));
 		}
 	}
-
 }
 
 t_cmd	*get_cmd(t_struct *cable)
@@ -61,7 +61,7 @@ t_cmd	*get_cmd(t_struct *cable)
 	h_lexer = parser(cable, s);
 	cmd = parser2(cable, h_lexer);
 	emplify(cable, cmd);
-	// ninety_check(cable, cmd);
+	ninety_check(cable, cmd);
 	return (cmd);
 }
 
@@ -83,20 +83,6 @@ int	check_for_udf(char *s)
 		if (s[i] == '&' || s[i] == ';')
 			return (1);
 		i++;
-	}
-	return (0);
-}
-
-int	basic_syntax_check2(t_lexer **h_lexer)
-{
-	t_lexer	*node;
-
-	node = *h_lexer;
-	while (node)
-	{
-		if (node->type == SCMD && check_for_udf(node->cmd))
-			return (syntx_err(), 1);
-		node = node->next;
 	}
 	return (0);
 }

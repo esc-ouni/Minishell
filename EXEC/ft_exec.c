@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 14:40:43 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:51:56 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ void	ft_exec(t_struct *cable)
 		;
 	ft_macrofy(cable);
 	get_sig_exitval(cable, g_var);
+}
+
+int	ft_forking(t_struct *cable, int *pid)
+{
+	*pid = fork();
+	if (*pid == -1)
+		return (perror("fork"), ft_close_fdtmp(cable), \
+			ft_collectorclear(cable->collector, ALL), -1);
+	return (0);
 }
