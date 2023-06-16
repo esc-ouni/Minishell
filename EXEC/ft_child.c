@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 14:43:37 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 12:46:45 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	ft_child(t_cmd *cmd, int *fd, t_struct *cable)
 	signal_dfl();
 	if (cmd->builtflag == NOT && cmd->cmd && cmd->cmd[0])
 		ft_cmd_not(cable, fd);
+	if (cmd->fd_in == -1)
+		exit(1);
 	ft_close(cable, fd[0]);
 	ft_redirect_child(cable, cmd, fd);
 	if (cmd->builtflag && (cmd->builtflag != SYS))
