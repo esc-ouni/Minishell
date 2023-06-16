@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/16 14:17:27 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:43:35 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 		return (1);
 	cmd->fd_in = -2;
 	ft_first_redirection(cmd, cable);
-	if (!cmd->cmd[0])
-		return (0);
 	ft_open_pipe(cable, fd);
 	ft_forking(cable, &pid);
 	if (cable->cmd->cmd[0])

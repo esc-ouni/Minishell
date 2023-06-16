@@ -6,17 +6,11 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:52 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/16 14:31:40 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:47:54 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ft_space_skip(char **str)
-{
-	while (**str == 32 || (**str >= 9 && **str <= 13))
-		(*str)++;
-}
 
 void	ft_quit(t_cmd *cmd)
 {
