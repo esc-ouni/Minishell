@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:47:39 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/11 12:58:17 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/16 16:08:48 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	check_for_in_files(t_struct *cable, t_file **in_files, t_lexer *n)
 			check_for_rin(cable, in_files, &n);
 		else if (n->cmd && n->type == R_HD && n->next)
 			check_for_hd(cable, in_files, &n);
-		if (n)
+		else if (n)
 			n = n->next;
 		else
 			break ;

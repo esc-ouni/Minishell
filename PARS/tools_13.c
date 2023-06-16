@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 16:46:49 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/16 16:08:06 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	check_for_out_files(t_struct *cable, t_file **out_files, t_lexer *n)
 			check_for_ot(cable, out_files, &n);
 		else if (n->cmd && n->type == R_OA && n->next)
 			check_for_oa(cable, out_files, &n);
-		if (n)
+		else if (n)
 			n = n->next;
 		else
 			break ;
