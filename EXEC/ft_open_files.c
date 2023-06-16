@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:10:01 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 14:15:39 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:42:24 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	ft_open_file_case(t_file *file, t_cmd *cmd, t_struct *cable)
 		is_here = 1;
 		if (ft_heredoc_proc(file, cable) == -1)
 			return (-1);
+		cmd->fd_in = -2;
 	}
 	else if (file->o_flag == O_TRUNC)
 	{
