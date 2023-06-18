@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:23:36 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/06 15:22:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/18 15:43:01 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char *filename, int flag)
 	new_node = h_malloc(cable->collector, sizeof(t_file), new_node, TMP);
 	new_node->filename = ft_mstrdup(cable, filename, TMP);
 	new_node->o_flag = flag;
+	new_node->exp = cable->rd;
 	if (!(*head))
 	{
 		*head = new_node;
@@ -64,6 +65,7 @@ void	add_file_file(t_struct *cable, t_file **head, t_file *file)
 	new_node = h_malloc(cable->collector, sizeof(t_file), new_node, TMP);
 	new_node->filename = ft_mstrdup(cable, file->filename, TMP);
 	new_node->o_flag = file->o_flag;
+	new_node->exp = file->exp;
 	if (!(*head))
 	{
 		*head = new_node;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_13.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/16 16:08:06 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/18 15:35:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ void	check_for_hd(t_struct *cable, t_file **in_files, t_lexer **n)
 	while ((*n) && (*n)->cmd && (*n)->type != WH_SP && (*n)->type != PIP && \
 	((*n)->type == SCMD || (*n)->type == ST_SQ || (*n)->type == ST_DQ))
 	{
+		if ((*n)->type == SCMD)
+			cable->rd = 1;
+		else if ((*n)->type == ST_SQ || (*n)->type == ST_DQ)
+			cable->rd = 666;
 		(*n)->type = FIL_NM;
 		filename = ft_mstrjoin(cable, filename, (*n)->cmd, TMP);
 		(*n) = (*n)->next;
