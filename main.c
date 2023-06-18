@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 15:55:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/18 13:40:57 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,16 @@ void	ft_init(char **ev, t_struct **cab)
 	*cab = cable;
 }
 
+void print_history() {
+    HIST_ENTRY **the_list;
+    the_list = history_list();
+    if (the_list) {
+        for (int i = 0; the_list[i]; i++) {
+            printf("%d: %s\n", i + 1, the_list[i]->line);
+        }
+    }
+}
+
 void	program(t_struct *cable)
 {
 	ft_env_set(cable);
@@ -62,6 +72,7 @@ void	program(t_struct *cable)
 	}
 	cable->cmd = get_cmd(cable);
 	ft_exec(cable);
+	print_history();
 	ft_collectorclear(cable->collector, TMP);
 }
 

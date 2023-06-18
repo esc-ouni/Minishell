@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_10.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/16 16:09:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/18 13:44:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	check_syntax(t_struct *cable, char *s)
 		return (2);
 	if (check_str(s))
 		return (1);
-	add_history(s);
 	if (check_oerr(s))
 		return (1);
 	return (0);

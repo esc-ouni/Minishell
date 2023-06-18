@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:42:06 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/13 15:14:45 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/18 13:46:22 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_lexer	*lexer(t_struct *cable, char *s)
 	sz = ft_strlen(s);
 	l_node = NULL;
 	lexer_p2(cable, &l_node, s, sz);
+	add_history(s);
 	free(s);
 	return (l_node);
 }
