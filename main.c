@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 23:13:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 15:55:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/18 15:34:33 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_init(char **ev, t_struct **cab)
 	cable->cmd = NULL;
 	cable->exit_val = 0;
 	cable->is_heredoc = 0;
+	cable->rd = 1;
 	cable->cmd_numb = 0;
 	*cab = cable;
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:40 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/14 14:18:48 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:26:25 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
+static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable, int exp)
 {
 	char	*line;
 
@@ -31,7 +31,7 @@ static int	ft_heredoc_write(int fd, char *delimiter, t_struct *cable)
 			free(line);
 			break ;
 		}
-		line = s_expander(cable, line);
+		line = s_expander(cable, line, exp);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 	}
@@ -65,7 +65,7 @@ static int	ft_heredoc_child(t_struct *cable, t_file *file, int *pfd)
 		perror("dup2");
 		exit(1);
 	}
-	ft_heredoc_write(pfd[1], file->filename, cable);
+	ft_heredoc_write(pfd[1], file->filename, cable, file->exp);
 	ft_close(cable, pfd[1]);
 	exit(0);
 }

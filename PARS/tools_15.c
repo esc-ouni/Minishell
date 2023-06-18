@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_15.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/13 14:47:18 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/18 15:44:02 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	expns(t_struct *cable, char **s, char **str)
 	}
 }
 
-char	*s_expander(t_struct *cable, char *line)
+char	*s_expander(t_struct *cable, char *line, int exp)
 {
 	char	**s;
 	char	*str;
@@ -57,7 +57,7 @@ char	*s_expander(t_struct *cable, char *line)
 	s = NULL;
 	if (!line)
 		return (NULL);
-	if (!ft_strchr(line, '$') || spc_after_d(line))
+	if (!ft_strchr(line, '$') || spc_after_d(line) || exp == 666)
 	{
 		str = ft_mstrdup(cable, line, TMP);
 		free(line);
