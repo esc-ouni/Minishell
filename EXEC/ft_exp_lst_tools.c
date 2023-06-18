@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:46:53 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/11 23:09:08 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:23:45 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ int	ft_valid_var(const char	*str)
 	char	*pstr;
 
 	pstr = (char *)str;
-	if (!pstr || *pstr == '=' || *pstr == '+' || \
-		*pstr == '-' || ft_isdigit(*pstr))
+	if (!pstr || (!ft_isalpha(*pstr) && *pstr != '_'))
 		return (0);
 	while (*pstr && *pstr != '=')
 	{
 		if (((*pstr == '+') && (*(pstr + 1) != '=')) \
-		&& (!ft_isalnum(*pstr) || *pstr != '_'))
+		|| (!ft_isalnum(*pstr) && *pstr != '_' && *pstr != '+'))
 			return (0);
 		pstr++;
 	}
