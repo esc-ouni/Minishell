@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:46:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/18 13:45:11 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/19 22:14:39 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_lexer	*parser(t_struct *cable, char *s)
 	t_lexer	*tmp;
 
 	if (check_syntax(cable, s) == 1)
-		return (set_exitval(cable, 258), free(s), \
-		ft_collectorclear(cable->collector, TMP), NULL);
+		return (set_exitval(cable, 258), add_history(s), \
+		free(s), ft_collectorclear(cable->collector, TMP), NULL);
 	else if (check_syntax(cable, s) == 2)
 		return (free(s), ft_collectorclear(cable->collector, TMP), NULL);
 	h_lexer = lexer(cable, s);
