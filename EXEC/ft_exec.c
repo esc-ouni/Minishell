@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/19 21:25:02 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/19 21:39:11 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	ft_exec(t_struct *cable)
 	while (wait(NULL) != -1)
 		;
 	ft_macrofy(cable);
-	printf("%d\n", cable->exit_val);
 	get_sig_exitval(cable, g_var);
 }
 

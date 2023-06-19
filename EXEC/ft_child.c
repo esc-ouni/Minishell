@@ -6,7 +6,7 @@
 /*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/19 21:09:30 by msamhaou         ###   ########.fr       */
+/*   Updated: 2023/06/19 21:49:39 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ void	ft_cmd_not(t_struct *cable, int *fd, t_cmd *cmd)
 	{
 		ft_putstr_fd(cmd->cmd_path, STDERR_FILENO);
 		ft_putendl_fd(" Permission denied", STDERR_FILENO);
+		exit(126);
 	}
-	else
-		ft_putendl_fd("cmd does not exist", STDERR_FILENO);
+	ft_putstr_fd(cmd->cmd_path, STDERR_FILENO);
+	ft_putendl_fd("cmd does not exist", STDERR_FILENO);
 	ft_close(cable, fd[1]);
 	ft_close(cable, 0);
 	ft_close(cable, 1);
