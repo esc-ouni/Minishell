@@ -6,7 +6,7 @@
 /*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:08:28 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/18 13:44:02 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/19 19:59:36 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 int	check_syntax(t_struct *cable, char *s)
 {
+	int	i;
+
+	i = 0;
 	if (!s)
 	{
+		i = cable->exit_val;
 		write(1, "exit\n", 6);
 		ft_close_fdtmp(cable);
-		ft_collectorclear(cable->collector, ALL);
-		exit (0);
+		ft_collectorclear(cable->collector, TMP);
+		ft_collectorclear(cable->collector, NTMP);
+		rl_clear_history();
+		exit (i);
 	}
 	if (!ft_strlen(s))
 		return (2);
