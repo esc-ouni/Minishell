@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:11:33 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/19 18:56:48 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/19 21:09:30 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,15 @@ int	ft_redirect_child(t_struct *cable, t_cmd *cmd, int *fd)
 	return (0);
 }
 
-void	ft_cmd_not(t_struct *cable, int *fd)
+void	ft_cmd_not(t_struct *cable, int *fd, t_cmd *cmd)
 {
-	ft_putendl_fd("cmd does not exist", STDERR_FILENO);
+	if (access(cmd->cmd_path, X_OK) == -1 && errno == EACCES)
+	{
+		ft_putstr_fd(cmd->cmd_path, STDERR_FILENO);
+		ft_putendl_fd(" Permission denied", STDERR_FILENO);
+	}
+	else
+		ft_putendl_fd("cmd does not exist", STDERR_FILENO);
 	ft_close(cable, fd[1]);
 	ft_close(cable, 0);
 	ft_close(cable, 1);
@@ -67,7 +73,7 @@ void	ft_cmd_not(t_struct *cable, int *fd)
 void	ft_child_plus(t_cmd *cmd, int *fd, t_struct *cable)
 {
 	if (cmd->builtflag == NOT && cmd->cmd && cmd->cmd[0])
-		ft_cmd_not(cable, fd);
+		ft_cmd_not(cable, fd, cmd);
 	if (cmd->fd_in == -1)
 		exit(1);
 	ft_close(cable, fd[0]);

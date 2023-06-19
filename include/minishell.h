@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:58:42 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/19 18:57:21 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/19 21:18:24 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ struct s_struct
 	t_envlst	*envlst;
 	t_exp		*exp;
 	t_cmd		*cmd;
+	int			last_pid;
 	int			tmp_fd_in;
 	int			tmp_err;
 	int			exit_val;

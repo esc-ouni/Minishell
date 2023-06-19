@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:43:54 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/19 18:56:40 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/19 21:26:15 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ int	ft_fork(t_cmd *cmd, t_struct *cable)
 	int	fd[2];
 	int	pid;
 
+	pid = 0;
 	if (!ft_built_in_first(cmd, cable))
 		return (1);
 	cmd->fd_in = -2;
 	ft_first_redirection(cmd, cable);
 	ft_open_pipe(cable, fd);
 	ft_forking(cable, &pid);
+	if (!cmd->next)
+		cable->last_pid = pid;
 	if (cable->cmd->cmd[0])
 	{
 		if (!ft_strncmp(cable->cmd->cmd[0], "./minishell", \

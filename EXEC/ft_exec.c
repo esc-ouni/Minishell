@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: msamhaou <msamhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:36:07 by msamhaou          #+#    #+#             */
-/*   Updated: 2023/06/19 18:56:44 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/19 21:25:02 by msamhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ void	ft_exec(t_struct *cable)
 		ft_fork(cmd, cable);
 		cmd = cmd->next;
 	}
-	while (wait(&cable->exit_val) != -1)
+	waitpid(cable->last_pid, &cable->exit_val, 0);
+	while (wait(NULL) != -1)
 		;
 	ft_macrofy(cable);
+	printf("%d\n", cable->exit_val);
 	get_sig_exitval(cable, g_var);
 }
 
