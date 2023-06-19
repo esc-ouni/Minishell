@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_16.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idouni <idouni@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: idouni <idouni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:45 by idouni            #+#    #+#             */
-/*   Updated: 2023/06/16 13:47:52 by idouni           ###   ########.fr       */
+/*   Updated: 2023/06/19 17:47:42 by idouni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	pcheck_bdy(t_lexer **h_lexer)
 		if ((node->type == PIP) && (node->next))
 		{
 			tmp = node->next;
-			while (tmp && tmp->type != PIP)
+			while (tmp)
 			{
 				if (tmp->type == SCMD || tmp->type == ST_SQ \
 				|| tmp->type == ST_DQ)

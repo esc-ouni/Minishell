@@ -1,0 +1,10 @@
+EXEC
+Makefile
+PARS
+d
+include
+k
+libft
+main.c
+minishell
+obj
